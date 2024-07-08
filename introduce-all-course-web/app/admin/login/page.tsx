@@ -6,7 +6,7 @@ const AdminLoginPage = () => {
   useOnlyAdminPublicRoute();
   return (
     <div className="m-auto flex h-full min-h-screen w-full max-w-lg flex-col items-center justify-center space-y-14">
-      <h2>스타터에 오신것을 환영합니다.</h2>
+      <h1 className="text-2xl">인트로듀스올코스</h1>
       <LoginForm />
     </div>
   );

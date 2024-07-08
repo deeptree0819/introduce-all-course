@@ -21,6 +21,10 @@ const LoginForm = () => {
   const form = useForm<LoginWithEmailDto>({
     mode: "onSubmit",
     resolver: zodResolver(AdminLoginUserWithEmailSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const { mutate: adminLoginByEmail } = useAdminLoginByEmail();

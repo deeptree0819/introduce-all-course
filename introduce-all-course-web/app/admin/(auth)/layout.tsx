@@ -1,3 +1,5 @@
+import { useOnlyAdminRoute } from "@lib/auth";
+
 import AdminSidebarNav from "../components/AdminSidebarNav";
 
 interface Props {
@@ -6,8 +8,7 @@ interface Props {
 
 export default function AdminAuthLayout(props: Props) {
   const { children } = props;
-  // TODO: 퍼블리싱 작업자를 위해 우선 주석처리 추후에 주석 삭제 필요
-  // useOnlyAdminRoute();
+  useOnlyAdminRoute();
   return (
     <div className="flex">
       <AdminSidebarNav />

@@ -1,4 +1,4 @@
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 /**
@@ -8,13 +8,10 @@ import { redirect } from "next/navigation";
  * @param {string} [redirectUrl='/admin/users'] - 리다이렉트 대상 URL.
  */
 export const useOnlyAdminPublicRoute = (redirectUrl = "/admin/users") => {
-  const adminToken = getCookie("adminToken");
-  // 'adminToken' 쿠키의 존재 여부 확인
-  const hasCookie = !!adminToken;
-  // 해당 쿠키가 있을 경우 리다이렉트
-  if (hasCookie) {
-    redirect(redirectUrl);
-  }
+  const cookieStore = cookies();
+  const token = cookieStore.get("adminToken");
+
+  if (!!token) redirect(redirectUrl);
 };
 
 /**
@@ -24,13 +21,10 @@ export const useOnlyAdminPublicRoute = (redirectUrl = "/admin/users") => {
  * @param {string} [redirectUrl='/admin/login'] - 리다이렉트 대상 URL.
  */
 export const useOnlyAdminRoute = (redirectUrl = "/admin/login") => {
-  const adminToken = getCookie("adminToken");
-  // 'adminToken' 쿠키의 존재 여부 확인
-  const hasCookie = !!adminToken;
-  // 해당 쿠키가 없을 경우 리다이렉트
-  if (!hasCookie) {
-    redirect(redirectUrl);
-  }
+  const cookieStore = cookies();
+  const token = cookieStore.get("adminToken");
+
+  if (!token) redirect(redirectUrl);
 };
 
 /**
@@ -40,13 +34,10 @@ export const useOnlyAdminRoute = (redirectUrl = "/admin/login") => {
  * @param {string} [redirectUrl='/home'] - 리다이렉트 대상 URL.
  */
 export const useOnlyPublicRoute = (redirectUrl = "/home") => {
-  const token = getCookie("token");
-  // 'token' 쿠키의 존재 여부 확인
-  const hasCookie = !!token;
-  // 해당 쿠키가 있을 경우 리다이렉트
-  if (hasCookie) {
-    redirect(redirectUrl);
-  }
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+
+  if (!!token) redirect(redirectUrl);
 };
 
 /**
@@ -56,11 +47,8 @@ export const useOnlyPublicRoute = (redirectUrl = "/home") => {
  * @param {string} [redirectUrl='/login'] - 리다이렉트 대상 URL.
  */
 export const useOnlyUserRoute = (redirectUrl = "/login") => {
-  const token = getCookie("token");
-  // 'token' 쿠키의 존재 여부 확인
-  const hasCookie = !!token;
-  // 해당 쿠키가 없을 경우 리다이렉트
-  if (!hasCookie) {
-    redirect(redirectUrl);
-  }
+  const cookieStore = cookies();
+  const token = cookieStore.get("adminToken");
+
+  if (!token) redirect(redirectUrl);
 };
