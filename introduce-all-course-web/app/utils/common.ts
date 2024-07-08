@@ -1,0 +1,68 @@
+import { InfiniteData } from "@tanstack/react-query";
+import { type ClassValue, clsx } from "clsx";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useCallback, useMemo } from "react";
+import { twMerge } from "tailwind-merge";
+
+import { Paginated } from "../types/common";
+
+/**
+ * 클래스 값들을 결합하고 병합합니다.
+ *
+ * 1. clsx: 동적으로 클래스 문자열을 결합합니다.
+ * 2. tailwind-merge: Tailwind CSS 클래스를 병합합니다.
+ *
+ * 예시:
+ * isActive가 true일 경우,
+ * cn('bg-white', isActive && 'text-black', 'p-4 p-2') -> 'bg-white text-black p-2'
+ *
+ * @param inputs - 결합할 클래스 값들의 배열.
+ * @returns 병합된 클래스 문자열.
+ */
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};
+
+export function pageRange(length: number, start = 0) {
+  return Array.from({ length }, (_, i) => i + start);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getNextPageParam(lastPage: Paginated<any>) {
+  const {
+    pagination: { currentPage, totalPage },
+  } = lastPage;
+  const nextPage = currentPage + 1;
+  return nextPage <= totalPage ? nextPage : undefined;
+}
+
+export const useCreateQueryParams = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!;
+
+  return useCallback(
+    (items: Record<string, string | undefined>) => {
+      const params = new URLSearchParams(searchParams.toString());
+      for (const [key, value] of Object.entries(items)) {
+        if (value) {
+          params.set(key, value);
+        }
+      }
+      return `${pathname}?${params.toString()}`;
+    },
+    [searchParams, pathname]
+  );
+};
+
+export type PaginatedList<T, U> = {
+  items: Array<T>;
+  pagination: U;
+};
+export const useFlatInfiniteData = <T, U>(
+  data: InfiniteData<PaginatedList<T, U>> | undefined
+): Array<T> => {
+  return useMemo(() => {
+    return data?.pages.flatMap((page) => page.items) || [];
+  }, [data]);
+};

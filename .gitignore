@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+ignored/*
+!ignored/.keep
+node_modules/
+.eslintcache
+
+introduce-all-course-web/.env
+introduce-all-course-web/storybook-static
+introduce-all-course-web/build-storybook.log

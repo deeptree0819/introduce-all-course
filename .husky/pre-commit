@@ -1,0 +1,7 @@
+#!/bin/sh
+
+. "$(dirname "$0")/_/husky.sh"
+
+## Lint
+cd introduce-all-course-web && pnpm lint-staged && cd ..
+cd introduce-all-course-api && yarn lint-staged && cd ..
