@@ -103,11 +103,15 @@ const AdminEditor = () => {
   const handleEnterLink = () => {
     if (!editor) return;
 
-    editor
-      .chain()
-      .focus()
-      .toggleLink({ href: linkInputRef.current?.value || "" })
-      .run();
+    const currentInput = linkInputRef.current?.value;
+    const newLink = !currentInput
+      ? ""
+      : !currentInput.startsWith("http://") &&
+        !currentInput.startsWith("https://")
+      ? `https://${currentInput}`
+      : currentInput;
+
+    editor.chain().focus().toggleLink({ href: newLink }).run();
   };
 
   if (!editor) {
