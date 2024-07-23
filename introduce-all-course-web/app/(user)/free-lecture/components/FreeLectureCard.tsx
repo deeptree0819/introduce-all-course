@@ -32,7 +32,7 @@ const FreeLectureCard = ({ item }: FreeLectureCardProps) => {
             <div className="text-xs font-semibold text-slate-600 laptop:text-sm">
               {item.channel}
             </div>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-2">
               {item.tags.map((tag, index) => (
                 <Badge
                   key={index}
