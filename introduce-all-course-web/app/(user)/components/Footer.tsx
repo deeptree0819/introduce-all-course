@@ -36,12 +36,11 @@ const Footer = () => {
         <div className="text-xs font-medium text-slate-500">
           (주) 딥트리 | 대표이사 이체은
         </div>
-        <Link href="/terms" className="text-xs font-medium text-slate-500">
-          이용약관
-        </Link>
-        <Link href="/privacy" className="text-xs font-medium text-slate-500">
-          개인정보 처리방침
-        </Link>
+        <div className="text-xs font-medium text-slate-500 laptop:mt-12">
+          <Link href="/terms">이용약관</Link>
+          <span> | </span>
+          <Link href="/privacy">개인정보 처리방침</Link>
+        </div>
         <div className="text-xs font-medium text-slate-500">
           Copyright by (주) 딥트리. All rights reserved.
         </div>
