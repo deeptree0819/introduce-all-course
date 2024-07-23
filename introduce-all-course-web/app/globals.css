@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --brand: 209 100% 57%;
+    --brand-secondary: 198 100% 98%;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -33,8 +36,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --brand: 209 100% 57%;
   }
 
   .dark {

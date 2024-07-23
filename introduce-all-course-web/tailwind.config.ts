@@ -13,11 +13,15 @@ module.exports = {
       padding: "2rem",
     },
     screens: {
-      desktop: "769px",
+      laptop: "769px",
+      desktop: "1100px",
     },
     extend: {
       colors: {
-        brand: "hsl(var(--brand))",
+        brand: {
+          DEFAULT: "hsl(var(--brand))",
+          secondary: "hsl(var(--brand-secondary))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

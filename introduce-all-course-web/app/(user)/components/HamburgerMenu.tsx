@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@components/ui/button";
+import { cn } from "@utils/common";
 import { MenuIcon, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,7 +18,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
   return (
     <>
       <Button
-        className={className}
+        className={cn(className, "flex items-center justify-center")}
         variant="ghost"
         size="icon"
         onClick={() => setIsOpen(true)}

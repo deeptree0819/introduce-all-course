@@ -10,12 +10,12 @@ import HamburgerMenu from "./HamburgerMenu";
 const GNB = () => {
   return (
     <header className="sticky top-0 bg-white">
-      <nav className="flex flex-row items-center justify-between px-8 py-2 desktop:px-28">
+      <nav className="flex flex-row items-center justify-between px-8 py-2 laptop:px-28">
         <Link href="/">
-          <Logo width={127} height={38} className="desktop:block" />
+          <Logo width={127} height={38} className="laptop:block" />
         </Link>
 
-        <div className="ml-8 hidden flex-1 flex-row items-center justify-between desktop:flex">
+        <div className="ml-8 hidden flex-1 flex-row items-center justify-between laptop:flex">
           <div className="space-x-8">
             <Link href="/event" className="text-lg font-semibold">
               공고소개
@@ -41,7 +41,7 @@ const GNB = () => {
           </Link>
         </div>
 
-        <HamburgerMenu className="block desktop:hidden" />
+        <HamburgerMenu className="block laptop:hidden" />
       </nav>
       <Separator />
     </header>
