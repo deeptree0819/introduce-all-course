@@ -44,7 +44,11 @@ const EventArticle = () => {
             <div className="absolute right-3 top-3 rounded bg-white/60 p-1 opacity-100 group-hover:opacity-100 laptop:opacity-0">
               <ExpandIcon size={24} className="text-slate-500" />
             </div>
-            <Image src={EventPosterImage} alt="공고 포스터" />
+            <Image
+              src={EventPosterImage}
+              alt="공고 포스터"
+              className="max-w-[450px]"
+            />
           </div>
           <Badge className="order-2 mt-6 w-fit laptop:order-1 laptop:col-span-2 laptop:mt-0 laptop:rounded-xl laptop:px-4 laptop:py-1 laptop:text-sm">
             D-2
