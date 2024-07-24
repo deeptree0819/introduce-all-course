@@ -9,7 +9,7 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const GNB = () => {
   return (
-    <header className="sticky top-0 bg-white">
+    <header className="sticky top-0 z-20 bg-white">
       <nav className="flex flex-row items-center justify-between px-8 py-2 laptop:px-28">
         <Link href="/">
           <Logo width={127} height={38} className="laptop:block" />

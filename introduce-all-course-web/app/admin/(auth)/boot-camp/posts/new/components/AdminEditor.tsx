@@ -1,10 +1,8 @@
-import CharacterCount from "@tiptap/extension-character-count";
-import Highlight from "@tiptap/extension-highlight";
-import Link from "@tiptap/extension-link";
-import Placeholder from "@tiptap/extension-placeholder";
-import Underline from "@tiptap/extension-underline";
+import {
+  editorExtensions,
+  editorProps,
+} from "@components/editor/editorSetting";
 import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { cn } from "@utils/common";
 import {
   CheckIcon,
@@ -41,27 +39,8 @@ const AdminEditor = () => {
   const limit = 10000;
 
   const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3],
-        },
-      }),
-      Highlight,
-      Underline,
-      Placeholder.configure({
-        placeholder: "내용을 입력해주세요.",
-      }),
-      Link,
-      CharacterCount.configure({
-        limit,
-      }),
-    ],
-    editorProps: {
-      attributes: {
-        class: "prose focus:outline-none",
-      },
-    },
+    extensions: editorExtensions,
+    editorProps: editorProps,
   });
 
   const handleHeadingChange = useCallback(

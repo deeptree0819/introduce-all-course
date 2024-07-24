@@ -19,7 +19,7 @@ const FreeLectureCard = ({ item }: FreeLectureCardProps) => {
       <Link href={`/free-lecture/${item.id}`} className="space-y-3">
         <Image
           src={item.image}
-          alt="free lecture"
+          alt="무료 강의"
           className="aspect-video rounded-2xl"
           width={500}
           height={500}

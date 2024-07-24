@@ -29,6 +29,7 @@ export default function RootLayout({
           {children}
           <ToastContainer />
           <Modal />
+          <div id="overlay-root" />
         </body>
       </html>
     </ReactQueryProvider>
