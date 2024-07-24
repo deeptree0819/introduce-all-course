@@ -36,7 +36,7 @@ const EventArticle = () => {
   return (
     <>
       <article className="space-y-6">
-        <header className="laptop: flex flex-col items-start laptop:grid laptop:grid-cols-2 laptop:items-start laptop:justify-center">
+        <header className="laptop: flex flex-col items-start laptop:grid laptop:grid-cols-[auto,1fr] laptop:items-start laptop:justify-center">
           <div
             className="group relative order-1 w-fit laptop:order-3 laptop:mr-10"
             onClick={() => setIsExpanded(true)}
