@@ -39,7 +39,7 @@
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "tailwindcss": {
-      "whitelist": ["*-brand", "*-brand-secondary"]
+      "whitelist": [".*-brand", ".*-brand-secondary"]
     }
   }
 }
