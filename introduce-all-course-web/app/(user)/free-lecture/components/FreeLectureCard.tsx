@@ -1,3 +1,4 @@
+import { cn } from "@utils/common";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
@@ -11,16 +12,20 @@ type FreeLectureCardProps = {
     channel: string;
     tags: string[];
   };
+  hideOverflowedBadges?: boolean;
 };
 
-const FreeLectureCard = ({ item }: FreeLectureCardProps) => {
+const FreeLectureCard = ({
+  item,
+  hideOverflowedBadges = false,
+}: FreeLectureCardProps) => {
   return (
     <div>
       <Link href={`/free-lecture/${item.id}`} className="space-y-3">
         <Image
           src={item.image}
-          alt="무료 강의"
-          className="aspect-video rounded-2xl"
+          alt={item.title}
+          className="aspect-video rounded-lg"
           width={500}
           height={500}
         />
@@ -32,7 +37,12 @@ const FreeLectureCard = ({ item }: FreeLectureCardProps) => {
             <div className="text-xs font-semibold text-slate-600 laptop:text-sm">
               {item.channel}
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div
+              className={cn(
+                "flex flex-wrap gap-2",
+                hideOverflowedBadges && "h-6 overflow-hidden"
+              )}
+            >
               {item.tags.map((tag, index) => (
                 <Badge
                   key={index}
