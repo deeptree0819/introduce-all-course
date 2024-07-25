@@ -36,9 +36,9 @@ const EventArticle = () => {
   return (
     <>
       <article className="space-y-6">
-        <header className="laptop: flex flex-col items-start laptop:grid laptop:grid-cols-[auto,1fr] laptop:items-start laptop:justify-center">
+        <header className="flex flex-col items-start laptop:grid laptop:grid-cols-[minmax(0,450px)_minmax(250px,1fr)] laptop:items-start laptop:justify-center">
           <div
-            className="group relative order-1 w-fit laptop:order-3 laptop:mr-10"
+            className="group relative order-1 w-full max-w-[450px] laptop:order-3 laptop:w-auto"
             onClick={() => setIsExpanded(true)}
           >
             <div className="absolute right-3 top-3 rounded bg-white/60 p-1 opacity-100 group-hover:opacity-100 laptop:opacity-0">
@@ -47,14 +47,14 @@ const EventArticle = () => {
             <Image
               src={EventPosterImage}
               alt="공고 포스터"
-              className="max-w-[450px]"
+              className="w-full"
             />
           </div>
           <Badge className="order-2 mt-6 w-fit laptop:order-1 laptop:col-span-2 laptop:mt-0 laptop:rounded-xl laptop:px-4 laptop:py-1 laptop:text-sm">
             D-2
           </Badge>
           <div className="order-3 mt-2.5 space-y-1.5 laptop:order-2 laptop:col-span-2 laptop:mb-6">
-            <h1 className="text-lg font-semibold laptop:text-3xl">
+            <h1 className="break-keep text-lg font-semibold laptop:text-3xl">
               [이지엔] eZ한 숏폼 공모전 (~7/31) | 2024년 이지에디터 6기
             </h1>
             <p className="text-base text-slate-600 laptop:text-xl">
@@ -63,7 +63,7 @@ const EventArticle = () => {
           </div>
           <EditorParagraph
             content={DUMMY_INFORMATION}
-            className="order-4 mt-4 pb-2"
+            className="order-4 mt-4 pb-2 laptop:ml-10"
           />
         </header>
         <Separator />
