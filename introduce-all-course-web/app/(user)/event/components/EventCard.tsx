@@ -16,13 +16,15 @@ const EventCard = ({ item }: EventCardProps) => {
   return (
     <div>
       <Link href={`/event/${item.id}`} className="space-y-3">
-        <Image
-          src={item.image}
-          alt="공고 썸네일"
-          className="aspect-square rounded-lg border border-slate-200"
-          width={500}
-          height={500}
-        />
+        <div className="overflow-hidden rounded-lg border border-slate-200">
+          <Image
+            src={item.image}
+            alt="공고 썸네일"
+            className="aspect-square rounded-lg transition-transform duration-500 hover:scale-105"
+            width={500}
+            height={500}
+          />
+        </div>
         <div className="space-y-2">
           <Badge>{item.dday}</Badge>
           <div className="space-y-1.5">

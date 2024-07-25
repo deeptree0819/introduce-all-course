@@ -11,7 +11,7 @@ const EventDetailPage = () => {
   const params = useParams();
 
   return (
-    <main className="p-4 laptop:px-28 laptop:pb-28 laptop:pt-16 desktop:flex desktop:flex-row desktop:items-start desktop:pr-7">
+    <main className="mx-auto max-w-[1300px] p-4 laptop:px-24 laptop:pb-28 laptop:pt-16 desktop:flex desktop:flex-row desktop:items-start desktop:pr-0">
       <div className="space-y-12 desktop:flex-1">
         <EventArticle />
         <RelatedEvent />

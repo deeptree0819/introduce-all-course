@@ -11,7 +11,7 @@ const InquiryBannerPacked = ({ className }: InquiryBannerPackedProps) => {
   return (
     <div
       className={cn(
-        "sticky top-20 mt-32 hidden min-w-fit flex-col space-y-7 rounded-2xl border border-slate-300 p-7 desktop:ml-7 desktop:flex",
+        "sticky top-24 mt-32 hidden min-w-fit flex-col space-y-7 rounded-2xl border border-slate-300 p-6 desktop:ml-7 desktop:flex",
         className
       )}
     >
