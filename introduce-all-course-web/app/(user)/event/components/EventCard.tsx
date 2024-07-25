@@ -19,7 +19,7 @@ const EventCard = ({ item }: EventCardProps) => {
         <Image
           src={item.image}
           alt="공고 썸네일"
-          className="aspect-square rounded-2xl"
+          className="aspect-square rounded-lg border border-slate-200"
           width={500}
           height={500}
         />

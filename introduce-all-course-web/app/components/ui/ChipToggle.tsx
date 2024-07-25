@@ -24,7 +24,7 @@ const ChipToggle = ({ label, onClick }: ChipToggleProps) => {
     <button
       className={cn(
         className,
-        "rounded-xl border border-brand px-2 py-1.5 text-xs"
+        "rounded-xl border border-brand px-2.5 py-1 text-xs"
       )}
       onClick={handleClick}
     >
