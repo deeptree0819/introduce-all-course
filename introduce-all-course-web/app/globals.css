@@ -114,3 +114,16 @@
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
 }
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hidden-scrollbar:hover::-webkit-scrollbar {
+  display: block;
+}
