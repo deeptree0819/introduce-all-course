@@ -12,7 +12,11 @@ const GNB = () => {
     <header className="sticky top-0 z-20 bg-white">
       <nav className="mx-auto flex max-w-[1300px] flex-row items-center justify-between px-8 py-2 laptop:px-24">
         <Link href="/">
-          <Logo width={127} height={60} className="laptop:block" />
+          <Logo
+            width={127}
+            height={38}
+            className="h-9 laptop:block laptop:h-14"
+          />
         </Link>
 
         <div className="ml-5 hidden flex-1 flex-row items-center justify-between laptop:flex">

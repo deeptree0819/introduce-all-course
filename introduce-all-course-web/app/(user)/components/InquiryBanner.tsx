@@ -67,7 +67,7 @@ const InquiryBanner = ({ className }: InquiryBannerProps) => {
 
       <Image
         src={PointingUpImage}
-        alt="d"
+        alt="일러스트"
         className="mt-4 w-[213px] desktop:w-[150px]"
       />
     </aside>

@@ -46,7 +46,7 @@ const EventArticle = () => {
             </div>
             <Image
               src={EventPosterImage}
-              alt="공고 포스터"
+              alt="[이지엔] eZ한 숏폼 공모전 (~7/31) | 2024년 이지에디터 6기"
               className="w-full"
             />
           </div>
@@ -86,7 +86,7 @@ const EventArticle = () => {
             width={imageSize.width}
             height={imageSize.height}
             src={EventPosterImage}
-            alt="공고 포스터"
+            alt="[이지엔] eZ한 숏폼 공모전 (~7/31) | 2024년 이지에디터 6기"
           />
         </Overlay>
       )}
