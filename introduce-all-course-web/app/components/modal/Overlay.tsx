@@ -27,7 +27,7 @@ const Overlay = ({ children, onClose }: OverlayProps) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex h-screen items-center justify-center bg-black/60"
+      className="fixed inset-0 z-50 flex h-screen items-center justify-center bg-black/80"
       onClick={() => onClose()}
     >
       <X
