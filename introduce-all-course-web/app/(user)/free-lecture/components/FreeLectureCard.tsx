@@ -36,7 +36,7 @@ const FreeLectureCard = ({ item }: FreeLectureCardProps) => {
               {item.tags.map((tag, index) => (
                 <Badge
                   key={index}
-                  className="rounded-sm bg-[#D0E8FF] font-medium text-[#0029FF] hover:bg-[#D0E8FF]"
+                  className="rounded-sm bg-[#D0E8FF] text-[10px] font-medium text-[#0029FF] hover:bg-[#D0E8FF] laptop:text-xs"
                 >
                   {tag}
                 </Badge>
