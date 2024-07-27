@@ -13,7 +13,7 @@ const Pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "인트로듀스올코스 - 국비지원/부트캠프",
+  title: "로봇에 풍덩",
   description: "Developed by Dophin In Cali",
 };
 
