@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [],
+    domains: ["picsum.photos"],
     minimumCacheTTL: 31536000,
   },
   eslint: {
