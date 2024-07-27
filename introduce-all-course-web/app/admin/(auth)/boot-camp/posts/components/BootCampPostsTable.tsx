@@ -73,7 +73,7 @@ export const columns: ColumnDef<UserDto>[] = [
   },
   {
     accessorKey: "phoneNumber",
-    header: "핸드폰번호",
+    header: "전화번호",
   },
   {
     accessorKey: "detail",
