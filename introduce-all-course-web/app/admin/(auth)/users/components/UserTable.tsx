@@ -9,7 +9,7 @@ interface UserDto {
   id: number;
   createdAt: string;
   updatedAt: string;
-  name: string;
+  nickname: string;
   email: string;
   phoneNumber: string;
 }
@@ -20,27 +20,30 @@ const USER_DUMMY = [
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
     email: "user1@gmail.com",
-    name: "유저1",
-    type: "일반",
-    phoneNumber: "01000000001",
+    userName: "김로보트",
+    nickname: "로봇에 흠뻑 빠진 내모습 1",
+    role: "일반",
+    phoneNumber: "010-1234-5678",
   },
   {
     id: 2,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
     email: "user2@gmail.com",
-    name: "유저2",
-    type: "일반",
-    phoneNumber: "01000000002",
+    userName: "김로보트",
+    nickname: "로봇에 흠뻑 빠진 내모습 2",
+    role: "일반",
+    phoneNumber: "010-1234-5678",
   },
   {
     id: 3,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
     email: "user3@gmail.com",
-    name: "유저3",
-    type: "전문가",
-    phoneNumber: "01000000003",
+    userName: "김로보트",
+    nickname: "로봇에 흠뻑 빠진 내모습 3",
+    role: "전문가",
+    phoneNumber: "010-1234-5678",
   },
 ];
 
@@ -57,15 +60,17 @@ export const columns: ColumnDef<UserDto>[] = [
     accessorKey: "id",
     header: "ID",
   },
-
   {
-    accessorKey: "name",
-    header: "회원명",
+    accessorKey: "role",
+    header: "권한",
   },
-
   {
-    accessorKey: "type",
-    header: "분류",
+    accessorKey: "userName",
+    header: "실명",
+  },
+  {
+    accessorKey: "nickname",
+    header: "닉네임",
   },
   {
     accessorKey: "email",
