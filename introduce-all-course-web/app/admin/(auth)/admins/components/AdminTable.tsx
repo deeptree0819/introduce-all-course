@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 
+import AdminSearch from "./AdminSearch";
+
 interface AdminDto {
   id: number;
   createdAt: string;
@@ -87,7 +89,8 @@ export const columns: ColumnDef<AdminDto>[] = [
 
 const AdminTable = () => {
   return (
-    <div className="flex flex-col space-y-5">
+    <div className="flex max-w-[1300px] flex-col space-y-5">
+      <AdminSearch />
       <AdminPaginatedTable
         data={USER_DUMMY}
         columns={columns}

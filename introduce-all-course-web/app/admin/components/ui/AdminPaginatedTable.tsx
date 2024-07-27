@@ -46,7 +46,7 @@ export function AdminPaginatedTable<TData, TValue>({
   return (
     <div
       className={cn(
-        "flex max-w-[1300px] flex-col overflow-x-auto rounded-lg border",
+        "flex flex-col overflow-x-auto rounded-lg border",
         className
       )}
     >

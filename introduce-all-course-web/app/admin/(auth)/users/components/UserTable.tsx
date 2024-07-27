@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 
+import UserSearch from "./UserSearch";
+
 interface UserDto {
   id: number;
   createdAt: string;
@@ -78,7 +80,7 @@ export const columns: ColumnDef<UserDto>[] = [
   },
   {
     accessorKey: "phoneNumber",
-    header: "핸드폰번호",
+    header: "전화번호",
   },
   {
     accessorKey: "createdAt",
@@ -106,7 +108,8 @@ export const columns: ColumnDef<UserDto>[] = [
 
 const UserTable = () => {
   return (
-    <div className="flex flex-col space-y-5">
+    <div className="flex max-w-[1300px] flex-col space-y-5">
+      <UserSearch />
       <AdminPaginatedTable
         data={USER_DUMMY}
         columns={columns}
