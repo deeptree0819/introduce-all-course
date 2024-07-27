@@ -14,9 +14,9 @@ type AdminSearchProps = {
 
 const AdminSearch = ({}: AdminSearchProps) => {
   return (
-    <div className="flex w-full max-w-lg items-center space-x-2 self-end">
+    <div className="flex w-full items-center justify-end space-x-2">
       <Select defaultValue="ALL">
-        <SelectTrigger>
+        <SelectTrigger className="w-40">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -25,7 +25,7 @@ const AdminSearch = ({}: AdminSearchProps) => {
           <SelectItem value="MANAGER">매니저</SelectItem>
         </SelectContent>
       </Select>
-      <Input placeholder="이름, 이메일" />
+      <Input placeholder="이름, 이메일" className="w-80" />
       <Button>검색</Button>
     </div>
   );
