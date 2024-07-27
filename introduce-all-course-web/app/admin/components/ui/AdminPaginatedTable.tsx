@@ -7,7 +7,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { cn } from "@utils/common";
-import React from "react";
 
 import { PaginationResponse } from "@/app/types/common";
 
@@ -47,7 +46,7 @@ export function AdminPaginatedTable<TData, TValue>({
   return (
     <div
       className={cn(
-        "flex flex-col overflow-x-auto rounded-lg border",
+        "flex max-w-[1300px] flex-col overflow-x-auto rounded-lg border",
         className
       )}
     >

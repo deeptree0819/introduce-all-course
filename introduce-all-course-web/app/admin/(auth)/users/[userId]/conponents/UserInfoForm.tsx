@@ -77,7 +77,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="text"
                 id="userName"
                 placeholder="유저 실명을 입력해주세요."
-                value={DUMMY_DATA.userName}
+                defaultValue={DUMMY_DATA.userName}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -86,7 +86,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="text"
                 id="nickname"
                 placeholder="닉네임을 입력해주세요."
-                value={DUMMY_DATA.nickname}
+                defaultValue={DUMMY_DATA.nickname}
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="email"
                 id="email"
                 placeholder="이메일을 입력해주세요."
-                value={DUMMY_DATA.email}
+                defaultValue={DUMMY_DATA.email}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -121,7 +121,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="text"
                 id="phoneNumber"
                 placeholder="전화번호를 입력해주세요."
-                value={DUMMY_DATA.phoneNumber}
+                defaultValue={DUMMY_DATA.phoneNumber}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -142,7 +142,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="number"
                 id="birthyear"
                 placeholder="전화번호를 입력해주세요."
-                value={DUMMY_DATA.birthyear}
+                defaultValue={DUMMY_DATA.birthyear}
               />
             </div>
           </div>
