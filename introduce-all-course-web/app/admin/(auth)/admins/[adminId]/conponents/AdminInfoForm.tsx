@@ -52,9 +52,9 @@ const AdminInfoForm = ({ className }: AdminInfoFormProps) => {
             )}
           </div>
         </div>
-        <div className="mt-4 flex w-fit flex-row items-end space-x-20">
-          <div className="flex w-96 flex-col items-start space-y-7">
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+        <div className="mt-4 flex flex-row items-end space-x-20">
+          <div className="flex flex-col items-start space-y-7">
+            <div className="grid w-[600px] items-center gap-1.5">
               <Label htmlFor="userName">권한</Label>
               <Select defaultValue={DUMMY_DATA.adminRole}>
                 <SelectTrigger>
@@ -66,7 +66,7 @@ const AdminInfoForm = ({ className }: AdminInfoFormProps) => {
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-[600px] items-center gap-1.5">
               <Label htmlFor="userName">이름</Label>
               <Input
                 type="text"
@@ -75,7 +75,7 @@ const AdminInfoForm = ({ className }: AdminInfoFormProps) => {
                 defaultValue={DUMMY_DATA.adminName}
               />
             </div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-[600px] items-center gap-1.5">
               <Label htmlFor="email">이메일</Label>
               <Input
                 type="email"
@@ -84,7 +84,7 @@ const AdminInfoForm = ({ className }: AdminInfoFormProps) => {
                 defaultValue={DUMMY_DATA.adminEmail}
               />
             </div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-[600px] items-center gap-1.5">
               <Label htmlFor="password">비밀번호</Label>
               <Input
                 type="password"
@@ -93,7 +93,7 @@ const AdminInfoForm = ({ className }: AdminInfoFormProps) => {
                 defaultValue={DUMMY_DATA.adminEmail}
               />
             </div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-[600px] items-center gap-1.5">
               <Label htmlFor="passwordCheck">비밀번호 확인</Label>
               <Input
                 type="password"
