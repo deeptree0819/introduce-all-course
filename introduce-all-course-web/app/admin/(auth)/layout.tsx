@@ -10,7 +10,7 @@ export default function AdminAuthLayout(props: Props) {
   const { children } = props;
   useOnlyAdminRoute();
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <AdminSidebarNav />
       <div className="h-screen flex-1 overflow-y-auto">{children}</div>
     </div>

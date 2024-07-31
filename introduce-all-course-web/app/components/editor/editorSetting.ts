@@ -45,7 +45,7 @@ const liClass =
 const editorProps = {
   attributes: {
     class: cn(
-      "prose prose-slate prose-sm focus:outline-none laptop:prose-base",
+      "prose prose-slate prose-sm focus:outline-none laptop:prose-base placeholder-black",
       h1Class,
       h2Class,
       h3Class,

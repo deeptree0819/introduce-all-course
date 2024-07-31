@@ -31,13 +31,17 @@ import {
 } from "@/app/admin/components/ui/admin-select";
 import { Separator } from "@/components/ui/separator";
 
-const AdminEditor = () => {
+type AdminEditorProps = {
+  className?: string;
+};
+
+const AdminEditor = ({ className }: AdminEditorProps) => {
   const [selectedHeading, setSelectedHeading] = useState("T");
   const [enterLink, setEnterLink] = useState(false);
 
   const linkInputRef = useRef<HTMLInputElement>(null);
 
-  const limit = 10000;
+  const limit = 5000;
 
   const editor = useEditor({
     extensions: editorExtensions,
@@ -113,7 +117,12 @@ const AdminEditor = () => {
   });
 
   return (
-    <div className="hidden-scrollbar group max-h-[90vh] space-y-1 overflow-y-scroll rounded-lg border border-gray-300 focus-within:border-black">
+    <div
+      className={cn(
+        "hidden-scrollbar group max-h-[80vh] space-y-1 overflow-y-scroll rounded-lg border border-slate-200 focus-within:border-black",
+        className
+      )}
+    >
       <div className="sticky top-0 z-10 space-y-1 bg-white px-1 pt-1">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center space-x-1">
@@ -280,7 +289,7 @@ const AdminEditor = () => {
       </div>
       <BubbleMenu
         editor={editor}
-        className="flex flex-row items-center space-x-1 rounded-md border  border-gray-300 bg-background p-1"
+        className="flex flex-row items-center space-x-1 rounded-md border border-gray-300 bg-background p-1"
       >
         <AdminButton
           onClick={() => editor.chain().focus().toggleBold().run()}
