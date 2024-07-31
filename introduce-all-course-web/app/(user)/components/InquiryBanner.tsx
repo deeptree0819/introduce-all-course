@@ -17,7 +17,7 @@ const InquiryBanner = ({ className }: InquiryBannerProps) => {
         className
       )}
     >
-      <h3 className="flex flex-col items-center">
+      <h3 className="flex flex-col items-center pt-10">
         <span className="block text-xl font-normal text-slate-600 desktop:text-lg">
           A부터 Z까지
         </span>
