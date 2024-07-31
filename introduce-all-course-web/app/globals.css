@@ -82,7 +82,8 @@
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
-  color: #adb5bd;
+  color: hsl(215.4, 16.3%, 46.9%);
+  font-size: 14px;
   pointer-events: none;
   height: 0;
 }
