@@ -16,10 +16,10 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
     >
       <div className="flex flex-col items-start">
         <h3 className="flex flex-col items-start">
-          <span className="block text-2xl font-normal text-slate-600">
+          <span className="block text-xl font-normal text-slate-600">
             A부터 Z까지
           </span>
-          <span className="block text-3xl">
+          <span className="block text-2xl">
             <span className="font-semibold ">로봇AI 교육 전문가에게</span>{" "}
             물어봐 🎤
           </span>
@@ -36,11 +36,8 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
             <div className="speech-bubble-right whitespace-pre break-keep rounded-2xl bg-[#EDF6FF] p-5 text-base font-semibold text-slate-500">
               <span className="text-slate-900">부산</span>에서 취업 준비 중인
               20대 후반 남성입니다.
-              <br />
-              <span className="text-slate-900">로봇과 AI 분야</span>에 관심이
-              있는데
-              <br />
-              어디부터 준비해야할지 모르겠어요ㅠㅠ
+              <span className="text-slate-900">로봇과 AI 분야</span>
+              <br />에 관심이 있는데 어디부터 준비해야할지 모르겠어요ㅠㅠ
             </div>
           </div>
 
@@ -56,7 +53,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
             </div>
             <div className="flex flex-col items-center">
               <Image src={GirlImage} alt="로봇 AI 전문가" className="w-20" />
-              <div className="whitespace-pre text-base font-normal text-slate-600">
+              <div className="whitespace-pre text-base font-semibold text-slate-600">
                 로봇 AI 전문가
               </div>
             </div>
@@ -65,13 +62,13 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
 
         <Link
           href="https://tally.so"
-          className="mt-6 rounded-full bg-brand px-14 py-5 text-lg font-semibold text-white shadow-lg shadow-slate-200 hover:bg-[hsl(209,100%,54%)]"
+          className="mt-6 rounded-full bg-brand px-14 py-5 text-lg font-semibold text-white shadow-md shadow-slate-200 hover:bg-[hsl(209,100%,54%)]"
         >
           무료상담 신청하기
         </Link>
       </div>
 
-      <div className="w-full min-w-[200px] max-w-xs">
+      <div className="w-full min-w-[200px] max-w-sm">
         <Image src={PointingUpImage} alt="일러스트" />
       </div>
     </section>
