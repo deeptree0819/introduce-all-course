@@ -9,6 +9,8 @@ import {
   type CarouselApi,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 import EventCarouselImage from "../dummy/eventCarousel.png";
@@ -127,6 +129,8 @@ const EventCarousel = () => {
       >
         <ChevronRight size={10} />
       </Button>
+      <CarouselPrevious className="top-[2/5] hidden laptop:inline-flex" />
+      <CarouselNext className="top-[2/5] hidden laptop:inline-flex" />
     </Carousel>
   );
 };
