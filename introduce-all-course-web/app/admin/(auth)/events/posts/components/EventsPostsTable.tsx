@@ -112,7 +112,7 @@ export const columns: ColumnDef<UserDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/users/${row.getValue("id")}`}
+          href={`/admin/events/posts/${row.getValue("id")}`}
           className="text-blue-500"
         >
           상세보기

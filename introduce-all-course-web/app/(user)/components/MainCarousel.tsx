@@ -105,7 +105,7 @@ const MainCarousel = () => {
                   alt={item.imageName}
                   className="aspect-video w-full rounded-2xl transition-transform duration-500 hover:scale-105"
                   width={500}
-                  height={500}
+                  height={281.25}
                 />
               </Link>
             </div>

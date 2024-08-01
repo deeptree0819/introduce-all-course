@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
+import ImageUploader from "../../../../../components/ImageUploader";
 import AdminEditor from "./AdminEditor";
 import AttachmentsUploader from "./AttachmentsUploader";
-import PosterImageUploader from "./PosterImageUploader";
 
 const EventsPostForm = () => {
   return (
@@ -30,7 +30,7 @@ const EventsPostForm = () => {
         </div>
         <div className="grid items-center gap-1.5">
           <Label>공고 포스터</Label>
-          <PosterImageUploader />
+          <ImageUploader fileId="poster-image-upload" />
         </div>
         <div className="grid max-w-xl items-center gap-1.5">
           <Label>공고 정보</Label>

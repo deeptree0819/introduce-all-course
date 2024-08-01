@@ -38,7 +38,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
             </div>
             <div className="speech-bubble-right whitespace-pre break-keep rounded-2xl bg-[#EDF6FF] p-5 text-base font-semibold text-slate-500">
               <span className="text-slate-900">부산</span>에서 취업 준비 중인
-              20대 후반 남성입니다.
+              20대 후반 남성입니다.{" "}
               <span className="text-slate-900">로봇과 AI 분야</span>
               <br />에 관심이 있는데 어디부터 준비해야할지 모르겠어요ㅠㅠ
             </div>
@@ -66,6 +66,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
         <Link
           href="https://tally.so"
           className="mt-6 rounded-full bg-brand px-14 py-5 text-lg font-semibold text-white shadow-md shadow-slate-200 hover:bg-[hsl(209,100%,54%)]"
+          target="_blank"
         >
           무료상담 신청하기
         </Link>
