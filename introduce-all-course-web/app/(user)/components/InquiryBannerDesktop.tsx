@@ -12,7 +12,10 @@ type InquiryBannerDesktopProps = {
 const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
   return (
     <section
-      className={cn("flex flex-row items-center justify-between", className)}
+      className={cn(
+        "flex flex-row items-center justify-start space-x-24",
+        className
+      )}
     >
       <div className="flex flex-col items-start">
         <h3 className="flex flex-col items-start">
