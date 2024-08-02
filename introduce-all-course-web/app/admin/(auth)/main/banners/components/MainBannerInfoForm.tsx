@@ -1,5 +1,6 @@
 "use client";
 
+import ImageUploader from "@adminComponents/ImageUploader";
 import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 
@@ -8,8 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-import ImageUploader from "../../../../../components/ImageUploader";
 
 const DUMMY_DATA = {
   id: 1,
