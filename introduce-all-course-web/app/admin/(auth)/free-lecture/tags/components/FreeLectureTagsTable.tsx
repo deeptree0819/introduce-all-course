@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 
-interface AdminDto {
+interface FreeLectureTagDto {
   id: number;
   createdAt: string;
   updatedAt: string;
@@ -13,7 +13,7 @@ interface AdminDto {
   postsNumber: number;
 }
 
-const USER_DUMMY = [
+const DUMMY = [
   {
     id: 1,
     createdAt: "2023-12-04T11:21:02.627Z",
@@ -45,7 +45,7 @@ const PAGINATION_DUMMY = {
   itemsPerPage: 10,
 };
 
-export const columns: ColumnDef<AdminDto>[] = [
+export const columns: ColumnDef<FreeLectureTagDto>[] = [
   {
     accessorKey: "id",
     header: "ID",
@@ -74,7 +74,7 @@ export const columns: ColumnDef<AdminDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/events/categories/${row.getValue("id")}`}
+          href={`/admin/free-lecture/tags/${row.getValue("id")}`}
           className="text-blue-500"
         >
           상세보기
@@ -84,11 +84,11 @@ export const columns: ColumnDef<AdminDto>[] = [
   },
 ];
 
-const AdminTable = () => {
+const FreeLectureTagsTable = () => {
   return (
     <div className="flex max-w-[1300px] flex-col space-y-5">
       <AdminPaginatedTable
-        data={USER_DUMMY}
+        data={DUMMY}
         columns={columns}
         pagination={PAGINATION_DUMMY}
       />
@@ -96,4 +96,4 @@ const AdminTable = () => {
   );
 };
 
-export default AdminTable;
+export default FreeLectureTagsTable;
