@@ -6,7 +6,7 @@ import Link from "next/link";
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-import EventSearch from "./EventSearch";
+import EventSearch from "../posts/components/EventSearch";
 
 interface UserDto {
   id: number;

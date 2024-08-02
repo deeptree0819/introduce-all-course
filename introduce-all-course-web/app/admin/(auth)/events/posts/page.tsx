@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { adminButtonVariants } from "@/app/admin/components/ui/admin-button";
 
-import EventsPostsTable from "./components/EventsPostsTable";
+import EventsPostsTable from "../components/EventsPostsTable";
 
 const AdminUsersPage = () => {
   return (
