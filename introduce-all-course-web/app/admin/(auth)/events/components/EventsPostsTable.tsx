@@ -6,13 +6,16 @@ import Link from "next/link";
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-import EventSearch from "./EventSearch";
+import EventSearch from "../posts/components/EventSearch";
 
 interface UserDto {
   id: number;
   createdAt: string;
   updatedAt: string;
+  createdBy: string;
+  updatedBy: string;
   eventTitle: string;
+  eventCategory: string;
   eventStartAt: string;
   eventEndAt: string;
   eventOrganization: string;
@@ -24,7 +27,10 @@ const DUMMY = [
     id: 1,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
+    createdBy: "어드민",
+    updatedBy: "매니저",
     eventTitle: "이벤트 제목 1",
+    eventCategory: "프론트엔드",
     eventStartAt: "2023-12-04T11:21:02.627Z",
     eventEndAt: "2023-12-04T11:21:02.627Z",
     eventOrganization: "이벤트 주최기관 1",
@@ -34,7 +40,10 @@ const DUMMY = [
     id: 2,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
+    createdBy: "어드민",
+    updatedBy: "매니저",
     eventTitle: "이벤트 제목 2",
+    eventCategory: "프론트엔드",
     eventStartAt: "2023-12-04T11:21:02.627Z",
     eventEndAt: "2023-12-04T11:21:02.627Z",
     eventOrganization: "이벤트 주최기관 2",
@@ -44,7 +53,10 @@ const DUMMY = [
     id: 3,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
+    createdBy: "어드민",
+    updatedBy: "매니저",
     eventTitle: "이벤트 제목 3",
+    eventCategory: "프론트엔드",
     eventStartAt: "2023-12-04T11:21:02.627Z",
     eventEndAt: "2023-12-04T11:21:02.627Z",
     eventOrganization: "이벤트 주최기관 3",
@@ -66,32 +78,35 @@ export const columns: ColumnDef<UserDto>[] = [
     header: "ID",
   },
   {
-    accessorKey: "createdAt",
     header: "작성일자",
     cell: ({ row }) => {
       const createdAt = row.original.createdAt;
       return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
     },
   },
-
+  {
+    accessorKey: "createdBy",
+    header: "작성자",
+  },
   {
     accessorKey: "eventTitle",
     header: "공고명",
   },
   {
-    accessorKey: "eventStartAt",
-    header: "공고시작일",
-    cell: ({ row }) => {
-      const eventStartAt = row.original.eventStartAt;
-      return <p>{getUtcToDateFormat(eventStartAt, DateFnsFormat.YYYYMMDD)}</p>;
-    },
+    accessorKey: "eventCategory",
+    header: "공고분야",
   },
   {
-    accessorKey: "eventEndAt",
-    header: "공고종료일",
+    header: "공고기간",
     cell: ({ row }) => {
+      const eventStartAt = row.original.eventStartAt;
       const eventEndAt = row.original.eventEndAt;
-      return <p>{getUtcToDateFormat(eventEndAt, DateFnsFormat.YYYYMMDD)}</p>;
+      return (
+        <p>{`${getUtcToDateFormat(
+          eventStartAt,
+          DateFnsFormat.YYYYMMDD
+        )} ~ ${getUtcToDateFormat(eventEndAt, DateFnsFormat.YYYYMMDD)}`}</p>
+      );
     },
   },
   {
@@ -99,7 +114,6 @@ export const columns: ColumnDef<UserDto>[] = [
     header: "주최기관",
   },
   {
-    accessorKey: "eventViewCount",
     header: "조회수",
     cell: ({ row }) => {
       const eventViewCount = row.original.eventViewCount;

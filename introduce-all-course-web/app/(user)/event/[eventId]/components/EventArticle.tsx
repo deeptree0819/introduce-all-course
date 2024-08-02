@@ -50,9 +50,14 @@ const EventArticle = () => {
               className="w-full"
             />
           </div>
-          <Badge className="order-2 mt-6 w-fit laptop:order-1 laptop:col-span-2 laptop:mt-0 laptop:rounded-xl laptop:px-4 laptop:py-1 laptop:text-sm">
-            D-2
-          </Badge>
+          <div className="order-2 mt-6 w-fit space-x-1.5 laptop:order-1 laptop:col-span-2 laptop:mt-2 laptop:space-x-3">
+            <Badge className="laptop:rounded-xl laptop:px-4 laptop:py-1 laptop:text-sm">
+              D-2
+            </Badge>
+            <Badge className="laptop:rounded-xl laptop:px-3 laptop:py-1 laptop:text-sm">
+              공모전
+            </Badge>
+          </div>
           <div className="order-3 mt-2.5 space-y-1.5 laptop:order-2 laptop:col-span-2 laptop:mb-6">
             <h1 className="break-keep text-lg font-semibold laptop:text-3xl">
               [이지엔] eZ한 숏폼 공모전 (~7/31) | 2024년 이지에디터 6기

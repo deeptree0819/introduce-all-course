@@ -64,7 +64,6 @@ export const columns: ColumnDef<AdminDto>[] = [
     header: "이메일",
   },
   {
-    accessorKey: "createdAt",
     header: "가입일자",
     cell: ({ row }) => {
       const createdAt = row.original.createdAt;

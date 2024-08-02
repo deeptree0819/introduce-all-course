@@ -1,23 +1,46 @@
 "use client";
 
+import ImageUploader from "@adminComponents/ImageUploader";
 import DatePicker from "@components/ui/datePicker";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
-import ImageUploader from "../../../../components/ImageUploader";
 import AdminEditor from "../new/components/AdminEditor";
 import AttachmentsUploader from "../new/components/AttachmentsUploader";
 
 const EventsPostForm = () => {
   return (
     <div className="space-y-6">
-      <div className="grid w-80 items-center gap-1.5">
-        <Label>공고 썸네일 (정사각형 비율)</Label>
-        <ImageUploader fileId="thumbnail-image-upload" />
+      <div className="flex flex-row space-x-5">
+        <div className="grid w-80 items-center gap-1.5">
+          <Label>공고 썸네일 (정사각형 비율)</Label>
+          <ImageUploader fileId="thumbnail-image-upload" />
+        </div>
+        <div className="flex flex-col space-y-1.5">
+          <Label>공고 분야</Label>
+          <Select>
+            <SelectTrigger className="w-56">
+              <SelectValue placeholder="공고분야를 선택해주세요." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="로봇">로봇</SelectItem>
+              <SelectItem value="인공지능">인공지능</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
+
       <Separator />
+
       <header className="grid grid-cols-[minmax(0,450px)_minmax(250px,1fr)] items-start justify-center gap-x-5 gap-y-10">
         <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="title">공고명</Label>
@@ -42,7 +65,9 @@ const EventsPostForm = () => {
           <AdminEditor />
         </div>
       </header>
+
       <Separator />
+
       <section className="space-y-6">
         <div className="grid max-w-[1042px] items-center gap-1.5">
           <Label>공고 상세설명</Label>

@@ -5,15 +5,13 @@ import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 
-import UserSearch from "./UserSearch";
-
-interface UserDto {
+interface AdminDto {
   id: number;
   createdAt: string;
+  createdBy: string;
   updatedAt: string;
-  nickname: string;
-  email: string;
-  phoneNumber: string;
+  eventCategoryName: string;
+  postsNumber: number;
 }
 
 const USER_DUMMY = [
@@ -21,31 +19,25 @@ const USER_DUMMY = [
     id: 1,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
-    email: "user1@gmail.com",
-    userName: "김로보트",
-    nickname: "로봇에 흠뻑 빠진 내모습 1",
-    role: "일반",
-    phoneNumber: "010-1234-5678",
+    createdBy: "어드민",
+    eventCategoryName: "프론트엔드",
+    postsNumber: 10,
   },
   {
     id: 2,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
-    email: "user2@gmail.com",
-    userName: "김로보트",
-    nickname: "로봇에 흠뻑 빠진 내모습 2",
-    role: "일반",
-    phoneNumber: "010-1234-5678",
+    createdBy: "어드민",
+    eventCategoryName: "백엔드",
+    postsNumber: 10,
   },
   {
     id: 3,
     createdAt: "2023-12-04T11:21:02.627Z",
     updatedAt: "2023-12-04T11:21:02.627Z",
-    email: "user3@gmail.com",
-    userName: "김로보트",
-    nickname: "로봇에 흠뻑 빠진 내모습 3",
-    role: "전문가",
-    phoneNumber: "010-1234-5678",
+    createdBy: "어드민",
+    eventCategoryName: "풀스택",
+    postsNumber: 10,
   },
 ];
 
@@ -57,33 +49,28 @@ const PAGINATION_DUMMY = {
   itemsPerPage: 10,
 };
 
-export const columns: ColumnDef<UserDto>[] = [
+export const columns: ColumnDef<AdminDto>[] = [
   {
     accessorKey: "id",
     header: "ID",
   },
   {
-    accessorKey: "role",
-    header: "권한",
+    accessorKey: "eventCategoryName",
+    header: "분야 명칭",
   },
   {
-    accessorKey: "userName",
-    header: "실명",
+    header: "게시글 수",
+    cell: ({ row }) => {
+      const postsNumber = row.original.postsNumber;
+      return <p>{`${postsNumber}개`}</p>;
+    },
   },
   {
-    accessorKey: "nickname",
-    header: "닉네임",
+    accessorKey: "createdBy",
+    header: "생성자",
   },
   {
-    accessorKey: "email",
-    header: "이메일",
-  },
-  {
-    accessorKey: "phoneNumber",
-    header: "전화번호",
-  },
-  {
-    header: "가입일자",
+    header: "생성일자",
     cell: ({ row }) => {
       const createdAt = row.original.createdAt;
       return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
@@ -95,7 +82,7 @@ export const columns: ColumnDef<UserDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/users/${row.getValue("id")}`}
+          href={`/admin/events/categories/${row.getValue("id")}`}
           className="text-blue-500"
         >
           상세보기
@@ -105,10 +92,9 @@ export const columns: ColumnDef<UserDto>[] = [
   },
 ];
 
-const UserTable = () => {
+const AdminTable = () => {
   return (
     <div className="flex max-w-[1300px] flex-col space-y-5">
-      <UserSearch />
       <AdminPaginatedTable
         data={USER_DUMMY}
         columns={columns}
@@ -118,4 +104,4 @@ const UserTable = () => {
   );
 };
 
-export default UserTable;
+export default AdminTable;
