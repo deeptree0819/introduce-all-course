@@ -1,5 +1,6 @@
 "use client";
 
+import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import { useParams } from "next/navigation";
 
 import GoBackButton from "@/app/admin/components/GoBackButton";
@@ -14,9 +15,32 @@ const AdminEventPostDetailPage = () => {
 
   return (
     <div className="relative flex h-full flex-col">
-      <div className="flex grow flex-col items-start space-y-5 p-5 pb-32">
+      <div className="flex grow flex-col items-start space-y-8 p-5 pb-32">
         <GoBackButton />
-        <Badge className="ml-3 py-1 text-sm">{`공고ID: ${postId}`}</Badge>
+        <div className="ml-3 flex flex-row items-center space-x-5">
+          <Badge className="text-sm">{`공고ID: ${postId}`}</Badge>
+          <div className="text-sm text-slate-600">
+            <span className="font-semibold">생성일시</span>{" "}
+            {getUtcToDateFormat(
+              "2023-12-04T11:21:02.627Z",
+              DateFnsFormat.YYYYMMDDHHmm
+            )}
+          </div>
+          <div className="text-sm text-slate-600">
+            <span className="font-semibold">수정일시</span>{" "}
+            {getUtcToDateFormat(
+              "2023-12-04T11:21:02.627Z",
+              DateFnsFormat.YYYYMMDDHHmm
+            )}
+          </div>
+          <div className="text-sm text-slate-600">
+            <span className="font-semibold">작성자</span> {`어드민`}
+          </div>
+          <div className="text-sm text-slate-600">
+            <span className="font-semibold">수정자</span> {`매니저`}
+          </div>
+        </div>
+
         <div className="mx-5">
           <EventsPostForm />
         </div>
