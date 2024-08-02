@@ -19,6 +19,11 @@ const navItems = [
     ],
   },
   {
+    title: "메인페이지",
+    href: "/admin/main/banners",
+    children: [{ title: "메인페이지 배너 관리", href: "/admin/main/banners" }],
+  },
+  {
     title: "공고소개",
     href: "/admin/events/posts",
     children: [

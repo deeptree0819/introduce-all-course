@@ -61,6 +61,7 @@ const InquiryBanner = ({ className }: InquiryBannerProps) => {
       <Link
         href="https://tally.so"
         className="mt-5 rounded-full bg-brand px-8 py-3 text-lg font-semibold text-white shadow-lg shadow-slate-200"
+        target="_blank"
       >
         무료상담 신청하기
       </Link>

@@ -27,6 +27,7 @@ const Footer = () => {
           <Link
             href="https://tally.so"
             className="text-xs font-medium text-slate-500"
+            target="_blank"
           >
             문의하기
           </Link>

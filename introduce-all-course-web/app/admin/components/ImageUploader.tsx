@@ -3,27 +3,31 @@
 import { cn } from "@utils/common";
 import { ImageIcon } from "lucide-react";
 import Image from "next/image";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
-type PosterImageUploaderProps = {
+type ImageUploaderProps = {
   className?: string;
+  fileId?: string;
+  defaultSrc?: string;
 };
 
-const PosterImageUploader = ({ className }: PosterImageUploaderProps) => {
-  const [preview, setPreview] = useState<string | null>(null);
-  const [aspectRatio, setAspectRatio] = useState<number | null>(null);
+const ImageUploader = ({
+  className,
+  fileId,
+  defaultSrc,
+}: ImageUploaderProps) => {
+  const [preview, setPreview] = useState<string | null>(defaultSrc || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setPreview(defaultSrc || null);
+  }, [defaultSrc]);
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const img = new window.Image();
-        img.onload = () => {
-          setAspectRatio(img.width / img.height);
-        };
-        img.src = reader.result as string;
         setPreview(reader.result as string);
       };
       reader.readAsDataURL(file);
@@ -40,12 +44,11 @@ const PosterImageUploader = ({ className }: PosterImageUploaderProps) => {
         "relative flex h-fit w-full items-center justify-center overflow-hidden hover:opacity-90",
         className
       )}
-      style={{ paddingBottom: aspectRatio ? `${100 / aspectRatio}%` : 0 }}
       onClick={triggerFileInput}
     >
       <input
         type="file"
-        id="poster-image-upload"
+        id={fileId ? fileId : "image-upload"}
         className="absolute inset-0 hidden h-full w-full cursor-pointer opacity-0"
         onChange={handleImageUpload}
         accept="image/*"
@@ -56,9 +59,9 @@ const PosterImageUploader = ({ className }: PosterImageUploaderProps) => {
           <Image
             src={preview}
             alt="Image Preview"
-            className="h-fit w-fit object-cover"
-            layout="fill"
-            objectFit="cover"
+            className="h-fit w-full"
+            width={500}
+            height={500}
           />
         </div>
       ) : (
@@ -71,4 +74,4 @@ const PosterImageUploader = ({ className }: PosterImageUploaderProps) => {
   );
 };
 
-export default PosterImageUploader;
+export default ImageUploader;
