@@ -47,6 +47,28 @@ const USER_DUMMY = [
     mainBannerOpenAt: "2023-12-04T11:21:02.627Z",
     mainBannerCloseAt: "",
   },
+  {
+    id: 2,
+    createdAt: "2023-12-04T11:21:02.627Z",
+    updatedAt: "2023-12-04T11:21:02.627Z",
+    mainBannerImageUrl: "https://picsum.photos/500/300",
+    mainBannerImageName: "메인배너1",
+    mainBannerUrl:
+      "https://unsplash.com/photos/brown-tabby-kitten-sitting-on-floor-nKC772R_qog",
+    mainBannerOpenAt: "2024-12-04T11:21:02.627Z",
+    mainBannerCloseAt: "2025-12-04T11:21:02.627Z",
+  },
+  {
+    id: 2,
+    createdAt: "2023-12-04T11:21:02.627Z",
+    updatedAt: "2023-12-04T11:21:02.627Z",
+    mainBannerImageUrl: "https://picsum.photos/500/300",
+    mainBannerImageName: "메인배너1",
+    mainBannerUrl:
+      "https://unsplash.com/photos/brown-tabby-kitten-sitting-on-floor-nKC772R_qog",
+    mainBannerOpenAt: "2023-12-04T11:21:02.627Z",
+    mainBannerCloseAt: "2023-12-04T11:21:02.627Z",
+  },
 ];
 
 const PAGINATION_DUMMY = {
@@ -57,10 +79,35 @@ const PAGINATION_DUMMY = {
   itemsPerPage: 10,
 };
 
+const getBannerStatus = (
+  mainBannerOpenAt: string,
+  mainBannerCloseAt: string
+) => {
+  const now = new Date();
+  const openDate = new Date(mainBannerOpenAt);
+  const closeDate = mainBannerCloseAt ? new Date(mainBannerCloseAt) : null;
+
+  if (now < openDate) {
+    return "대기";
+  } else if (closeDate && now > closeDate) {
+    return "종료";
+  } else {
+    return "게시중";
+  }
+};
+
 export const columns: ColumnDef<AdminDto>[] = [
   {
     accessorKey: "id",
     header: "ID",
+  },
+  {
+    header: "진행상태",
+    cell: ({ row }) => {
+      const mainBannerOpenAt = row.original.mainBannerOpenAt;
+      const mainBannerCloseAt = row.original.mainBannerCloseAt;
+      return <p>{getBannerStatus(mainBannerOpenAt, mainBannerCloseAt)}</p>;
+    },
   },
   {
     accessorKey: "mainBannerImageUrl",
