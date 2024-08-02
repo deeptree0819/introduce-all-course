@@ -6,6 +6,7 @@ import Link from "next/link";
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
+import EventPostDeleteButton from "../posts/[postId]/components/EventPostDeleteButton";
 import EventSearch from "../posts/components/EventSearch";
 
 interface UserDto {
@@ -29,7 +30,7 @@ const DUMMY = [
     updatedAt: "2023-12-04T11:21:02.627Z",
     createdBy: "어드민",
     updatedBy: "매니저",
-    eventTitle: "이벤트 제목 1",
+    eventTitle: "[kakao x goorm] 구름톤 딥다이브 프로덕트 매니지먼트 과정 모집",
     eventCategory: "프론트엔드",
     eventStartAt: "2023-12-04T11:21:02.627Z",
     eventEndAt: "2023-12-04T11:21:02.627Z",
@@ -42,7 +43,8 @@ const DUMMY = [
     updatedAt: "2023-12-04T11:21:02.627Z",
     createdBy: "어드민",
     updatedBy: "매니저",
-    eventTitle: "이벤트 제목 2",
+    eventTitle:
+      "반도체 설계 전문 엔지니어 양성 교육(시스템반도체 제어 설계 엔지니어 양성)",
     eventCategory: "프론트엔드",
     eventStartAt: "2023-12-04T11:21:02.627Z",
     eventEndAt: "2023-12-04T11:21:02.627Z",
@@ -78,19 +80,15 @@ export const columns: ColumnDef<UserDto>[] = [
     header: "ID",
   },
   {
-    header: "작성일자",
-    cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
-      return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
-    },
-  },
-  {
-    accessorKey: "createdBy",
-    header: "작성자",
-  },
-  {
-    accessorKey: "eventTitle",
     header: "공고명",
+    cell: ({ row }) => {
+      const eventTitle = row.original.eventTitle;
+      return (
+        <div className="flex flex-col items-center">
+          <p className="w-52">{eventTitle}</p>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "eventCategory",
@@ -121,6 +119,17 @@ export const columns: ColumnDef<UserDto>[] = [
     },
   },
   {
+    header: "작성일자",
+    cell: ({ row }) => {
+      const createdAt = row.original.createdAt;
+      return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
+    },
+  },
+  {
+    accessorKey: "createdBy",
+    header: "작성자",
+  },
+  {
     accessorKey: "detail",
     header: "",
     cell: ({ row }) => {
@@ -131,6 +140,15 @@ export const columns: ColumnDef<UserDto>[] = [
         >
           상세보기
         </Link>
+      );
+    },
+  },
+  {
+    accessorKey: "delete",
+    header: "",
+    cell: ({ row }) => {
+      return (
+        <EventPostDeleteButton postId={row.getValue("id")} variant="icon" />
       );
     },
   },

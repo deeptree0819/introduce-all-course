@@ -133,7 +133,7 @@ export const columns: ColumnDef<AdminDto>[] = [
     },
   },
   {
-    header: "이미지명",
+    header: "이미지 대체텍스트",
     cell: ({ row }) => {
       const mainBannerImageName = row.original.mainBannerImageName;
       const mainBannerUrl = row.original.mainBannerUrl;

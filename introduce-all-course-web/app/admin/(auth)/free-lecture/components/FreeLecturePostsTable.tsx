@@ -6,6 +6,7 @@ import Link from "next/link";
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
+import FreeLecturePostDeleteButton from "../posts/[postId]/components/FreeLecturePostDeleteButton";
 import EventSearch from "../posts/components/FreeLecturePostsSearch";
 
 interface FreeLectureDto {
@@ -48,17 +49,6 @@ export const columns: ColumnDef<FreeLectureDto>[] = [
     header: "ID",
   },
   {
-    header: "작성일자",
-    cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
-      return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
-    },
-  },
-  {
-    accessorKey: "createdBy",
-    header: "작성자",
-  },
-  {
     accessorKey: "freeLectureTitle",
     header: "무료강의 제목",
   },
@@ -81,6 +71,17 @@ export const columns: ColumnDef<FreeLectureDto>[] = [
     },
   },
   {
+    header: "작성일자",
+    cell: ({ row }) => {
+      const createdAt = row.original.createdAt;
+      return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
+    },
+  },
+  {
+    accessorKey: "createdBy",
+    header: "작성자",
+  },
+  {
     accessorKey: "detail",
     header: "",
     cell: ({ row }) => {
@@ -91,6 +92,18 @@ export const columns: ColumnDef<FreeLectureDto>[] = [
         >
           상세보기
         </Link>
+      );
+    },
+  },
+  {
+    accessorKey: "delete",
+    header: "",
+    cell: ({ row }) => {
+      return (
+        <FreeLecturePostDeleteButton
+          postId={row.getValue("id")}
+          variant="icon"
+        />
       );
     },
   },
@@ -107,9 +120,6 @@ const FreeLecturePostsTable = () => {
           </ToggleGroupItem>
           <ToggleGroupItem value="oldest" size="sm">
             오래된순
-          </ToggleGroupItem>
-          <ToggleGroupItem value="due" size="sm">
-            마감임박순
           </ToggleGroupItem>
           <ToggleGroupItem value="viewCount" size="sm">
             조회수순
