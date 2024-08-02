@@ -110,7 +110,6 @@ export const columns: ColumnDef<AdminDto>[] = [
     },
   },
   {
-    accessorKey: "mainBannerImageUrl",
     header: "이미지",
     cell: ({ row }) => {
       const id = row.original.id;
@@ -134,7 +133,6 @@ export const columns: ColumnDef<AdminDto>[] = [
     },
   },
   {
-    accessorKey: "mainBannerImageName",
     header: "이미지명",
     cell: ({ row }) => {
       const mainBannerImageName = row.original.mainBannerImageName;
@@ -149,7 +147,6 @@ export const columns: ColumnDef<AdminDto>[] = [
     },
   },
   {
-    accessorKey: "mainBannerOpenAt",
     header: "노출 시작일시",
     cell: ({ row }) => {
       const mainBannerOpenAt = row.original.mainBannerOpenAt;
@@ -161,7 +158,6 @@ export const columns: ColumnDef<AdminDto>[] = [
     },
   },
   {
-    accessorKey: "mainBannerCloseAt",
     header: "노출 종료일시",
     cell: ({ row }) => {
       const mainBannerCloseAt = row.original.mainBannerCloseAt;

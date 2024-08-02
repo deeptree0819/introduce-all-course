@@ -83,7 +83,6 @@ export const columns: ColumnDef<UserDto>[] = [
     header: "전화번호",
   },
   {
-    accessorKey: "createdAt",
     header: "가입일자",
     cell: ({ row }) => {
       const createdAt = row.original.createdAt;
