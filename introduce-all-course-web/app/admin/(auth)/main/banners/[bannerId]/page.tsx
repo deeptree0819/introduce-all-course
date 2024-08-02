@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import GoBackButton from "@/app/admin/components/GoBackButton";
 import { Badge } from "@/components/ui/badge";
 
-import MainBannerInfoForm from "../components/MainBannerInfoForm";
+import MainBannerInfoForm from "./conponents/MainBannerInfoForm";
 
 const AdminMainBannerDetailPage = () => {
   const params = useParams<{ bannerId: string }>();

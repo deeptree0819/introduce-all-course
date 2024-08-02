@@ -1,5 +1,7 @@
 "use client";
 
+import AdminEditor from "@adminComponents/AdminEditor";
+import AttachmentsUploader from "@adminComponents/AttachmentsUploader";
 import ImageUploader from "@adminComponents/ImageUploader";
 import DatePicker from "@components/ui/datePicker";
 
@@ -13,9 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-
-import AdminEditor from "../new/components/AdminEditor";
-import AttachmentsUploader from "../new/components/AttachmentsUploader";
 
 const EventsPostForm = () => {
   return (

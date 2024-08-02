@@ -43,7 +43,7 @@ const navItems = [
     href: "/admin/free-lecture/posts",
     children: [
       { title: "게시글 관리", href: "/admin/free-lecture/posts" },
-      { title: "태그 관리", href: "/admin/free-lecture/categories" },
+      { title: "태그 관리", href: "/admin/free-lecture/tags" },
     ],
   },
 ];

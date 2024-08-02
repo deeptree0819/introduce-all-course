@@ -10,10 +10,14 @@ const AdminFormLinksPage = () => {
       <p className="text-3xl">상담신청 링크 관리</p>
 
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="email">현재 선택된 링크</Label>
+        <Label htmlFor="form-link">현재 선택된 링크</Label>
         <div className="flex w-full max-w-lg items-center space-x-2">
-          <Input type="email" placeholder="Email" defaultValue={"tally.so"} />
-          <Button type="submit">수정</Button>
+          <Input
+            type="text"
+            placeholder="상담신청 링크를 입력해주세요."
+            defaultValue={"tally.so"}
+          />
+          <Button type="submit">등록</Button>
         </div>
       </div>
 

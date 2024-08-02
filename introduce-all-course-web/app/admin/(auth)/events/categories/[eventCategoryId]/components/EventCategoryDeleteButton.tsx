@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-type AdminDeleteAlertProps = {
+type EventCategoryDeleteButtonProps = {
   eventCategoryName: string;
 };
 
 const EventCategoryDeleteButton = ({
   eventCategoryName,
-}: AdminDeleteAlertProps) => {
+}: EventCategoryDeleteButtonProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
