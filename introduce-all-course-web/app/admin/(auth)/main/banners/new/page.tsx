@@ -1,7 +1,6 @@
 import GoBackButton from "@/app/admin/components/GoBackButton";
-import { Button } from "@/components/ui/button";
 
-import MainBannerInfoForm from "../components/MainBannerInfoForm";
+import CreateMainBannerForm from "./components/CreateMainBannerForm";
 
 const AdminEventPostsNewPage = () => {
   return (
@@ -9,11 +8,8 @@ const AdminEventPostsNewPage = () => {
       <div className="flex grow flex-col items-start space-y-5 p-5 pb-32">
         <GoBackButton />
         <div className="mx-5">
-          <MainBannerInfoForm />
+          <CreateMainBannerForm />
         </div>
-      </div>
-      <div className="fixed bottom-0 left-0 flex w-full flex-row items-center justify-end border-t border-slate-300 bg-white px-7 py-3 shadow">
-        <Button>등록</Button>
       </div>
     </div>
   );
