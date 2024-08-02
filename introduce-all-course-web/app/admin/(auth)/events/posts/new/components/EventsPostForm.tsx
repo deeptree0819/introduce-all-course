@@ -13,6 +13,11 @@ import AttachmentsUploader from "./AttachmentsUploader";
 const EventsPostForm = () => {
   return (
     <div className="space-y-6">
+      <div className="grid w-80 items-center gap-1.5">
+        <Label>공고 썸네일 (정사각형 비율)</Label>
+        <ImageUploader fileId="thumbnail-image-upload" />
+      </div>
+      <Separator />
       <header className="grid grid-cols-[minmax(0,450px)_minmax(250px,1fr)] items-start justify-center gap-x-5 gap-y-10">
         <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="title">공고명</Label>
@@ -29,7 +34,7 @@ const EventsPostForm = () => {
           </div>
         </div>
         <div className="grid items-center gap-1.5">
-          <Label>공고 포스터</Label>
+          <Label>공고 포스터 (A4 비율)</Label>
           <ImageUploader fileId="poster-image-upload" />
         </div>
         <div className="grid max-w-xl items-center gap-1.5">
