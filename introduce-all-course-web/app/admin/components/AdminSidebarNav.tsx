@@ -35,7 +35,7 @@ const navItems = [
     title: "취업상담",
     href: "/admin/inquiry/form-links",
     children: [
-      { title: "상담폼 링크 관리", href: "/admin/inquiry/form-links" },
+      { title: "상담신청 링크 관리", href: "/admin/inquiry/form-links" },
     ],
   },
   {
