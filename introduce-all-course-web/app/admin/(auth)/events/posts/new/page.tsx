@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 import EventsPostForm from "../components/EventsPostForm";
 
-const AdminBootCampPostsNewPage = () => {
+const AdminEventPostsNewPage = () => {
   return (
     <div className="relative flex h-full flex-col">
       <div className="flex grow flex-col items-start space-y-5 p-5 pb-32">
@@ -19,4 +19,4 @@ const AdminBootCampPostsNewPage = () => {
   );
 };
 
-export default AdminBootCampPostsNewPage;
+export default AdminEventPostsNewPage;

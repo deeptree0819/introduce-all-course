@@ -25,6 +25,7 @@
       "@utils/*": ["./app/utils/*"],
       "@generated/*": ["./app/generated/api/*"],
       "@components/*": ["./app/components/*"],
+      "@adminComponents/*": ["./app/admin/components/*"],
       "@assets/*": ["./app/assets/*"],
       "@/*": ["./*"]
     },
