@@ -1,8 +1,9 @@
 "use client";
 
-import { Button, buttonVariants } from "@components/ui/button";
+import Logo from "@assets/logo.svg";
+import { Button } from "@components/ui/button";
 import { cn } from "@utils/common";
-import { MenuIcon, X } from "lucide-react";
+import { ChevronRightIcon, MenuIcon, X } from "lucide-react";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
@@ -32,25 +33,25 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
       <SheetContent className="w-5/6">
         <div className="absolute inset-0 z-50 h-screen w-full space-y-3 bg-white px-3 py-5">
           <div>
-            <div className="mb-10 flex w-full flex-row items-center justify-between">
+            <div className="mb-5 flex w-full flex-row items-center justify-between pl-2">
+              <Link href="/">
+                <Link href="/">
+                  <Logo width={127} height={38} className="h-9" />
+                </Link>
+              </Link>
               <SheetClose asChild>
-                <Button variant="ghost" size="icon" className="right-0">
+                <Button variant="ghost" size="icon" className="">
                   <X />
                 </Button>
               </SheetClose>
-              <Link
-                href="/login"
-                className={cn(
-                  buttonVariants({
-                    variant: "ghost",
-                    className: "text-brand hover:text-brand",
-                    size: "sm",
-                  })
-                )}
-              >
-                로그인
-              </Link>
             </div>
+            <Link
+              href="/login"
+              className="mb-5 flex w-full flex-row items-center justify-between pl-3 pr-2"
+            >
+              <div className="font-regular text-base">로그인이 필요합니다.</div>
+              <ChevronRightIcon className="" />
+            </Link>
             <div className="flex w-full flex-col space-y-7 px-3">
               <div className="space-y-1">
                 <SheetClose asChild>
