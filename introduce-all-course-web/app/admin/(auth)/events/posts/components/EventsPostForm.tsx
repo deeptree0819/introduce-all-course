@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
-import ImageUploader from "../../../../../components/ImageUploader";
-import AdminEditor from "./AdminEditor";
-import AttachmentsUploader from "./AttachmentsUploader";
+import ImageUploader from "../../../../components/ImageUploader";
+import AdminEditor from "../new/components/AdminEditor";
+import AttachmentsUploader from "../new/components/AttachmentsUploader";
 
 const EventsPostForm = () => {
   return (

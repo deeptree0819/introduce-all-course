@@ -6,7 +6,7 @@ import GoBackButton from "@/app/admin/components/GoBackButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import EventsPostForm from "../new/components/EventsPostForm";
+import EventsPostForm from "../components/EventsPostForm";
 
 const AdminEventPostDetailPage = () => {
   const params = useParams<{ postId: string }>();
