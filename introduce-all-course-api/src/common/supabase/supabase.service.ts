@@ -9,8 +9,8 @@ export class SupabaseService {
 
   constructor(private configService: ConfigService) {
     this.supabaseClient = createClient<Database>(
-      this.configService.get<string>("SUPABASE_URL")!,
-      this.configService.get<string>("SUPABASE_KEY")!,
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_KEY!,
     );
   }
 
