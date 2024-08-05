@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@components/ui/button";
+import { cn } from "@utils/common";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -20,8 +21,7 @@ const DUMMY_DATA = [
   {
     id: 0,
     image: FreeLectureCarouselImage,
-    title:
-      "뉴모노 울트라 마이크로 스코픽 실리코 볼케이노 코니오시스 클라우드 엔지니어가 알아야 할 10가지",
+    title: "11111111111111111 1111111111 111111111 111111111111111111111111",
     channel: "실리콘밸리 아저씨들",
     tags: [
       "클라우드",
@@ -101,7 +101,7 @@ const FreeLectureCarousel = () => {
       setApi={setApi}
       opts={{
         align: "center",
-        loop: true,
+        loop: false,
         breakpoints: {
           "(min-width: 769px)": { loop: false, align: "start" },
         },
@@ -118,7 +118,10 @@ const FreeLectureCarousel = () => {
         {DUMMY_DATA.map((item, index) => (
           <CarouselItem
             key={index}
-            className="max-w-xs basis-5/12 laptop:basis-3/12"
+            className={cn(
+              "max-w-xs basis-5/12 laptop:basis-3/12",
+              index == 0 && "ml-4 laptop:ml-0"
+            )}
           >
             <FreeLectureCard hideOverflowedBadges={true} item={item} />
           </CarouselItem>
