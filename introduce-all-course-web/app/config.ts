@@ -18,7 +18,6 @@ const getEnvironmentVariable = (environmentVariable: string): string => {
 
 const config = {
   apiUrl: getEnvironmentVariable("NEXT_PUBLIC_API_URL"),
-  adminApiUrl: getEnvironmentVariable("NEXT_PUBLIC_ADMIN_API_URL"),
 };
 
 export default config;
