@@ -10,13 +10,14 @@ import {
   FormMessage,
 } from "@components/ui/form";
 import { Input } from "@components/ui/input";
-import { LoginWithEmailDto } from "@generated/admin";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { LoginWithEmailDto } from "@/app/generated";
 import { useAdminLoginByEmail } from "@/app/hooks/admin/adminAuthHooks";
 
 import { AdminLoginUserWithEmailSchema } from "./schema";
+
 const LoginForm = () => {
   const form = useForm<LoginWithEmailDto>({
     mode: "onSubmit",
