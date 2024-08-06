@@ -14,7 +14,7 @@ export class AdminAuthService {
    * @returns LoginResultDto
    * @throws ApiError
    */
-  public static authControllerLoginByEmail(
+  public static loginByEmail(
     requestBody: LoginWithEmailDto
   ): CancelablePromise<LoginResultDto> {
     return __request(OpenAPI, {
