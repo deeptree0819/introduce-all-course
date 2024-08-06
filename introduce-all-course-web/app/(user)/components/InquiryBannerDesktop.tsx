@@ -13,7 +13,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
   return (
     <section
       className={cn(
-        "flex flex-row items-center justify-start space-x-24",
+        "flex flex-row items-center justify-between space-x-24",
         className
       )}
     >
@@ -72,7 +72,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
         </Link>
       </div>
 
-      <div className="w-full min-w-[200px] max-w-sm">
+      <div className="mt-20 w-full min-w-[200px] max-w-sm">
         <Image src={PointingUpImage} alt="일러스트" />
       </div>
     </section>
