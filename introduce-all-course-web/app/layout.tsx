@@ -6,6 +6,11 @@ import ReactQueryProvider from "@components/provider/ReactQueryProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import config from "./config";
+import { OpenAPI } from "./generated";
+
+OpenAPI.BASE = config.apiUrl;
+
 const Pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
   display: "swap",

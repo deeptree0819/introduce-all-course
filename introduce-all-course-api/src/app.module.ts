@@ -1,11 +1,16 @@
 import { AdminModule } from "@admin/admin.module";
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { SupabaseModule } from "./common/supabase/supabase.module";
 
 @Module({
-  imports: [SupabaseModule, AdminModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    SupabaseModule,
+    AdminModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
