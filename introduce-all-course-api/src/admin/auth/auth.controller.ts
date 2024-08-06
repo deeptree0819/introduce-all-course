@@ -2,7 +2,7 @@ import { AuthService } from "@admin/auth/auth.service";
 import { Public } from "@common/decorators/public.decorator";
 import { Roles } from "@common/decorators/roles.decorator";
 import { Body, Controller, Post, Req } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiOperation } from "@nestjs/swagger";
 import { LoginResultDto } from "./dtos/login-result.dto";
 import { LoginWithEmailDto } from "./dtos/login-with-email.dto";
 
@@ -11,7 +11,10 @@ import { LoginWithEmailDto } from "./dtos/login-with-email.dto";
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @ApiTags("어드민 로그인")
+  @ApiOperation({
+    summary: "관리자 이메일 로그인",
+    tags: ["admin-auth"],
+  })
   @Public()
   @Post("/admin/login")
   async loginByEmail(

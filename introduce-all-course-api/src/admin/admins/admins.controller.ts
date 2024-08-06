@@ -1,12 +1,15 @@
+import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
 import { AdminsService } from "./admins.service";
 
 @Controller("/admin/admins")
 export class AdminsController {
   constructor(private readonly adminsService: AdminsService) {}
 
-  @ApiTags("어드민 어드민관리")
+  @CustomApiOperation({
+    summary: "어드민 목록 조회",
+    tags: ["admin-admins"],
+  })
   @Get()
   async getAllAdmins() {
     return this.adminsService.getAllAdmins();

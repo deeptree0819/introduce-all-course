@@ -4,3 +4,7 @@
 
 ## Lint
 cd introduce-all-course-web && pnpm lint-staged && cd ..
+
+
+## codegen
+pnpm gen:dto

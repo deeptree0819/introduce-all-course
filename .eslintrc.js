@@ -1,3 +1,3 @@
 module.exports = {
-  ignorePatterns: [".eslintrc.js", "*.stories.tsx", "yarn.lock"],
+  ignorePatterns: [".eslintrc.js", "codegen.config.js", "scripts/*.js"],
 };
