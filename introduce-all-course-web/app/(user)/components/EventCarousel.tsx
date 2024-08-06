@@ -113,14 +113,11 @@ const EventCarousel = () => {
       >
         <ChevronLeft size={10} />
       </Button>
-      <CarouselContent>
+      <CarouselContent className="ml-0">
         {DUMMY_DATA.map((item, index) => (
           <CarouselItem
             key={index}
-            className={cn(
-              "max-w-xs basis-5/12 laptop:basis-3/12",
-              index == 0 && "ml-4 laptop:ml-0"
-            )}
+            className={cn("max-w-xs basis-5/12 laptop:basis-3/12 ")}
           >
             <EventCard item={item} />
           </CarouselItem>

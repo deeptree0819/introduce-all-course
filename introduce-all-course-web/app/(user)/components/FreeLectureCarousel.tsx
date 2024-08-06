@@ -100,7 +100,7 @@ const FreeLectureCarousel = () => {
       className="flex flex-row items-center space-y-5"
       setApi={setApi}
       opts={{
-        align: "center",
+        align: "start",
         loop: false,
         breakpoints: {
           "(min-width: 769px)": { loop: false, align: "start" },
@@ -114,14 +114,11 @@ const FreeLectureCarousel = () => {
       >
         <ChevronLeft size={10} />
       </Button>
-      <CarouselContent>
+      <CarouselContent className="ml-0">
         {DUMMY_DATA.map((item, index) => (
           <CarouselItem
             key={index}
-            className={cn(
-              "max-w-xs basis-5/12 laptop:basis-3/12",
-              index == 0 && "ml-4 laptop:ml-0"
-            )}
+            className={cn("max-w-xs basis-5/12 laptop:basis-3/12")}
           >
             <FreeLectureCard hideOverflowedBadges={true} item={item} />
           </CarouselItem>
