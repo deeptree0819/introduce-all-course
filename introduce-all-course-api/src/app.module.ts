@@ -1,5 +1,4 @@
-import { AdminsModule } from "@admin/admin.module";
-import { AuthModule } from "@admin/auth/auth.module";
+import { AdminModule } from "@admin/admin.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./app.controller";
@@ -10,8 +9,7 @@ import { SupabaseModule } from "./common/supabase/supabase.module";
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     SupabaseModule,
-    AdminsModule,
-    AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

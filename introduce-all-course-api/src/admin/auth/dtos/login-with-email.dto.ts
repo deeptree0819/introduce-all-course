@@ -4,7 +4,7 @@ export class LoginWithEmailDto {
   /*
    * 이메일
    *
-   * @example user@gmail.com
+   * @example admin@gmail.com
    */
   @IsEmail()
   @IsString()
@@ -13,7 +13,7 @@ export class LoginWithEmailDto {
   /*
    * 비밀번호
    *
-   * @example asdf1234
+   * @example admin1234
    */
   @IsString()
   password: string;

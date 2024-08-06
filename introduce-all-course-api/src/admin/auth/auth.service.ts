@@ -57,7 +57,7 @@ export class AuthService {
       .from("admins")
       .select("*")
       .eq("admin_email", email)
-      .single();
+      .maybeSingle();
 
     if (error) {
       throw new InternalServerErrorException(error.message);
