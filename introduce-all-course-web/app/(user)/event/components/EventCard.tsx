@@ -14,7 +14,7 @@ type EventCardProps = {
 
 const EventCard = ({ item }: EventCardProps) => {
   return (
-    <Link href={`/event/${item.id}`} className="space-y-3">
+    <Link href={`/event/${item.id}`} className="space-y-2">
       <div className="overflow-hidden rounded-lg border border-slate-200">
         <Image
           src={item.image}
@@ -26,11 +26,11 @@ const EventCard = ({ item }: EventCardProps) => {
       </div>
       <div className="space-y-2">
         <Badge className="text-[10px]">{item.dday}</Badge>
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           <div className="line-clamp-2 break-keep text-sm font-semibold laptop:text-base">
             {item.title}
           </div>
-          <div className="text-xs text-slate-600 laptop:text-sm">
+          <div className="text-xs font-medium text-slate-600 laptop:text-sm">
             {item.organization}
           </div>
         </div>

@@ -21,7 +21,8 @@ const DUMMY_DATA = [
   {
     id: 0,
     image: EventCarouselImage,
-    title: "1111111111111111111111111111111111111111111111111111111",
+    title:
+      "11111111111111111111111111111 111111111111111 111111111111 111111111",
     organization: "삼성생명",
     dday: "D-3",
   },
@@ -113,7 +114,7 @@ const EventCarousel = () => {
       >
         <ChevronLeft size={10} />
       </Button>
-      <CarouselContent className="ml-0">
+      <CarouselContent className="ml-0 laptop:-ml-4">
         {DUMMY_DATA.map((item, index) => (
           <CarouselItem
             key={index}

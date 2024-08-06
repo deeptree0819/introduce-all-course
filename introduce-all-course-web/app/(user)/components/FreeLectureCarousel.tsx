@@ -114,7 +114,7 @@ const FreeLectureCarousel = () => {
       >
         <ChevronLeft size={10} />
       </Button>
-      <CarouselContent className="ml-0">
+      <CarouselContent className="ml-0 laptop:-ml-4">
         {DUMMY_DATA.map((item, index) => (
           <CarouselItem
             key={index}

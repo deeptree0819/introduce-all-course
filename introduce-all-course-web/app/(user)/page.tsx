@@ -12,7 +12,7 @@ const MainPage = () => {
       </section>
       <section className="bg-[#EDF6FF] py-10 laptop:py-20">
         <div className="mx-auto max-w-[1300px] laptop:px-24">
-          <h1 className="px-4 text-base laptop:px-0 laptop:pb-2 laptop:text-2xl">
+          <h1 className="px-4 text-lg laptop:px-0 laptop:pb-2 laptop:text-2xl">
             씹고 뜯고 배우는{" "}
             <span className="font-semibold">로봇AI 행사 🤖</span>
           </h1>
@@ -23,7 +23,7 @@ const MainPage = () => {
       <InquiryBannerDesktop className="mx-auto hidden max-w-[1300px] px-24 py-20 laptop:flex" />
       <section className="bg-[#F2FEFF] py-10 laptop:py-20">
         <div className="mx-auto max-w-[1300px] laptop:px-24">
-          <h1 className="px-4 text-base laptop:px-0 laptop:pb-2 laptop:text-2xl">
+          <h1 className="px-4 text-lg laptop:px-0 laptop:pb-2 laptop:text-2xl">
             <span className="font-semibold">지금 놓치면 손해보는</span> 무료
             강의 👆
           </h1>

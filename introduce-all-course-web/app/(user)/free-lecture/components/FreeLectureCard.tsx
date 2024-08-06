@@ -21,7 +21,7 @@ const FreeLectureCard = ({
 }: FreeLectureCardProps) => {
   return (
     <div>
-      <Link href={`/free-lecture/${item.id}`} className="space-y-3">
+      <Link href={`/free-lecture/${item.id}`} className="space-y-2">
         <Image
           src={item.image}
           alt={item.title}
@@ -29,12 +29,12 @@ const FreeLectureCard = ({
           width={500}
           height={500}
         />
-        <div className="space-y-2">
+        <div className="space-y-1">
           <div className="line-clamp-2 break-keep text-sm font-semibold laptop:text-base">
             {item.title}
           </div>
-          <div className="space-y-3">
-            <div className="text-xs font-semibold text-slate-600 laptop:text-sm">
+          <div className="space-y-2">
+            <div className="text-xs font-medium text-slate-600 laptop:text-sm">
               {item.channel}
             </div>
             <div
@@ -46,7 +46,7 @@ const FreeLectureCard = ({
               {item.tags.map((tag, index) => (
                 <Badge
                   key={index}
-                  className="rounded-sm bg-[#D0E8FF] text-[10px] font-medium text-[#0029FF] hover:bg-[#D0E8FF] laptop:text-xs"
+                  className="h-fit rounded-sm bg-[#D0E8FF] px-1 text-[10px] font-normal text-[#0029FF] hover:bg-[#D0E8FF] laptop:text-xs"
                 >
                   {tag}
                 </Badge>
