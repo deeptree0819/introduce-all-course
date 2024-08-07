@@ -13,7 +13,7 @@ export class DefaultService {
   public static appControllerGetHello(): CancelablePromise<string> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/",
+      url: "/say-hello",
     });
   }
 }

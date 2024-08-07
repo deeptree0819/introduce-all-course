@@ -1,5 +1,6 @@
+import { Enums } from "@common/database.types";
 import { SetMetadata } from "@nestjs/common";
-import { Enums } from "database.types";
 
+export const ROLES_KEY = "roles";
 export const Roles = (...roles: Enums<"admin_role">[]) =>
   SetMetadata("roles", roles);

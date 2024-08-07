@@ -1,12 +1,10 @@
 import { AuthService } from "@admin/auth/auth.service";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { Public } from "@common/decorators/public.decorator";
-import { Roles } from "@common/decorators/roles.decorator";
 import { Body, Controller, Post, Req } from "@nestjs/common";
 import { LoginResultDto } from "./dtos/login-result.dto";
 import { LoginWithEmailDto } from "./dtos/login-with-email.dto";
 
-@Roles("SUPER")
 @Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
