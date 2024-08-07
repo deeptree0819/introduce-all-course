@@ -1,3 +1,4 @@
+import { Tables } from "@common/database.types";
 import { SupabaseService } from "@common/supabase/supabase.service";
 import {
   Injectable,
@@ -7,7 +8,6 @@ import {
 import { JwtService } from "@nestjs/jwt";
 import { compare } from "bcrypt";
 import { plainToInstance } from "class-transformer";
-import { Tables } from "database.types";
 import { LoginResultDto } from "./dtos/login-result.dto";
 import { LoginWithEmailDto } from "./dtos/login-with-email.dto";
 
