@@ -1,4 +1,4 @@
-import { Tables } from "@common/database.types";
+import { Enums, Tables } from "@common/database.types";
 import { SupabaseService } from "@common/supabase/supabase.service";
 import {
   Injectable,
@@ -44,6 +44,7 @@ export class AuthService {
       token: await this.generateAccessToken({
         adminId: admin.admin_id,
         adminName: admin.admin_name,
+        adminRole: admin.admin_role,
       }),
     });
   }
@@ -83,11 +84,17 @@ export class AuthService {
   async generateAccessToken({
     adminId,
     adminName,
+    adminRole,
   }: {
     adminId: number;
     adminName: string;
+    adminRole: Enums<"admin_role">;
   }) {
-    const payload = { sub: adminId, username: adminName };
+    const payload = {
+      sub: adminId,
+      username: adminName,
+      roles: [adminRole],
+    };
     return this.jwtService.sign(payload);
   }
 }

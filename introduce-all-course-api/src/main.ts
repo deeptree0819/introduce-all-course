@@ -9,6 +9,7 @@ async function bootstrap() {
     const config = new DocumentBuilder()
       .setTitle("로봇에 풍덩 API")
       .setVersion("1.0.0")
+      .addBearerAuth()
       .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup("api", app, document);
