@@ -1,3 +1,7 @@
+import { useCreateQueryParams } from "@utils/common";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,9 +17,31 @@ type UserSearchProps = {
 };
 
 const UserSearch = ({}: UserSearchProps) => {
+  const [role, setRole] = useState<string>("ALL");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const createQueryParams = useCreateQueryParams();
+  const { replace } = useRouter();
+
+  const handleOnValueChange = (value: string) => {
+    if (value === "ALL") {
+      replace(createQueryParams({ queryText: inputRef.current?.value }));
+      return;
+    }
+
+    replace(
+      createQueryParams({ role: value, queryText: inputRef.current?.value })
+    );
+    setRole(value);
+  };
+
+  const handleOnClick = () => {
+    replace(createQueryParams({ role, queryText: inputRef.current?.value }));
+  };
+
   return (
     <div className="flex w-full items-center justify-end space-x-2">
-      <Select defaultValue="ALL">
+      <Select defaultValue="ALL" onValueChange={handleOnValueChange}>
         <SelectTrigger className="w-40">
           <SelectValue />
         </SelectTrigger>
@@ -27,8 +53,12 @@ const UserSearch = ({}: UserSearchProps) => {
           <SelectItem value="MANAGER">매니저</SelectItem>
         </SelectContent>
       </Select>
-      <Input placeholder="실명, 닉네임, 이메일, 전화번호" className="w-80" />
-      <Button>검색</Button>
+      <Input
+        placeholder="실명, 닉네임, 이메일, 전화번호"
+        className="w-80"
+        ref={inputRef}
+      />
+      <Button onClick={() => handleOnClick()}>검색</Button>
     </div>
   );
 };
