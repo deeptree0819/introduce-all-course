@@ -20,7 +20,7 @@ export const columns: ColumnDef<UserSummaryDto>[] = [
     header: "권한",
   },
   {
-    accessorKey: "use_name",
+    accessorKey: "user_name",
     header: "실명",
   },
   {
@@ -48,7 +48,7 @@ export const columns: ColumnDef<UserSummaryDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/users/${row.getValue("id")}`}
+          href={`/admin/users/${row.getValue("users_id")}`}
           className="text-blue-500"
         >
           상세보기
