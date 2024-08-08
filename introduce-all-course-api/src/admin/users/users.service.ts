@@ -79,11 +79,15 @@ export class UsersService {
     dto: UpdateUserDto,
   ): Promise<Tables<"users">> {
     const client = this.supabaseService.getClient();
-    const { data: user } = await client
+    const { data: user, error: selectError } = await client
       .from("users")
       .select()
       .eq("users_id", userId)
       .maybeSingle();
+
+    if (selectError) {
+      throw new NotFoundException(selectError.message);
+    }
 
     if (dto.nickname) {
       if (await this.checkDuplicateNickname(dto.nickname, user.users_id)) {
@@ -115,16 +119,17 @@ export class UsersService {
     user.email = dto.email ?? user.email;
     user.birthyear = dto.birthyear ?? user.birthyear;
     user.phone_number = dto.phone_number ?? user.phone_number;
+    user.updated_at = new Date().toISOString();
 
-    const { data, error } = await client
+    const { data, error: updateError } = await client
       .from("users")
       .update(user)
       .eq("users_id", userId)
       .select()
       .maybeSingle();
 
-    if (error) {
-      throw new InternalServerErrorException(error.message);
+    if (updateError) {
+      throw new InternalServerErrorException(updateError.message);
     }
 
     return data;
