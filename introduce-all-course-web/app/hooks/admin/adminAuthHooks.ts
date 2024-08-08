@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import {
   AdminAuthService,
+  AdminsService,
   ApiError,
   LoginResultDto,
   LoginWithEmailDto,
@@ -18,15 +19,14 @@ export const useAdminLoginByEmail = () => {
     mutationFn: (requestBody) => AdminAuthService.loginByEmail(requestBody),
     onSuccess: async (data) => {
       OpenAPI.TOKEN = data.token;
-      //   TODO: 추후에 me를 가져오는 API를 연결해야함
-      //   const me = await AuthService.findMe();
+      const me = await AdminsService.findMe();
       setCookie("token", data.token, {
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 60 * 60 * 24 * 30 * 1000),
       });
       toastSuccess("로그인에 성공했습니다.");
-      queryClient.invalidateQueries({ queryKey: ["admin", "users", "me"] });
-      //   queryClient.setQueryData(["admin", "users", "me"], me);
+      queryClient.invalidateQueries({ queryKey: ["admin", "me"] });
+      queryClient.setQueryData(["admin", "me"], me);
       router.replace("/admin/users");
     },
     onError: (error) => {

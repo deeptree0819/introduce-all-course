@@ -1,3 +1,4 @@
+import { AdminsModule } from "@admin/admins/admins.module";
 import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
@@ -16,6 +17,7 @@ import { JwtStrategy } from "./jwt.strategy";
         signOptions: { expiresIn: "1h" },
       }),
     }),
+    AdminsModule,
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],

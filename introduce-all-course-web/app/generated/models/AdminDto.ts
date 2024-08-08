@@ -2,10 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type AdminMeDto = {
+import type { AdminRole } from "./AdminRole";
+export type AdminDto = {
+  admin_role: AdminRole;
   admin_id: number;
   admin_name: string;
-  admin_role: Record<string, any>;
   admin_email: string;
   created_at: string;
+  updated_at: string;
+  admin_password: string;
+  admin_phone: string;
 };

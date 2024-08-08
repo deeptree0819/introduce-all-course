@@ -7,7 +7,8 @@ export { CancelablePromise, CancelError } from "./core/CancelablePromise";
 export { OpenAPI } from "./core/OpenAPI";
 export type { OpenAPIConfig } from "./core/OpenAPI";
 
-export type { AdminMeDto } from "./models/AdminMeDto";
+export type { AdminDto } from "./models/AdminDto";
+export { AdminRole } from "./models/AdminRole";
 export type { AdminSummaryDto } from "./models/AdminSummaryDto";
 export type { LoginResultDto } from "./models/LoginResultDto";
 export type { LoginWithEmailDto } from "./models/LoginWithEmailDto";

@@ -7,5 +7,6 @@ import { AdminsService } from "./admins.service";
   imports: [SupabaseModule],
   controllers: [AdminsController],
   providers: [AdminsService],
+  exports: [AdminsService],
 })
 export class AdminsModule {}
