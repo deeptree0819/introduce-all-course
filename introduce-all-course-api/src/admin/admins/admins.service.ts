@@ -22,6 +22,8 @@ export class AdminsService {
       .from("admins")
       .select("admin_id, admin_name, admin_role, admin_email, created_at");
 
+    if (dto.role) query.eq("admin_role", dto.role);
+
     if (dto.queryText)
       query.or(
         dto.queryText
@@ -29,9 +31,12 @@ export class AdminsService {
           : undefined,
       );
 
-    if (dto.order) query.order("admin_id", { ascending: dto.order === "ASC" });
+    query.range(
+      (dto.page - 1) * dto.itemsPerPage,
+      dto.page * dto.itemsPerPage - 1,
+    );
 
-    const { data, count, error } = await query;
+    const { data, error } = await query;
 
     if (error) {
       throw new InternalServerErrorException(error.message);
@@ -39,7 +44,7 @@ export class AdminsService {
 
     return new Paginated(
       plainToInstance(AdminSummaryDto, data),
-      count,
+      data.length,
       dto.page,
       dto.itemsPerPage,
     );

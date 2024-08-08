@@ -9,7 +9,7 @@ import { request as __request } from "../core/request";
 export class AdminAdminsService {
   /**
    * 어드민 목록 조회
-   * @param order
+   * @param role
    * @param queryText
    * @param page
    * @param itemsPerPage
@@ -17,7 +17,7 @@ export class AdminAdminsService {
    * @throws ApiError
    */
   public static getAllAdminsWithPagination(
-    order?: "ASC" | "DESC",
+    role?: "SUPER" | "MANAGER",
     queryText?: string,
     page: number = 1,
     itemsPerPage: number = 30
@@ -26,7 +26,7 @@ export class AdminAdminsService {
       method: "GET",
       url: "/admin/admins",
       query: {
-        order: order,
+        role: role,
         queryText: queryText,
         page: page,
         itemsPerPage: itemsPerPage,

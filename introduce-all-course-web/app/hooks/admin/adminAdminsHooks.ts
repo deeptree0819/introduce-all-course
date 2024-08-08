@@ -1,5 +1,6 @@
 import {
   AdminAdminsService,
+  AdminRole,
   ApiError,
   OpenAPI,
   PaginatedAdminListDto,
@@ -9,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PaginationDto } from "@/app/types/common";
 
 interface AdminFindAllUsersWithPagination extends PaginationDto {
-  order?: "ASC" | "DESC";
+  role?: AdminRole;
   queryText?: string;
   page: number;
   itemsPerPage: number;
@@ -18,12 +19,17 @@ interface AdminFindAllUsersWithPagination extends PaginationDto {
 export const useGetAllAdminsWithPagination = (
   dto: AdminFindAllUsersWithPagination
 ) => {
-  const { order, queryText, page, itemsPerPage } = dto;
+  const { role, queryText, page, itemsPerPage } = dto;
 
   return useQuery<PaginatedAdminListDto, ApiError>({
     queryKey: ["admin", "admins", dto],
     queryFn: () =>
-      AdminAdminsService.getAllAdmins(order, queryText, page, itemsPerPage),
+      AdminAdminsService.getAllAdminsWithPagination(
+        role,
+        queryText,
+        page,
+        itemsPerPage
+      ),
     enabled: !!OpenAPI.TOKEN,
   });
 };

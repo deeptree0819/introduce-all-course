@@ -1,11 +1,11 @@
-import { Order } from "@common/enum";
+import { AdminRole } from "@common/enum";
 import { PaginateDto } from "@common/pagination";
 import { IsEnum, IsOptional, IsString } from "class-validator";
 
 export class GetAllAdminsWithPaginationDto extends PaginateDto {
-  @IsEnum(Order)
+  @IsEnum(AdminRole)
   @IsOptional()
-  order?: Order;
+  role?: AdminRole;
 
   @IsString()
   @IsOptional()

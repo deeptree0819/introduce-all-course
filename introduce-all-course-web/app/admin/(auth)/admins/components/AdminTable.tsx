@@ -1,5 +1,5 @@
 "use client";
-import { AdminSummaryDto } from "@generated/index";
+import { AdminRole, AdminSummaryDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -51,10 +51,12 @@ export const columns: ColumnDef<AdminSummaryDto>[] = [
 ];
 
 const AdminTable = () => {
-  const { order, queryText, page, itemsPerPage } = useGetSearchParams();
+  const { role, queryText, page, itemsPerPage } = useGetSearchParams();
 
   const { data: admins } = useGetAllAdminsWithPagination({
-    order: order === "ASC" || order === "DESC" ? order : undefined,
+    role: (Object.values(AdminRole) as string[]).includes(role)
+      ? (role as AdminRole)
+      : undefined,
     queryText,
     page: page ? +page : 1,
     itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
