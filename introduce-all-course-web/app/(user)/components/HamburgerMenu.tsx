@@ -31,9 +31,9 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
         </Button>
       </SheetTrigger>
       <SheetContent className="w-5/6">
-        <div className="absolute inset-0 z-50 h-screen w-full space-y-3 bg-white px-3 py-5">
+        <div className="absolute inset-0 z-50 h-screen w-full space-y-3 bg-white px-3 py-12">
           <div>
-            <div className="mb-5 flex w-full flex-row items-center justify-between pl-2">
+            <div className="mb-8 flex w-full flex-row items-center justify-between pl-2">
               <Link href="/">
                 <Link href="/">
                   <Logo width={127} height={38} className="h-9" />
@@ -47,7 +47,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
             </div>
             <Link
               href="/login"
-              className="mb-5 flex w-full flex-row items-center justify-between pl-3 pr-2"
+              className="mb-8 flex w-full flex-row items-center justify-between pl-3 pr-2"
             >
               <div className="font-regular text-base">로그인이 필요합니다.</div>
               <ChevronRightIcon className="" />

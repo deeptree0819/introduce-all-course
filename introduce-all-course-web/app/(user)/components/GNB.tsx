@@ -1,6 +1,7 @@
-import Logo from "@assets/logo.svg";
+import Logo from "@assets/logo.png";
 import { buttonVariants } from "@components/ui/button";
 import { cn } from "@utils/common";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
@@ -10,13 +11,9 @@ import HamburgerMenu from "./HamburgerMenu";
 const GNB = () => {
   return (
     <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-[1300px] flex-row items-center justify-between px-8 py-2 laptop:px-24">
-        <Link href="/">
-          <Logo
-            width={127}
-            height={38}
-            className="h-9 laptop:block laptop:h-14"
-          />
+      <nav className="mx-auto flex max-w-[1300px] flex-row items-center justify-between px-4 py-3 laptop:px-24 laptop:py-4">
+        <Link href="/" className="cursor-pointer">
+          <Image src={Logo} alt="logo" className="h-[30px] w-[130px]" />
         </Link>
 
         <div className="ml-5 hidden flex-1 flex-row items-center justify-between laptop:flex">
