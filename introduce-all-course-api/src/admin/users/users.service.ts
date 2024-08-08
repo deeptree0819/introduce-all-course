@@ -85,7 +85,7 @@ export class UsersService {
       .eq("users_id", userId)
       .maybeSingle();
 
-    if (dto.email) {
+    if (dto.nickname) {
       if (await this.checkDuplicateNickname(dto.nickname, user.users_id)) {
         throw new ConflictException("다른 유저가 사용중인 닉네임입니다.");
       }
@@ -97,7 +97,7 @@ export class UsersService {
       }
     }
 
-    if (dto.email) {
+    if (dto.phone_number) {
       if (
         await this.checkDuplicatePhoneNumber(dto.phone_number, user.users_id)
       ) {
