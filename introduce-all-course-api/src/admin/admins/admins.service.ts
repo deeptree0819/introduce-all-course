@@ -101,6 +101,7 @@ export class AdminsService {
     admin.admin_password = !!dto.admin_password
       ? hashSync(dto.admin_password, SALT_ROUNDS)
       : admin.admin_password;
+    admin.updated_at = new Date().toISOString();
 
     const { data, error: updateError } = await client
       .from("admins")

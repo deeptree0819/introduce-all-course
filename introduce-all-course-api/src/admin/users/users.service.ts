@@ -119,6 +119,7 @@ export class UsersService {
     user.email = dto.email ?? user.email;
     user.birthyear = dto.birthyear ?? user.birthyear;
     user.phone_number = dto.phone_number ?? user.phone_number;
+    user.updated_at = new Date().toISOString();
 
     const { data, error: updateError } = await client
       .from("users")
