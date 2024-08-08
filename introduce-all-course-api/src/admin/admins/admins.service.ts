@@ -1,8 +1,13 @@
 import { Paginated } from "@common/pagination";
 import { SupabaseService } from "@common/supabase/supabase.service";
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { AdminSummaryDto } from "./dtos/admin-summary.dto";
+import { AdminDto } from "./dtos/admin.dto";
 import { GetAllAdminsWithPaginationDto } from "./dtos/get-all-admins.dto";
 
 @Injectable()
@@ -38,5 +43,24 @@ export class AdminsService {
       dto.page,
       dto.itemsPerPage,
     );
+  }
+
+  async getAdminById(adminId: string): Promise<AdminDto> {
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client
+      .from("admins")
+      .select()
+      .eq("admin_id", adminId)
+      .single();
+
+    if (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+
+    if (!data) {
+      throw new NotFoundException("어드민이 존재하지 않습니다.");
+    }
+
+    return plainToInstance(AdminDto, data);
   }
 }

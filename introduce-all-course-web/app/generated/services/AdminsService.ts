@@ -2,17 +2,17 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { AdminMeDto } from "../models/AdminMeDto";
+import type { AdminDto } from "../models/AdminDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
 export class AdminsService {
   /**
    * 내 정보 조회
-   * @returns AdminMeDto
+   * @returns AdminDto
    * @throws ApiError
    */
-  public static findMe(): CancelablePromise<AdminMeDto> {
+  public static findMe(): CancelablePromise<AdminDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admins/me",
