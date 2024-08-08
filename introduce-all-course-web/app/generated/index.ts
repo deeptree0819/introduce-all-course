@@ -7,6 +7,7 @@ export { CancelablePromise, CancelError } from "./core/CancelablePromise";
 export { OpenAPI } from "./core/OpenAPI";
 export type { OpenAPIConfig } from "./core/OpenAPI";
 
+export type { AdminMeDto } from "./models/AdminMeDto";
 export type { AdminSummaryDto } from "./models/AdminSummaryDto";
 export type { LoginResultDto } from "./models/LoginResultDto";
 export type { LoginWithEmailDto } from "./models/LoginWithEmailDto";
@@ -15,4 +16,5 @@ export type { PaginationMetaData } from "./models/PaginationMetaData";
 
 export { AdminAdminsService } from "./services/AdminAdminsService";
 export { AdminAuthService } from "./services/AdminAuthService";
+export { AdminsService } from "./services/AdminsService";
 export { DefaultService } from "./services/DefaultService";
