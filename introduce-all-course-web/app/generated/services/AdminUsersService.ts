@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { PaginatedUserListDto } from "../models/PaginatedUserListDto";
+import type { UserDto } from "../models/UserDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
@@ -30,6 +31,21 @@ export class AdminUsersService {
         queryText: queryText,
         page: page,
         itemsPerPage: itemsPerPage,
+      },
+    });
+  }
+  /**
+   * 유저 상세 조회
+   * @param userId
+   * @returns UserDto
+   * @throws ApiError
+   */
+  public static getUserById(userId: number): CancelablePromise<UserDto> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/admin/users/{userId}",
+      path: {
+        userId: userId,
       },
     });
   }

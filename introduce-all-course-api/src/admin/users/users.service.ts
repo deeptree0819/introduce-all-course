@@ -52,13 +52,13 @@ export class UsersService {
     );
   }
 
-  async getUserById(userId: string): Promise<UserDto> {
+  async getUserById(userId: number): Promise<UserDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("users")
       .select()
-      .eq("user_id", userId)
-      .single();
+      .eq("users_id", userId)
+      .maybeSingle();
 
     if (error) {
       throw new InternalServerErrorException(error.message);
