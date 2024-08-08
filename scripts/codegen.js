@@ -4,6 +4,12 @@ const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const OpenAPI = require("openapi-typescript-codegen");
 const config = require("../codegen.config");
+const axios = require("axios");
+
+async function fetchOpenApiJson(url) {
+  const response = await axios.get(url);
+  return response.data;
+}
 
 async function run() {
   if (!config.enable) {
@@ -28,14 +34,22 @@ async function run() {
         fs.rmSync(corePath, { recursive: true });
       }
 
+      const openApiJson = await fetchOpenApiJson(config.url);
+      openApiJson.servers = config.servers;
+
+      const tempFilePath = path.resolve(config.outPath, "temp-openapi.json");
+      fs.writeFileSync(tempFilePath, JSON.stringify(openApiJson, null, 2));
+
       await OpenAPI.generate({
-        input: config.url,
+        input: tempFilePath,
         output: config.outPath,
         exportCore: config.exportCore,
         exportServices: config.exportService,
         httpClient: "axios",
         indent: "2",
       });
+
+      fs.unlinkSync(tempFilePath); // Clean up temporary file
 
       await exec(`npx prettier --write --loglevel silent ${config.outPath}`);
     }

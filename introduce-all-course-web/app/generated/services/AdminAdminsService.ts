@@ -2,19 +2,35 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { PaginatedAdminListDto } from "../models/PaginatedAdminListDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
 export class AdminAdminsService {
   /**
    * 어드민 목록 조회
-   * @returns any
+   * @param order
+   * @param queryText
+   * @param page
+   * @param itemsPerPage
+   * @returns PaginatedAdminListDto
    * @throws ApiError
    */
-  public static getAllAdmins(): CancelablePromise<any> {
+  public static getAllAdmins(
+    order?: "ASC" | "DESC",
+    queryText?: string,
+    page: number = 1,
+    itemsPerPage: number = 30
+  ): CancelablePromise<PaginatedAdminListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/admins",
+      query: {
+        order: order,
+        queryText: queryText,
+        page: page,
+        itemsPerPage: itemsPerPage,
+      },
     });
   }
 }

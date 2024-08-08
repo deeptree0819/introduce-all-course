@@ -1,72 +1,36 @@
 "use client";
+import { AdminSummaryDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
+import { useGetAllAdminsWithPagination } from "@/app/hooks/admin/adminAdminsHooks";
 
 import AdminSearch from "./AdminSearch";
 
-interface AdminDto {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  adminName: string;
-  adminRole: string;
-  adminEmail: string;
-  adminPassword: string;
-}
-
-const USER_DUMMY = [
+export const columns: ColumnDef<AdminSummaryDto>[] = [
   {
-    id: 1,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    adminName: "어드민",
-    adminRole: "어드민",
-    adminEmail: "admin@gmail.com",
-    adminPassword: "asdf1234",
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    adminName: "매니저",
-    adminRole: "매니저",
-    adminEmail: "manager@gmail.com",
-    adminPassword: "asdf1234",
-  },
-];
-
-const PAGINATION_DUMMY = {
-  totalItemCount: 15,
-  currentItemCount: 10,
-  totalPage: 2,
-  currentPage: 1,
-  itemsPerPage: 10,
-};
-
-export const columns: ColumnDef<AdminDto>[] = [
-  {
-    accessorKey: "id",
+    accessorKey: "admin_id",
     header: "ID",
   },
   {
-    accessorKey: "adminRole",
+    accessorKey: "admin_role",
     header: "권한",
   },
   {
-    accessorKey: "adminName",
+    accessorKey: "admin_name",
     header: "이름",
   },
   {
-    accessorKey: "adminEmail",
+    accessorKey: "admin_email",
     header: "이메일",
   },
   {
     header: "가입일자",
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
+      const createdAt = row.original.created_at;
       return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
     },
   },
@@ -76,7 +40,7 @@ export const columns: ColumnDef<AdminDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/admins/${row.getValue("id")}`}
+          href={`/admin/admins/${row.getValue("admin_id")}`}
           className="text-blue-500"
         >
           상세보기
@@ -87,14 +51,25 @@ export const columns: ColumnDef<AdminDto>[] = [
 ];
 
 const AdminTable = () => {
+  const { order, queryText, page, itemsPerPage } = useGetSearchParams();
+
+  const { data: admins } = useGetAllAdminsWithPagination({
+    order: order === "ASC" || order === "DESC" ? order : undefined,
+    queryText,
+    page: page ? +page : 1,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+  });
+
   return (
     <div className="flex max-w-[1300px] flex-col space-y-5">
       <AdminSearch />
-      <AdminPaginatedTable
-        data={USER_DUMMY}
-        columns={columns}
-        pagination={PAGINATION_DUMMY}
-      />
+      {admins && (
+        <AdminPaginatedTable
+          data={admins.items}
+          columns={columns}
+          pagination={admins.pagination}
+        />
+      )}
     </div>
   );
 };

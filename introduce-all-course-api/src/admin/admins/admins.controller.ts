@@ -1,8 +1,11 @@
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { Roles } from "@common/decorators/roles.decorator";
-import { Controller, Get } from "@nestjs/common";
-import { ApiBearerAuth } from "@nestjs/swagger";
+import { BasePaginatedDto, IPaginated } from "@common/pagination";
+import { Controller, Get, Query } from "@nestjs/common";
+import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { AdminsService } from "./admins.service";
+import { AdminSummaryDto } from "./dtos/admin-summary.dto";
+import { GetAllAdminsWithPaginationDto } from "./dtos/get-all-admins.dto";
 
 @ApiBearerAuth()
 @Roles("SUPER")
@@ -14,8 +17,11 @@ export class AdminsController {
     summary: "어드민 목록 조회",
     tags: ["admin-admins"],
   })
+  @ApiOkResponse({ type: BasePaginatedDto(AdminSummaryDto, "Admin") })
   @Get("/admin/admins")
-  async getAllAdmins() {
-    return this.adminsService.getAllAdmins();
+  async getAllAdmins(
+    @Query() dto: GetAllAdminsWithPaginationDto,
+  ): Promise<IPaginated<AdminSummaryDto>> {
+    return this.adminsService.getAllAdmins(dto);
   }
 }

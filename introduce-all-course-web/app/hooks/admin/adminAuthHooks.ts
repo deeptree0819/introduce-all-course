@@ -20,7 +20,7 @@ export const useAdminLoginByEmail = () => {
       OpenAPI.TOKEN = data.token;
       //   TODO: 추후에 me를 가져오는 API를 연결해야함
       //   const me = await AuthService.findMe();
-      setCookie("adminToken", data.token, {
+      setCookie("token", data.token, {
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 60 * 60 * 24 * 30 * 1000),
       });
@@ -41,7 +41,7 @@ export const useAdminLogout = () => {
 
   return () => {
     queryClient.clear();
-    deleteCookie("adminToken");
+    deleteCookie("token");
     OpenAPI.TOKEN = "";
     toastSuccess("로그아웃 되었습니다.");
     replace("/admin/login");

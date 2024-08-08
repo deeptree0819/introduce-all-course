@@ -4,6 +4,7 @@ import { AppModule } from "./app.module";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
 
   if (process.env.APP_ENV !== "production") {
     const config = new DocumentBuilder()

@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
  */
 export const useOnlyAdminPublicRoute = (redirectUrl = "/admin/users") => {
   const cookieStore = cookies();
-  const token = cookieStore.get("adminToken");
+  const token = cookieStore.get("token");
 
   if (!!token) redirect(redirectUrl);
 };
@@ -22,7 +22,7 @@ export const useOnlyAdminPublicRoute = (redirectUrl = "/admin/users") => {
  */
 export const useOnlyAdminRoute = (redirectUrl = "/admin/login") => {
   const cookieStore = cookies();
-  const token = cookieStore.get("adminToken");
+  const token = cookieStore.get("token");
 
   if (!token) redirect(redirectUrl);
 };
@@ -48,7 +48,7 @@ export const useOnlyPublicRoute = (redirectUrl = "/home") => {
  */
 export const useOnlyUserRoute = (redirectUrl = "/login") => {
   const cookieStore = cookies();
-  const token = cookieStore.get("adminToken");
+  const token = cookieStore.get("token");
 
   if (!token) redirect(redirectUrl);
 };
