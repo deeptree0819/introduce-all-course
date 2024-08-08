@@ -2,31 +2,31 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PaginatedAdminListDto } from "../models/PaginatedAdminListDto";
+import type { PaginatedUserListDto } from "../models/PaginatedUserListDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
-export class AdminAdminsService {
+export class AdminUsersService {
   /**
-   * 어드민 목록 조회
-   * @param order
+   * 유저 목록 조회
+   * @param role
    * @param queryText
    * @param page
    * @param itemsPerPage
-   * @returns PaginatedAdminListDto
+   * @returns PaginatedUserListDto
    * @throws ApiError
    */
-  public static getAllAdminsWithPagination(
-    order?: "ASC" | "DESC",
+  public static getAllUsersWithPagination(
+    role?: "SUPER" | "MANAGER" | "USER" | "EXPERT",
     queryText?: string,
     page: number = 1,
     itemsPerPage: number = 30
-  ): CancelablePromise<PaginatedAdminListDto> {
+  ): CancelablePromise<PaginatedUserListDto> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/admin/admins",
+      url: "/admin/users",
       query: {
-        order: order,
+        role: role,
         queryText: queryText,
         page: page,
         itemsPerPage: itemsPerPage,

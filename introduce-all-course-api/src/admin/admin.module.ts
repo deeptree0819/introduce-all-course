@@ -4,9 +4,10 @@ import { APP_GUARD } from "@nestjs/core";
 import { AdminsModule } from "./admins/admins.module";
 import { AuthModule } from "./auth/auth.module";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { UsersModule } from "./users/users.module";
 
 @Module({
-  imports: [AdminsModule, AuthModule],
+  imports: [AdminsModule, AuthModule, UsersModule],
   providers: [
     {
       provide: APP_GUARD,
