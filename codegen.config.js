@@ -11,4 +11,10 @@ module.exports = {
   exportService: true,
   url: `http://localhost:${port}/api-json`,
   outPath: outPath,
+  servers: [
+    {
+      url: `http://localhost:${port}`,
+      description: "Local server",
+    },
+  ],
 };
