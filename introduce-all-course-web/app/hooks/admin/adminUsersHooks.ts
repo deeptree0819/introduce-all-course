@@ -4,6 +4,7 @@ import {
   OpenAPI,
   PaginatedUserListDto,
   Role,
+  UserDto,
 } from "@generated/index";
 import { useQuery } from "@tanstack/react-query";
 
@@ -30,6 +31,14 @@ export const useGetAllUsersWithPagination = (
         page,
         itemsPerPage
       ),
+    enabled: !!OpenAPI.TOKEN,
+  });
+};
+
+export const useGetUserById = (userId: number) => {
+  return useQuery<UserDto, ApiError>({
+    queryKey: ["admin", "users", userId],
+    queryFn: () => AdminUsersService.getUserById(userId),
     enabled: !!OpenAPI.TOKEN,
   });
 };

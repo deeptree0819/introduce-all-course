@@ -2,8 +2,11 @@
 
 import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
+import { ImagePlusIcon } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
+import { useGetUserById } from "@/app/hooks/admin/adminUsersHooks";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,24 +19,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DUMMY_DATA = {
-  createdAt: "2023-12-04T11:21:02.627Z",
-  updatedAt: "2023-12-04T11:21:02.627Z",
-  email: "example@gmail.com",
-  userName: "김로보트",
-  nickname: "로봇에 흠뻑 빠진 내모습",
-  role: "USER",
-  phoneNumber: "010-1234-5678",
-  profileUrl: "https://picsum.photos/500/500",
-  gender: "FEMALE",
-  birthyear: "1995",
-};
-
 type UserInfoFormProps = {
   className?: string;
 };
 
 const UserInfoForm = ({ className }: UserInfoFormProps) => {
+  const params = useParams<{ userId: string }>();
+  const userId = +params.userId;
+
+  const { data: user } = useGetUserById(userId);
+
+  if (!user) return null;
+
   return (
     <Card className={cn(className)}>
       <CardHeader>
@@ -43,28 +40,28 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
         <div className="flex flex-row space-x-7">
           <div className="text-sm text-slate-600">
             <span className="font-semibold">가입일시</span>{" "}
-            {getUtcToDateFormat(
-              DUMMY_DATA.createdAt,
-              DateFnsFormat.YYYYMMDDHHmm
-            )}
+            {getUtcToDateFormat(user.created_at, DateFnsFormat.YYYYMMDDHHmm)}
           </div>
           <div className="text-sm text-slate-600">
             <span className="font-semibold">수정일시</span>{" "}
-            {getUtcToDateFormat(
-              DUMMY_DATA.updatedAt,
-              DateFnsFormat.YYYYMMDDHHmm
-            )}
+            {getUtcToDateFormat(user.updated_at, DateFnsFormat.YYYYMMDDHHmm)}
           </div>
         </div>
         <div className="mt-4 flex w-fit flex-row items-end space-x-20">
           <div className="flex flex-col items-start space-y-7">
             <div className="flex flex-col items-start space-y-1">
-              <Image
-                src={DUMMY_DATA.profileUrl}
-                alt="profile"
-                width={250}
-                height={250}
-              />
+              {user.profile_url ? (
+                <Image
+                  src={user.profile_url}
+                  alt="profile"
+                  width={250}
+                  height={250}
+                />
+              ) : (
+                <div className="flex h-[250px] w-[250px] items-center justify-center rounded-md bg-slate-100">
+                  <ImagePlusIcon />
+                </div>
+              )}
               <Input
                 type="file"
                 id="profile"
@@ -77,7 +74,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="text"
                 id="userName"
                 placeholder="유저 실명을 입력해주세요."
-                defaultValue={DUMMY_DATA.userName}
+                defaultValue={user.user_name}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -86,7 +83,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="text"
                 id="nickname"
                 placeholder="닉네임을 입력해주세요."
-                defaultValue={DUMMY_DATA.nickname}
+                defaultValue={user.nickname}
               />
             </div>
           </div>
@@ -94,7 +91,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
           <div className="flex w-96 flex-col items-start space-y-7">
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="userName">권한</Label>
-              <Select defaultValue={DUMMY_DATA.role}>
+              <Select defaultValue={user.role}>
                 <SelectTrigger>
                   <SelectValue placeholder="권한을 선택해주세요." />
                 </SelectTrigger>
@@ -112,7 +109,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="email"
                 id="email"
                 placeholder="이메일을 입력해주세요."
-                defaultValue={DUMMY_DATA.email}
+                defaultValue={user.email}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -121,12 +118,12 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="text"
                 id="phoneNumber"
                 placeholder="전화번호를 입력해주세요."
-                defaultValue={DUMMY_DATA.phoneNumber}
+                defaultValue={user.phone_number}
               />
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="gender">성별</Label>
-              <Select defaultValue={DUMMY_DATA.gender}>
+              <Select defaultValue={user.gender}>
                 <SelectTrigger>
                   <SelectValue placeholder="성별을 선택해주세요." />
                 </SelectTrigger>
@@ -142,7 +139,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                 type="number"
                 id="birthyear"
                 placeholder="전화번호를 입력해주세요."
-                defaultValue={DUMMY_DATA.birthyear}
+                defaultValue={user.birthyear}
               />
             </div>
           </div>
