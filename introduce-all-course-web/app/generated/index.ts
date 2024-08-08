@@ -16,6 +16,7 @@ export type { PaginatedAdminListDto } from "./models/PaginatedAdminListDto";
 export type { PaginatedUserListDto } from "./models/PaginatedUserListDto";
 export type { PaginationMetaData } from "./models/PaginationMetaData";
 export { Role } from "./models/Role";
+export { UpdateUserDto } from "./models/UpdateUserDto";
 export { UserDto } from "./models/UserDto";
 export type { UserSummaryDto } from "./models/UserSummaryDto";
 

@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { PaginatedUserListDto } from "../models/PaginatedUserListDto";
+import type { UpdateUserDto } from "../models/UpdateUserDto";
 import type { UserDto } from "../models/UserDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
@@ -47,6 +48,27 @@ export class AdminUsersService {
       path: {
         userId: userId,
       },
+    });
+  }
+  /**
+   * 유저 정보 수정
+   * @param userId
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public static updateUser(
+    userId: number,
+    requestBody: UpdateUserDto
+  ): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/admin/users/{userId}",
+      path: {
+        userId: userId,
+      },
+      body: requestBody,
+      mediaType: "application/json",
     });
   }
 }
