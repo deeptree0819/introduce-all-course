@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { PaginatedAdminListDto } from "../models/PaginatedAdminListDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
@@ -12,7 +13,7 @@ export class AdminAdminsService {
    * @param queryText
    * @param page
    * @param itemsPerPage
-   * @returns any
+   * @returns PaginatedAdminListDto
    * @throws ApiError
    */
   public static getAllAdmins(
@@ -20,7 +21,7 @@ export class AdminAdminsService {
     queryText?: string,
     page: number = 1,
     itemsPerPage: number = 30
-  ): CancelablePromise<any> {
+  ): CancelablePromise<PaginatedAdminListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/admins",
