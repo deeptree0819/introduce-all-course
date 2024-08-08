@@ -13,9 +13,13 @@ export type { AdminSummaryDto } from "./models/AdminSummaryDto";
 export type { LoginResultDto } from "./models/LoginResultDto";
 export type { LoginWithEmailDto } from "./models/LoginWithEmailDto";
 export type { PaginatedAdminListDto } from "./models/PaginatedAdminListDto";
+export type { PaginatedUserListDto } from "./models/PaginatedUserListDto";
 export type { PaginationMetaData } from "./models/PaginationMetaData";
+export { Role } from "./models/Role";
+export type { UserSummaryDto } from "./models/UserSummaryDto";
 
 export { AdminAdminsService } from "./services/AdminAdminsService";
 export { AdminAuthService } from "./services/AdminAuthService";
 export { AdminsService } from "./services/AdminsService";
+export { AdminUsersService } from "./services/AdminUsersService";
 export { DefaultService } from "./services/DefaultService";

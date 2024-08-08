@@ -6,30 +6,32 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
-import { AdminSummaryDto } from "./dtos/admin-summary.dto";
-import { AdminDto } from "./dtos/admin.dto";
-import { GetAllAdminsWithPaginationDto } from "./dtos/get-all-admins.dto";
+import { GetAllUsersWithPaginationDto } from "./dtos/get-all-users.dto";
+import { UserSummaryDto } from "./dtos/user-summary.dto";
+import { UserDto } from "./dtos/user.dto";
 
 @Injectable()
-export class AdminsService {
+export class UsersService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
-  async getAllAdminsWithPagination(
-    dto: GetAllAdminsWithPaginationDto,
-  ): Promise<Paginated<AdminSummaryDto>> {
+  async getAllUsersWithPagination(
+    dto: GetAllUsersWithPaginationDto,
+  ): Promise<Paginated<UserSummaryDto>> {
     const client = this.supabaseService.getClient();
     const query = client
-      .from("admins")
-      .select("admin_id, admin_name, admin_role, admin_email, created_at");
+      .from("users")
+      .select(
+        "users_id, role, user_name, nickname, email, phone_number, created_at",
+      );
+
+    if (dto.role) query.eq("role", dto.role);
 
     if (dto.queryText)
       query.or(
         dto.queryText
-          ? `admin_name.ilike.%${dto.queryText}%,admin_email.ilike.%${dto.queryText}%`
+          ? `user_name.ilike.%${dto.queryText}%,nickname.ilike.%${dto.queryText}%,email.ilike.%${dto.queryText}%,phone_number.ilike.%${dto.queryText}%`
           : undefined,
       );
-
-    if (dto.order) query.order("admin_id", { ascending: dto.order === "ASC" });
 
     const { data, count, error } = await query;
 
@@ -38,19 +40,19 @@ export class AdminsService {
     }
 
     return new Paginated(
-      plainToInstance(AdminSummaryDto, data),
+      plainToInstance(UserSummaryDto, data),
       count,
       dto.page,
       dto.itemsPerPage,
     );
   }
 
-  async getAdminById(adminId: string): Promise<AdminDto> {
+  async getUserById(userId: string): Promise<UserDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
-      .from("admins")
+      .from("users")
       .select()
-      .eq("admin_id", adminId)
+      .eq("user_id", userId)
       .single();
 
     if (error) {
@@ -61,6 +63,6 @@ export class AdminsService {
       throw new NotFoundException("어드민이 존재하지 않습니다.");
     }
 
-    return plainToInstance(AdminDto, data);
+    return plainToInstance(UserDto, data);
   }
 }

@@ -19,9 +19,9 @@ export class AdminsController {
   })
   @ApiOkResponse({ type: BasePaginatedDto(AdminSummaryDto, "Admin") })
   @Get("/admin/admins")
-  async getAllAdmins(
+  async getAllAdminsWithPagination(
     @Query() dto: GetAllAdminsWithPaginationDto,
   ): Promise<IPaginated<AdminSummaryDto>> {
-    return this.adminsService.getAllAdmins(dto);
+    return this.adminsService.getAllAdminsWithPagination(dto);
   }
 }
