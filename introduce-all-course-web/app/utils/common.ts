@@ -39,6 +39,23 @@ export function getNextPageParam(lastPage: Paginated<any>) {
 
 export const useCreateQueryParams = () => {
   const pathname = usePathname();
+
+  return useCallback(
+    (items: Record<string, string | undefined>) => {
+      const params = new URLSearchParams();
+      for (const [key, value] of Object.entries(items)) {
+        if (value) {
+          params.set(key, value);
+        }
+      }
+      return `${pathname}?${params.toString()}`;
+    },
+    [pathname]
+  );
+};
+
+export const useAppendQueryParams = () => {
+  const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
   return useCallback(
