@@ -7,7 +7,7 @@ import MainCarousel from "./components/MainCarousel";
 const MainPage = () => {
   return (
     <main>
-      <section className="py-4 laptop:py-7">
+      <section className="py-5 laptop:py-7">
         <MainCarousel />
       </section>
       <section className="bg-[#EDF6FF] py-10 laptop:py-20">
@@ -19,7 +19,7 @@ const MainPage = () => {
           <EventCarousel />
         </div>
       </section>
-      <InquiryBanner className="p-4 laptop:hidden" />
+      <InquiryBanner className="py-10 laptop:hidden" />
       <InquiryBannerDesktop className="mx-auto hidden max-w-[1300px] px-24 py-20 laptop:flex" />
       <section className="bg-[#F2FEFF] py-10 laptop:py-20">
         <div className="mx-auto max-w-[1300px] laptop:px-24">

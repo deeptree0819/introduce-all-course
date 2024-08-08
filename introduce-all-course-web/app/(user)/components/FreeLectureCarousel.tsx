@@ -97,7 +97,7 @@ const FreeLectureCarousel = () => {
 
   return (
     <Carousel
-      className="flex flex-row items-center space-y-5"
+      className="flex flex-row items-center space-y-2"
       setApi={setApi}
       opts={{
         align: "start",

@@ -21,7 +21,7 @@ const InquiryBannerPacked = ({ className }: InquiryBannerPackedProps) => {
           {"자세히보기 >"}
         </Link>
       </div>
-      <InquiryBanner />
+      <InquiryBanner className="px-0" />
     </div>
   );
 };

@@ -32,7 +32,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
           <div className="flex flex-row items-center space-x-3">
             <div className="flex flex-col items-center">
               <Image src={BoyImage} alt="취업준비생" className="w-20" />
-              <div className="whitespace-pre text-base font-normal text-slate-600">
+              <div className="whitespace-pre text-base font-semibold text-slate-600">
                 취업준비생
               </div>
             </div>
