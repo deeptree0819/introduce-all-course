@@ -6,7 +6,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { deleteCookie, getCookie } from "cookies-next";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { ApiError, OpenAPI } from "@/app/generated";
 
@@ -24,7 +24,6 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
               if ((error as ApiError).status === 401) {
                 queryClient.clear();
                 deleteCookie("token");
-                deleteCookie("adminToken");
                 OpenAPI.TOKEN = "";
               }
             }
@@ -33,20 +32,9 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
       })
   );
 
-  const setToken = () => {
-    const adminToken = getCookie("adminToken");
-    const token = getCookie("token");
+  const token = getCookie("token");
 
-    if (window.location.pathname.includes("/admin")) {
-      OpenAPI.TOKEN = typeof adminToken === "string" ? adminToken : undefined;
-    } else {
-      OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
-    }
-  };
-
-  useEffect(() => {
-    setToken();
-  }, []);
+  OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

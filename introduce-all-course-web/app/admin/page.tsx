@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 const AdminPage = async () => {
   const cookieStore = cookies();
-  const token = cookieStore.get("adminToken");
+  const token = cookieStore.get("token");
 
   if (token) redirect("/admin/users");
   if (!token) redirect("/admin/login");

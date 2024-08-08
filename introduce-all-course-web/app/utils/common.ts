@@ -55,6 +55,11 @@ export const useCreateQueryParams = () => {
   );
 };
 
+export const useGetSearchParams = () => {
+  const searchParams = useSearchParams();
+  return Object.fromEntries(searchParams);
+};
+
 export type PaginatedList<T, U> = {
   items: Array<T>;
   pagination: U;
