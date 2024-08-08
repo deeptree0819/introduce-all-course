@@ -31,7 +31,12 @@ export class AdminsService {
           : undefined,
       );
 
-    const { data, count, error } = await query;
+    query.range(
+      (dto.page - 1) * dto.itemsPerPage,
+      dto.page * dto.itemsPerPage - 1,
+    );
+
+    const { data, error } = await query;
 
     if (error) {
       throw new InternalServerErrorException(error.message);
@@ -39,7 +44,7 @@ export class AdminsService {
 
     return new Paginated(
       plainToInstance(AdminSummaryDto, data),
-      count,
+      data.length,
       dto.page,
       dto.itemsPerPage,
     );

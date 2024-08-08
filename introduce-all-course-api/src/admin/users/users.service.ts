@@ -33,7 +33,12 @@ export class UsersService {
           : undefined,
       );
 
-    const { data, count, error } = await query;
+    query.range(
+      (dto.page - 1) * dto.itemsPerPage,
+      dto.page * dto.itemsPerPage - 1,
+    );
+
+    const { data, error } = await query;
 
     if (error) {
       throw new InternalServerErrorException(error.message);
@@ -41,7 +46,7 @@ export class UsersService {
 
     return new Paginated(
       plainToInstance(UserSummaryDto, data),
-      count,
+      data.length,
       dto.page,
       dto.itemsPerPage,
     );
