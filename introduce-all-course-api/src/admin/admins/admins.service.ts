@@ -22,14 +22,14 @@ export class AdminsService {
       .from("admins")
       .select("admin_id, admin_name, admin_role, admin_email, created_at");
 
+    if (dto.role) query.eq("admin_role", dto.role);
+
     if (dto.queryText)
       query.or(
         dto.queryText
           ? `admin_name.ilike.%${dto.queryText}%,admin_email.ilike.%${dto.queryText}%`
           : undefined,
       );
-
-    if (dto.order) query.order("admin_id", { ascending: dto.order === "ASC" });
 
     const { data, count, error } = await query;
 
