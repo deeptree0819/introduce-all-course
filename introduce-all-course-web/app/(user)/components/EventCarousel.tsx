@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@components/ui/button";
-import { cn } from "@utils/common";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
@@ -96,7 +95,7 @@ const EventCarousel = () => {
 
   return (
     <Carousel
-      className="flex flex-row items-center space-y-5"
+      className="flex flex-row items-center space-y-2"
       setApi={setApi}
       opts={{
         align: "start",
@@ -118,7 +117,7 @@ const EventCarousel = () => {
         {DUMMY_DATA.map((item, index) => (
           <CarouselItem
             key={index}
-            className={cn("max-w-xs basis-5/12 laptop:basis-3/12 ")}
+            className="max-w-xs basis-5/12 laptop:basis-3/12 "
           >
             <EventCard item={item} />
           </CarouselItem>

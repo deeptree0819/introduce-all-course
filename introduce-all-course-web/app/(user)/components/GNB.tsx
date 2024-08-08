@@ -10,7 +10,7 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const GNB = () => {
   return (
-    <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-20 bg-white/70 backdrop-blur-md">
       <nav className="mx-auto flex max-w-[1300px] flex-row items-center justify-between px-4 py-3 laptop:px-24 laptop:py-4">
         <Link href="/" className="cursor-pointer">
           <Image src={Logo} alt="logo" className="h-[30px] w-[130px]" />
@@ -22,7 +22,7 @@ const GNB = () => {
               href="/event"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
-                "rounded-lg px-3 py-2 text-base font-medium"
+                "rounded-lg px-3 py-2 text-base font-normal"
               )}
             >
               공고소개
@@ -31,7 +31,7 @@ const GNB = () => {
               href="/inquiry"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
-                "rounded-lg px-3 py-2 text-base font-medium"
+                "rounded-lg px-3 py-2 text-base font-normal"
               )}
             >
               취업상담
@@ -40,7 +40,7 @@ const GNB = () => {
               href="/free-lecture"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
-                "rounded-lg px-3 py-2 text-base font-medium"
+                "rounded-lg px-3 py-2 text-base font-normal"
               )}
             >
               무료강의
