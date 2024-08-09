@@ -36,10 +36,12 @@ export class AdminsService {
           : undefined,
       );
 
-    query.range(
-      (dto.page - 1) * dto.itemsPerPage,
-      dto.page * dto.itemsPerPage - 1,
-    );
+    query
+      .order("admin_id", { ascending: true })
+      .range(
+        (dto.page - 1) * dto.itemsPerPage,
+        dto.page * dto.itemsPerPage - 1,
+      );
 
     const { data, error } = await query;
 

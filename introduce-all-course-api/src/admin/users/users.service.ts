@@ -36,10 +36,12 @@ export class UsersService {
           : undefined,
       );
 
-    query.range(
-      (dto.page - 1) * dto.itemsPerPage,
-      dto.page * dto.itemsPerPage - 1,
-    );
+    query
+      .order("updated_at", { ascending: false })
+      .range(
+        (dto.page - 1) * dto.itemsPerPage,
+        dto.page * dto.itemsPerPage - 1,
+      );
 
     const { data, error } = await query;
 
