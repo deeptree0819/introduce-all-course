@@ -41,7 +41,7 @@ export class AdminsController {
     tags: ["admin-admins"],
   })
   @Get("/admin/admins/:adminId")
-  async getUserById(
+  async getAdminById(
     @Param("adminId", ParseIntPipe) adminId: number,
   ): Promise<AdminDto> {
     return this.adminsService.getAdminById(adminId);
@@ -52,11 +52,10 @@ export class AdminsController {
     tags: ["admin-admins"],
   })
   @Patch("/admin/admins/:adminId")
-  async updateUser(
+  async updateAdmin(
     @Param("adminId", ParseIntPipe) adminId: number,
     @Body() dto: UpdateAdminDto,
   ): Promise<Tables<"admins">> {
-    const updatedUser = await this.adminsService.updateAdmin(adminId, dto);
-    return updatedUser;
+    return this.adminsService.updateAdmin(adminId, dto);
   }
 }

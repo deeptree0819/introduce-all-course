@@ -41,7 +41,7 @@ export class AdminAdminsService {
    * @returns AdminDto
    * @throws ApiError
    */
-  public static getUserById(adminId: number): CancelablePromise<AdminDto> {
+  public static getAdminById(adminId: number): CancelablePromise<AdminDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/admins/{adminId}",
@@ -57,7 +57,7 @@ export class AdminAdminsService {
    * @returns any
    * @throws ApiError
    */
-  public static updateUser(
+  public static updateAdmin(
     adminId: number,
     requestBody: UpdateAdminDto
   ): CancelablePromise<any> {
