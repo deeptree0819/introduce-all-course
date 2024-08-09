@@ -63,7 +63,7 @@ export class AdminsService {
       .from("admins")
       .select()
       .eq("admin_id", adminId)
-      .single();
+      .maybeSingle();
 
     if (error) {
       throw new InternalServerErrorException(error.message);
