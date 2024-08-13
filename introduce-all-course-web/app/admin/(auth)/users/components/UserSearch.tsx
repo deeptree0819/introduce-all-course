@@ -17,7 +17,7 @@ type UserSearchProps = {
 };
 
 const UserSearch = ({}: UserSearchProps) => {
-  const [role, setRole] = useState<string>("ALL");
+  const [role, setRole] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const createQueryParams = useCreateQueryParams();
@@ -26,6 +26,7 @@ const UserSearch = ({}: UserSearchProps) => {
   const handleOnValueChange = (value: string) => {
     if (value === "ALL") {
       replace(createQueryParams({ queryText: inputRef.current?.value }));
+      setRole("");
       return;
     }
 
@@ -36,7 +37,9 @@ const UserSearch = ({}: UserSearchProps) => {
   };
 
   const handleOnClick = () => {
-    replace(createQueryParams({ role, queryText: inputRef.current?.value }));
+    replace(
+      createQueryParams({ role: role, queryText: inputRef.current?.value })
+    );
   };
 
   return (
