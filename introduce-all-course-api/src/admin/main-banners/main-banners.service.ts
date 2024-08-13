@@ -7,6 +7,7 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
+import { CreateMainBannerDto } from "./dtos/create-main-banner.dto";
 import { GetAllMainBannesWithPaginationDto } from "./dtos/get-all-main-banners.dto";
 import { MainBannerSummaryDto } from "./dtos/main-banner-summary.dto";
 import { MainBannerDto } from "./dtos/main-banner.dto";
@@ -26,8 +27,16 @@ export class MainBannersService {
         "main_banners_id, main_banner_url, main_banner_image_url, main_banner_image_name, main_banner_open_at, main_banner_close_at",
       );
 
-    // TODO: find how to or the open_at and close_at to be the status
-    if (dto.status) query.eq("main_banner_open_at", dto.status);
+    const now = new Date().toISOString();
+    if (dto.status === "BEFORE") {
+      query.gt("main_banner_open_at", now);
+    } else if (dto.status === "AFTER") {
+      query.lt("main_banner_close_at", now);
+    } else if (dto.status === "PROGRESS") {
+      query
+        .lt("main_banner_open_at", now)
+        .or(`main_banner_close_at.is.null, main_banner_close_at.gt.now()`);
+    }
 
     query
       .order("main_banner_open_at", { ascending: false })
@@ -80,8 +89,10 @@ export class MainBannersService {
       .eq("main_banners_id", mainBannersId)
       .maybeSingle();
 
-    if (selectError || mainBanner) {
-      throw new NotFoundException(selectError.message);
+    if (selectError || !mainBanner) {
+      throw new NotFoundException(
+        selectError.message || "해당 배너가 존재하지 않습니다.",
+      );
     }
 
     mainBanner.main_banner_url =
@@ -104,33 +115,26 @@ export class MainBannersService {
       .maybeSingle();
 
     if (updateError || !data) {
-      throw new InternalServerErrorException(updateError.message);
+      throw new InternalServerErrorException(
+        updateError.message || "수정에 실패했습니다.",
+      );
     }
 
     return data;
   }
 
   async createMainBanner(
-    dto: UpdateMainBannerDto,
+    dto: CreateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
-    const mainBanner = {
-      main_banner_url: dto.main_banner_url,
-      main_banner_image_url: dto.main_banner_image_url,
-      main_banner_image_name: dto.main_banner_image_name,
-      main_banner_open_at: dto.main_banner_open_at,
-      main_banner_close_at: dto.main_banner_close_at,
-    };
-
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("main_banners")
-      .insert(mainBanner)
+      .insert(dto)
       .select()
       .maybeSingle();
-    // TODO: how to select inserted row
 
-    if (error || mainBanner) {
-      throw new NotFoundException(error.message);
+    if (error || !data) {
+      throw new NotFoundException(error.message || "생성에 실패했습니다.");
     }
 
     return data;

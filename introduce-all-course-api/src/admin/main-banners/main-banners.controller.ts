@@ -60,7 +60,7 @@ export class MainBannersController {
   }
 
   @CustomApiOperation({
-    summary: "메인페이지 배너 수정",
+    summary: "메인페이지 배너 추가",
     tags: ["admin-main-banners"],
   })
   @Post("/admin/main/banners/:mainBannerId")
