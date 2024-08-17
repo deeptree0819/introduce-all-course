@@ -19,3 +19,9 @@ export enum Gender {
   MALE = "MALE",
   FEMALE = "FEMALE",
 }
+
+export enum BannerStatus {
+  BEFORE = "BEFORE",
+  PROGRESS = "PROGRESS",
+  AFTER = "AFTER",
+}

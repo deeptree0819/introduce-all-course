@@ -17,7 +17,7 @@ type AdminSearchProps = {
 };
 
 const AdminSearch = ({}: AdminSearchProps) => {
-  const [role, setRole] = useState<string>("ALL");
+  const [role, setRole] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const createQueryParams = useCreateQueryParams();
@@ -26,6 +26,7 @@ const AdminSearch = ({}: AdminSearchProps) => {
   const handleOnValueChange = (value: string) => {
     if (value === "ALL") {
       replace(createQueryParams({ queryText: inputRef.current?.value }));
+      setRole("");
       return;
     }
 

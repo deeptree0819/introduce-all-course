@@ -24,6 +24,14 @@ const EventsPostForm = () => {
           <Label>공고 썸네일 (정사각형 비율)</Label>
           <ImageUploader fileId="thumbnail-image-upload" />
         </div>
+        <div className="flex w-56 flex-col space-y-1.5">
+          <Label htmlFor="organization">공고기관</Label>
+          <Input
+            type="text"
+            id="organization"
+            placeholder="공고기관을 입력해주세요."
+          />
+        </div>
         <div className="flex flex-col space-y-1.5">
           <Label>공고 분야</Label>
           <Select>
