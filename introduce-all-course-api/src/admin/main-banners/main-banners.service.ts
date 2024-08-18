@@ -39,7 +39,7 @@ export class MainBannersService {
     }
 
     query
-      .order("main_banner_open_at", { ascending: false })
+      .order("main_banners_id", { ascending: false })
       .range(
         (dto.page - 1) * dto.itemsPerPage,
         dto.page * dto.itemsPerPage - 1,

@@ -72,7 +72,7 @@ export class AdminMainBannersService {
     });
   }
   /**
-   * 메인페이지 배너 수정
+   * 메인페이지 배너 추가
    * @param requestBody
    * @returns any
    * @throws ApiError

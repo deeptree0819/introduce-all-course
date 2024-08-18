@@ -1,10 +1,21 @@
 "use client";
+import { MainBannerSummaryDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
+import {
+  getEnumIfExists,
+  useCreateQueryParams,
+  useGetSearchParams,
+} from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
+import {
+  BannerStatus,
+  useGetAllMainBannersWithPagination,
+} from "@/app/hooks/admin/adminMainBannersHooks";
 import {
   Select,
   SelectContent,
@@ -12,72 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-interface AdminDto {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  mainBannerImageUrl: string;
-  mainBannerImageName: string;
-  mainBannerUrl: string;
-  mainBannerOpenAt: string;
-  mainBannerCloseAt: string;
-}
-
-const USER_DUMMY = [
-  {
-    id: 1,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    mainBannerImageUrl: "https://picsum.photos/500/300",
-    mainBannerImageName: "구름톤 딥다이브 프로덕트 매니지먼트 과정 모집",
-    mainBannerUrl:
-      "https://unsplash.com/photos/brown-tabby-kitten-sitting-on-floor-nKC772R_qog",
-    mainBannerOpenAt: "2023-12-04T11:21:02.627Z",
-    mainBannerCloseAt: "2024-12-04T11:21:02.627Z",
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    mainBannerImageUrl: "https://picsum.photos/500/300",
-    mainBannerImageName: "메인배너1",
-    mainBannerUrl:
-      "https://unsplash.com/photos/brown-tabby-kitten-sitting-on-floor-nKC772R_qog",
-    mainBannerOpenAt: "2023-12-04T11:21:02.627Z",
-    mainBannerCloseAt: "",
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    mainBannerImageUrl: "https://picsum.photos/500/300",
-    mainBannerImageName: "메인배너1",
-    mainBannerUrl:
-      "https://unsplash.com/photos/brown-tabby-kitten-sitting-on-floor-nKC772R_qog",
-    mainBannerOpenAt: "2024-12-04T11:21:02.627Z",
-    mainBannerCloseAt: "2025-12-04T11:21:02.627Z",
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    mainBannerImageUrl: "https://picsum.photos/500/300",
-    mainBannerImageName: "메인배너1",
-    mainBannerUrl:
-      "https://unsplash.com/photos/brown-tabby-kitten-sitting-on-floor-nKC772R_qog",
-    mainBannerOpenAt: "2023-12-04T11:21:02.627Z",
-    mainBannerCloseAt: "2023-12-04T11:21:02.627Z",
-  },
-];
-
-const PAGINATION_DUMMY = {
-  totalItemCount: 10,
-  currentItemCount: 10,
-  totalPage: 1,
-  currentPage: 1,
-  itemsPerPage: 10,
-};
 
 const getBannerStatus = (
   mainBannerOpenAt: string,
@@ -96,25 +41,25 @@ const getBannerStatus = (
   }
 };
 
-export const columns: ColumnDef<AdminDto>[] = [
+export const columns: ColumnDef<MainBannerSummaryDto>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "main_banners_id",
     header: "ID",
   },
   {
     header: "진행상태",
     cell: ({ row }) => {
-      const mainBannerOpenAt = row.original.mainBannerOpenAt;
-      const mainBannerCloseAt = row.original.mainBannerCloseAt;
+      const mainBannerOpenAt = row.original.main_banner_open_at;
+      const mainBannerCloseAt = row.original.main_banner_close_at;
       return <p>{getBannerStatus(mainBannerOpenAt, mainBannerCloseAt)}</p>;
     },
   },
   {
     header: "이미지",
     cell: ({ row }) => {
-      const id = row.original.id;
-      const mainBannerImageUrl = row.original.mainBannerImageUrl;
-      const mainBannerUrl = row.original.mainBannerUrl;
+      const id = row.original.main_banners_id;
+      const mainBannerImageUrl = row.original.main_banner_image_url;
+      const mainBannerUrl = row.original.main_banner_url;
       return (
         <Link
           className="flex flex-col items-center"
@@ -135,12 +80,12 @@ export const columns: ColumnDef<AdminDto>[] = [
   {
     header: "이미지 대체텍스트",
     cell: ({ row }) => {
-      const mainBannerImageName = row.original.mainBannerImageName;
-      const mainBannerUrl = row.original.mainBannerUrl;
+      const mainBannerImageName = row.original.main_banner_image_name;
+      const mainBannerUrl = row.original.main_banner_image_url;
       return (
         <div className="flex flex-col items-center">
           <Link href={mainBannerUrl} target="_blank">
-            {mainBannerImageName}
+            {!!mainBannerImageName ? mainBannerImageName : "-"}
           </Link>
         </div>
       );
@@ -149,7 +94,7 @@ export const columns: ColumnDef<AdminDto>[] = [
   {
     header: "노출 시작일시",
     cell: ({ row }) => {
-      const mainBannerOpenAt = row.original.mainBannerOpenAt;
+      const mainBannerOpenAt = row.original.main_banner_open_at;
       return (
         <p>
           {getUtcToDateFormat(mainBannerOpenAt, DateFnsFormat.YYYYMMDDHHmm)}
@@ -160,7 +105,7 @@ export const columns: ColumnDef<AdminDto>[] = [
   {
     header: "노출 종료일시",
     cell: ({ row }) => {
-      const mainBannerCloseAt = row.original.mainBannerCloseAt;
+      const mainBannerCloseAt = row.original.main_banner_close_at;
       return mainBannerCloseAt ? (
         <p>
           {getUtcToDateFormat(mainBannerCloseAt, DateFnsFormat.YYYYMMDDHHmm)}
@@ -176,7 +121,7 @@ export const columns: ColumnDef<AdminDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/main/banners/${row.getValue("id")}`}
+          href={`/admin/main/banners/${row.getValue("main_banners_id")}`}
           className="text-blue-500"
         >
           상세보기
@@ -187,10 +132,30 @@ export const columns: ColumnDef<AdminDto>[] = [
 ];
 
 const MainBannerTable = () => {
+  const { status, page, itemsPerPage } = useGetSearchParams();
+
+  const { data: mainBanners } = useGetAllMainBannersWithPagination({
+    status: getEnumIfExists(status, BannerStatus),
+    page: page ? +page : 1,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+  });
+
+  const createQueryParams = useCreateQueryParams();
+  const { replace } = useRouter();
+
+  const handleOnValueChange = (value: string) => {
+    if (value === "ALL") {
+      replace(createQueryParams({}));
+      return;
+    }
+
+    replace(createQueryParams({ status: value }));
+  };
+
   return (
     <div className="flex max-w-[1300px] flex-col space-y-5">
       <div className="flex w-full flex-col items-end">
-        <Select defaultValue="ALL">
+        <Select defaultValue="ALL" onValueChange={handleOnValueChange}>
           <SelectTrigger className="w-40">
             <SelectValue />
           </SelectTrigger>
@@ -203,11 +168,13 @@ const MainBannerTable = () => {
         </Select>
       </div>
 
-      <AdminPaginatedTable
-        data={USER_DUMMY}
-        columns={columns}
-        pagination={PAGINATION_DUMMY}
-      />
+      {mainBanners && (
+        <AdminPaginatedTable
+          data={mainBanners.items}
+          columns={columns}
+          pagination={mainBanners.pagination}
+        />
+      )}
     </div>
   );
 };

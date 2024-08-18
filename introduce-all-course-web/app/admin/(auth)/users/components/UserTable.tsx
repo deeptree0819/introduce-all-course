@@ -1,7 +1,7 @@
 "use client";
 import { Role, UserSummaryDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { useGetSearchParams } from "@utils/common";
+import { getEnumIfExists, useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
 
@@ -62,9 +62,7 @@ const UserTable = () => {
   const { role, queryText, page, itemsPerPage } = useGetSearchParams();
 
   const { data: users } = useGetAllUsersWithPagination({
-    role: (Object.values(Role) as string[]).includes(role)
-      ? (role as Role)
-      : undefined,
+    role: getEnumIfExists(role, Role),
     queryText,
     page: page ? +page : 1,
     itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
