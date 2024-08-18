@@ -53,7 +53,12 @@ export default function AdminSidebarNav({ ...props }: AdminSidebarNavProps) {
   const pathname = usePathname();
   const logout = useAdminLogout();
 
-  const { data: me } = useAdminFindMe();
+  const { data: me, isError } = useAdminFindMe();
+
+  if (isError) {
+    logout();
+    return null;
+  }
 
   return (
     <div className="z-10 flex h-screen w-[255px] flex-col justify-between space-y-5 border-r bg-[#F9FAFB] p-4">
