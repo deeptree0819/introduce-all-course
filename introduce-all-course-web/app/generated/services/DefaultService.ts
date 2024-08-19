@@ -21,9 +21,7 @@ export class DefaultService {
    * @returns string
    * @throws ApiError
    */
-  public static uploadControllerGetUploadUrl(
-    tag: string
-  ): CancelablePromise<string> {
+  public static getUploadUrl(tag: string): CancelablePromise<string> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/upload/{tag}",

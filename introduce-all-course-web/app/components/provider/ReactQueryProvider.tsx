@@ -6,6 +6,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { deleteCookie, getCookie } from "cookies-next";
+import { redirect } from "next/navigation";
 import React from "react";
 
 import { ApiError, OpenAPI } from "@/app/generated";
@@ -25,6 +26,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
                 queryClient.clear();
                 deleteCookie("token");
                 OpenAPI.TOKEN = "";
+                redirect("/login");
               }
             }
           },

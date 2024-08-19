@@ -11,15 +11,16 @@ import { UpdateUserDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
-import { ImagePlusIcon } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
   useGetUserById,
   useUpdateUser,
 } from "@/app/hooks/admin/adminUsersHooks";
+import { useUploadImage } from "@/app/hooks/fileUploadHooks";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -42,6 +43,10 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
   const params = useParams<{ userId: string }>();
   const userId = +params.userId;
 
+  const [profileUrl, setProfileUrl] = useState<string | null>(null);
+
+  const imageRef = useRef<HTMLInputElement>(null);
+
   const { data: user } = useGetUserById(userId);
 
   const form = useForm<UpdateUserDto>({
@@ -50,6 +55,26 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
   });
   const { handleSubmit } = form;
   const { mutate: updateUser } = useUpdateUser(userId);
+
+  const { mutateAsync: uploadImage } = useUploadImage("user-profile");
+
+  useEffect(() => {
+    setProfileUrl(user?.profile_url ?? null);
+  }, [user?.profile_url]);
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    form.setValue("profile_url", undefined);
+    form.setValue("profile_thumbnail_url", undefined);
+    if (!file) return;
+
+    const url = await uploadImage(file);
+
+    setProfileUrl(url);
+
+    form.setValue("profile_url", url);
+    form.setValue("profile_thumbnail_url", url);
+  };
 
   if (!user) return null;
 
@@ -82,23 +107,38 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
             </div>
             <div className="mt-4 flex w-fit flex-row items-end space-x-20">
               <div className="flex flex-col items-start space-y-7">
-                <div className="flex flex-col items-start space-y-1">
-                  {user.profile_url ? (
+                <div className="flex flex-col items-start space-y-2">
+                  <Label>프로필 사진</Label>
+                  {profileUrl ? (
                     <Image
-                      src={user.profile_url}
+                      src={profileUrl}
                       alt="profile"
                       width={250}
                       height={250}
+                      className="cursor-pointer border border-slate-100"
+                      onClick={() => {
+                        setProfileUrl(null);
+                        imageRef.current?.value &&
+                          (imageRef.current.value = "");
+                        form.setValue("profile_url", undefined);
+                        form.setValue("profile_thumbnail_url", undefined);
+                      }}
                     />
                   ) : (
-                    <div className="flex h-[250px] w-[250px] items-center justify-center rounded-md bg-slate-100">
-                      <ImagePlusIcon />
-                    </div>
+                    <Label
+                      htmlFor="profile"
+                      className="flex h-[250px] w-[250px] items-center justify-center rounded-md bg-slate-200 text-4xl text-slate-700"
+                    >
+                      {user.nickname.at(0)}
+                    </Label>
                   )}
                   <Input
                     type="file"
+                    accept=".jpg, .jpeg, .png, .webp"
                     id="profile"
-                    className="h-fit w-[250px] border-0 p-0"
+                    className="hidden h-fit w-[250px] border-0 p-0"
+                    onChange={handleImageChange}
+                    ref={imageRef}
                   />
                 </div>
 
