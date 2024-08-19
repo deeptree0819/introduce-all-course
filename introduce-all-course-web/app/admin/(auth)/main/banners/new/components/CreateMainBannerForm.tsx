@@ -48,13 +48,7 @@ const CreateMainBannerForm = ({ className }: CreateMainBannerFormProps) => {
       <CardContent className="flex flex-col">
         <Form {...form}>
           <form
-            onSubmit={handleSubmit(
-              (data) => createMainBanner(data),
-              (error) => {
-                console.log(error);
-                // TODO: Implement image upload
-              }
-            )}
+            onSubmit={handleSubmit((data) => createMainBanner(data))}
             className="flex flex-col"
           >
             <div className="mt-4 flex flex-row items-end space-x-20">
