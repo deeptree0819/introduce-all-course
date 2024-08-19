@@ -1,6 +1,7 @@
 import {
   AdminMainBannersService,
   ApiError,
+  CreateMainBannerDto,
   MainBannerDto,
   OpenAPI,
   PaginatedMainBannerListDto,
@@ -57,6 +58,21 @@ export const useUpdateMainBanner = (bannerId: number) => {
     },
     onError: (error: ApiError) => {
       toastApiError(error, "메인배너 수정에 실패했습니다.");
+    },
+  });
+};
+
+export const useCreateMainBanner = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (dto: CreateMainBannerDto) =>
+      AdminMainBannersService.createMainBanner(dto),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "main", "banners"] });
+      toastSuccess("메인배너가 등록되었습니다.");
+    },
+    onError: (error: ApiError) => {
+      toastApiError(error, "메인배너 등록에 실패했습니다.");
     },
   });
 };

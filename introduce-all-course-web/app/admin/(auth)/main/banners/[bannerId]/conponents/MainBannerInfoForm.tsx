@@ -1,5 +1,6 @@
 "use client";
 
+import { DatePickerForm } from "@adminComponents/DatePickerForm";
 import ImageUploader from "@adminComponents/ImageUploader";
 import {
   Form,
@@ -25,7 +26,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { UpdateMainBannerSchema } from "../schema";
-import { DatePickerForm } from "./DatePickerForm";
 
 type MainBannerInfoFormProps = {
   className?: string;

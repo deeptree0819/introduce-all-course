@@ -11,16 +11,19 @@ import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import { CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 
-type DatePickerFormProps = {
-  field: ControllerRenderProps;
+type DatePickerFormProps<T extends FieldValues> = {
+  field: ControllerRenderProps<T>;
   defaultValue?: string;
 };
 
-export function DatePickerForm({ field, defaultValue }: DatePickerFormProps) {
+export function DatePickerForm<T extends FieldValues>({
+  field,
+  defaultValue,
+}: DatePickerFormProps<T>) {
   const [selectedDate, setSelectedDate] = useState<string | undefined>(
     defaultValue
   );
