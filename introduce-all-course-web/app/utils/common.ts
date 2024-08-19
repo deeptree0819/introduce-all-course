@@ -88,3 +88,12 @@ export const useFlatInfiniteData = <T, U>(
     return data?.pages.flatMap((page) => page.items) || [];
   }, [data]);
 };
+
+export const getEnumIfExists = <T>(
+  string: string,
+  enumObject: object
+): T | undefined => {
+  return (Object.values(enumObject) as string[]).includes(string)
+    ? (string as T)
+    : undefined;
+};

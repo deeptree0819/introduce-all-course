@@ -12,7 +12,7 @@ import { toastApiError, toastSuccess } from "@toast";
 
 import { PaginationDto } from "@/app/types/common";
 
-interface AdminFindAllAdminsWithPagination extends PaginationDto {
+interface AdminFindAllAdminsWithPaginationDto extends PaginationDto {
   role?: AdminRole;
   queryText?: string;
   page: number;
@@ -20,7 +20,7 @@ interface AdminFindAllAdminsWithPagination extends PaginationDto {
 }
 
 export const useGetAllAdminsWithPagination = (
-  dto: AdminFindAllAdminsWithPagination
+  dto: AdminFindAllAdminsWithPaginationDto
 ) => {
   const { role, queryText, page, itemsPerPage } = dto;
 
@@ -41,7 +41,7 @@ export const useGetAdminById = (adminId: number) => {
   return useQuery<AdminDto, ApiError>({
     queryKey: ["admin", "admins", adminId],
     queryFn: () => AdminAdminsService.getAdminById(adminId),
-    enabled: !!OpenAPI.TOKEN,
+    enabled: !!OpenAPI.TOKEN && !!adminId,
   });
 };
 

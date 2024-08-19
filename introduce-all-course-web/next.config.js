@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // TODO: Remove dummy remotePatterns
     remotePatterns: [
       {
         protocol: "https",
         hostname: "picsum.photos",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "media.tenor.com",
         port: "",
       },
     ],
