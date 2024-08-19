@@ -5,33 +5,38 @@ import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
+import { useUploadImage } from "@/app/hooks/fileUploadHooks";
+
 type ImageUploaderProps = {
   className?: string;
   fileId?: string;
   defaultSrc?: string;
+  onUpload: (url: string) => void;
 };
 
 const ImageUploader = ({
   className,
   fileId,
   defaultSrc,
+  onUpload,
 }: ImageUploaderProps) => {
   const [preview, setPreview] = useState<string | null>(defaultSrc || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { mutateAsync: uploadImage } = useUploadImage("user-profile");
 
   useEffect(() => {
     setPreview(defaultSrc || null);
   }, [defaultSrc]);
 
-  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    const url = await uploadImage(file);
+
+    setPreview(url);
+    onUpload(url);
   };
 
   const triggerFileInput = () => {
@@ -59,7 +64,7 @@ const ImageUploader = ({
           <Image
             src={preview}
             alt="Image Preview"
-            className="h-fit w-full"
+            className="h-fit w-full border border-slate-100"
             width={500}
             height={500}
           />

@@ -64,9 +64,11 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    form.setValue("profile_url", undefined);
-    form.setValue("profile_thumbnail_url", undefined);
-    if (!file) return;
+    if (!file) {
+      form.setValue("profile_url", undefined);
+      form.setValue("profile_thumbnail_url", undefined);
+      return;
+    }
 
     const url = await uploadImage(file);
 
@@ -134,7 +136,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                   )}
                   <Input
                     type="file"
-                    accept=".jpg, .jpeg, .png, .webp"
+                    accept="image/*"
                     id="profile"
                     className="hidden h-fit w-[250px] border-0 p-0"
                     onChange={handleImageChange}

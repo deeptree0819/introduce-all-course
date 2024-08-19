@@ -61,7 +61,12 @@ const CreateMainBannerForm = ({ className }: CreateMainBannerFormProps) => {
               <div className="flex flex-col items-start space-y-7">
                 <div className="grid w-[600px] items-center gap-1.5">
                   <Label htmlFor="userName">배너 이미지 (16:9 비율)</Label>
-                  <ImageUploader fileId="main-banner-image-upload" />
+                  <ImageUploader
+                    fileId="main-banner-image-upload"
+                    onUpload={(url) =>
+                      form.setValue("main_banner_image_url", url)
+                    }
+                  />
                 </div>
 
                 <FormField

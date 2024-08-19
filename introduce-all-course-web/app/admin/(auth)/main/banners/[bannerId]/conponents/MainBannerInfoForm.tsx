@@ -80,6 +80,9 @@ const MainBannerInfoForm = ({ className }: MainBannerInfoFormProps) => {
                   <ImageUploader
                     fileId="main-banner-image-upload"
                     defaultSrc={mainBanner.main_banner_image_url}
+                    onUpload={(url) =>
+                      form.setValue("main_banner_image_url", url)
+                    }
                   />
                 </div>
 
