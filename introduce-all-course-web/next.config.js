@@ -5,6 +5,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "allrobotai-deeptree.s3.ap-northeast-2.amazonaws.com",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "picsum.photos",
         port: "",
       },

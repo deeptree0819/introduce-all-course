@@ -48,20 +48,19 @@ const CreateMainBannerForm = ({ className }: CreateMainBannerFormProps) => {
       <CardContent className="flex flex-col">
         <Form {...form}>
           <form
-            onSubmit={handleSubmit(
-              (data) => createMainBanner(data),
-              (error) => {
-                console.log(error);
-                // TODO: Implement image upload
-              }
-            )}
+            onSubmit={handleSubmit((data) => createMainBanner(data))}
             className="flex flex-col"
           >
             <div className="mt-4 flex flex-row items-end space-x-20">
               <div className="flex flex-col items-start space-y-7">
                 <div className="grid w-[600px] items-center gap-1.5">
                   <Label htmlFor="userName">배너 이미지 (16:9 비율)</Label>
-                  <ImageUploader fileId="main-banner-image-upload" />
+                  <ImageUploader
+                    fileId="main-banner-image-upload"
+                    onUpload={(url) =>
+                      form.setValue("main_banner_image_url", url)
+                    }
+                  />
                 </div>
 
                 <FormField

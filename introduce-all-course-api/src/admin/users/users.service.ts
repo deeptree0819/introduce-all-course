@@ -113,9 +113,8 @@ export class UsersService {
 
     user.nickname = dto.nickname ?? user.nickname;
     user.role = dto.role ?? user.role;
-    user.profile_url = dto.profile_url ?? user.profile_url;
-    user.profile_thumbnail_url =
-      dto.profile_thumbnail_url ?? user.profile_thumbnail_url;
+    user.profile_url = dto.profile_url ?? null;
+    user.profile_thumbnail_url = dto.profile_thumbnail_url ?? null;
     user.gender = dto.gender ?? user.gender;
     user.user_name = dto.user_name ?? user.user_name;
     user.email = dto.email ?? user.email;

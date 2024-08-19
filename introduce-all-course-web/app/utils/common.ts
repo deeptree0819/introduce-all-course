@@ -1,3 +1,4 @@
+import { DefaultService } from "@generated/index";
 import { InfiniteData } from "@tanstack/react-query";
 import { type ClassValue, clsx } from "clsx";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -96,4 +97,8 @@ export const getEnumIfExists = <T>(
   return (Object.values(enumObject) as string[]).includes(string)
     ? (string as T)
     : undefined;
+};
+
+export const getUploadUrl = async (tag: string) => {
+  return await DefaultService.getUploadUrl(tag);
 };

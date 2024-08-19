@@ -1,4 +1,5 @@
 import { RolesGuard } from "@common/guards/roles.guard";
+import { ImageUploadModule } from "@common/upload/upload.module";
 import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
 import { AdminsModule } from "./admins/admins.module";
@@ -15,6 +16,7 @@ import { UsersModule } from "./users/users.module";
     UsersModule,
     MainBannersModule,
     EventsModule,
+    ImageUploadModule,
   ],
   providers: [
     {

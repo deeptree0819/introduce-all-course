@@ -7,7 +7,7 @@ import { ExpandIcon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import useWindowSize from "@/app/hooks/useWindowSize";
+import useWindowSize from "@/app/hooks/windowSizeHooks";
 import { Separator } from "@/components/ui/separator";
 
 import { DUMMY_DESCRIPTION, DUMMY_INFORMATION } from "../dummy/dummyContents";
