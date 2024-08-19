@@ -14,7 +14,7 @@ export class ImageUploadService {
   });
 
   async generateUploadURL(tag: string): Promise<string> {
-    const key = `${tag}/${uuid()}.jpg`;
+    const key = `${tag}/${uuid()}`;
 
     const command = new PutObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME,
