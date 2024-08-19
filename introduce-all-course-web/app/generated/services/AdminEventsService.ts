@@ -88,4 +88,19 @@ export class AdminEventsService {
       mediaType: "application/json",
     });
   }
+  /**
+   * 공고소개 게시글 삭제
+   * @param eventId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteEvent(eventId: number): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/admin/events/posts/{eventId}",
+      path: {
+        eventId: eventId,
+      },
+    });
+  }
 }

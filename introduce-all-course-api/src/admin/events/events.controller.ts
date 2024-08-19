@@ -5,6 +5,7 @@ import { BasePaginatedDto, IPaginated } from "@common/pagination";
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -71,5 +72,14 @@ export class EventsController {
     @Body() dto: CreateEventDto,
   ): Promise<Tables<"events">> {
     return this.eventsService.createEvent(me.userId, dto);
+  }
+
+  @CustomApiOperation({
+    summary: "공고소개 게시글 삭제",
+    tags: ["admin-events"],
+  })
+  @Delete("/admin/events/posts/:eventId")
+  async deleteEvent(@Param("eventId", ParseIntPipe) eventId: number) {
+    this.eventsService.deleteEvent(eventId);
   }
 }

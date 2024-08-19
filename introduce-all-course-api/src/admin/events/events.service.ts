@@ -176,4 +176,18 @@ export class EventsService {
 
     return data;
   }
+
+  async deleteEvent(eventId: number): Promise<void> {
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("events")
+      .delete()
+      .eq("events_id", eventId);
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error.message || "삭제를 실패하였습니다.",
+      );
+    }
+  }
 }
