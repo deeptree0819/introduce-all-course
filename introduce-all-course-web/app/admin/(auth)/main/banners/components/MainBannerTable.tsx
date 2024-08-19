@@ -92,24 +92,20 @@ export const columns: ColumnDef<MainBannerSummaryDto>[] = [
     },
   },
   {
-    header: "노출 시작일시",
+    header: "노출 시작일자",
     cell: ({ row }) => {
       const mainBannerOpenAt = row.original.main_banner_open_at;
       return (
-        <p>
-          {getUtcToDateFormat(mainBannerOpenAt, DateFnsFormat.YYYYMMDDHHmm)}
-        </p>
+        <p>{getUtcToDateFormat(mainBannerOpenAt, DateFnsFormat.YYYYMMDD)}</p>
       );
     },
   },
   {
-    header: "노출 종료일시",
+    header: "노출 종료일자",
     cell: ({ row }) => {
       const mainBannerCloseAt = row.original.main_banner_close_at;
       return mainBannerCloseAt ? (
-        <p>
-          {getUtcToDateFormat(mainBannerCloseAt, DateFnsFormat.YYYYMMDDHHmm)}
-        </p>
+        <p>{getUtcToDateFormat(mainBannerCloseAt, DateFnsFormat.YYYYMMDD)}</p>
       ) : (
         <p>무기한</p>
       );

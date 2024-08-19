@@ -41,7 +41,7 @@ export const useGetAdminById = (adminId: number) => {
   return useQuery<AdminDto, ApiError>({
     queryKey: ["admin", "admins", adminId],
     queryFn: () => AdminAdminsService.getAdminById(adminId),
-    enabled: !!OpenAPI.TOKEN,
+    enabled: !!OpenAPI.TOKEN && !!adminId,
   });
 };
 

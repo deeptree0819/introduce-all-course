@@ -104,7 +104,7 @@ export class MainBannersService {
     mainBanner.main_banner_open_at =
       dto.main_banner_open_at ?? mainBanner.main_banner_open_at;
     mainBanner.main_banner_close_at =
-      dto.main_banner_close_at ?? mainBanner.main_banner_close_at;
+      (dto.main_banner_close_at ?? mainBanner.main_banner_close_at) || null;
     mainBanner.updated_at = new Date().toISOString();
 
     const { data, error: updateError } = await client
