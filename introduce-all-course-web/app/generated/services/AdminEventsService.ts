@@ -37,6 +37,22 @@ export class AdminEventsService {
     });
   }
   /**
+   * 공고소개 게시글 작성
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public static createEvent(
+    requestBody: CreateEventDto
+  ): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/admin/events/posts",
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
    * 공고소개 게시글 상세 조회
    * @param eventId
    * @returns EventDto
@@ -68,22 +84,6 @@ export class AdminEventsService {
       path: {
         eventId: eventId,
       },
-      body: requestBody,
-      mediaType: "application/json",
-    });
-  }
-  /**
-   * 공고소개 게시글 작성
-   * @param requestBody
-   * @returns any
-   * @throws ApiError
-   */
-  public static createEvent(
-    requestBody: CreateEventDto
-  ): CancelablePromise<any> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/admin/events/posts/{eventId}",
       body: requestBody,
       mediaType: "application/json",
     });

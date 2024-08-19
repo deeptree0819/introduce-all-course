@@ -63,7 +63,7 @@ export class MainBannersController {
     summary: "메인페이지 배너 추가",
     tags: ["admin-main-banners"],
   })
-  @Post("/admin/main/banners/:mainBannerId")
+  @Post("/admin/main/banners")
   async createMainBanner(
     @Body() dto: CreateMainBannerDto,
   ): Promise<Tables<"main_banners">> {

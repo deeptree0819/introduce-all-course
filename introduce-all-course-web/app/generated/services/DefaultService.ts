@@ -16,4 +16,20 @@ export class DefaultService {
       url: "/say-hello",
     });
   }
+  /**
+   * @param tag
+   * @returns string
+   * @throws ApiError
+   */
+  public static uploadControllerGetUploadUrl(
+    tag: string
+  ): CancelablePromise<string> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/upload/{tag}",
+      path: {
+        tag: tag,
+      },
+    });
+  }
 }

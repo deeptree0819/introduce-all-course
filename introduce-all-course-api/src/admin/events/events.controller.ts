@@ -65,7 +65,7 @@ export class EventsController {
     summary: "공고소개 게시글 작성",
     tags: ["admin-events"],
   })
-  @Post("/admin/events/posts/:eventId")
+  @Post("/admin/events/posts")
   async createEvent(
     @CurrentUser() me,
     @Body() dto: CreateEventDto,

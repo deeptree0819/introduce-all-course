@@ -34,6 +34,22 @@ export class AdminMainBannersService {
     });
   }
   /**
+   * 메인페이지 배너 추가
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public static createMainBanner(
+    requestBody: CreateMainBannerDto
+  ): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/admin/main/banners",
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
    * 메인페이지 배너 상세 조회
    * @param mainBannerId
    * @returns MainBannerDto
@@ -67,22 +83,6 @@ export class AdminMainBannersService {
       path: {
         mainBannerId: mainBannerId,
       },
-      body: requestBody,
-      mediaType: "application/json",
-    });
-  }
-  /**
-   * 메인페이지 배너 추가
-   * @param requestBody
-   * @returns any
-   * @throws ApiError
-   */
-  public static createMainBanner(
-    requestBody: CreateMainBannerDto
-  ): CancelablePromise<any> {
-    return __request(OpenAPI, {
-      method: "POST",
-      url: "/admin/main/banners/{mainBannerId}",
       body: requestBody,
       mediaType: "application/json",
     });
