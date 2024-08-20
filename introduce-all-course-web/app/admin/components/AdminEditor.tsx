@@ -2,6 +2,7 @@ import {
   editorExtensions,
   editorProps,
 } from "@components/editor/editorSetting";
+import { Input } from "@components/ui/input";
 import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
 import { cn } from "@utils/common";
 import {
@@ -29,6 +30,7 @@ import {
   AdminSelectTrigger,
   AdminSelectValue,
 } from "@/app/admin/components/ui/admin-select";
+import { useUploadImage } from "@/app/hooks/fileUploadHooks";
 import { Separator } from "@/components/ui/separator";
 
 type AdminEditorProps = {
@@ -40,6 +42,9 @@ const AdminEditor = ({ className }: AdminEditorProps) => {
   const [enterLink, setEnterLink] = useState(false);
 
   const linkInputRef = useRef<HTMLInputElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const { mutateAsync: uploadImage } = useUploadImage("images-in-post");
 
   const limit = 5000;
 
@@ -96,6 +101,22 @@ const AdminEditor = ({ className }: AdminEditorProps) => {
       : currentInput;
 
     editor.chain().focus().toggleLink({ href: newLink }).run();
+  };
+
+  const handleImageButtonClick = () => {
+    imageInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!editor) return;
+
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const src = await uploadImage(file);
+
+    editor.chain().focus().setImage({ src }).run();
+    imageInputRef.current!.value = "";
   };
 
   if (!editor) {
@@ -251,13 +272,20 @@ const AdminEditor = ({ className }: AdminEditorProps) => {
             </AdminButton>
             <div className="h-5 w-px bg-gray-300" />
             <AdminButton
-              onClick={() => {}}
+              onClick={handleImageButtonClick}
               variant="ghost"
               size="icon"
               className="h-8 w-8"
             >
               <ImageIcon className="h-4 w-4" />
             </AdminButton>
+            <Input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
             <div className="h-5 w-px bg-gray-300" />
             <AdminButton
               onClick={() => editor.chain().focus().undo().run()}

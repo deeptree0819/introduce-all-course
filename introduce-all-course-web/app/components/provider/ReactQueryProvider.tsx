@@ -6,7 +6,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { deleteCookie, getCookie } from "cookies-next";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 import { ApiError, OpenAPI } from "@/app/generated";
@@ -16,20 +16,18 @@ interface ReactQueryProviderProps {
 }
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
+  const { push } = useRouter();
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
         queryCache: new QueryCache({
           onError: (error) => {
             if ("status" in (error as ApiError)) {
-              console.log("error", error);
               if ((error as ApiError).status === 401) {
-                console.log("401 error");
-
                 queryClient.clear();
                 deleteCookie("token");
                 OpenAPI.TOKEN = "";
-                redirect("/login");
+                push("/login");
               }
             }
           },
