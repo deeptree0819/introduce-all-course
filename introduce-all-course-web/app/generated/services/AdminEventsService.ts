@@ -4,9 +4,8 @@
 /* eslint-disable */
 import type { CreateEventCategoryDto } from "../models/CreateEventCategoryDto";
 import type { CreateEventDto } from "../models/CreateEventDto";
-import type { CreateEventResultDto } from "../models/CreateEventResultDto";
 import type { EventCategoryDto } from "../models/EventCategoryDto";
-import type { EventDto } from "../models/EventDto";
+import type { EventResultDto } from "../models/EventResultDto";
 import type { EventsOrderBy } from "../models/EventsOrderBy";
 import type { Order } from "../models/Order";
 import type { PaginatedEventCategoryListDto } from "../models/PaginatedEventCategoryListDto";
@@ -48,12 +47,12 @@ export class AdminEventsService {
   /**
    * 공고소개 게시글 작성
    * @param requestBody
-   * @returns CreateEventResultDto
+   * @returns EventResultDto
    * @throws ApiError
    */
   public static createEvent(
     requestBody: CreateEventDto
-  ): CancelablePromise<CreateEventResultDto> {
+  ): CancelablePromise<EventResultDto> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/admin/events/posts",
@@ -64,10 +63,12 @@ export class AdminEventsService {
   /**
    * 공고소개 게시글 상세 조회
    * @param eventId
-   * @returns EventDto
+   * @returns EventResultDto
    * @throws ApiError
    */
-  public static getEventById(eventId: number): CancelablePromise<EventDto> {
+  public static getEventById(
+    eventId: number
+  ): CancelablePromise<EventResultDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/events/posts/{eventId}",
@@ -80,13 +81,13 @@ export class AdminEventsService {
    * 공고소개 게시글 수정
    * @param eventId
    * @param requestBody
-   * @returns any
+   * @returns EventResultDto
    * @throws ApiError
    */
   public static updateEvent(
     eventId: number,
     requestBody: UpdateEventDto
-  ): CancelablePromise<any> {
+  ): CancelablePromise<EventResultDto> {
     return __request(OpenAPI, {
       method: "PATCH",
       url: "/admin/events/posts/{eventId}",

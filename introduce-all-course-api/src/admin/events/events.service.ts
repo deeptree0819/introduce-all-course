@@ -10,11 +10,10 @@ import {
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
-import { CreateEventResultDto } from "./dtos/create-event-result.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
 import { EventCategoryDto } from "./dtos/event-category.dto";
+import { EventResultDto } from "./dtos/event-result.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
-import { EventDto } from "./dtos/event.dto";
 import { GetAllEventsWithPaginationDto } from "./dtos/get-all-events.dto";
 import { UpdateEventDto } from "./dtos/update-event.dto";
 
@@ -73,7 +72,7 @@ export class EventsService {
     );
   }
 
-  async getEventById(eventId: number): Promise<EventDto> {
+  async getEventById(eventId: number): Promise<EventResultDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("events")
@@ -89,14 +88,33 @@ export class EventsService {
       throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
     }
 
-    return plainToInstance(EventDto, data);
+    const { data: attachments, error: attachmentError } = await client
+      .from("event_attachments")
+      .select("event_attachment_url")
+      .eq("event_id", eventId);
+
+    if (attachmentError) {
+      throw new InternalServerErrorException(
+        attachmentError.message || "첨부파일 조회를 실패하였습니다.",
+      );
+    }
+
+    const result = { ...data, event_attachment_urls: [] };
+
+    if (attachments) {
+      result.event_attachment_urls = attachments.map(
+        (attachment) => attachment.event_attachment_url,
+      );
+    }
+
+    return plainToInstance(EventResultDto, data);
   }
 
   async updateEvent(
     adminId: number,
     eventId: number,
     dto: UpdateEventDto,
-  ): Promise<Tables<"events">> {
+  ): Promise<EventResultDto> {
     const client = this.supabaseService.getClient();
     const { data: event, error: eventSelectError } = await client
       .from("events")
@@ -110,28 +128,39 @@ export class EventsService {
       );
     }
 
-    const { data: eventCategory, error: eventCategoryError } =
-      dto.event_category_name
-        ? await client
-            .from("event_categories")
-            .select("event_categories_id")
-            .eq("event_category_name", dto.event_category_name)
-            .maybeSingle()
-        : {
-            data: { event_categories_id: event.event_category_id },
-            error: null,
-          };
+    const { error: attachmentError } = await client
+      .from("event_attachments")
+      .delete()
+      .eq("event_id", eventId);
 
-    if (eventCategoryError || !eventCategory) {
+    if (attachmentError) {
       throw new InternalServerErrorException(
-        eventSelectError.message || "해당 카테고리가 존재하지 않습니다.",
+        attachmentError.message || "첨부파일 업로드를 실패하였습니다.",
+      );
+    }
+
+    const { event_attachment_urls } = dto;
+
+    const { data: newAttachment, error: newAttachmentError } = await client
+      .from("event_attachments")
+      .insert(
+        event_attachment_urls.map((url) => ({
+          events_id: eventId,
+          event_attachment_url: url,
+        })),
+      )
+      .select();
+
+    if (newAttachmentError || !newAttachment) {
+      throw new InternalServerErrorException(
+        newAttachmentError.message || "첨부파일 업로드를 실패하였습니다.",
       );
     }
 
     const updatedEvent = {
       event_thumbnail_url: dto.event_thumbnail_url ?? event.event_thumbnail_url,
       event_organization: dto.event_organization ?? event.event_organization,
-      event_category_id: eventCategory.event_categories_id,
+      event_category_id: dto.event_category_id,
       event_title: dto.event_title ?? event.event_title,
       event_start_at: dto.event_start_at ?? event.event_start_at,
       event_end_at: dto.event_end_at ?? event.event_end_at,
@@ -143,26 +172,26 @@ export class EventsService {
       updated_by: adminId,
     };
 
-    const { data, error: updateError } = await client
+    const { data: post, error: updateError } = await client
       .from("events")
       .update(updatedEvent)
       .eq("events_id", eventId)
       .select()
       .maybeSingle();
 
-    if (updateError || !data) {
+    if (updateError || !post) {
       throw new InternalServerErrorException(
         updateError.message || "수정을 실패하였습니다.",
       );
     }
 
-    return data;
+    return { ...post, event_attachment_urls };
   }
 
   async createEvent(
     adminId: number,
     dto: CreateEventDto,
-  ): Promise<CreateEventResultDto> {
+  ): Promise<EventResultDto> {
     const { event_attachment_urls, ...rest } = dto;
     const event = {
       ...rest,
@@ -189,7 +218,7 @@ export class EventsService {
       .from("event_attachments")
       .insert(
         event_attachment_urls.map((url) => ({
-          event_id: post.events_id,
+          events_id: post.events_id,
           event_attachment_url: url,
         })),
       )

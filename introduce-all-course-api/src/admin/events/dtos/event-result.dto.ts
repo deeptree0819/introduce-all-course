@@ -1,8 +1,6 @@
-/* generated using openapi-typescript-codegen -- do not edit */
-/* istanbul ignore file */
-/* tslint:disable */
-/* eslint-disable */
-export type CreateEventResultDto = {
+import { Tables } from "@common/database.types";
+
+export class EventResultDto implements Tables<"events"> {
   events_id: number;
   created_at: string;
   created_by: number;
@@ -18,5 +16,5 @@ export type CreateEventResultDto = {
   event_info: string;
   event_description: string;
   event_view_count: number;
-  event_attachment_urls: Array<string>;
-};
+  event_attachment_urls: string[];
+}

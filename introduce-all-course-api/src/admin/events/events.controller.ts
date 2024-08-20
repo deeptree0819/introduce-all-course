@@ -15,11 +15,10 @@ import {
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
-import { CreateEventResultDto } from "./dtos/create-event-result.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
 import { EventCategoryDto } from "./dtos/event-category.dto";
+import { EventResultDto } from "./dtos/event-result.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
-import { EventDto } from "./dtos/event.dto";
 import { GetAllEventsWithPaginationDto } from "./dtos/get-all-events.dto";
 import { UpdateEventDto } from "./dtos/update-event.dto";
 import { EventsService } from "./events.service";
@@ -48,7 +47,7 @@ export class EventsController {
   @Get("/admin/events/posts/:eventId")
   async getEventById(
     @Param("eventId", ParseIntPipe) eventId: number,
-  ): Promise<EventDto> {
+  ): Promise<EventResultDto> {
     return this.eventsService.getEventById(eventId);
   }
 
@@ -61,7 +60,7 @@ export class EventsController {
     @CurrentUser() me,
     @Param("eventId", ParseIntPipe) eventId: number,
     @Body() dto: UpdateEventDto,
-  ): Promise<Tables<"events">> {
+  ): Promise<EventResultDto> {
     return this.eventsService.updateEvent(me.userId, eventId, dto);
   }
 
@@ -73,7 +72,7 @@ export class EventsController {
   async createEvent(
     @CurrentUser() me,
     @Body() dto: CreateEventDto,
-  ): Promise<CreateEventResultDto> {
+  ): Promise<EventResultDto> {
     return this.eventsService.createEvent(me.userId, dto);
   }
 

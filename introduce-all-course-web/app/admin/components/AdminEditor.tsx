@@ -3,7 +3,12 @@ import {
   editorProps,
 } from "@components/editor/editorSetting";
 import { Input } from "@components/ui/input";
-import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
+import {
+  BubbleMenu,
+  EditorContent,
+  JSONContent,
+  useEditor,
+} from "@tiptap/react";
 import { cn } from "@utils/common";
 import {
   CheckIcon,
@@ -35,9 +40,10 @@ import { Separator } from "@/components/ui/separator";
 
 type AdminEditorProps = {
   className?: string;
+  onChange?: (content: JSONContent) => void;
 };
 
-const AdminEditor = ({ className }: AdminEditorProps) => {
+const AdminEditor = ({ className, onChange }: AdminEditorProps) => {
   const [selectedHeading, setSelectedHeading] = useState("T");
   const [enterLink, setEnterLink] = useState(false);
 
@@ -51,6 +57,7 @@ const AdminEditor = ({ className }: AdminEditorProps) => {
   const editor = useEditor({
     extensions: editorExtensions,
     editorProps: editorProps,
+    onUpdate: ({ editor }) => onChange?.(editor.getJSON()),
   });
 
   const handleHeadingChange = useCallback(

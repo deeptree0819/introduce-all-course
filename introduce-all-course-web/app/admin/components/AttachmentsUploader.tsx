@@ -1,12 +1,16 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 
 const MAX_FILE_SIZE = 500 * 1024 * 1024; // 500MB
 const MAX_FILE_COUNT = 10;
 
-const AttachmentsUploader = () => {
-  const [files, setFiles] = useState<File[]>([]);
+type AttachmentsUploaderProps = {
+  fileState: [File[], Dispatch<SetStateAction<File[]>>];
+};
+
+const AttachmentsUploader = ({ fileState }: AttachmentsUploaderProps) => {
+  const [files, setFiles] = fileState;
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +28,7 @@ const AttachmentsUploader = () => {
 
       if (validFiles.length !== newFiles.length) {
         setError(
-          `${
-            MAX_FILE_SIZE / (1024 * 1024 * 1024)
-          } MB 이하의 파일만 업로드 가능합니다.`
+          `${MAX_FILE_SIZE / (1024 * 1024)} MB 이하의 파일만 업로드 가능합니다.`
         );
       }
 
