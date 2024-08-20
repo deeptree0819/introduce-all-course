@@ -18,15 +18,20 @@ export class DefaultService {
   }
   /**
    * @param tag
+   * @param contentType
    * @returns string
    * @throws ApiError
    */
-  public static getUploadUrl(tag: string): CancelablePromise<string> {
+  public static getUploadUrl(
+    tag: string,
+    contentType: string
+  ): CancelablePromise<string> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/upload/{tag}",
-      path: {
+      url: "/upload",
+      query: {
         tag: tag,
+        contentType: contentType,
       },
     });
   }

@@ -13,7 +13,7 @@ export const useUploadImage = (tag: string) => {
         throw new Error("파일 사이즈는 10MB 이하여야 합니다.");
       }
 
-      const url = await getUploadUrl(tag);
+      const url = await getUploadUrl(tag, file.type);
 
       try {
         await axios.put(url, file, {

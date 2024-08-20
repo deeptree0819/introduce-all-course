@@ -13,13 +13,13 @@ export class ImageUploadService {
     },
   });
 
-  async generateUploadURL(tag: string): Promise<string> {
+  async generateUploadURL(tag: string, contentType: string): Promise<string> {
     const key = `${tag}/${uuid()}`;
 
     const command = new PutObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME,
       Key: key,
-      ContentType: "image/jpeg",
+      ContentType: contentType,
     });
 
     const url = await getSignedUrl(this.s3, command, { expiresIn: 3600 });
