@@ -92,7 +92,7 @@ export class EventsController {
   @ApiOkResponse({ type: BasePaginatedDto(EventCategoryDto, "EventCategory") })
   @Get("/admin/events/categories")
   async getAllEventCategoriesWithPagination(
-    dto: PaginateDto,
+    @Query() dto: PaginateDto,
   ): Promise<IPaginated<EventCategoryDto>> {
     return this.eventsService.getAllEventCategoriesWithPagination(dto);
   }

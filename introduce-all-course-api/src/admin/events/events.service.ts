@@ -3,6 +3,7 @@ import { Order } from "@common/enum";
 import { Paginated, PaginateDto } from "@common/pagination";
 import { SupabaseService } from "@common/supabase/supabase.service";
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -244,6 +245,14 @@ export class EventsService {
     dto: CreateEventCategoryDto,
   ): Promise<Tables<"event_categories">> {
     const client = this.supabaseService.getClient();
+    const { count } = await client
+      .from("event_categories")
+      .select("*", { count: "exact", head: true });
+
+    if (count >= 30) {
+      throw new BadRequestException("공고 분야는 30개까지 등록 가능합니다.");
+    }
+
     const { data, error } = await client
       .from("event_categories")
       .insert(dto)

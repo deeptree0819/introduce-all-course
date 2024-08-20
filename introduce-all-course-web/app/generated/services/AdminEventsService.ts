@@ -113,13 +113,22 @@ export class AdminEventsService {
   }
   /**
    * 공고분야 목록 조회
+   * @param page
+   * @param itemsPerPage
    * @returns PaginatedEventCategoryListDto
    * @throws ApiError
    */
-  public static getAllEventCategoriesWithPagination(): CancelablePromise<PaginatedEventCategoryListDto> {
+  public static getAllEventCategoriesWithPagination(
+    page: number = 1,
+    itemsPerPage: number = 30
+  ): CancelablePromise<PaginatedEventCategoryListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/events/categories",
+      query: {
+        page: page,
+        itemsPerPage: itemsPerPage,
+      },
     });
   }
   /**
