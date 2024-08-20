@@ -11,5 +11,7 @@ export type EventSummaryDto = {
   event_organization: string;
   event_view_count: number;
   created_at: string;
-  created_by: string;
+  created_by: {
+    admin_name?: string;
+  };
 };

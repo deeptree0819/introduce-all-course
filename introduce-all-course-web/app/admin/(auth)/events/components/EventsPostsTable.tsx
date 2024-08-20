@@ -65,8 +65,11 @@ export const columns: ColumnDef<EventSummaryDto>[] = [
     },
   },
   {
-    accessorKey: "created_by",
     header: "작성자",
+    cell: ({ row }) => {
+      const createdBy = row.original.created_by.admin_name;
+      return <p>{createdBy}</p>;
+    },
   },
   {
     accessorKey: "detail",

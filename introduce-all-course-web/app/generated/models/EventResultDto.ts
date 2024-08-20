@@ -5,9 +5,13 @@
 export type EventResultDto = {
   events_id: number;
   created_at: string;
-  created_by: number;
   updated_at: string;
-  updated_by: number;
+  created_by: {
+    admin_name?: string;
+  };
+  updated_by: {
+    admin_name?: string;
+  };
   event_thumbnail_url: string;
   event_organization: string;
   event_category_id: number;

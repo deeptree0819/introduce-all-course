@@ -33,8 +33,8 @@ export class EventsService {
         event_end_at, 
         event_organization, 
         event_view_count, 
-        created_at, 
-        created_by
+        created_at,
+        created_by:admins!events_created_by_fkey(admin_name)
       `);
 
     if (dto.queryText)
@@ -76,7 +76,13 @@ export class EventsService {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("events")
-      .select()
+      .select(
+        `
+        *, 
+        created_by:admins!events_created_by_fkey(admin_name),
+        updated_by:admins!events_updated_by_fkey(admin_name)
+        `,
+      )
       .eq("events_id", eventId)
       .maybeSingle();
 
@@ -91,7 +97,7 @@ export class EventsService {
     const { data: attachments, error: attachmentError } = await client
       .from("event_attachments")
       .select("event_attachment_url")
-      .eq("event_id", eventId);
+      .eq("events_id", eventId);
 
     if (attachmentError) {
       throw new InternalServerErrorException(
@@ -107,7 +113,7 @@ export class EventsService {
       );
     }
 
-    return plainToInstance(EventResultDto, data);
+    return plainToInstance(EventResultDto, result);
   }
 
   async updateEvent(
@@ -131,7 +137,7 @@ export class EventsService {
     const { error: attachmentError } = await client
       .from("event_attachments")
       .delete()
-      .eq("event_id", eventId);
+      .eq("events_id", eventId);
 
     if (attachmentError) {
       throw new InternalServerErrorException(
@@ -176,7 +182,11 @@ export class EventsService {
       .from("events")
       .update(updatedEvent)
       .eq("events_id", eventId)
-      .select()
+      .select(
+        `*,
+        created_by:admins!events_created_by_fkey(admin_name),
+        updated_by:admins!events_updated_by_fkey(admin_name)`,
+      )
       .maybeSingle();
 
     if (updateError || !post) {
@@ -205,7 +215,13 @@ export class EventsService {
     const { data: post, error: postError } = await client
       .from("events")
       .insert(event)
-      .select()
+      .select(
+        `
+        *,
+        created_by:admins!events_created_by_fkey(admin_name),
+        updated_by:admins!events_updated_by_fkey(admin_name)
+      `,
+      )
       .maybeSingle();
 
     if (postError || !post) {

@@ -1,11 +1,13 @@
 import { Tables } from "@common/database.types";
 
-export class EventResultDto implements Tables<"events"> {
+export class EventResultDto
+  implements Omit<Tables<"events">, "created_by" | "updated_by">
+{
   events_id: number;
   created_at: string;
-  created_by: number;
   updated_at: string;
-  updated_by: number;
+  created_by: { admin_name: string };
+  updated_by: { admin_name: string };
   event_thumbnail_url: string;
   event_organization: string;
   event_category_id: number;
