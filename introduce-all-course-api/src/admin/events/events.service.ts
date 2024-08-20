@@ -10,6 +10,7 @@ import {
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
+import { CreateEventResultDto } from "./dtos/create-event-result.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
 import { EventCategoryDto } from "./dtos/event-category.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
@@ -161,9 +162,10 @@ export class EventsService {
   async createEvent(
     adminId: number,
     dto: CreateEventDto,
-  ): Promise<Tables<"events">> {
+  ): Promise<CreateEventResultDto> {
+    const { event_attachment_urls, ...rest } = dto;
     const event = {
-      ...dto,
+      ...rest,
       created_by: adminId,
       updated_by: adminId,
       event_category_id: dto.event_category_id,
@@ -171,17 +173,35 @@ export class EventsService {
     };
 
     const client = this.supabaseService.getClient();
-    const { data, error } = await client
+    const { data: post, error: postError } = await client
       .from("events")
       .insert(event)
       .select()
       .maybeSingle();
 
-    if (error || !event) {
-      throw new NotFoundException(error.message || "작성을 실패하였습니다.");
+    if (postError || !post) {
+      throw new InternalServerErrorException(
+        postError.message || "작성을 실패하였습니다.",
+      );
     }
 
-    return data;
+    const { data: attachment, error: attachmentError } = await client
+      .from("event_attachments")
+      .insert(
+        event_attachment_urls.map((url) => ({
+          event_id: post.events_id,
+          event_attachment_url: url,
+        })),
+      )
+      .select();
+
+    if (attachmentError || !attachment) {
+      throw new InternalServerErrorException(
+        attachmentError.message || "첨부파일 업로드를 실패하였습니다.",
+      );
+    }
+
+    return { ...post, event_attachment_urls };
   }
 
   async deleteEvent(eventId: number): Promise<void> {

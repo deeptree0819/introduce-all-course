@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CreateEventCategoryDto } from "../models/CreateEventCategoryDto";
 import type { CreateEventDto } from "../models/CreateEventDto";
+import type { CreateEventResultDto } from "../models/CreateEventResultDto";
 import type { EventCategoryDto } from "../models/EventCategoryDto";
 import type { EventDto } from "../models/EventDto";
 import type { EventsOrderBy } from "../models/EventsOrderBy";
@@ -47,12 +48,12 @@ export class AdminEventsService {
   /**
    * 공고소개 게시글 작성
    * @param requestBody
-   * @returns any
+   * @returns CreateEventResultDto
    * @throws ApiError
    */
   public static createEvent(
     requestBody: CreateEventDto
-  ): CancelablePromise<any> {
+  ): CancelablePromise<CreateEventResultDto> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/admin/events/posts",

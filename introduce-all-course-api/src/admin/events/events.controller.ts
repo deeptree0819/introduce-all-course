@@ -15,6 +15,7 @@ import {
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
+import { CreateEventResultDto } from "./dtos/create-event-result.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
 import { EventCategoryDto } from "./dtos/event-category.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
@@ -72,7 +73,7 @@ export class EventsController {
   async createEvent(
     @CurrentUser() me,
     @Body() dto: CreateEventDto,
-  ): Promise<Tables<"events">> {
+  ): Promise<CreateEventResultDto> {
     return this.eventsService.createEvent(me.userId, dto);
   }
 
