@@ -299,10 +299,6 @@ export class EventsService {
       );
     }
 
-    if (!data) {
-      throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
-    }
-
     return plainToInstance(EventCategoryDto, data);
   }
 
