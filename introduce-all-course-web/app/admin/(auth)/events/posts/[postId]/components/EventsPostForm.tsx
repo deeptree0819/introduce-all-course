@@ -11,14 +11,16 @@ import {
   FormItem,
   FormMessage,
 } from "@components/ui/form";
-import { CreateEventDto } from "@generated/index";
+import { UpdateEventDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { forwardRef, useState } from "react";
+import { useParams } from "next/navigation";
+import { forwardRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
-  useCreateEvent,
   useGetAllEventCategoriesWithPagination,
+  useGetEventById,
+  useUpdateEvent,
 } from "@/app/hooks/admin/adminEventsHooks";
 import { useUploadFile } from "@/app/hooks/fileUploadHooks";
 import { Input } from "@/components/ui/input";
@@ -32,17 +34,23 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
-import { CreateEventSchema } from "../schema";
+import { UpdateEventSchema } from "../schema";
 
 const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
-  const fileState = useState<File[]>([]);
+  const fileState = useState<(File | string)[]>([]);
+  const [files, setFiles] = fileState;
 
-  const form = useForm<CreateEventDto>({
+  const params = useParams<{ postId: string }>();
+  const postId = +params.postId;
+
+  const form = useForm<UpdateEventDto>({
     mode: "onSubmit",
-    resolver: zodResolver(CreateEventSchema),
+    resolver: zodResolver(UpdateEventSchema),
   });
   const { handleSubmit } = form;
-  const { mutate: createEvent } = useCreateEvent();
+
+  const { data: eventPost } = useGetEventById(postId);
+  const { mutate: updateEvent } = useUpdateEvent(postId);
 
   const { data: eventCategories } = useGetAllEventCategoriesWithPagination({
     page: 1,
@@ -50,6 +58,13 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
   });
 
   const { mutateAsync: uploadFile } = useUploadFile("event-attachments");
+
+  useEffect(() => {
+    if (eventPost && eventPost.event_attachment_urls)
+      setFiles(eventPost.event_attachment_urls);
+  }, [eventPost, setFiles, eventPost?.event_attachment_urls]);
+
+  if (!eventPost) return null;
 
   return (
     <Form {...form}>
@@ -59,9 +74,11 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
         onSubmit={handleSubmit(
           async (data) => {
             const event_attachment_urls = await Promise.all(
-              fileState[0].map((file) => uploadFile(file))
+              files.map((file) =>
+                file instanceof File ? uploadFile(file) : file
+              )
             );
-            createEvent({ ...data, event_attachment_urls });
+            updateEvent({ ...data, event_attachment_urls });
           },
           (error) => console.log(error)
         )}
@@ -77,6 +94,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
                   fileId="thumbnail-image-upload"
                   onUpload={(url) => form.setValue("event_thumbnail_url", url)}
                   fileTag="event-thumbnail"
+                  defaultSrc={eventPost.event_thumbnail_url}
                 />
                 <FormMessage />
               </FormItem>
@@ -94,6 +112,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
                   type="text"
                   id="organization"
                   placeholder="공고기관을 입력해주세요."
+                  defaultValue={eventPost.event_organization}
                 />
                 <FormMessage />
               </FormItem>
@@ -106,7 +125,10 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
             render={({ field }) => (
               <FormItem className="flex flex-col space-y-1.5">
                 <Label>공고 분야</Label>
-                <Select onValueChange={field.onChange}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={eventPost.event_category_id.toString()}
+                >
                   <FormControl>
                     <SelectTrigger className="w-56">
                       <SelectValue placeholder="공고분야를 선택해주세요." />
@@ -143,6 +165,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
                   type="text"
                   id="title"
                   placeholder="공고명을 입력해주세요."
+                  defaultValue={eventPost.event_title}
                 />
                 <FormMessage />
               </FormItem>
@@ -156,7 +179,10 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
               render={({ field }) => (
                 <FormItem className="grid items-center gap-1.5">
                   <Label>공고 시작일</Label>
-                  <DatePickerForm field={field} />
+                  <DatePickerForm
+                    field={field}
+                    defaultValue={eventPost.event_start_at}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -168,7 +194,10 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
               render={({ field }) => (
                 <FormItem className="grid items-center gap-1.5">
                   <Label>공고 종료일</Label>
-                  <DatePickerForm field={field} />
+                  <DatePickerForm
+                    field={field}
+                    defaultValue={eventPost.event_end_at}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -186,6 +215,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
                     form.setValue("event_poster_image_url", url)
                   }
                   fileTag="event-poster"
+                  defaultSrc={eventPost.event_poster_image_url}
                 />
                 <FormMessage />
               </FormItem>
@@ -202,6 +232,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
                   onChange={(content) => {
                     form.setValue("event_info", JSON.stringify(content));
                   }}
+                  defaultValue={JSON.parse(eventPost.event_info)}
                 />
                 <FormMessage />
               </FormItem>
@@ -218,6 +249,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
               onChange={(content) => {
                 form.setValue("event_description", JSON.stringify(content));
               }}
+              defaultValue={JSON.parse(eventPost.event_description)}
             />
           </div>
           <Separator className="my-3" />

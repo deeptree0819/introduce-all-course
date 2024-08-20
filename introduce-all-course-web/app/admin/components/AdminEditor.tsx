@@ -41,9 +41,14 @@ import { Separator } from "@/components/ui/separator";
 type AdminEditorProps = {
   className?: string;
   onChange?: (content: JSONContent) => void;
+  defaultValue?: JSONContent;
 };
 
-const AdminEditor = ({ className, onChange }: AdminEditorProps) => {
+const AdminEditor = ({
+  className,
+  onChange,
+  defaultValue,
+}: AdminEditorProps) => {
   const [selectedHeading, setSelectedHeading] = useState("T");
   const [enterLink, setEnterLink] = useState(false);
 
@@ -58,6 +63,7 @@ const AdminEditor = ({ className, onChange }: AdminEditorProps) => {
     extensions: editorExtensions,
     editorProps: editorProps,
     onUpdate: ({ editor }) => onChange?.(editor.getJSON()),
+    content: defaultValue || "",
   });
 
   const handleHeadingChange = useCallback(
