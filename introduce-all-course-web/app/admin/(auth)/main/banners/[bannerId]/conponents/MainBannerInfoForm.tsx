@@ -83,6 +83,7 @@ const MainBannerInfoForm = ({ className }: MainBannerInfoFormProps) => {
                     onUpload={(url) =>
                       form.setValue("main_banner_image_url", url)
                     }
+                    fileTag="main-banner"
                   />
                 </div>
 

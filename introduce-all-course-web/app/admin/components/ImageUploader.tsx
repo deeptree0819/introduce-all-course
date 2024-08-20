@@ -12,6 +12,7 @@ type ImageUploaderProps = {
   fileId?: string;
   defaultSrc?: string;
   onUpload: (url: string) => void;
+  fileTag: string;
 };
 
 const ImageUploader = ({
@@ -19,11 +20,12 @@ const ImageUploader = ({
   fileId,
   defaultSrc,
   onUpload,
+  fileTag,
 }: ImageUploaderProps) => {
   const [preview, setPreview] = useState<string | null>(defaultSrc || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { mutateAsync: uploadImage } = useUploadImage("user-profile");
+  const { mutateAsync: uploadImage } = useUploadImage(fileTag);
 
   useEffect(() => {
     setPreview(defaultSrc || null);
