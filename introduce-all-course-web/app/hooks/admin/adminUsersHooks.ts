@@ -9,6 +9,7 @@ import {
 } from "@generated/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toastApiError, toastSuccess } from "@toast";
+import { useRouter } from "next/navigation";
 
 import { PaginationDto } from "@/app/types/common";
 
@@ -56,6 +57,22 @@ export const useUpdateUser = (userId: number) => {
     },
     onError: (error: ApiError) => {
       toastApiError(error, "사용자 정보 수정에 실패했습니다.");
+    },
+  });
+};
+
+export const useDeleteUser = () => {
+  const { push } = useRouter();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (userId: number) => AdminUsersService.deleteUser(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      toastSuccess("사용자가 삭제되었습니다.");
+      push("/admin/users");
+    },
+    onError: (error: ApiError) => {
+      toastApiError(error, "사용자 삭제에 실패했습니다.");
     },
   });
 };

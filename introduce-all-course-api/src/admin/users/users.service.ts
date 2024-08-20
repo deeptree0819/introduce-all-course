@@ -180,4 +180,16 @@ export class UsersService {
 
     return !!user;
   }
+
+  async deleteUser(userId: number): Promise<void> {
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("users")
+      .delete()
+      .eq("users_id", userId);
+
+    if (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
 }

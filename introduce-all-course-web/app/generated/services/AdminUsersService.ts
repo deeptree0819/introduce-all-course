@@ -71,4 +71,19 @@ export class AdminUsersService {
       mediaType: "application/json",
     });
   }
+  /**
+   * 유저 삭제
+   * @param userId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteUser(userId: number): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/admin/users/{userId}",
+      path: {
+        userId: userId,
+      },
+    });
+  }
 }

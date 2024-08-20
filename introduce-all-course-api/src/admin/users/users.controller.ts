@@ -4,6 +4,7 @@ import { BasePaginatedDto, IPaginated } from "@common/pagination";
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -55,5 +56,14 @@ export class UsersController {
     @Body() dto: UpdateUserDto,
   ): Promise<Tables<"users">> {
     return this.usersService.updateUser(userId, dto);
+  }
+
+  @CustomApiOperation({
+    summary: "유저 삭제",
+    tags: ["admin-users"],
+  })
+  @Delete("/admin/users/:userId")
+  async deleteUser(@Param("userId", ParseIntPipe) userId: number) {
+    this.usersService.deleteUser(userId);
   }
 }
