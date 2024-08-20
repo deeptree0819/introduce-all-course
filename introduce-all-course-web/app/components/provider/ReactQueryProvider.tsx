@@ -27,7 +27,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
                 queryClient.clear();
                 deleteCookie("token");
                 OpenAPI.TOKEN = "";
-                push("/login");
+                push("/");
               }
             }
           },
