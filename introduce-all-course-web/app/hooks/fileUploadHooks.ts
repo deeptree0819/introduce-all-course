@@ -15,7 +15,11 @@ export const useUploadImage = (tag: string) => {
         );
       }
 
-      const url = await getUploadUrl(tag, file.type);
+      const url = await getUploadUrl({
+        tag,
+        contentType: file.type,
+        fileName: file.name,
+      });
 
       try {
         await axios.put(url, file, {
@@ -46,7 +50,11 @@ export const useUploadFile = (tag: string) => {
         );
       }
 
-      const url = await getUploadUrl(tag, file.type);
+      const url = await getUploadUrl({
+        tag,
+        contentType: file.type,
+        fileName: file.name,
+      });
 
       try {
         await axios.put(url, file, {

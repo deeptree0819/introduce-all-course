@@ -19,12 +19,14 @@ export class DefaultService {
   /**
    * @param tag
    * @param contentType
+   * @param fileName
    * @returns string
    * @throws ApiError
    */
   public static getUploadUrl(
     tag: string,
-    contentType: string
+    contentType: string,
+    fileName: string
   ): CancelablePromise<string> {
     return __request(OpenAPI, {
       method: "GET",
@@ -32,6 +34,7 @@ export class DefaultService {
       query: {
         tag: tag,
         contentType: contentType,
+        fileName: fileName,
       },
     });
   }

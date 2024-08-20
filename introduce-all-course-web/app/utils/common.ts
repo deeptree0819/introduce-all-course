@@ -99,6 +99,16 @@ export const getEnumIfExists = <T>(
     : undefined;
 };
 
-export const getUploadUrl = async (tag: string, contentType: string) => {
-  return await DefaultService.getUploadUrl(tag, contentType);
+type getUploadURLParams = {
+  tag: string;
+  contentType: string;
+  fileName: string;
+};
+
+export const getUploadUrl = async ({
+  tag,
+  contentType,
+  fileName,
+}: getUploadURLParams) => {
+  return await DefaultService.getUploadUrl(tag, contentType, fileName);
 };

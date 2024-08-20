@@ -13,7 +13,12 @@ export class UploadController {
   async getUploadURL(
     @Query("tag") tag: string,
     @Query("contentType") contentType: string,
+    @Query("fileName") fileName: string,
   ): Promise<string> {
-    return this.imageUploadService.generateUploadURL(tag, contentType);
+    return this.imageUploadService.generateUploadURL(
+      tag,
+      contentType,
+      fileName,
+    );
   }
 }
