@@ -1,4 +1,8 @@
 import {
+  useDeleteEventCategory,
+  useGetEventCategoryById,
+} from "@/app/hooks/admin/adminEventsHooks";
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -12,12 +16,17 @@ import {
 import { Button } from "@/components/ui/button";
 
 type EventCategoryDeleteButtonProps = {
-  eventCategoryName: string;
+  eventCategoryId: number;
 };
 
 const EventCategoryDeleteButton = ({
-  eventCategoryName,
+  eventCategoryId,
 }: EventCategoryDeleteButtonProps) => {
+  const { data: eventCategory } = useGetEventCategoryById(eventCategoryId);
+  const categoryName = eventCategory?.event_category_name || "";
+
+  const { mutate: deleteEventCategory } = useDeleteEventCategory();
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -29,12 +38,16 @@ const EventCategoryDeleteButton = ({
         <AlertDialogHeader className="items-start">
           <AlertDialogTitle>공고분야를 삭제하시겠습니까?</AlertDialogTitle>
           <AlertDialogDescription>
-            {`${eventCategoryName} 카테고리를 삭제합니다. 삭제하신 이후에는 되돌릴 수 없습니다.`}
+            {`${categoryName} 카테고리를 삭제합니다. 삭제하신 이후에는 되돌릴 수 없습니다.`}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center justify-end space-x-3">
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
-          <AlertDialogAction>삭제하기</AlertDialogAction>
+          <AlertDialogAction
+            onClick={() => deleteEventCategory(eventCategoryId)}
+          >
+            삭제하기
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
