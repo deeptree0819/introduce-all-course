@@ -6,7 +6,6 @@ export type CreateEventDto = {
   event_thumbnail_url: string;
   event_organization: string;
   event_category_id: number;
-  event_category_name: string;
   event_title: string;
   event_start_at: string;
   event_end_at: string;
