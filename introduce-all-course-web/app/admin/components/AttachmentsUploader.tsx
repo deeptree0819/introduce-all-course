@@ -1,12 +1,16 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 
 const MAX_FILE_SIZE = 500 * 1024 * 1024; // 500MB
 const MAX_FILE_COUNT = 10;
 
-const AttachmentsUploader = () => {
-  const [files, setFiles] = useState<File[]>([]);
+type AttachmentsUploaderProps = {
+  fileState: [(File | string)[], Dispatch<SetStateAction<(File | string)[]>>];
+};
+
+const AttachmentsUploader = ({ fileState }: AttachmentsUploaderProps) => {
+  const [files, setFiles] = fileState;
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +28,7 @@ const AttachmentsUploader = () => {
 
       if (validFiles.length !== newFiles.length) {
         setError(
-          `${
-            MAX_FILE_SIZE / (1024 * 1024 * 1024)
-          } MB 이하의 파일만 업로드 가능합니다.`
+          `${MAX_FILE_SIZE / (1024 * 1024)} MB 이하의 파일만 업로드 가능합니다.`
         );
       }
 
@@ -38,8 +40,8 @@ const AttachmentsUploader = () => {
     setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const handleFileClick = (file: File) => {
-    const fileURL = URL.createObjectURL(file);
+  const handleFileClick = (file: File | string) => {
+    const fileURL = file instanceof File ? URL.createObjectURL(file) : file;
     window.open(fileURL, "_blank");
   };
 
@@ -72,9 +74,10 @@ const AttachmentsUploader = () => {
                 className="line-clamp-1 w-full cursor-pointer"
                 onClick={() => handleFileClick(file)}
               >
-                {file.name}
+                {file instanceof File ? file.name : file.split("__")[1]}
               </span>
               <Button
+                type="button"
                 variant="link"
                 size="sm"
                 className="h-fit pr-20 text-xs text-red-600"

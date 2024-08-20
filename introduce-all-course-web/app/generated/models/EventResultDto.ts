@@ -2,7 +2,16 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type CreateEventDto = {
+export type EventResultDto = {
+  events_id: number;
+  created_at: string;
+  updated_at: string;
+  created_by: {
+    admin_name?: string;
+  };
+  updated_by: {
+    admin_name?: string;
+  };
   event_thumbnail_url: string;
   event_organization: string;
   event_category_id: number;
@@ -12,5 +21,6 @@ export type CreateEventDto = {
   event_poster_image_url: string;
   event_info: string;
   event_description: string;
+  event_view_count: number;
   event_attachment_urls: Array<string>;
 };

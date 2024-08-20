@@ -1,5 +1,6 @@
 import CharacterCount from "@tiptap/extension-character-count";
 import Highlight from "@tiptap/extension-highlight";
+import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
@@ -23,6 +24,7 @@ const editorExtensions = [
   CharacterCount.configure({
     limit,
   }),
+  Image,
 ];
 
 const h1Class =
