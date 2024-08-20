@@ -1,5 +1,6 @@
 import { TrashIcon } from "lucide-react";
 
+import { useDeleteEvent } from "@/app/hooks/admin/adminEventsHooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,6 +23,7 @@ const EventPostDeleteButton = ({
   postId,
   variant = "text",
 }: EventPostDeleteButtonProps) => {
+  const { mutate: deleteEvent } = useDeleteEvent();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -48,7 +50,9 @@ const EventPostDeleteButton = ({
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center justify-end space-x-3">
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
-          <AlertDialogAction>삭제하기</AlertDialogAction>
+          <AlertDialogAction onClick={() => deleteEvent(postId)}>
+            삭제하기
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
