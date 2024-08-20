@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 import { Order } from "@common/enum";
-import { Paginated } from "@common/pagination";
+import { Paginated, PaginateDto } from "@common/pagination";
 import { SupabaseService } from "@common/supabase/supabase.service";
 import {
   Injectable,
@@ -8,7 +8,9 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
+import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
+import { EventCategoryDto } from "./dtos/event-category.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
 import { EventDto } from "./dtos/event.dto";
 import { GetAllEventsWithPaginationDto } from "./dtos/get-all-events.dto";
@@ -56,9 +58,9 @@ export class EventsService {
     const { data, error } = await query;
 
     if (error) {
-      console.log(error);
-
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error.message || "조회를 실패하였습니다.",
+      );
     }
 
     return new Paginated(
@@ -187,6 +189,80 @@ export class EventsService {
       .from("events")
       .delete()
       .eq("events_id", eventId);
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error.message || "삭제를 실패하였습니다.",
+      );
+    }
+  }
+
+  async getAllEventCategoriesWithPagination(
+    dto: PaginateDto,
+  ): Promise<Paginated<EventCategoryDto>> {
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client.from("event_categories").select();
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error.message || "조회를 실패하였습니다.",
+      );
+    }
+
+    return new Paginated(
+      plainToInstance(EventCategoryDto, data),
+      data.length,
+      dto.page,
+      dto.itemsPerPage,
+    );
+  }
+
+  async getEventCategoryById(
+    eventCategoriesId: number,
+  ): Promise<EventCategoryDto> {
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client
+      .from("event_categories")
+      .select()
+      .eq("event_categories_id", eventCategoriesId)
+      .maybeSingle();
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error.message || "조회를 실패하였습니다.",
+      );
+    }
+
+    if (!data) {
+      throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
+    }
+
+    return plainToInstance(EventCategoryDto, data);
+  }
+
+  async createEventCategory(
+    dto: CreateEventCategoryDto,
+  ): Promise<Tables<"event_categories">> {
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client
+      .from("event_categories")
+      .insert(dto)
+      .select()
+      .maybeSingle();
+
+    if (error || !data) {
+      throw new NotFoundException(error.message || "등록을 실패하였습니다.");
+    }
+
+    return data;
+  }
+
+  async deleteEventCategory(eventCategoriesId: number): Promise<void> {
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("event_categories")
+      .delete()
+      .eq("event_categories_id", eventCategoriesId);
 
     if (error) {
       throw new InternalServerErrorException(

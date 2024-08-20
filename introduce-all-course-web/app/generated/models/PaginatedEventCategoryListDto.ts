@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EventSummaryDto } from "./EventSummaryDto";
+import type { EventCategoryDto } from "./EventCategoryDto";
 import type { PaginationMetaData } from "./PaginationMetaData";
-export type PaginatedEventListDto = {
-  items: Array<EventSummaryDto>;
+export type PaginatedEventCategoryListDto = {
+  items: Array<EventCategoryDto>;
   pagination: PaginationMetaData;
 };

@@ -2,11 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CreateEventCategoryDto } from "../models/CreateEventCategoryDto";
 import type { CreateEventDto } from "../models/CreateEventDto";
+import type { EventCategoryDto } from "../models/EventCategoryDto";
 import type { EventDto } from "../models/EventDto";
 import type { EventsOrderBy } from "../models/EventsOrderBy";
 import type { Order } from "../models/Order";
-import type { PaginatedeventListDto } from "../models/PaginatedeventListDto";
+import type { PaginatedEventCategoryListDto } from "../models/PaginatedEventCategoryListDto";
+import type { PaginatedEventListDto } from "../models/PaginatedEventListDto";
 import type { UpdateEventDto } from "../models/UpdateEventDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
@@ -19,7 +22,7 @@ export class AdminEventsService {
    * @param queryText
    * @param page
    * @param itemsPerPage
-   * @returns PaginatedeventListDto
+   * @returns PaginatedEventListDto
    * @throws ApiError
    */
   public static getAllEventsWithPagination(
@@ -28,7 +31,7 @@ export class AdminEventsService {
     queryText?: string,
     page: number = 1,
     itemsPerPage: number = 30
-  ): CancelablePromise<PaginatedeventListDto> {
+  ): CancelablePromise<PaginatedEventListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/events/posts",
@@ -105,6 +108,67 @@ export class AdminEventsService {
       url: "/admin/events/posts/{eventId}",
       path: {
         eventId: eventId,
+      },
+    });
+  }
+  /**
+   * 공고분야 목록 조회
+   * @returns PaginatedEventCategoryListDto
+   * @throws ApiError
+   */
+  public static getAllEventCategoriesWithPagination(): CancelablePromise<PaginatedEventCategoryListDto> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/admin/events/categories",
+    });
+  }
+  /**
+   * 공고분야 등록
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public static createEventCategory(
+    requestBody: CreateEventCategoryDto
+  ): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/admin/events/categories",
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
+   * 공고분야 상세 조회
+   * @param eventCategoriesId
+   * @returns EventCategoryDto
+   * @throws ApiError
+   */
+  public static getEventCategoryById(
+    eventCategoriesId: number
+  ): CancelablePromise<EventCategoryDto> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/admin/events/categories/{eventCategoriesId}",
+      path: {
+        eventCategoriesId: eventCategoriesId,
+      },
+    });
+  }
+  /**
+   * 공고분야 삭제
+   * @param eventCategoriesId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteEventCategory(
+    eventCategoriesId: number
+  ): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/admin/events/categories/{eventCategoriesId}",
+      path: {
+        eventCategoriesId: eventCategoriesId,
       },
     });
   }
