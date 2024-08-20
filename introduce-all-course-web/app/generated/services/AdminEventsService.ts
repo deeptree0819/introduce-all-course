@@ -4,6 +4,8 @@
 /* eslint-disable */
 import type { CreateEventDto } from "../models/CreateEventDto";
 import type { EventDto } from "../models/EventDto";
+import type { EventsOrderBy } from "../models/EventsOrderBy";
+import type { Order } from "../models/Order";
 import type { PaginatedeventListDto } from "../models/PaginatedeventListDto";
 import type { UpdateEventDto } from "../models/UpdateEventDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
@@ -13,6 +15,7 @@ export class AdminEventsService {
   /**
    * 공고소개 게시글 목록 조회
    * @param order
+   * @param orderBy
    * @param queryText
    * @param page
    * @param itemsPerPage
@@ -20,7 +23,8 @@ export class AdminEventsService {
    * @throws ApiError
    */
   public static getAllEventsWithPagination(
-    order?: "ASC" | "DESC",
+    order?: Order,
+    orderBy?: EventsOrderBy,
     queryText?: string,
     page: number = 1,
     itemsPerPage: number = 30
@@ -30,6 +34,7 @@ export class AdminEventsService {
       url: "/admin/events/posts",
       query: {
         order: order,
+        orderBy: orderBy,
         queryText: queryText,
         page: page,
         itemsPerPage: itemsPerPage,

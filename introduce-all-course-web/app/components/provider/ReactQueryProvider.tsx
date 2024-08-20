@@ -22,7 +22,10 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
         queryCache: new QueryCache({
           onError: (error) => {
             if ("status" in (error as ApiError)) {
+              console.log("error", error);
               if ((error as ApiError).status === 401) {
+                console.log("401 error");
+
                 queryClient.clear();
                 deleteCookie("token");
                 OpenAPI.TOKEN = "";

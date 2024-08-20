@@ -25,7 +25,7 @@ export class EventsService {
     const query = client.from("events").select(`
         events_id, 
         event_title, 
-        event_categories(event_category_name), 
+        ...event_categories(event_category_name), 
         event_start_at, 
         event_end_at, 
         event_organization, 
@@ -44,6 +44,8 @@ export class EventsService {
     if (dto.orderBy) {
       const ascending = dto.order ? dto.order === Order.ASC : false;
       query.order(dto.orderBy, { ascending });
+    } else {
+      query.order("events_id", { ascending: false });
     }
 
     query.range(
@@ -54,6 +56,8 @@ export class EventsService {
     const { data, error } = await query;
 
     if (error) {
+      console.log(error);
+
       throw new InternalServerErrorException(error.message);
     }
 

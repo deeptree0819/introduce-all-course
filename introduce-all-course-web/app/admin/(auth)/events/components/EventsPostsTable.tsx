@@ -1,88 +1,27 @@
 "use client";
+import { EventsOrderBy, EventSummaryDto, Order } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useCreateQueryParams, useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
+import { useGetAllEventsWithPagination } from "@/app/hooks/admin/adminEventsHooks";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import EventPostDeleteButton from "../posts/[postId]/components/EventPostDeleteButton";
 import EventSearch from "../posts/components/EventSearch";
 
-interface UserDto {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: string;
-  updatedBy: string;
-  eventTitle: string;
-  eventCategory: string;
-  eventStartAt: string;
-  eventEndAt: string;
-  eventOrganization: string;
-  eventViewCount: number;
-}
-
-const DUMMY = [
+export const columns: ColumnDef<EventSummaryDto>[] = [
   {
-    id: 1,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    createdBy: "어드민",
-    updatedBy: "매니저",
-    eventTitle: "[kakao x goorm] 구름톤 딥다이브 프로덕트 매니지먼트 과정 모집",
-    eventCategory: "프론트엔드",
-    eventStartAt: "2023-12-04T11:21:02.627Z",
-    eventEndAt: "2023-12-04T11:21:02.627Z",
-    eventOrganization: "이벤트 주최기관 1",
-    eventViewCount: 100000,
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    createdBy: "어드민",
-    updatedBy: "매니저",
-    eventTitle:
-      "반도체 설계 전문 엔지니어 양성 교육(시스템반도체 제어 설계 엔지니어 양성)",
-    eventCategory: "프론트엔드",
-    eventStartAt: "2023-12-04T11:21:02.627Z",
-    eventEndAt: "2023-12-04T11:21:02.627Z",
-    eventOrganization: "이벤트 주최기관 2",
-    eventViewCount: 200,
-  },
-  {
-    id: 3,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    createdBy: "어드민",
-    updatedBy: "매니저",
-    eventTitle: "이벤트 제목 3",
-    eventCategory: "프론트엔드",
-    eventStartAt: "2023-12-04T11:21:02.627Z",
-    eventEndAt: "2023-12-04T11:21:02.627Z",
-    eventOrganization: "이벤트 주최기관 3",
-    eventViewCount: 300,
-  },
-];
-
-const PAGINATION_DUMMY = {
-  totalItemCount: 15,
-  currentItemCount: 10,
-  totalPage: 2,
-  currentPage: 1,
-  itemsPerPage: 10,
-};
-
-export const columns: ColumnDef<UserDto>[] = [
-  {
-    accessorKey: "id",
+    accessorKey: "events_id",
     header: "ID",
   },
   {
     header: "공고명",
     cell: ({ row }) => {
-      const eventTitle = row.original.eventTitle;
+      const eventTitle = row.original.event_title;
       return (
         <div className="flex flex-col items-center">
           <p className="w-52">{eventTitle}</p>
@@ -91,14 +30,14 @@ export const columns: ColumnDef<UserDto>[] = [
     },
   },
   {
-    accessorKey: "eventCategory",
+    accessorKey: "event_category_name",
     header: "공고분야",
   },
   {
     header: "공고기간",
     cell: ({ row }) => {
-      const eventStartAt = row.original.eventStartAt;
-      const eventEndAt = row.original.eventEndAt;
+      const eventStartAt = row.original.event_start_at;
+      const eventEndAt = row.original.event_end_at;
       return (
         <p>{`${getUtcToDateFormat(
           eventStartAt,
@@ -108,25 +47,25 @@ export const columns: ColumnDef<UserDto>[] = [
     },
   },
   {
-    accessorKey: "eventOrganization",
+    accessorKey: "event_organization",
     header: "주최기관",
   },
   {
     header: "조회수",
     cell: ({ row }) => {
-      const eventViewCount = row.original.eventViewCount;
+      const eventViewCount = row.original.event_view_count;
       return <p>{`${eventViewCount.toLocaleString()}회`}</p>;
     },
   },
   {
     header: "작성일자",
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
+      const createdAt = row.original.created_at;
       return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
     },
   },
   {
-    accessorKey: "createdBy",
+    accessorKey: "created_by",
     header: "작성자",
   },
   {
@@ -135,7 +74,7 @@ export const columns: ColumnDef<UserDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/events/posts/${row.getValue("id")}`}
+          href={`/admin/events/posts/${row.getValue("events_id")}`}
           className="text-blue-500"
         >
           상세보기
@@ -148,18 +87,50 @@ export const columns: ColumnDef<UserDto>[] = [
     header: "",
     cell: ({ row }) => {
       return (
-        <EventPostDeleteButton postId={row.getValue("id")} variant="icon" />
+        <EventPostDeleteButton
+          postId={row.getValue("events_id")}
+          variant="icon"
+        />
       );
     },
   },
 ];
 
 const EventsPostsTable = () => {
+  const { queryText, order, page, itemsPerPage } = useGetSearchParams();
+
+  const orderDirection = order === "oldest" ? Order.ASC : Order.DESC;
+  const orderBy =
+    order === "due"
+      ? EventsOrderBy.EVENT_END_AT
+      : order === "viewCount"
+      ? EventsOrderBy.EVENT_VIEW_COUNT
+      : EventsOrderBy.CREATED_AT;
+
+  const { data: events } = useGetAllEventsWithPagination({
+    order: orderDirection,
+    orderBy,
+    queryText,
+    page: page ? +page : 1,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+  });
+
+  const createQueryParams = useCreateQueryParams();
+  const { replace } = useRouter();
+
+  const handleOnValueChange = (value: string) => {
+    replace(createQueryParams({ order: value }));
+  };
+
   return (
     <div className="flex max-w-[1300px] flex-col space-y-7">
       <EventSearch />
       <div className="space-y-1">
-        <ToggleGroup type="single" className="w-full justify-end space-x-1">
+        <ToggleGroup
+          type="single"
+          className="w-full justify-end space-x-1"
+          onValueChange={handleOnValueChange}
+        >
           <ToggleGroupItem value="latest" size="sm">
             최신순
           </ToggleGroupItem>
@@ -174,11 +145,13 @@ const EventsPostsTable = () => {
           </ToggleGroupItem>
         </ToggleGroup>
 
-        <AdminPaginatedTable
-          data={DUMMY}
-          columns={columns}
-          pagination={PAGINATION_DUMMY}
-        />
+        {events && (
+          <AdminPaginatedTable
+            data={events.items}
+            columns={columns}
+            pagination={events.pagination}
+          />
+        )}
       </div>
     </div>
   );
