@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CreateEventCategoryDto } from "../models/CreateEventCategoryDto";
 import type { CreateEventDto } from "../models/CreateEventDto";
+import type { DeleteEventCategoryDto } from "../models/DeleteEventCategoryDto";
 import type { EventCategoryDto } from "../models/EventCategoryDto";
 import type { EventResultDto } from "../models/EventResultDto";
 import type { EventsOrderBy } from "../models/EventsOrderBy";
@@ -20,6 +21,7 @@ export class AdminEventsService {
    * @param order
    * @param orderBy
    * @param queryText
+   * @param eventCategoryId
    * @param page
    * @param itemsPerPage
    * @returns PaginatedEventListDto
@@ -29,6 +31,7 @@ export class AdminEventsService {
     order?: Order,
     orderBy?: EventsOrderBy,
     queryText?: string,
+    eventCategoryId?: string,
     page: number = 1,
     itemsPerPage: number = 30
   ): CancelablePromise<PaginatedEventListDto> {
@@ -39,6 +42,7 @@ export class AdminEventsService {
         order: order,
         orderBy: orderBy,
         queryText: queryText,
+        eventCategoryId: eventCategoryId,
         page: page,
         itemsPerPage: itemsPerPage,
       },
@@ -169,15 +173,36 @@ export class AdminEventsService {
   /**
    * 공고분야 삭제
    * @param eventCategoriesId
+   * @param requestBody
    * @returns any
    * @throws ApiError
    */
   public static deleteEventCategory(
-    eventCategoriesId: number
+    eventCategoriesId: number,
+    requestBody: DeleteEventCategoryDto
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "DELETE",
       url: "/admin/events/categories/{eventCategoriesId}",
+      path: {
+        eventCategoriesId: eventCategoriesId,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
+   * 공고분야 게시글수 조회
+   * @param eventCategoriesId
+   * @returns number
+   * @throws ApiError
+   */
+  public static getEventCategoryPostCount(
+    eventCategoriesId: number
+  ): CancelablePromise<number> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/admin/events/categories/{eventCategoriesId}/postcount",
       path: {
         eventCategoriesId: eventCategoriesId,
       },

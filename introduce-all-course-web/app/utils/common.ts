@@ -2,6 +2,7 @@ import { DefaultService } from "@generated/index";
 import { InfiniteData } from "@tanstack/react-query";
 import { type ClassValue, clsx } from "clsx";
 import { usePathname, useSearchParams } from "next/navigation";
+import { ParsedUrlQueryInput } from "querystring";
 import { useCallback, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -71,6 +72,17 @@ export const useAppendQueryParams = () => {
     },
     [searchParams, pathname]
   );
+};
+
+export const useUpdateQueryParams = () => {
+  return (newParams: ParsedUrlQueryInput) => {
+    const currentQuery = new URLSearchParams(window.location.search);
+    Object.keys(newParams).forEach((key) => {
+      currentQuery.set(key, newParams[key] as string);
+    });
+
+    return `${window.location.pathname}?${currentQuery.toString()}`;
+  };
 };
 
 export const useGetSearchParams = () => {

@@ -1,10 +1,10 @@
 "use client";
 import { EventsOrderBy, EventSummaryDto, Order } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { useCreateQueryParams, useGetSearchParams } from "@utils/common";
+import { useGetSearchParams, useUpdateQueryParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 import { useGetAllEventsWithPagination } from "@/app/hooks/admin/adminEventsHooks";
@@ -100,6 +100,9 @@ export const columns: ColumnDef<EventSummaryDto>[] = [
 ];
 
 const EventsPostsTable = () => {
+  const params = useParams<{ eventCategoryId: string }>();
+  const eventCategoryId = params.eventCategoryId;
+
   const { queryText, order, page, itemsPerPage } = useGetSearchParams();
 
   const orderDirection = order === "oldest" ? Order.ASC : Order.DESC;
@@ -114,15 +117,16 @@ const EventsPostsTable = () => {
     order: orderDirection,
     orderBy,
     queryText,
+    eventCategoryId,
     page: page ? +page : 1,
     itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
   });
 
-  const createQueryParams = useCreateQueryParams();
+  const updateQueryParams = useUpdateQueryParams();
   const { replace } = useRouter();
 
   const handleOnValueChange = (value: string) => {
-    replace(createQueryParams({ order: value }));
+    replace(updateQueryParams({ order: value }));
   };
 
   return (

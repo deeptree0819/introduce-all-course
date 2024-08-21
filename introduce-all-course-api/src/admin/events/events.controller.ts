@@ -16,6 +16,7 @@ import {
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
+import { DeleteEventCategoryDto } from "./dtos/delete-event-category.dto";
 import { EventCategoryDto } from "./dtos/event-category.dto";
 import { EventResultDto } from "./dtos/event-result.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
@@ -126,7 +127,19 @@ export class EventsController {
   @Delete("/admin/events/categories/:eventCategoriesId")
   async deleteEventCategory(
     @Param("eventCategoriesId", ParseIntPipe) eventCategoriesId: number,
+    @Body() dto: DeleteEventCategoryDto,
   ) {
-    this.eventsService.deleteEventCategory(eventCategoriesId);
+    this.eventsService.deleteEventCategory(eventCategoriesId, dto);
+  }
+
+  @CustomApiOperation({
+    summary: "공고분야 게시글수 조회",
+    tags: ["admin-events"],
+  })
+  @Get("/admin/events/categories/:eventCategoriesId/postcount")
+  async getEventCategoryPostCount(
+    @Param("eventCategoriesId", ParseIntPipe) eventCategoriesId: number,
+  ) {
+    return this.eventsService.getEventCategoryPostCount(eventCategoriesId);
   }
 }
