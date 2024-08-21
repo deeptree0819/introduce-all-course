@@ -5,8 +5,12 @@
 export type InquiryFormLinkDto = {
   inquiry_form_links_id: number;
   created_at: string;
-  created_by: number;
+  created_by: {
+    admin_name?: string;
+  };
   updated_at: string;
-  updated_by: number;
+  updated_by: {
+    admin_name?: string;
+  };
   inquiry_form_links_url: string;
 };

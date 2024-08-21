@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateInquiryFormLinkDto } from "../models/CreateInquiryFormLinkDto";
-import type { InquiryFormLinkDto } from "../models/InquiryFormLinkDto";
 import type { PaginatedInquiryFormLinkListDto } from "../models/PaginatedInquiryFormLinkListDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
@@ -47,10 +46,10 @@ export class AdminInquiryService {
   }
   /**
    * 상담신청 링크 조회
-   * @returns InquiryFormLinkDto
+   * @returns string
    * @throws ApiError
    */
-  public static getLatestInquiryFormLink(): CancelablePromise<InquiryFormLinkDto> {
+  public static getLatestInquiryFormLink(): CancelablePromise<string> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/inquiry/form-links/latest",

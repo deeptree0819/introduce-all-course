@@ -20,7 +20,13 @@ export class InquiryService {
     const client = this.supabaseService.getClient();
     const query = client
       .from("inquiry_form_links")
-      .select()
+      .select(
+        `
+        *, 
+        created_by:admins!inquiry_form_links_created_by_fkey(admin_name),
+        updated_by:admins!inquiry_form_links_updated_by_fkey(admin_name)
+        `,
+      )
       .order("inquiry_form_links_id", { ascending: false })
       .range(
         (dto.page - 1) * dto.itemsPerPage,
@@ -43,7 +49,7 @@ export class InquiryService {
     );
   }
 
-  async getLatestInquiryFormLink(): Promise<InquiryFormLinkDto> {
+  async getLatestInquiryFormLink(): Promise<string> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("inquiry_form_links")
@@ -61,7 +67,7 @@ export class InquiryService {
       throw new NotFoundException("상담신청 링크가 존재하지 않습니다.");
     }
 
-    return plainToInstance(InquiryFormLinkDto, data[0]);
+    return data[0].inquiry_form_links_url;
   }
 
   async createInquiryFormLink(
