@@ -1,12 +1,12 @@
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { Controller, Get, Query } from "@nestjs/common";
 import { ApiBearerAuth } from "@nestjs/swagger";
-import { ImageUploadService } from "./upload.service";
+import { UploadService } from "./upload.service";
 
 @ApiBearerAuth()
 @Controller("/upload")
 export class UploadController {
-  constructor(private readonly imageUploadService: ImageUploadService) {}
+  constructor(private readonly uploadService: UploadService) {}
 
   @CustomApiOperation({})
   @Get()
@@ -15,10 +15,6 @@ export class UploadController {
     @Query("contentType") contentType: string,
     @Query("fileName") fileName: string,
   ): Promise<string> {
-    return this.imageUploadService.generateUploadURL(
-      tag,
-      contentType,
-      fileName,
-    );
+    return this.uploadService.generateUploadURL(tag, contentType, fileName);
   }
 }
