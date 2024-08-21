@@ -17,4 +17,8 @@ export class GetAllEventsWithPaginationDto extends PaginateDto {
   @IsString()
   @IsOptional()
   queryText?: string;
+
+  @IsString()
+  @IsOptional()
+  eventCategoryId?: string;
 }

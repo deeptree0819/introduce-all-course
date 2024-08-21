@@ -13,6 +13,7 @@ export type { AdminSummaryDto } from "./models/AdminSummaryDto";
 export type { CreateEventCategoryDto } from "./models/CreateEventCategoryDto";
 export type { CreateEventDto } from "./models/CreateEventDto";
 export type { CreateMainBannerDto } from "./models/CreateMainBannerDto";
+export type { DeleteEventCategoryDto } from "./models/DeleteEventCategoryDto";
 export type { EventCategoryDto } from "./models/EventCategoryDto";
 export type { EventResultDto } from "./models/EventResultDto";
 export { EventsOrderBy } from "./models/EventsOrderBy";

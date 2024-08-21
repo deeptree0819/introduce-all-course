@@ -1,3 +1,4 @@
+import { useDeleteAdmin } from "@/app/hooks/admin/adminAdminsHooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +17,7 @@ type AdminDeleteAlertProps = {
 };
 
 const AdminDeleteButton = ({ adminId }: AdminDeleteAlertProps) => {
+  const { mutate: deleteEvent } = useDeleteAdmin();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -32,7 +34,9 @@ const AdminDeleteButton = ({ adminId }: AdminDeleteAlertProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center justify-end space-x-3">
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
-          <AlertDialogAction>삭제하기</AlertDialogAction>
+          <AlertDialogAction onClick={() => deleteEvent(adminId)}>
+            삭제하기
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -133,4 +133,18 @@ export class AdminsService {
 
     return !!admin;
   }
+
+  async deleteAdmin(adminId: number): Promise<void> {
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("admins")
+      .delete()
+      .eq("admin_id", adminId);
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error.message || "삭제를 실패하였습니다.",
+      );
+    }
+  }
 }

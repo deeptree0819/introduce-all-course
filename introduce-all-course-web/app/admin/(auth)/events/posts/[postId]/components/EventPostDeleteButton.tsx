@@ -43,7 +43,7 @@ const EventPostDeleteButton = ({
       </AlertDialogTrigger>
       <AlertDialogContent className="rounded-lg">
         <AlertDialogHeader className="items-start">
-          <AlertDialogTitle>공고분야를 삭제하시겠습니까?</AlertDialogTitle>
+          <AlertDialogTitle>게시글를 삭제하시겠습니까?</AlertDialogTitle>
           <AlertDialogDescription>
             {`${postId}번 게시글을 삭제합니다. 삭제하신 이후에는 되돌릴 수 없습니다.`}
           </AlertDialogDescription>

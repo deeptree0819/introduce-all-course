@@ -71,4 +71,19 @@ export class AdminAdminsService {
       mediaType: "application/json",
     });
   }
+  /**
+   * 어드민 삭제
+   * @param adminId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteAdmin(adminId: number): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/admin/admins/{adminId}",
+      path: {
+        adminId: adminId,
+      },
+    });
+  }
 }

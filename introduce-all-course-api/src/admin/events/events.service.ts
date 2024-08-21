@@ -11,6 +11,7 @@ import {
 import { plainToInstance } from "class-transformer";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
 import { CreateEventDto } from "./dtos/create-event.dto";
+import { DeleteEventCategoryDto } from "./dtos/delete-event-category.dto";
 import { EventCategoryDto } from "./dtos/event-category.dto";
 import { EventResultDto } from "./dtos/event-result.dto";
 import { EventSummaryDto } from "./dtos/event-summary.dto";
@@ -36,6 +37,8 @@ export class EventsService {
         created_at,
         created_by:admins!events_created_by_fkey(admin_name)
       `);
+
+    if (dto.eventCategoryId) query.eq("event_category_id", dto.eventCategoryId);
 
     if (dto.queryText)
       query.or(
@@ -299,10 +302,6 @@ export class EventsService {
       );
     }
 
-    if (!data) {
-      throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
-    }
-
     return plainToInstance(EventCategoryDto, data);
   }
 
@@ -331,17 +330,47 @@ export class EventsService {
     return data;
   }
 
-  async deleteEventCategory(eventCategoriesId: number): Promise<void> {
+  async deleteEventCategory(
+    eventCategoriesId: number,
+    dto: DeleteEventCategoryDto,
+  ): Promise<void> {
     const client = this.supabaseService.getClient();
-    const { error } = await client
+    const { error: updateError } = await client
+      .from("events")
+      .update({ event_category_id: dto.move_category_id })
+      .eq("event_category_id", eventCategoriesId);
+
+    if (updateError) {
+      throw new InternalServerErrorException(
+        updateError.message || "게시물 이동을 실패하였습니다.",
+      );
+    }
+
+    const { error: deleteError } = await client
       .from("event_categories")
       .delete()
       .eq("event_categories_id", eventCategoriesId);
 
-    if (error) {
+    if (deleteError) {
       throw new InternalServerErrorException(
-        error.message || "삭제를 실패하였습니다.",
+        deleteError.message || "삭제를 실패하였습니다.",
       );
     }
+  }
+
+  async getEventCategoryPostCount(eventCategoryId: number): Promise<number> {
+    const client = this.supabaseService.getClient();
+    const { count, error } = await client
+      .from("events")
+      .select("events_id", { count: "exact", head: true })
+      .eq("event_category_id", eventCategoryId);
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error.message || "조회를 실패하였습니다.",
+      );
+    }
+
+    return count;
   }
 }

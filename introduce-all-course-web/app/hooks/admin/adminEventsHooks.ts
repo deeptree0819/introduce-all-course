@@ -3,6 +3,7 @@ import {
   ApiError,
   CreateEventCategoryDto,
   CreateEventDto,
+  DeleteEventCategoryDto,
   EventCategoryDto,
   EventResultDto,
   EventsOrderBy,
@@ -22,12 +23,14 @@ interface GetAllEventsWithPaginationDto extends PaginationDto {
   queryText?: string;
   order?: Order;
   orderBy?: EventsOrderBy;
+  eventCategoryId?: string;
 }
 
 export const useGetAllEventsWithPagination = (
   dto: GetAllEventsWithPaginationDto
 ) => {
-  const { queryText, order, orderBy, page, itemsPerPage } = dto;
+  const { order, orderBy, queryText, eventCategoryId, page, itemsPerPage } =
+    dto;
 
   return useQuery<PaginatedEventListDto, ApiError>({
     queryKey: ["admin", "events", "posts", dto],
@@ -36,6 +39,7 @@ export const useGetAllEventsWithPagination = (
         order,
         orderBy,
         queryText,
+        eventCategoryId,
         page,
         itemsPerPage
       ),
@@ -120,7 +124,7 @@ export const useGetEventCategoryById = (categoryId: number) => {
   });
 };
 
-export const useCreateEventCategory = () => {
+export const useCreateEventCategory = (onSuccess: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (dto: CreateEventCategoryDto) =>
@@ -130,6 +134,7 @@ export const useCreateEventCategory = () => {
         queryKey: ["admin", "events", "categories"],
       });
       toastSuccess("공고분야가 등록되었습니다.");
+      onSuccess?.();
     },
     onError: (error: ApiError) => {
       toastApiError(error, "공고분야 등록에 실패했습니다.");
@@ -137,21 +142,33 @@ export const useCreateEventCategory = () => {
   });
 };
 
-export const useDeleteEventCategory = () => {
-  const { push } = useRouter();
+export const useDeleteEventCategory = (
+  categoryId: number,
+  onSuccess?: () => void
+) => {
+  const { replace } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (categoryId: number) =>
-      AdminEventsService.deleteEventCategory(categoryId),
+    mutationFn: (dto: DeleteEventCategoryDto) =>
+      AdminEventsService.deleteEventCategory(categoryId, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["admin", "events", "categories"],
       });
       toastSuccess("공고분야가 삭제되었습니다.");
-      push("/admin/events/categories");
+      replace("/admin/events/categories");
+      onSuccess?.();
     },
     onError: (error: ApiError) => {
       toastApiError(error, "공고분야 삭제에 실패했습니다.");
     },
+  });
+};
+
+export const useGetEventCategoryPostCount = (categoryId: number) => {
+  return useQuery<number, ApiError>({
+    queryKey: ["admin", "events", "categories", categoryId, "postcount"],
+    queryFn: () => AdminEventsService.getEventCategoryPostCount(categoryId),
+    enabled: !!OpenAPI.TOKEN && !!categoryId,
   });
 };

@@ -1,3 +1,4 @@
+import { useDeleteUser } from "@/app/hooks/admin/adminUsersHooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +17,7 @@ type UserDeleteAlertProps = {
 };
 
 const UserDeleteButton = ({ userId }: UserDeleteAlertProps) => {
+  const { mutate: deleteUser } = useDeleteUser();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -32,7 +34,9 @@ const UserDeleteButton = ({ userId }: UserDeleteAlertProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center justify-end space-x-3">
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
-          <AlertDialogAction>삭제하기</AlertDialogAction>
+          <AlertDialogAction onClick={() => deleteUser(userId)}>
+            삭제하기
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
