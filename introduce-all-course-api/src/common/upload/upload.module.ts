@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { UploadController } from "./upload.controller";
-import { ImageUploadService } from "./upload.service";
+import { UploadService } from "./upload.service";
 
 @Module({
-  providers: [ImageUploadService],
+  providers: [UploadService],
   controllers: [UploadController],
 })
-export class ImageUploadModule {}
+export class UploadModule {}

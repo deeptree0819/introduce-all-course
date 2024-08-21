@@ -4,7 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { v4 as uuid } from "uuid";
 
 @Injectable()
-export class ImageUploadService {
+export class UploadService {
   private readonly s3 = new S3Client({
     region: process.env.S3_REGION,
     credentials: {
