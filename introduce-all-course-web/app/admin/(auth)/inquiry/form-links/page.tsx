@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import FormLinkAddInputField from "./components/FormLinkAddInputField";
 import FormLinksTable from "./components/FormLinksTable";
 
 const AdminFormLinksPage = () => {
@@ -11,14 +10,7 @@ const AdminFormLinksPage = () => {
 
       <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="form-link">현재 선택된 링크</Label>
-        <div className="flex w-full max-w-lg items-center space-x-2">
-          <Input
-            type="text"
-            placeholder="상담신청 링크를 입력해주세요."
-            defaultValue={"tally.so"}
-          />
-          <Button type="submit">등록</Button>
-        </div>
+        <FormLinkAddInputField />
       </div>
 
       <div className="flex max-w-[1300px] flex-col space-y-5">

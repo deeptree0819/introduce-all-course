@@ -32,7 +32,7 @@ export class InquiryController {
     tags: ["admin-inquiry"],
   })
   @Get("/admin/inquiry/form-links/latest")
-  async getLatestInquiryFormLink(): Promise<InquiryFormLinkDto> {
+  async getLatestInquiryFormLink(): Promise<string> {
     return this.inquiryService.getLatestInquiryFormLink();
   }
 

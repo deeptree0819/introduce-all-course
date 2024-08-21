@@ -1,59 +1,22 @@
 "use client";
+import { InquiryFormLinkDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
+import { useGetAllInquiryFormLinksWithPagination } from "@/app/hooks/admin/adminInquiryHooks";
 
-interface AdminDto {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: string;
-  inquiryFormLinksUrl: string;
-}
-
-const USER_DUMMY = [
+export const columns: ColumnDef<InquiryFormLinkDto>[] = [
   {
-    id: 1,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    createdBy: "어드민",
-    inquiryFormLinksUrl: "https://tally.so",
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    createdBy: "어드민",
-    inquiryFormLinksUrl: "https://tally.so",
-  },
-  {
-    id: 3,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    createdBy: "어드민",
-    inquiryFormLinksUrl: "https://tally.so",
-  },
-];
-
-const PAGINATION_DUMMY = {
-  totalItemCount: 15,
-  currentItemCount: 10,
-  totalPage: 2,
-  currentPage: 1,
-  itemsPerPage: 10,
-};
-
-export const columns: ColumnDef<AdminDto>[] = [
-  {
-    accessorKey: "id",
+    accessorKey: "inquiry_form_links_id",
     header: "ID",
   },
   {
     header: "링크 주소",
     cell: ({ row }) => {
-      const inquiryFormLinksUrl = row.original.inquiryFormLinksUrl;
+      const inquiryFormLinksUrl = row.original.inquiry_form_links_url;
       return (
         <Link href={inquiryFormLinksUrl} target="_blank">
           {inquiryFormLinksUrl}
@@ -62,25 +25,34 @@ export const columns: ColumnDef<AdminDto>[] = [
     },
   },
   {
-    accessorKey: "createdBy",
+    accessorKey: "created_by.admin_name",
     header: "생성자",
   },
   {
     header: "생성일자",
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
+      const createdAt = row.original.created_at;
       return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
     },
   },
 ];
 
 const AdminTable = () => {
+  const { page, itemsPerPage } = useGetSearchParams();
+
+  const { data: formLinks } = useGetAllInquiryFormLinksWithPagination({
+    page: page ? +page : 1,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+  });
+
+  if (!formLinks) return;
+
   return (
     <div className="flex max-w-[900px] flex-col space-y-5">
       <AdminPaginatedTable
-        data={USER_DUMMY}
+        data={formLinks.items}
         columns={columns}
-        pagination={PAGINATION_DUMMY}
+        pagination={formLinks.pagination}
       />
     </div>
   );
