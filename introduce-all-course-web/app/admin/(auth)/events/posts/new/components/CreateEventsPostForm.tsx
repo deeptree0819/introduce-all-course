@@ -35,7 +35,7 @@ import { Separator } from "@/components/ui/separator";
 import { CreateEventSchema } from "../schema";
 
 const CreateEventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
-  const fileState = useState<File[]>([]);
+  const fileState = useState<(File | string)[]>([]);
 
   const form = useForm<CreateEventDto>({
     mode: "onSubmit",
@@ -56,15 +56,13 @@ const CreateEventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
       <form
         ref={ref}
         className="space-y-6"
-        onSubmit={handleSubmit(
-          async (data) => {
-            const event_attachment_urls = await Promise.all(
-              fileState[0].map((file) => uploadFile(file))
-            );
-            createEvent({ ...data, event_attachment_urls });
-          },
-          (error) => console.log(error)
-        )}
+        onSubmit={handleSubmit(async (data) => {
+          const urls = await Promise.all(
+            fileState[0].map((file) => file instanceof File && uploadFile(file))
+          );
+          const event_attachment_urls = urls.filter((url) => url !== false);
+          createEvent({ ...data, event_attachment_urls });
+        })}
       >
         <div className="flex flex-row space-x-5">
           <FormField

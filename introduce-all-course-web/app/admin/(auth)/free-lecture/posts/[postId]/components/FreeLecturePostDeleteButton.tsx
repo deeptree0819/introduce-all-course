@@ -1,5 +1,6 @@
 import { TrashIcon } from "lucide-react";
 
+import { useDeleteFreeLecture } from "@/app/hooks/admin/adminFreeLectureHooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,6 +23,7 @@ const FreeLecturePostDeleteButton = ({
   postId,
   variant = "text",
 }: FreeLecturePostDeleteButtonProps) => {
+  const { mutate: deleteEvent } = useDeleteFreeLecture();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -48,7 +50,9 @@ const FreeLecturePostDeleteButton = ({
         </AlertDialogHeader>
         <AlertDialogFooter className="flex flex-row items-center justify-end space-x-3">
           <AlertDialogCancel className="mt-0">취소</AlertDialogCancel>
-          <AlertDialogAction>삭제하기</AlertDialogAction>
+          <AlertDialogAction onClick={() => deleteEvent(postId)}>
+            삭제하기
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -74,7 +74,7 @@ export const useUpdateFreeLecture = (postId: number) => {
 };
 
 export const useCreateFreeLecture = () => {
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (dto: CreateFreeLectureDto) =>
@@ -84,7 +84,7 @@ export const useCreateFreeLecture = () => {
         queryKey: ["admin", "free-lecture", "posts"],
       });
       toastSuccess("게시글이 등록되었습니다.");
-      push(`/admin/free-lecture/posts/${data.free_lecture_id}`);
+      replace(`/admin/free-lecture/posts/${data.free_lecture_id}`);
     },
     onError: (error: ApiError) => {
       toastApiError(error, "게시글 등록에 실패했습니다.");

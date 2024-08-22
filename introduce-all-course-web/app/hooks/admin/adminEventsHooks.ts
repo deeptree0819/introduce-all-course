@@ -73,14 +73,14 @@ export const useUpdateEvent = (eventId: number) => {
 };
 
 export const useCreateEvent = () => {
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (dto: CreateEventDto) => AdminEventsService.createEvent(dto),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin", "events", "posts"] });
       toastSuccess("게시글이 등록되었습니다.");
-      push(`/admin/events/posts/${data.events_id}`);
+      replace(`/admin/events/posts/${data.events_id}`);
     },
     onError: (error: ApiError) => {
       toastApiError(error, "게시글 등록에 실패했습니다.");
