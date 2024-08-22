@@ -143,4 +143,18 @@ export class MainBannersService {
 
     return data;
   }
+
+  async deleteMainBanner(mainBannersId: number): Promise<void> {
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("main_banners")
+      .delete()
+      .eq("main_banners_id", mainBannersId);
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error?.message || "삭제에 실패했습니다.",
+      );
+    }
+  }
 }
