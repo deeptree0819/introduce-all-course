@@ -1,8 +1,10 @@
 "use client";
 
+import { FreeLectureTags } from "@generated/index";
 import { PlusSquareIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { useGetAllFreeLectureTagsWithPagination } from "@/app/hooks/admin/adminFreeLectureHooks";
 import { Badge } from "@/components/ui/badge";
 import {
   Command,
@@ -21,42 +23,56 @@ import {
 
 type FreeLectureTagSelectorProps = {
   className?: string;
+  onChange?: (tagIds: number[]) => void;
+  defaultValue?: FreeLectureTags[];
 };
 
-const DUMMY_DATA = [
-  "클라우드",
-  "인턴",
-  "경진대회",
-  "코딩테스트",
-  "프로젝트",
-  "대학생",
-  "취업",
-  "자소서",
-];
+const FreeLectureTagSelector = ({
+  className,
+  onChange,
+  defaultValue,
+}: FreeLectureTagSelectorProps) => {
+  const [selectedTagNames, setSelectedTagNames] = useState<string[]>(
+    defaultValue?.map((tag) => tag.free_lecture_tag_name) ?? []
+  );
+  const [selectedTagIds, setSelectedTagIds] = useState<number[]>(
+    defaultValue?.map((tag) => tag.free_lecture_tags_id) ?? []
+  );
 
-const FreeLectureTagSelector = ({}: FreeLectureTagSelectorProps) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const { data: eventCategories } = useGetAllFreeLectureTagsWithPagination({
+    page: 1,
+    itemsPerPage: 100,
+  });
+
+  useEffect(() => {
+    onChange?.(selectedTagIds);
+  }, [selectedTagIds]);
+
+  if (!eventCategories) return null;
 
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="title">태그</Label>
+      <Label htmlFor="title">태그*</Label>
       <Popover>
         <PopoverTrigger asChild>
-          {selectedTags.length === 0 ? (
+          {selectedTagNames.length === 0 ? (
             <div className="flex max-w-xs flex-row items-center justify-center space-x-2 rounded-md border border-slate-200 p-2 text-sm text-muted-foreground">
               <PlusSquareIcon size={20} />
               <span>태그를 추가해주세요.</span>
             </div>
           ) : (
             <div className="flex max-w-xs flex-row flex-wrap gap-2 rounded-md border border-slate-200 p-2">
-              {selectedTags.map((tag, index) => (
+              {selectedTagNames.map((tag, index) => (
                 <Badge
                   key={index}
                   className="rounded-sm bg-[#D0E8FF] text-xs font-medium text-[#0029FF] hover:bg-[#D0E8FF]"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedTags((prevTags) =>
+                    setSelectedTagNames((prevTags) =>
                       prevTags.filter((t) => t !== tag)
+                    );
+                    setSelectedTagIds((prevIds) =>
+                      prevIds.filter((id) => id !== selectedTagIds[index])
                     );
                   }}
                 >
@@ -72,27 +88,29 @@ const FreeLectureTagSelector = ({}: FreeLectureTagSelectorProps) => {
             <CommandList>
               <CommandEmpty>해당하는 태그가 없습니다.</CommandEmpty>
               <CommandGroup>
-                {DUMMY_DATA.filter((tag) => !selectedTags.includes(tag)).map(
-                  (tag, index) => (
+                {eventCategories.items
+                  .filter(
+                    (tag) =>
+                      !selectedTagNames.includes(tag.free_lecture_tag_name)
+                  )
+                  .map((tag, index) => (
                     <CommandItem
                       key={index}
-                      value={tag}
+                      value={tag.free_lecture_tag_name}
                       onSelect={(currentValue) => {
-                        setSelectedTags((prevTags) => {
-                          if (prevTags.includes(currentValue)) {
-                            return prevTags.filter(
-                              (tag) => tag !== currentValue
-                            );
-                          } else {
-                            return [...prevTags, currentValue];
-                          }
-                        });
+                        setSelectedTagNames((prevTags) => [
+                          ...prevTags,
+                          currentValue,
+                        ]);
+                        setSelectedTagIds((prevIds) => [
+                          ...prevIds,
+                          tag.free_lecture_tags_id,
+                        ]);
                       }}
                     >
-                      {tag}
+                      {tag.free_lecture_tag_name}
                     </CommandItem>
-                  )
-                )}
+                  ))}
               </CommandGroup>
             </CommandList>
           </Command>

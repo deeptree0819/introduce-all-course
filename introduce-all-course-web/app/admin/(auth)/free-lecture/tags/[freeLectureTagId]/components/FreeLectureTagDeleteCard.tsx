@@ -24,7 +24,7 @@ const FreeLectureTagDeleteCard = ({
               카테고리에 해당하는 게시글이 없는 경우에만 삭제하실 수 있습니다.
             </div>
           </div>
-          <FreeLectureTagDeleteButton freeLectureTagName={"부트캠프"} />
+          <FreeLectureTagDeleteButton />
         </div>
       </CardContent>
     </Card>

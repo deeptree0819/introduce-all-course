@@ -69,8 +69,18 @@ const EventCategoryAddButton = ({ className }: EventCategoryAddButtonProps) => {
               )}
             />
 
-            <DialogFooter>
-              <Button type="submit">저장하기</Button>
+            <DialogFooter className="flex flex-row space-x-3">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setIsOpen(false)}
+                className="w-full"
+              >
+                취소
+              </Button>
+              <Button type="submit" className="w-full">
+                저장하기
+              </Button>
             </DialogFooter>
           </form>
         </Form>

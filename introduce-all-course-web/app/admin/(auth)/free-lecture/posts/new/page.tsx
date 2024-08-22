@@ -1,19 +1,33 @@
+"use client";
+
+import { useRef } from "react";
+
 import GoBackButton from "@/app/admin/components/GoBackButton";
 import { Button } from "@/components/ui/button";
 
-import EventsPostForm from "../components/FreeLecturePostForm";
+import CreateFreeLecturePostForm from "./components/CreateFreeLecturePostForm";
 
 const AdminFreeLecturePostsNewPage = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleFormSubmit = () => {
+    if (formRef.current) {
+      formRef.current.requestSubmit();
+    }
+  };
+
   return (
     <div className="relative flex h-full flex-col">
       <div className="items-start space-y-5 p-5 pb-32">
         <GoBackButton />
         <div className="mx-5">
-          <EventsPostForm />
+          <CreateFreeLecturePostForm ref={formRef} />
         </div>
       </div>
       <div className="fixed bottom-0 left-0 flex w-full flex-row items-center justify-end border-t border-slate-300 bg-white px-7 py-3 shadow">
-        <Button>등록</Button>
+        <Button type="button" onClick={handleFormSubmit}>
+          등록
+        </Button>
       </div>
     </div>
   );

@@ -1,70 +1,26 @@
 "use client";
+import { FreeLectureTagDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
-
-interface FreeLectureTagDto {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  eventCategoryName: string;
-  postsNumber: number;
-}
-
-const DUMMY = [
-  {
-    id: 1,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    eventCategoryName: "프론트엔드",
-    postsNumber: 10,
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    eventCategoryName: "백엔드",
-    postsNumber: 10,
-  },
-  {
-    id: 3,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    eventCategoryName: "풀스택",
-    postsNumber: 10,
-  },
-];
-
-const PAGINATION_DUMMY = {
-  totalItemCount: 15,
-  currentItemCount: 10,
-  totalPage: 2,
-  currentPage: 1,
-  itemsPerPage: 10,
-};
+import { useGetAllFreeLectureTagsWithPagination } from "@/app/hooks/admin/adminFreeLectureHooks";
 
 export const columns: ColumnDef<FreeLectureTagDto>[] = [
   {
-    accessorKey: "id",
+    accessorKey: "free_lecture_tags_id",
     header: "ID",
   },
   {
-    accessorKey: "eventCategoryName",
+    accessorKey: "free_lecture_tag_name",
     header: "분야 명칭",
-  },
-  {
-    header: "게시글 수",
-    cell: ({ row }) => {
-      const postsNumber = row.original.postsNumber;
-      return <p>{`${postsNumber}개`}</p>;
-    },
   },
   {
     header: "생성일자",
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
+      const createdAt = row.original.created_at;
       return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
     },
   },
@@ -74,7 +30,9 @@ export const columns: ColumnDef<FreeLectureTagDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/free-lecture/tags/${row.getValue("id")}`}
+          href={`/admin/free-lecture/tags/${row.getValue(
+            "free_lecture_tags_id"
+          )}`}
           className="text-blue-500"
         >
           상세보기
@@ -85,12 +43,21 @@ export const columns: ColumnDef<FreeLectureTagDto>[] = [
 ];
 
 const FreeLectureTagsTable = () => {
+  const { page, itemsPerPage } = useGetSearchParams();
+
+  const { data: freelectureTags } = useGetAllFreeLectureTagsWithPagination({
+    page: page ? +page : 1,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+  });
+
+  if (!freelectureTags) return null;
+
   return (
     <div className="flex max-w-[1300px] flex-col space-y-5">
       <AdminPaginatedTable
-        data={DUMMY}
+        data={freelectureTags.items}
         columns={columns}
-        pagination={PAGINATION_DUMMY}
+        pagination={freelectureTags.pagination}
       />
     </div>
   );

@@ -86,7 +86,10 @@ const EventCategoryDeleteButton = ({
       </AlertDialogTrigger>
       <AlertDialogContent className="rounded-lg">
         <Form {...form}>
-          <form onSubmit={handleSubmit((data) => deleteEventCategory(data))}>
+          <form
+            onSubmit={handleSubmit((data) => deleteEventCategory(data))}
+            className="space-y-5"
+          >
             <AlertDialogHeader className="items-start">
               <AlertDialogTitle>공고분야를 삭제하시겠습니까?</AlertDialogTitle>
               <AlertDialogDescription>
@@ -99,7 +102,7 @@ const EventCategoryDeleteButton = ({
               name="move_category_id"
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-1.5">
-                  <Label>공고 분야</Label>
+                  <Label>{`${categoryName} 카테고리에 해당하는 게시글을 옮길 카테고리를 선택해주세요.`}</Label>
                   <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-56">

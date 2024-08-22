@@ -5,11 +5,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-type EventSearchProps = {
-  dummy?: string;
-};
-
-const EventSearch = ({}: EventSearchProps) => {
+const EventSearch = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const updateQueryParams = useUpdateQueryParams();
