@@ -32,7 +32,7 @@ export class FreeLecturesService {
     const query = client.from("free_lecture").select(`
       *,
       created_by:admins!free_lecture_created_by_fkey(admin_name, admin_id),
-      free_lecture_tags!inner(free_lecture_tags_id, free_lecture_tag_name)
+      free_lecture_tags(free_lecture_tags_id, free_lecture_tag_name)
       `);
 
     if (dto.freeLectureTagId) {
@@ -119,7 +119,7 @@ export class FreeLecturesService {
         *, 
         created_by:admins!free_lecture_created_by_fkey(admin_name),
         updated_by:admins!free_lecture_updated_by_fkey(admin_name),
-        free_lecture_tags!inner(free_lecture_tags_id, free_lecture_tag_name)
+        free_lecture_tags(free_lecture_tags_id, free_lecture_tag_name)
         `,
       )
       .eq("free_lecture_id", postId)
@@ -208,7 +208,7 @@ export class FreeLecturesService {
         *, 
         created_by:admins!free_lecture_created_by_fkey(admin_name),
         updated_by:admins!free_lecture_updated_by_fkey(admin_name),
-        free_lecture_tags!inner(free_lecture_tags_id, free_lecture_tag_name)
+        free_lecture_tags(free_lecture_tags_id, free_lecture_tag_name)
         `,
       )
       .maybeSingle();
