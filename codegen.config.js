@@ -7,7 +7,7 @@ const outPath = path.resolve(`introduce-all-course-web/app/generated/`);
 
 module.exports = {
   enable: true,
-  exportCore: true,
+  exportCore: false,
   exportService: true,
   url: `http://localhost:${port}/api-json`,
   outPath: outPath,
