@@ -12,11 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type AdminSearchProps = {
-  dummy?: string;
-};
-
-const AdminSearch = ({}: AdminSearchProps) => {
+const AdminSearch = () => {
   const [role, setRole] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
