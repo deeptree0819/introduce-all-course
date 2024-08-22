@@ -8,3 +8,4 @@ node_modules/
 introduce-all-course-web/.env
 introduce-all-course-web/storybook-static
 introduce-all-course-web/build-storybook.log
+.vercel
