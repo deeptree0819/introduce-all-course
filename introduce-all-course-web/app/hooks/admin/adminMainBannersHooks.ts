@@ -79,3 +79,20 @@ export const useCreateMainBanner = () => {
     },
   });
 };
+
+export const useDeleteMainBanner = () => {
+  const { replace } = useRouter();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (bannerId: number) =>
+      AdminMainBannersService.deleteMainBanner(bannerId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "main", "banners"] });
+      toastSuccess("메인배너가 삭제되었습니다.");
+      replace("/admin/main/banners");
+    },
+    onError: (error: ApiError) => {
+      toastApiError(error, "메인배너 삭제에 실패했습니다.");
+    },
+  });
+};

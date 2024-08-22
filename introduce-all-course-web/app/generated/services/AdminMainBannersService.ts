@@ -87,4 +87,19 @@ export class AdminMainBannersService {
       mediaType: "application/json",
     });
   }
+  /**
+   * 메인페이지 배너 삭제
+   * @param mainBannerId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteMainBanner(mainBannerId: number): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/admin/main/banners/{mainBannerId}",
+      path: {
+        mainBannerId: mainBannerId,
+      },
+    });
+  }
 }
