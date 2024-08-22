@@ -1,21 +1,25 @@
 {
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "dotenv": "^16.0.1",
+    "axios": "^1.7.3",
+    "bcrypt": "^5.1.1",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^7.0.4",
+    "openapi-typescript-codegen": "^0.29.0",
     "prettier": "^2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.8"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "gen:dto": "node ./scripts/codegen.js"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "seamless-scroll-polyfill": "^2.1.8"
   },
   "volta": {

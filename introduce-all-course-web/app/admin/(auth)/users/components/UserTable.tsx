@@ -1,79 +1,46 @@
 "use client";
+import { Role, UserSummaryDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
+import { getEnumIfExists, useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
 
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
+import { useGetAllUsersWithPagination } from "@/app/hooks/admin/adminUsersHooks";
 
-interface UserDto {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
+import UserSearch from "./UserSearch";
 
-const USER_DUMMY = [
+export const columns: ColumnDef<UserSummaryDto>[] = [
   {
-    id: 1,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    email: "user1@gmail.com",
-    name: "유저1",
-    phoneNumber: "01000000001",
-  },
-  {
-    id: 2,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    email: "user2@gmail.com",
-    name: "유저2",
-    phoneNumber: "01000000002",
-  },
-  {
-    id: 3,
-    createdAt: "2023-12-04T11:21:02.627Z",
-    updatedAt: "2023-12-04T11:21:02.627Z",
-    email: "user3@gmail.com",
-    name: "유저3",
-    phoneNumber: "01000000003",
-  },
-];
-
-const PAGINATION_DUMMY = {
-  totalItemCount: 15,
-  currentItemCount: 10,
-  totalPage: 2,
-  currentPage: 1,
-  itemsPerPage: 10,
-};
-
-export const columns: ColumnDef<UserDto>[] = [
-  {
-    accessorKey: "id",
+    accessorKey: "users_id",
     header: "ID",
   },
   {
-    accessorKey: "createdAt",
-    header: "가입일자",
-    cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
-      return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
-    },
+    accessorKey: "role",
+    header: "권한",
   },
-
   {
-    accessorKey: "name",
-    header: "회원명",
+    accessorKey: "user_name",
+    header: "실명",
+  },
+  {
+    accessorKey: "nickname",
+    header: "닉네임",
   },
   {
     accessorKey: "email",
     header: "이메일",
   },
   {
-    accessorKey: "phoneNumber",
-    header: "핸드폰번호",
+    accessorKey: "phone_number",
+    header: "전화번호",
+  },
+  {
+    header: "가입일자",
+    cell: ({ row }) => {
+      const createdAt = row.original.created_at;
+      return <p>{getUtcToDateFormat(createdAt, DateFnsFormat.YYYYMMDDHHmm)}</p>;
+    },
   },
   {
     accessorKey: "detail",
@@ -81,7 +48,7 @@ export const columns: ColumnDef<UserDto>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/admin/users/${row.getValue("id")}`}
+          href={`/admin/users/${row.getValue("users_id")}`}
           className="text-blue-500"
         >
           상세보기
@@ -92,13 +59,24 @@ export const columns: ColumnDef<UserDto>[] = [
 ];
 
 const UserTable = () => {
+  const { role, queryText, page, itemsPerPage } = useGetSearchParams();
+
+  const { data: users } = useGetAllUsersWithPagination({
+    role: getEnumIfExists(role, Role),
+    queryText,
+    page: page ? +page : 1,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+  });
   return (
-    <div className="flex flex-col space-y-5">
-      <AdminPaginatedTable
-        data={USER_DUMMY}
-        columns={columns}
-        pagination={PAGINATION_DUMMY}
-      />
+    <div className="flex max-w-[1300px] flex-col space-y-5">
+      <UserSearch />
+      {users && (
+        <AdminPaginatedTable
+          data={users.items}
+          columns={columns}
+          pagination={users.pagination}
+        />
+      )}
     </div>
   );
 };

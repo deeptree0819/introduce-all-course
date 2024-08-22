@@ -13,7 +13,7 @@ const Pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "introduce-all-course",
+  title: "로봇에 풍덩",
   description: "Developed by Dophin In Cali",
 };
 
@@ -29,6 +29,7 @@ export default function RootLayout({
           {children}
           <ToastContainer />
           <Modal />
+          <div id="overlay-root" />
         </body>
       </html>
     </ReactQueryProvider>

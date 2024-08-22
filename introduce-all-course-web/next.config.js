@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [],
+    // TODO: Remove dummy remotePatterns
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "allrobotai-deeptree.s3.ap-northeast-2.amazonaws.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "media.tenor.com",
+        port: "",
+      },
+    ],
     minimumCacheTTL: 31536000,
   },
   eslint: {

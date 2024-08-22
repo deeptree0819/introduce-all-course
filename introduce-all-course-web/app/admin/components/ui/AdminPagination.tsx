@@ -35,8 +35,8 @@ const AdminPaginationLabel: FC<PaginationLabelProps> = ({
 }) => {
   return (
     <p className={cn(`text-sm text-gray-700`, className)} {...props}>
-      Count:
-      <span className="font-medium"> {count} </span>/ Total:
+      현재 페이지:
+      <span className="font-medium"> {count} </span>/ 전체 개수:
       <span className="font-medium"> {total} </span>
     </p>
   );

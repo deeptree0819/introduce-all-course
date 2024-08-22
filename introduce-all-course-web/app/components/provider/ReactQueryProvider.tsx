@@ -1,43 +1,66 @@
 "use client";
 
-import { OpenAPI as AdminOpenAPI } from "@generated/admin/core/OpenAPI";
-import { ApiError } from "@generated/front/core/ApiError";
-import { OpenAPI } from "@generated/front/core/OpenAPI";
 import {
+  MutationCache,
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { deleteCookie, getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 import React from "react";
+
+import { ApiError, OpenAPI } from "@/app/generated";
 
 interface ReactQueryProviderProps {
   children: React.ReactNode;
 }
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
+  const { push } = useRouter();
+  const excludedPages = ["/admin/login"];
+
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
         queryCache: new QueryCache({
           onError: (error) => {
+            if (excludedPages.includes(window.location.pathname)) return;
+
             if ("status" in (error as ApiError)) {
               if ((error as ApiError).status === 401) {
                 queryClient.clear();
                 deleteCookie("token");
-                deleteCookie("adminToken");
                 OpenAPI.TOKEN = "";
-                AdminOpenAPI.TOKEN = "";
+                push("/");
               }
             }
           },
         }),
+        mutationCache: new MutationCache({
+          onError: (error) => {
+            if (excludedPages.includes(window.location.pathname)) return;
+
+            if ("status" in (error as ApiError)) {
+              if ((error as ApiError).status === 401) {
+                queryClient.clear();
+                deleteCookie("token");
+                OpenAPI.TOKEN = "";
+                push("/");
+              }
+            }
+          },
+        }),
+        defaultOptions: {
+          queries: {
+            retry: false,
+          },
+        },
       })
   );
 
-  const adminToken = getCookie("adminToken");
   const token = getCookie("token");
-  AdminOpenAPI.TOKEN = typeof adminToken === "string" ? adminToken : undefined;
+
   OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
 
   return (

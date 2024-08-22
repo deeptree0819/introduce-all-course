@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -23,8 +23,10 @@
       "@toast": ["./app/utils/toast"],
       "@lib/*": ["./app/libs/*"],
       "@utils/*": ["./app/utils/*"],
-      "@generated/*": ["./app/generated/api/*"],
+      "@generated/*": ["./app/generated/*"],
       "@components/*": ["./app/components/*"],
+      "@adminComponents/*": ["./app/admin/components/*"],
+      "@assets/*": ["./app/assets/*"],
       "@/*": ["./*"]
     },
     "forceConsistentCasingInFileNames": true

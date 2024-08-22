@@ -7,7 +7,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { cn } from "@utils/common";
-import React from "react";
 
 import { PaginationResponse } from "@/app/types/common";
 

@@ -1,5 +1,4 @@
-import { ApiError as AdminApiError } from "@generated/admin/core/ApiError";
-import { ApiError } from "@generated/front/core/ApiError";
+import { ApiError } from "@generated/index";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { toast } from "react-toastify";
 
@@ -13,7 +12,7 @@ export function toastError(msg: string) {
   });
 }
 
-export function toastApiError(e: ApiError | AdminApiError, msg: string) {
+export function toastApiError(e: ApiError, msg: string) {
   toastError(e.body?.message || msg);
 }
 

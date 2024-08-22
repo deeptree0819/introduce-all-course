@@ -1,6 +1,8 @@
+import { DefaultService } from "@generated/index";
 import { InfiniteData } from "@tanstack/react-query";
 import { type ClassValue, clsx } from "clsx";
 import { usePathname, useSearchParams } from "next/navigation";
+import { ParsedUrlQueryInput } from "querystring";
 import { useCallback, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -39,6 +41,23 @@ export function getNextPageParam(lastPage: Paginated<any>) {
 
 export const useCreateQueryParams = () => {
   const pathname = usePathname();
+
+  return useCallback(
+    (items: Record<string, string | undefined>) => {
+      const params = new URLSearchParams();
+      for (const [key, value] of Object.entries(items)) {
+        if (value) {
+          params.set(key, value);
+        }
+      }
+      return `${pathname}?${params.toString()}`;
+    },
+    [pathname]
+  );
+};
+
+export const useAppendQueryParams = () => {
+  const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
   return useCallback(
@@ -55,6 +74,22 @@ export const useCreateQueryParams = () => {
   );
 };
 
+export const useUpdateQueryParams = () => {
+  return (newParams: ParsedUrlQueryInput) => {
+    const currentQuery = new URLSearchParams(window.location.search);
+    Object.keys(newParams).forEach((key) => {
+      currentQuery.set(key, newParams[key] as string);
+    });
+
+    return `${window.location.pathname}?${currentQuery.toString()}`;
+  };
+};
+
+export const useGetSearchParams = () => {
+  const searchParams = useSearchParams();
+  return Object.fromEntries(searchParams);
+};
+
 export type PaginatedList<T, U> = {
   items: Array<T>;
   pagination: U;
@@ -65,4 +100,27 @@ export const useFlatInfiniteData = <T, U>(
   return useMemo(() => {
     return data?.pages.flatMap((page) => page.items) || [];
   }, [data]);
+};
+
+export const getEnumIfExists = <T>(
+  string: string,
+  enumObject: object
+): T | undefined => {
+  return (Object.values(enumObject) as string[]).includes(string)
+    ? (string as T)
+    : undefined;
+};
+
+type getUploadURLParams = {
+  tag: string;
+  contentType: string;
+  fileName: string;
+};
+
+export const getUploadUrl = async ({
+  tag,
+  contentType,
+  fileName,
+}: getUploadURLParams) => {
+  return await DefaultService.getUploadUrl(tag, contentType, fileName);
 };

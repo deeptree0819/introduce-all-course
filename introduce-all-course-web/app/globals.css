@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --brand: 209 100% 57%;
+    --brand-secondary: 198 100% 98%;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -73,4 +76,55 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Tiptap editor placeholder */
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: hsl(215.4, 16.3%, 46.9%);
+  font-size: 14px;
+  pointer-events: none;
+  height: 0;
+}
+
+.speech-bubble-left {
+  position: relative;
+}
+
+.speech-bubble-left:after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: -13px;
+  border-left: 15px solid #edf6ff;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.speech-bubble-right {
+  position: relative;
+}
+
+.speech-bubble-right:after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: -13px;
+  border-right: 15px solid #edf6ff;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hidden-scrollbar:hover::-webkit-scrollbar {
+  display: block;
 }
