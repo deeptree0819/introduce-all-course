@@ -4,6 +4,7 @@ import { Paginated, PaginateDto } from "@common/pagination";
 import { SupabaseService } from "@common/supabase/supabase.service";
 import { YoutubeService } from "@common/youtube/youtube.service";
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -336,6 +337,14 @@ export class FreeLecturesService {
     dto: CreateFreeLectureTagDto,
   ): Promise<Tables<"free_lecture_tags">> {
     const client = this.supabaseService.getClient();
+    const { count } = await client
+      .from("free_lecture_tags")
+      .select("*", { count: "exact", head: true });
+
+    if (count >= 100) {
+      throw new BadRequestException("공고 분야는 100개까지 등록 가능합니다.");
+    }
+
     const { data, error } = await client
       .from("free_lecture_tags")
       .insert(dto)
