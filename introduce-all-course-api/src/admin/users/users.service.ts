@@ -46,7 +46,9 @@ export class UsersService {
     const { data, error } = await query;
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "유저 조회에 실패했습니다.",
+      );
     }
 
     return new Paginated(
@@ -66,7 +68,9 @@ export class UsersService {
       .maybeSingle();
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "유저 조회에 실패했습니다.",
+      );
     }
 
     if (!data) {
@@ -88,7 +92,9 @@ export class UsersService {
       .maybeSingle();
 
     if (selectError) {
-      throw new NotFoundException(selectError.message);
+      throw new NotFoundException(
+        selectError?.message || "유저 수정에 실패했습니다.",
+      );
     }
 
     if (dto.nickname) {
@@ -130,7 +136,9 @@ export class UsersService {
       .maybeSingle();
 
     if (updateError) {
-      throw new InternalServerErrorException(updateError.message);
+      throw new InternalServerErrorException(
+        updateError?.message || "수정에 실패했습니다.",
+      );
     }
 
     return data;
@@ -189,7 +197,9 @@ export class UsersService {
       .eq("users_id", userId);
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "삭제를 실패했습니다.",
+      );
     }
   }
 }

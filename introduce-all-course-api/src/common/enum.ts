@@ -31,3 +31,8 @@ export enum EventsOrderBy {
   EVENT_END_AT = "event_end_at",
   EVENT_VIEW_COUNT = "event_view_count",
 }
+
+export enum FreeLecturesOrderBy {
+  CREATED_AT = "created_at",
+  EVENT_VIEW_COUNT = "free_lecture_view_count",
+}

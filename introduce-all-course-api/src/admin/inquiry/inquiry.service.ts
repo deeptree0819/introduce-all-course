@@ -37,7 +37,7 @@ export class InquiryService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "상담신청 링크 조회에 실패했습니다.",
+        error?.message || "상담신청 링크 조회에 실패했습니다.",
       );
     }
 
@@ -59,7 +59,7 @@ export class InquiryService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "상담신청 링크 조회에 실패했습니다.",
+        error?.message || "상담신청 링크 조회에 실패했습니다.",
       );
     }
 
@@ -88,7 +88,7 @@ export class InquiryService {
       .maybeSingle();
 
     if (error || !data) {
-      throw new NotFoundException(error.message || "생성에 실패했습니다.");
+      throw new NotFoundException(error?.message || "생성에 실패했습니다.");
     }
 
     return data;

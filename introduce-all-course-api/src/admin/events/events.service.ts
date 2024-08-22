@@ -63,7 +63,7 @@ export class EventsService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "조회를 실패하였습니다.",
+        error?.message || "조회를 실패하였습니다.",
       );
     }
 
@@ -90,7 +90,9 @@ export class EventsService {
       .maybeSingle();
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "조회를 실패하였습니다.",
+      );
     }
 
     if (!data) {
@@ -104,7 +106,7 @@ export class EventsService {
 
     if (attachmentError) {
       throw new InternalServerErrorException(
-        attachmentError.message || "첨부파일 조회를 실패하였습니다.",
+        attachmentError?.message || "첨부파일 조회를 실패하였습니다.",
       );
     }
 
@@ -133,7 +135,7 @@ export class EventsService {
 
     if (eventSelectError || !event) {
       throw new NotFoundException(
-        eventSelectError.message || "해당 게시물이 존재하지 않습니다.",
+        eventSelectError?.message || "해당 게시물이 존재하지 않습니다.",
       );
     }
 
@@ -144,7 +146,7 @@ export class EventsService {
 
     if (attachmentError) {
       throw new InternalServerErrorException(
-        attachmentError.message || "첨부파일 업로드를 실패하였습니다.",
+        attachmentError?.message || "첨부파일 업로드를 실패하였습니다.",
       );
     }
 
@@ -162,7 +164,7 @@ export class EventsService {
 
     if (newAttachmentError || !newAttachment) {
       throw new InternalServerErrorException(
-        newAttachmentError.message || "첨부파일 업로드를 실패하였습니다.",
+        newAttachmentError?.message || "첨부파일 업로드를 실패하였습니다.",
       );
     }
 
@@ -194,7 +196,7 @@ export class EventsService {
 
     if (updateError || !post) {
       throw new InternalServerErrorException(
-        updateError.message || "수정을 실패하였습니다.",
+        updateError?.message || "수정을 실패하였습니다.",
       );
     }
 
@@ -229,7 +231,7 @@ export class EventsService {
 
     if (postError || !post) {
       throw new InternalServerErrorException(
-        postError.message || "작성을 실패하였습니다.",
+        postError?.message || "작성을 실패하였습니다.",
       );
     }
 
@@ -245,7 +247,7 @@ export class EventsService {
 
     if (attachmentError || !attachment) {
       throw new InternalServerErrorException(
-        attachmentError.message || "첨부파일 업로드를 실패하였습니다.",
+        attachmentError?.message || "첨부파일 업로드를 실패하였습니다.",
       );
     }
 
@@ -261,7 +263,7 @@ export class EventsService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "삭제를 실패하였습니다.",
+        error?.message || "삭제를 실패하였습니다.",
       );
     }
   }
@@ -270,11 +272,17 @@ export class EventsService {
     dto: PaginateDto,
   ): Promise<Paginated<EventCategoryDto>> {
     const client = this.supabaseService.getClient();
-    const { data, error } = await client.from("event_categories").select();
+    const { data, error } = await client
+      .from("event_categories")
+      .select()
+      .range(
+        (dto.page - 1) * dto.itemsPerPage,
+        dto.page * dto.itemsPerPage - 1,
+      );
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "조회를 실패하였습니다.",
+        error?.message || "조회를 실패하였습니다.",
       );
     }
 
@@ -298,7 +306,7 @@ export class EventsService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "조회를 실패하였습니다.",
+        error?.message || "조회를 실패하였습니다.",
       );
     }
 
@@ -324,7 +332,7 @@ export class EventsService {
       .maybeSingle();
 
     if (error || !data) {
-      throw new NotFoundException(error.message || "등록을 실패하였습니다.");
+      throw new NotFoundException(error?.message || "등록을 실패하였습니다.");
     }
 
     return data;
@@ -342,7 +350,7 @@ export class EventsService {
 
     if (updateError) {
       throw new InternalServerErrorException(
-        updateError.message || "게시물 이동을 실패하였습니다.",
+        updateError?.message || "게시물 이동을 실패하였습니다.",
       );
     }
 
@@ -353,7 +361,7 @@ export class EventsService {
 
     if (deleteError) {
       throw new InternalServerErrorException(
-        deleteError.message || "삭제를 실패하였습니다.",
+        deleteError?.message || "삭제를 실패하였습니다.",
       );
     }
   }
@@ -367,7 +375,7 @@ export class EventsService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "조회를 실패하였습니다.",
+        error?.message || "조회를 실패하였습니다.",
       );
     }
 

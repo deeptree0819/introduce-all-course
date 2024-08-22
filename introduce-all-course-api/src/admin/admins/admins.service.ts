@@ -46,7 +46,9 @@ export class AdminsService {
     const { data, error } = await query;
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "어드민 조회에 실패했습니다.",
+      );
     }
 
     return new Paginated(
@@ -66,7 +68,9 @@ export class AdminsService {
       .maybeSingle();
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "어드민 조회에 실패했습니다.",
+      );
     }
 
     if (!data) {
@@ -88,7 +92,9 @@ export class AdminsService {
       .maybeSingle();
 
     if (selectError) {
-      throw new NotFoundException(selectError.message);
+      throw new NotFoundException(
+        selectError?.message || "어드민 수정에 실패하였습니다.",
+      );
     }
 
     if (dto.admin_email) {
@@ -113,7 +119,9 @@ export class AdminsService {
       .maybeSingle();
 
     if (updateError) {
-      throw new InternalServerErrorException(updateError.message);
+      throw new InternalServerErrorException(
+        updateError?.message || "수정을 실패하였습니다.",
+      );
     }
 
     return data;
@@ -143,7 +151,7 @@ export class AdminsService {
 
     if (error) {
       throw new InternalServerErrorException(
-        error.message || "삭제를 실패하였습니다.",
+        error?.message || "삭제를 실패하였습니다.",
       );
     }
   }

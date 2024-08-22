@@ -48,7 +48,9 @@ export class MainBannersService {
     const { data, error } = await query;
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "메인베너 조회에 실패했습니다.",
+      );
     }
 
     return new Paginated(
@@ -68,7 +70,9 @@ export class MainBannersService {
       .maybeSingle();
 
     if (error) {
-      throw new InternalServerErrorException(error.message);
+      throw new InternalServerErrorException(
+        error?.message || "메인베너 조회에 실패했습니다.",
+      );
     }
 
     if (!data) {
@@ -91,7 +95,7 @@ export class MainBannersService {
 
     if (selectError || !mainBanner) {
       throw new NotFoundException(
-        selectError.message || "해당 배너가 존재하지 않습니다.",
+        selectError?.message || "해당 배너가 존재하지 않습니다.",
       );
     }
 
@@ -116,7 +120,7 @@ export class MainBannersService {
 
     if (updateError || !data) {
       throw new InternalServerErrorException(
-        updateError.message || "수정에 실패했습니다.",
+        updateError?.message || "수정에 실패했습니다.",
       );
     }
 
@@ -134,7 +138,7 @@ export class MainBannersService {
       .maybeSingle();
 
     if (error || !data) {
-      throw new NotFoundException(error.message || "생성에 실패했습니다.");
+      throw new NotFoundException(error?.message || "생성에 실패했습니다.");
     }
 
     return data;

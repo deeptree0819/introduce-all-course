@@ -6,6 +6,7 @@ import { AdminsModule } from "./admins/admins.module";
 import { AuthModule } from "./auth/auth.module";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { EventsModule } from "./events/events.module";
+import { FreeLecturesModule } from "./free-lectures/free-lectures.module";
 import { InquiryModule } from "./inquiry/inquiry.module";
 import { MainBannersModule } from "./main-banners/main-banners.module";
 import { UsersModule } from "./users/users.module";
@@ -19,6 +20,7 @@ import { UsersModule } from "./users/users.module";
     EventsModule,
     UploadModule,
     InquiryModule,
+    FreeLecturesModule,
   ],
   providers: [
     {
