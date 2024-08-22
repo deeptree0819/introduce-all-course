@@ -18,8 +18,6 @@ const AdminEventCategoryDetailPage = () => {
 
   if (!eventCategory) return null;
 
-  console.log(eventCategory);
-
   return (
     <div className="relative flex h-full w-full flex-col">
       <div className="items-start space-y-5 p-5">

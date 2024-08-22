@@ -71,17 +71,14 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
       <form
         ref={ref}
         className="space-y-6"
-        onSubmit={handleSubmit(
-          async (data) => {
-            const event_attachment_urls = await Promise.all(
-              files.map((file) =>
-                file instanceof File ? uploadFile(file) : file
-              )
-            );
-            updateEvent({ ...data, event_attachment_urls });
-          },
-          (error) => console.log(error)
-        )}
+        onSubmit={handleSubmit(async (data) => {
+          const event_attachment_urls = await Promise.all(
+            files.map((file) =>
+              file instanceof File ? uploadFile(file) : file
+            )
+          );
+          updateEvent({ ...data, event_attachment_urls });
+        })}
       >
         <div className="flex flex-row space-x-5">
           <FormField
