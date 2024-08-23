@@ -10,6 +10,7 @@ export type { OpenAPIConfig } from "./core/OpenAPI";
 export type { AdminDto } from "./models/AdminDto";
 export { AdminRole } from "./models/AdminRole";
 export type { AdminSummaryDto } from "./models/AdminSummaryDto";
+export type { CreateAdminDto } from "./models/CreateAdminDto";
 export type { CreateEventCategoryDto } from "./models/CreateEventCategoryDto";
 export type { CreateEventDto } from "./models/CreateEventDto";
 export type { CreateFreeLectureDto } from "./models/CreateFreeLectureDto";
