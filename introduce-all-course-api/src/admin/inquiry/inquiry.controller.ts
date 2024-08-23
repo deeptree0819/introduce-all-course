@@ -1,13 +1,16 @@
+import { JwtAuthGuard } from "@admin/auth/jwt-auth.guard";
 import { Tables } from "@common/database.types";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { CurrentUser } from "@common/decorators/current-user.decorator";
+import { RolesGuard } from "@common/guards/roles.guard";
 import { BasePaginatedDto, IPaginated, PaginateDto } from "@common/pagination";
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateInquiryFormLinkDto } from "./dtos/create-inquiry-form-link.dto";
 import { InquiryFormLinkDto } from "./dtos/inquiry-form-link.dto";
 import { InquiryService } from "./inquiry.service";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 @Controller()
 export class InquiryController {

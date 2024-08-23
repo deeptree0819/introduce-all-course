@@ -4,11 +4,14 @@ import { AuthService } from "@admin/auth/auth.service";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { CurrentUser } from "@common/decorators/current-user.decorator";
 import { Public } from "@common/decorators/public.decorator";
-import { Body, Controller, Get, Post, Req } from "@nestjs/common";
+import { RolesGuard } from "@common/guards/roles.guard";
+import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth } from "@nestjs/swagger";
 import { LoginResultDto } from "./dtos/login-result.dto";
 import { LoginWithEmailDto } from "./dtos/login-with-email.dto";
+import { JwtAuthGuard } from "./jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller()
 export class AuthController {
   constructor(

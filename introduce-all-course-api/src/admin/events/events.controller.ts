@@ -1,6 +1,8 @@
+import { JwtAuthGuard } from "@admin/auth/jwt-auth.guard";
 import { Tables } from "@common/database.types";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { CurrentUser } from "@common/decorators/current-user.decorator";
+import { RolesGuard } from "@common/guards/roles.guard";
 import { BasePaginatedDto, IPaginated, PaginateDto } from "@common/pagination";
 import {
   Body,
@@ -12,6 +14,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
@@ -24,6 +27,7 @@ import { GetAllEventsWithPaginationDto } from "./dtos/get-all-events.dto";
 import { UpdateEventDto } from "./dtos/update-event.dto";
 import { EventsService } from "./events.service";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 @Controller()
 export class EventsController {
