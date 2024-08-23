@@ -61,3 +61,4 @@ export { AdminMainBannersService } from "./services/AdminMainBannersService";
 export { AdminsService } from "./services/AdminsService";
 export { AdminUsersService } from "./services/AdminUsersService";
 export { DefaultService } from "./services/DefaultService";
+export { EventsService } from "./services/EventsService";
