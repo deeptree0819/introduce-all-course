@@ -98,7 +98,7 @@ const MainCarousel = () => {
             key={index}
             className="max-w-xl basis-10/12 laptop:basis-6/12"
           >
-            <div className="overflow-hidden rounded-2xl border border-slate-200 laptop:rounded-3xl">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 laptop:rounded-2xl">
               <Link href={item.url}>
                 <Image
                   src={item.image}

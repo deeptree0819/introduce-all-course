@@ -35,7 +35,7 @@ const Footer = () => {
       </div>
       <div className="flex flex-col gap-y-3 laptop:order-first laptop:col-span-2">
         <div className="text-xs font-medium text-slate-500">
-          딥트리 | 대표이사 이체은
+          딥트리 | 대표 이체은
         </div>
         <div className="text-xs font-medium text-slate-500 laptop:mt-12">
           <Link href="/terms">이용약관</Link>

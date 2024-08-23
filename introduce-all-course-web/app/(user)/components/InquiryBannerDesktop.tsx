@@ -72,7 +72,7 @@ const InquiryBannerDesktop = ({ className }: InquiryBannerDesktopProps) => {
         </Link>
       </div>
 
-      <div className="mt-20 w-full min-w-[200px] max-w-sm">
+      <div className="mt-20 w-full min-w-[200px] max-w-xs">
         <Image src={PointingUpImage} alt="일러스트" />
       </div>
     </section>

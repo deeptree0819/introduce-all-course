@@ -13,6 +13,7 @@ module.exports = {
       padding: "2rem",
     },
     screens: {
+      mobile2: "500px",
       laptop: "769px",
       desktop: "1100px",
     },
