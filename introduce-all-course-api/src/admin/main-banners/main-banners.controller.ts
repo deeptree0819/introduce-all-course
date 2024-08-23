@@ -4,6 +4,7 @@ import { BasePaginatedDto, IPaginated } from "@common/pagination";
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -68,5 +69,16 @@ export class MainBannersController {
     @Body() dto: CreateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
     return this.mainBannersService.createMainBanner(dto);
+  }
+
+  @CustomApiOperation({
+    summary: "메인페이지 배너 삭제",
+    tags: ["admin-main-banners"],
+  })
+  @Delete("/admin/main/banners/:mainBannerId")
+  async deleteMainBanner(
+    @Param("mainBannerId", ParseIntPipe) mainBannerId: number,
+  ) {
+    this.mainBannersService.deleteMainBanner(mainBannerId);
   }
 }

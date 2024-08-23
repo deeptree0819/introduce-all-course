@@ -12,6 +12,7 @@ import { hashSync } from "bcrypt";
 import { plainToInstance } from "class-transformer";
 import { AdminSummaryDto } from "./dtos/admin-summary.dto";
 import { AdminDto } from "./dtos/admin.dto";
+import { CreateAdminDto } from "./dtos/create-admin.dto";
 import { GetAllAdminsWithPaginationDto } from "./dtos/get-all-admins.dto";
 import { UpdateAdminDto } from "./dtos/update-admin.dto";
 
@@ -121,6 +122,34 @@ export class AdminsService {
     if (updateError) {
       throw new InternalServerErrorException(
         updateError?.message || "수정을 실패하였습니다.",
+      );
+    }
+
+    return data;
+  }
+
+  async createAdmin(dto: CreateAdminDto): Promise<Tables<"admins">> {
+    if (await this.checkDuplicateEmail(dto.admin_email)) {
+      throw new ConflictException("다른 어드민이 사용중인 이메일입니다.");
+    }
+
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client
+      .from("admins")
+      .insert([
+        {
+          admin_name: dto.admin_name,
+          admin_email: dto.admin_email,
+          admin_role: dto.admin_role,
+          admin_password: hashSync(dto.admin_password, SALT_ROUNDS),
+        },
+      ])
+      .select()
+      .maybeSingle();
+
+    if (error || !data) {
+      throw new InternalServerErrorException(
+        error?.message || "생성을 실패하였습니다.",
       );
     }
 

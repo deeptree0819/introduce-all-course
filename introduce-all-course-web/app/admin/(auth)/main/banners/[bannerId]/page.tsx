@@ -5,7 +5,8 @@ import { useParams } from "next/navigation";
 import GoBackButton from "@/app/admin/components/GoBackButton";
 import { Badge } from "@/components/ui/badge";
 
-import MainBannerInfoForm from "./conponents/MainBannerInfoForm";
+import MainBannerDeleteCard from "./components/MainBannerDeleteCard";
+import MainBannerInfoForm from "./components/MainBannerInfoForm";
 
 const AdminMainBannerDetailPage = () => {
   const params = useParams<{ bannerId: string }>();
@@ -18,6 +19,7 @@ const AdminMainBannerDetailPage = () => {
       <div className="space-y-3 px-10">
         <Badge className="py-1 text-sm">{`배너ID: ${bannerId}`}</Badge>
         <MainBannerInfoForm />
+        <MainBannerDeleteCard />
       </div>
     </div>
   );

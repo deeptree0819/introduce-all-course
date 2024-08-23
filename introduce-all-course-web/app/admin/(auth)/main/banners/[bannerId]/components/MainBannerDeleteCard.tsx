@@ -4,34 +4,34 @@ import { useParams } from "next/navigation";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import EventPostDeleteButton from "./EventPostDeleteButton";
+import MainBannerDeleteButton from "./MainBannerDeleteButton";
 
-type EventPostDeleteCardProps = {
+type EventCategoryDeleteCardProps = {
   className?: string;
 };
 
-const EventPostDeleteCard = ({ className }: EventPostDeleteCardProps) => {
-  const params = useParams<{ postId: string }>();
-  const postId = +params.postId;
+const MainBannerDeleteCard = ({ className }: EventCategoryDeleteCardProps) => {
+  const params = useParams<{ bannerId: string }>();
+  const bannerId = +params.bannerId;
 
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle>공고소개글 삭제</CardTitle>
+        <CardTitle>메인페이지 배너 삭제</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-row items-center justify-between">
           <div>
-            <div>공고소개글을 삭제합니다.</div>
+            <div>메인페이지 배너를 삭제합니다.</div>
             <div className="text-sm text-slate-700">
               삭제한 이후에는 되돌릴 수 없습니다.
             </div>
           </div>
-          <EventPostDeleteButton postId={postId} />
+          <MainBannerDeleteButton bannerId={bannerId} />
         </div>
       </CardContent>
     </Card>
   );
 };
 
-export default EventPostDeleteCard;
+export default MainBannerDeleteCard;
