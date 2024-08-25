@@ -30,7 +30,7 @@ const EventList = () => {
     eventCategoryId:
       !!eventCategoryIds && !!eventCategoryIds.length
         ? eventCategoryIds.split(",").map(Number)
-        : undefined,
+        : [],
     order: orderDirection,
     orderBy,
     page: page ? +page : 1,
