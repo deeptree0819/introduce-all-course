@@ -35,6 +35,8 @@ export class EventsService {
 
     if (dto.eventCategoryId) query.in("event_category_id", dto.eventCategoryId);
 
+    if (dto.excludeEventId) query.neq("events_id", dto.excludeEventId);
+
     if (dto.orderBy) {
       const ascending = dto.order ? dto.order === Order.ASC : false;
       query.order(dto.orderBy, { ascending });
@@ -79,9 +81,16 @@ export class EventsService {
       .from("events")
       .select(
         `
-        *, 
-        created_by:admins!events_created_by_fkey(admin_name),
-        updated_by:admins!events_updated_by_fkey(admin_name)
+        event_organization,
+        event_title,
+        event_start_at,
+        event_end_at,
+        event_poster_image_url,
+        event_info,
+        event_description,
+        event_view_count,
+        event_category_id,
+        ...event_categories(event_category_name)
         `,
       )
       .eq("events_id", eventId)
@@ -153,5 +162,34 @@ export class EventsService {
       dto.page,
       dto.itemsPerPage,
     );
+  }
+
+  async increaseEventViewCount(eventId: number): Promise<number> {
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client
+      .from("events")
+      .select("event_view_count")
+      .eq("events_id", eventId)
+      .maybeSingle();
+
+    if (error || !data) {
+      throw new InternalServerErrorException(
+        error?.message || "게시글 조회에 실패하였습니다.",
+      );
+    }
+
+    const viewCount = data.event_view_count + 1;
+    const { error: updateError } = await client
+      .from("events")
+      .update({ event_view_count: viewCount })
+      .eq("events_id", eventId);
+
+    if (updateError) {
+      throw new InternalServerErrorException(
+        updateError?.message || "조회수 업데이트를 실패하였습니다.",
+      );
+    }
+
+    return viewCount;
   }
 }

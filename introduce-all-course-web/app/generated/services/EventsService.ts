@@ -16,6 +16,7 @@ export class EventsService {
    * @param order
    * @param orderBy
    * @param eventCategoryId
+   * @param excludeEventId
    * @param page
    * @param itemsPerPage
    * @returns PaginatedEventListDto
@@ -25,6 +26,7 @@ export class EventsService {
     order?: Order,
     orderBy?: EventsOrderBy,
     eventCategoryId?: Array<number>,
+    excludeEventId?: number,
     page: number = 1,
     itemsPerPage: number = 10
   ): CancelablePromise<PaginatedEventListDto> {
@@ -35,6 +37,7 @@ export class EventsService {
         order: order,
         orderBy: orderBy,
         eventCategoryId: eventCategoryId,
+        excludeEventId: excludeEventId,
         page: page,
         itemsPerPage: itemsPerPage,
       },
@@ -74,6 +77,23 @@ export class EventsService {
       query: {
         page: page,
         itemsPerPage: itemsPerPage,
+      },
+    });
+  }
+  /**
+   * 공고소개 게시글 조회수 올리기
+   * @param eventId
+   * @returns number
+   * @throws ApiError
+   */
+  public static increaseEventViewCount(
+    eventId: number
+  ): CancelablePromise<number> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/events/posts/{eventId}/view-count",
+      path: {
+        eventId: eventId,
       },
     });
   }

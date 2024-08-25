@@ -190,6 +190,7 @@ const AdminEditor = ({
               </AdminSelectContent>
             </AdminSelect>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleBold().run()}
               variant="ghost"
               size="icon"
@@ -201,6 +202,7 @@ const AdminEditor = ({
               <strong>B</strong>
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleItalic().run()}
               variant="ghost"
               size="icon"
@@ -212,6 +214,7 @@ const AdminEditor = ({
               <i>i</i>
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleStrike().run()}
               variant="ghost"
               size="icon"
@@ -223,6 +226,7 @@ const AdminEditor = ({
               <StrikethroughIcon className="h-4 w-4" />
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleHighlight().run()}
               variant="ghost"
               size="icon"
@@ -235,6 +239,7 @@ const AdminEditor = ({
               <span className="w-4 bg-yellow-200">H</span>
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleUnderline().run()}
               variant="ghost"
               size="icon"
@@ -248,6 +253,7 @@ const AdminEditor = ({
             </AdminButton>
             <div className="h-5 w-px bg-gray-300" />
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               variant="ghost"
               size="icon"
@@ -260,6 +266,7 @@ const AdminEditor = ({
               <ListIcon className="h-4 w-4" />
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               variant="ghost"
               size="icon"
@@ -272,6 +279,7 @@ const AdminEditor = ({
               <ListOrderedIcon className="h-4 w-4" />
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               variant="ghost"
               size="icon"
@@ -285,6 +293,7 @@ const AdminEditor = ({
             </AdminButton>
             <div className="h-5 w-px bg-gray-300" />
             <AdminButton
+              type="button"
               onClick={handleImageButtonClick}
               variant="ghost"
               size="icon"
@@ -301,6 +310,7 @@ const AdminEditor = ({
             />
             <div className="h-5 w-px bg-gray-300" />
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().undo().run()}
               disabled={!editor.can().undo()}
               variant="ghost"
@@ -310,6 +320,7 @@ const AdminEditor = ({
               <Undo2Icon className="h-4 w-4" />
             </AdminButton>
             <AdminButton
+              type="button"
               onClick={() => editor.chain().focus().redo().run()}
               disabled={!editor.can().redo()}
               variant="ghost"
@@ -333,6 +344,7 @@ const AdminEditor = ({
         className="flex flex-row items-center space-x-1 rounded-md border border-gray-300 bg-background p-1"
       >
         <AdminButton
+          type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
           variant="ghost"
           size="icon"
@@ -344,6 +356,7 @@ const AdminEditor = ({
           <strong>B</strong>
         </AdminButton>
         <AdminButton
+          type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           variant="ghost"
           size="icon"
@@ -355,6 +368,7 @@ const AdminEditor = ({
           <i>i</i>
         </AdminButton>
         <AdminButton
+          type="button"
           onClick={() => handleLinkButtonClick()}
           variant="ghost"
           size="icon"
@@ -379,6 +393,7 @@ const AdminEditor = ({
               ref={linkInputRef}
             />
             <AdminButton
+              type="button"
               variant="ghost"
               size="icon"
               className="h-8 w-8"

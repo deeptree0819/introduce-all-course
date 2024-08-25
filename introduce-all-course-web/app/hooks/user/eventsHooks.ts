@@ -7,20 +7,29 @@ import {
   PaginatedEventCategoryListDto,
   PaginatedEventListDto,
 } from "@generated/index";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
+import useViewStore from "@/app/stores/viewStore";
 import { PaginationDto } from "@/app/types/common";
 
 interface GetAllEventsWithPaginationDto extends PaginationDto {
   order?: Order;
   orderBy?: EventsOrderBy;
   eventCategoryId?: Array<number>;
+  excludeEventId?: number;
 }
 
 export const useGetAllEventsWithPagination = (
   dto: GetAllEventsWithPaginationDto
 ) => {
-  const { order, orderBy, eventCategoryId, page, itemsPerPage } = dto;
+  const {
+    order,
+    orderBy,
+    eventCategoryId,
+    excludeEventId,
+    page,
+    itemsPerPage,
+  } = dto;
 
   return useQuery<PaginatedEventListDto, ApiError>({
     queryKey: ["user", "events", "posts", dto],
@@ -29,6 +38,7 @@ export const useGetAllEventsWithPagination = (
         order,
         orderBy,
         eventCategoryId,
+        excludeEventId,
         page,
         itemsPerPage
       ),
@@ -50,5 +60,26 @@ export const useGetAllEventCategoriesWithPagination = (dto: PaginationDto) => {
         dto.page,
         dto.itemsPerPage
       ),
+  });
+};
+
+export const useIncreaseEventViewCount = () => {
+  const getView = useViewStore((state) => state.getView);
+  const setView = useViewStore((state) => state.setView);
+
+  return useMutation<number, ApiError, number>({
+    mutationFn: (eventId) => {
+      const lastViewed = getView(eventId.toString());
+      const currentTime = Date.now();
+
+      if (!lastViewed || currentTime - lastViewed > 600000) {
+        console.log("setView", eventId.toString(), currentTime);
+
+        setView(eventId.toString(), currentTime);
+        return EventsService.increaseEventViewCount(eventId);
+      }
+
+      return Promise.resolve(0);
+    },
   });
 };

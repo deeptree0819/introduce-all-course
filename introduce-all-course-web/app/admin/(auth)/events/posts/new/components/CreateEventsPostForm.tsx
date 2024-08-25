@@ -11,7 +11,7 @@ import {
   FormItem,
   FormMessage,
 } from "@components/ui/form";
-import { CreateEventDto } from "@generated/index";
+import { AdminCreateEventDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { forwardRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -37,7 +37,7 @@ import { CreateEventSchema } from "../schema";
 const CreateEventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
   const fileState = useState<(File | string)[]>([]);
 
-  const form = useForm<CreateEventDto>({
+  const form = useForm<AdminCreateEventDto>({
     mode: "onSubmit",
     resolver: zodResolver(CreateEventSchema),
   });

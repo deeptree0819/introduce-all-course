@@ -17,4 +17,8 @@ export class GetAllEventsWithPaginationDto extends PaginateDto {
   @IsNumber()
   @IsOptional()
   eventCategoryId?: Array<number>;
+
+  @IsNumber()
+  @IsOptional()
+  excludeEventId?: number;
 }

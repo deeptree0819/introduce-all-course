@@ -1,6 +1,13 @@
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { BasePaginatedDto, IPaginated, PaginateDto } from "@common/pagination";
-import { Controller, Get, Param, ParseIntPipe, Query } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from "@nestjs/common";
 import { ApiOkResponse } from "@nestjs/swagger";
 import { EventCategoryDto } from "./dtos/event-category.dto";
 import { EventResultDto } from "./dtos/event-result.dto";
@@ -47,5 +54,16 @@ export class EventsController {
     @Query() dto: PaginateDto,
   ): Promise<IPaginated<EventCategoryDto>> {
     return this.eventsService.getAllEventCategoriesWithPagination(dto);
+  }
+
+  @CustomApiOperation({
+    summary: "공고소개 게시글 조회수 올리기",
+    tags: ["events"],
+  })
+  @Post("/events/posts/:eventId/view-count")
+  async increaseEventViewCount(
+    @Param("eventId", ParseIntPipe) eventId: number,
+  ): Promise<number> {
+    return this.eventsService.increaseEventViewCount(eventId);
   }
 }

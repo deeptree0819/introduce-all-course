@@ -3,18 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type EventResultDto = {
-  events_id: number;
-  created_at: string;
-  updated_at: string;
-  created_by: {
-    admin_name?: string;
-  };
-  updated_by: {
-    admin_name?: string;
-  };
-  event_thumbnail_url: string;
   event_organization: string;
-  event_category_id: number;
   event_title: string;
   event_start_at: string;
   event_end_at: string;
@@ -23,4 +12,6 @@ export type EventResultDto = {
   event_description: string;
   event_view_count: number;
   event_attachment_urls: Array<string>;
+  event_category_id: number;
+  event_category_name: string;
 };
