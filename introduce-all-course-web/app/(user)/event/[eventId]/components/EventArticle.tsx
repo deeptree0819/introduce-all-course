@@ -9,7 +9,10 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { useGetEventById } from "@/app/hooks/user/eventsHooks";
+import {
+  useGetEventById,
+  useIncreaseEventViewCount,
+} from "@/app/hooks/user/eventsHooks";
 import useWindowSize from "@/app/hooks/windowSizeHooks";
 import { Separator } from "@/components/ui/separator";
 
@@ -23,6 +26,12 @@ const EventArticle = () => {
   const { data: event } = useGetEventById(eventId);
 
   const { width: windowWidth, height: windowHeight } = useWindowSize();
+
+  const { mutate: increaseViewCount } = useIncreaseEventViewCount();
+
+  useEffect(() => {
+    increaseViewCount(eventId);
+  }, [eventId, increaseViewCount]);
 
   useEffect(() => {
     if (!event?.event_poster_image_url) return;

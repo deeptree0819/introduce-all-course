@@ -163,4 +163,33 @@ export class EventsService {
       dto.itemsPerPage,
     );
   }
+
+  async increaseEventViewCount(eventId: number): Promise<number> {
+    const client = this.supabaseService.getClient();
+    const { data, error } = await client
+      .from("events")
+      .select("event_view_count")
+      .eq("events_id", eventId)
+      .maybeSingle();
+
+    if (error || !data) {
+      throw new InternalServerErrorException(
+        error?.message || "게시글 조회에 실패하였습니다.",
+      );
+    }
+
+    const viewCount = data.event_view_count + 1;
+    const { error: updateError } = await client
+      .from("events")
+      .update({ event_view_count: viewCount })
+      .eq("events_id", eventId);
+
+    if (updateError) {
+      throw new InternalServerErrorException(
+        updateError?.message || "조회수 업데이트를 실패하였습니다.",
+      );
+    }
+
+    return viewCount;
+  }
 }

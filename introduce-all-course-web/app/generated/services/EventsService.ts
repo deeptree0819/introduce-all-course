@@ -80,4 +80,21 @@ export class EventsService {
       },
     });
   }
+  /**
+   * 공고소개 게시글 조회수 올리기
+   * @param eventId
+   * @returns number
+   * @throws ApiError
+   */
+  public static increaseEventViewCount(
+    eventId: number
+  ): CancelablePromise<number> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/events/posts/{eventId}/view-count",
+      path: {
+        eventId: eventId,
+      },
+    });
+  }
 }
