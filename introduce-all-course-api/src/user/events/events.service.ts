@@ -35,6 +35,8 @@ export class EventsService {
 
     if (dto.eventCategoryId) query.in("event_category_id", dto.eventCategoryId);
 
+    if (dto.excludeEventId) query.neq("events_id", dto.excludeEventId);
+
     if (dto.orderBy) {
       const ascending = dto.order ? dto.order === Order.ASC : false;
       query.order(dto.orderBy, { ascending });
