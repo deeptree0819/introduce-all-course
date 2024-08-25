@@ -53,9 +53,19 @@ export class MainBannersService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("main_banners")
+      .select("main_banners_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
       plainToInstance(MainBannerSummaryDto, data),
-      data.length,
+      count,
       dto.page,
       dto.itemsPerPage,
     );

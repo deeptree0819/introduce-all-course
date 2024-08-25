@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class CreateEventDto
+export class AdminCreateEventDto
   implements
     Omit<
       Tables<"events">,

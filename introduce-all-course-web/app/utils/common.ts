@@ -75,14 +75,25 @@ export const useAppendQueryParams = () => {
 };
 
 export const useUpdateQueryParams = () => {
-  return (newParams: ParsedUrlQueryInput) => {
+  return useCallback((newParams: ParsedUrlQueryInput) => {
     const currentQuery = new URLSearchParams(window.location.search);
     Object.keys(newParams).forEach((key) => {
       currentQuery.set(key, newParams[key] as string);
     });
 
     return `${window.location.pathname}?${currentQuery.toString()}`;
-  };
+  }, []);
+};
+
+export const useDeleteQueryParams = () => {
+  return useCallback((keys: string[]) => {
+    const currentQuery = new URLSearchParams(window.location.search);
+    keys.forEach((key) => {
+      currentQuery.delete(key);
+    });
+
+    return `${window.location.pathname}?${currentQuery.toString()}`;
+  }, []);
 };
 
 export const useGetSearchParams = () => {

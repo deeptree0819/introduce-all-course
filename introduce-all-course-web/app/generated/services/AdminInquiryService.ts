@@ -17,7 +17,7 @@ export class AdminInquiryService {
    */
   public static getAllInquiryFormLinksWithPagination(
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedInquiryFormLinkListDto> {
     return __request(OpenAPI, {
       method: "GET",

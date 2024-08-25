@@ -1,6 +1,8 @@
+import { JwtAuthGuard } from "@admin/auth/jwt-auth.guard";
 import { Tables } from "@common/database.types";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { CurrentUser } from "@common/decorators/current-user.decorator";
+import { RolesGuard } from "@common/guards/roles.guard";
 import { BasePaginatedDto, IPaginated, PaginateDto } from "@common/pagination";
 import {
   Body,
@@ -12,6 +14,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateFreeLectureTagDto } from "./dtos/create-free-lecture-tag.dto";
@@ -24,6 +27,7 @@ import { GetAllFreeLecturesWithPaginationDto } from "./dtos/get-all-free-lecture
 import { UpdateFreeLectureDto } from "./dtos/update-free-lecture.dto";
 import { FreeLecturesService } from "./free-lectures.service";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 @Controller()
 export class FreeLecturesController {

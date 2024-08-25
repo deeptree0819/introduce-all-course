@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class UpdateEventDto
+export class AdminUpdateEventDto
   implements
     Partial<
       Omit<Tables<"events">, "created_by" | "updated_by" | "event_view_count">

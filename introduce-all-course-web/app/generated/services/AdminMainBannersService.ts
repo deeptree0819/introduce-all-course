@@ -21,7 +21,7 @@ export class AdminMainBannersService {
   public static getAllMainBannersWithPagination(
     status?: "BEFORE" | "PROGRESS" | "AFTER",
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedMainBannerListDto> {
     return __request(OpenAPI, {
       method: "GET",

@@ -1,5 +1,7 @@
+import { JwtAuthGuard } from "@admin/auth/jwt-auth.guard";
 import { Tables } from "@common/database.types";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
+import { RolesGuard } from "@common/guards/roles.guard";
 import { BasePaginatedDto, IPaginated } from "@common/pagination";
 import {
   Body,
@@ -11,6 +13,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { CreateMainBannerDto } from "./dtos/create-main-banner.dto";
@@ -20,6 +23,7 @@ import { MainBannerDto } from "./dtos/main-banner.dto";
 import { UpdateMainBannerDto } from "./dtos/update-main-banner.dto";
 import { MainBannersService } from "./main-banners.service";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 @Controller()
 export class MainBannersController {

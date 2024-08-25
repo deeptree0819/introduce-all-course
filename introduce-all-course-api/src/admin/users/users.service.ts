@@ -51,9 +51,19 @@ export class UsersService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("users")
+      .select("users_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
       plainToInstance(UserSummaryDto, data),
-      data.length,
+      count,
       dto.page,
       dto.itemsPerPage,
     );

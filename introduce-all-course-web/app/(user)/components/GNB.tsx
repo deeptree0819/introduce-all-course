@@ -1,3 +1,5 @@
+"use client";
+
 import Logo from "@assets/logo.png";
 import { buttonVariants } from "@components/ui/button";
 import { cn } from "@utils/common";

@@ -42,7 +42,7 @@ const AdminTable = () => {
 
   const { data: formLinks } = useGetAllInquiryFormLinksWithPagination({
     page: page ? +page : 1,
-    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 10,
   });
 
   if (!formLinks) return;

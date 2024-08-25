@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UpdateEventDto = {
+export type AdminUpdateEventDto = {
   event_thumbnail_url?: string;
   event_organization?: string;
   event_category_id?: number;

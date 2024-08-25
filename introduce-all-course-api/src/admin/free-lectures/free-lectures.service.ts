@@ -103,9 +103,19 @@ export class FreeLecturesService {
       }
     }
 
+    const { count, error: countError } = await client
+      .from("free_lecture")
+      .select("free_lecture_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
       plainToInstance(FreeLectureSummaryDto, updates),
-      updates.length,
+      count,
       dto.page,
       dto.itemsPerPage,
     );
@@ -306,9 +316,19 @@ export class FreeLecturesService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("free_lecture_tags")
+      .select("free_lecture_tags_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
       plainToInstance(FreeLectureTagDto, data),
-      data.length,
+      count,
       dto.page,
       dto.itemsPerPage,
     );

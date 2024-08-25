@@ -65,7 +65,7 @@ const UserTable = () => {
     role: getEnumIfExists(role, Role),
     queryText,
     page: page ? +page : 1,
-    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 10,
   });
   return (
     <div className="flex max-w-[1300px] flex-col space-y-5">

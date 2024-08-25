@@ -1,7 +1,7 @@
 import { EventsOrderBy, Order } from "@common/enum";
 import { PaginateDto } from "@common/pagination";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEnum, IsOptional, IsString } from "class-validator";
+import { IsEnum, IsNumber, IsOptional } from "class-validator";
 
 export class GetAllEventsWithPaginationDto extends PaginateDto {
   @IsEnum(Order)
@@ -14,11 +14,7 @@ export class GetAllEventsWithPaginationDto extends PaginateDto {
   @IsOptional()
   orderBy?: EventsOrderBy;
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  queryText?: string;
-
-  @IsString()
-  @IsOptional()
-  eventCategoryId?: string;
+  eventCategoryId?: Array<number>;
 }

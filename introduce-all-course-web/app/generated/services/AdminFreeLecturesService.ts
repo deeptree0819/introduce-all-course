@@ -33,7 +33,7 @@ export class AdminFreeLecturesService {
     queryText?: string,
     freeLectureTagId?: string,
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedFreeLectureListDto> {
     return __request(OpenAPI, {
       method: "GET",
@@ -126,7 +126,7 @@ export class AdminFreeLecturesService {
    */
   public static getAllFreeLectureTagsWithPagination(
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedFreeLectureTagListDto> {
     return __request(OpenAPI, {
       method: "GET",

@@ -52,9 +52,19 @@ export class AdminsService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("admins")
+      .select("admin_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
       plainToInstance(AdminSummaryDto, data),
-      data.length,
+      count,
       dto.page,
       dto.itemsPerPage,
     );

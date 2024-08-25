@@ -101,7 +101,7 @@ const FreeLecturePostsTable = () => {
     queryText,
     freeLectureTagId,
     page: page ? +page : 1,
-    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 10,
   });
 
   const updateQueryParams = useUpdateQueryParams();
