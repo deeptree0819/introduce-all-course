@@ -1,6 +1,6 @@
 "use client";
 
-import { useUpdateQueryParams } from "@utils/common";
+import { cn, useUpdateQueryParams } from "@utils/common";
 import { useRouter } from "next/navigation";
 
 import * as PaginationPrimitive from "@/components/ui/pagination";
@@ -134,9 +134,10 @@ const Pagination = ({ currentPage, totalPage }: PaginationProps) => {
             href="#"
             aria-disabled={currentPage <= 1}
             tabIndex={currentPage <= 1 ? -1 : undefined}
-            className={
+            className={cn(
+              "hidden laptop:inline-flex",
               currentPage <= 1 ? "pointer-events-none opacity-50" : undefined
-            }
+            )}
             onClick={(e) => {
               e.preventDefault();
               handlePageChange(currentPage - 1);
@@ -151,11 +152,12 @@ const Pagination = ({ currentPage, totalPage }: PaginationProps) => {
             href="#"
             aria-disabled={currentPage >= totalPage}
             tabIndex={currentPage >= totalPage ? -1 : undefined}
-            className={
+            className={cn(
+              "hidden laptop:inline-flex",
               currentPage >= totalPage
                 ? "pointer-events-none opacity-50"
                 : undefined
-            }
+            )}
             onClick={(e) => {
               e.preventDefault();
               handlePageChange(currentPage + 1);
