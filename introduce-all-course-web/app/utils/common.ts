@@ -85,6 +85,17 @@ export const useUpdateQueryParams = () => {
   };
 };
 
+export const useDeleteQueryParams = () => {
+  return (keys: string[]) => {
+    const currentQuery = new URLSearchParams(window.location.search);
+    keys.forEach((key) => {
+      currentQuery.delete(key);
+    });
+
+    return `${window.location.pathname}?${currentQuery.toString()}`;
+  };
+};
+
 export const useGetSearchParams = () => {
   const searchParams = useSearchParams();
   return Object.fromEntries(searchParams);

@@ -1,3 +1,5 @@
+"use client";
+
 import BoyImage from "@assets/inquiryBannerBoy.png";
 import GirlImage from "@assets/inquiryBannerGirl.png";
 import PointingUpImage from "@assets/pointingUp.png";

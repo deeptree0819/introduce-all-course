@@ -2,6 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type DeleteEventCategoryDto = {
-  move_category_id: number;
+export type AdminCreateEventCategoryDto = {
+  event_category_name: string;
 };

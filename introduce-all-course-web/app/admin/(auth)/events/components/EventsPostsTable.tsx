@@ -1,5 +1,5 @@
 "use client";
-import { EventsOrderBy, EventSummaryDto, Order } from "@generated/index";
+import { AdminEventSummaryDto, EventsOrderBy, Order } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useGetSearchParams, useUpdateQueryParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -13,7 +13,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import EventPostDeleteButton from "../posts/[postId]/components/EventPostDeleteButton";
 import EventSearch from "../posts/components/EventSearch";
 
-export const columns: ColumnDef<EventSummaryDto>[] = [
+export const columns: ColumnDef<AdminEventSummaryDto>[] = [
   {
     accessorKey: "events_id",
     header: "ID",
@@ -116,7 +116,7 @@ const EventsPostsTable = () => {
     queryText,
     eventCategoryId,
     page: page ? +page : 1,
-    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 10,
   });
 
   const updateQueryParams = useUpdateQueryParams();

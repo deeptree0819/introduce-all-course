@@ -1,3 +1,4 @@
+import { differenceInCalendarDays, parseISO } from "date-fns";
 import { ko } from "date-fns/locale";
 import { formatInTimeZone } from "date-fns-tz";
 
@@ -76,4 +77,18 @@ export function getUtcToStartEndDateText(
 
 export function getDateToFormat(date: Date, format: DateFnsFormat) {
   return formatInTimeZone(date, "Asia/Seoul", format);
+}
+
+export function getDdayString(utcDate: string) {
+  const date = parseISO(utcDate);
+  const today = new Date();
+  const diff = differenceInCalendarDays(date, today);
+
+  if (diff === 0) {
+    return "D-day";
+  } else if (diff > 0) {
+    return `D-${diff}`;
+  } else {
+    return `D+${Math.abs(diff)}`;
+  }
 }

@@ -22,7 +22,7 @@ export class AdminUsersService {
     role?: "SUPER" | "MANAGER" | "USER" | "EXPERT",
     queryText?: string,
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedUserListDto> {
     return __request(OpenAPI, {
       method: "GET",

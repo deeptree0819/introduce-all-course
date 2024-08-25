@@ -41,9 +41,19 @@ export class InquiryService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("inquiry_form_links")
+      .select("inquiry_form_links_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
       plainToInstance(InquiryFormLinkDto, data),
-      data.length,
+      count,
       dto.page,
       dto.itemsPerPage,
     );

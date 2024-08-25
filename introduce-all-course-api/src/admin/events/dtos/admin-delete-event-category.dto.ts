@@ -1,6 +1,6 @@
 import { IsNumber } from "class-validator";
 
-export class DeleteEventCategoryDto {
+export class AdminDeleteEventCategoryDto {
   @IsNumber()
   move_category_id: number;
 }

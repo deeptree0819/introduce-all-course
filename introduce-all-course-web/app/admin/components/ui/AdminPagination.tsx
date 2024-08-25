@@ -53,9 +53,9 @@ const AdminPaginationNav: FC<AdminPaginationNavProps> & {
 } = ({ className, total, maxPageSetLength = 7, ...props }) => {
   const params = useSearchParams();
   const page = params.get("page") || 1;
-  const limit = params.get("limit") || DEFAULT_ITEMS_PER_PAGE;
+  const itemsPerPage = params.get("itemsPerPage") || DEFAULT_ITEMS_PER_PAGE;
 
-  const pageCount = Math.ceil(total / +limit);
+  const pageCount = Math.ceil(total / +itemsPerPage);
   const pageSet = Math.ceil(+page / maxPageSetLength);
   const pageSetLength = Math.min(
     pageCount - (pageSet - 1) * maxPageSetLength,
@@ -68,7 +68,7 @@ const AdminPaginationNav: FC<AdminPaginationNavProps> & {
     if (typeof window === "undefined") return "";
     const url = new URL(window.location.href);
     url.searchParams.set("page", page.toString());
-    url.searchParams.set("limit", limit.toString());
+    url.searchParams.set("itemsPerPage", itemsPerPage.toString());
     return url.toString();
   };
 

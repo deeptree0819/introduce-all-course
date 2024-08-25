@@ -47,7 +47,7 @@ const FreeLectureTagsTable = () => {
 
   const { data: freelectureTags } = useGetAllFreeLectureTagsWithPagination({
     page: page ? +page : 1,
-    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 10,
   });
 
   if (!freelectureTags) return null;

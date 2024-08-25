@@ -57,7 +57,7 @@ const AdminTable = () => {
     role: getEnumIfExists(role, AdminRole),
     queryText,
     page: page ? +page : 1,
-    itemsPerPage: itemsPerPage ? +itemsPerPage : 30,
+    itemsPerPage: itemsPerPage ? +itemsPerPage : 10,
   });
 
   return (

@@ -1,17 +1,17 @@
 import {
+  AdminCreateEventCategoryDto,
+  AdminCreateEventDto,
+  AdminDeleteEventCategoryDto,
+  AdminEventCategoryDto,
+  AdminEventResultDto,
   AdminEventsService,
+  AdminUpdateEventDto,
   ApiError,
-  CreateEventCategoryDto,
-  CreateEventDto,
-  DeleteEventCategoryDto,
-  EventCategoryDto,
-  EventResultDto,
   EventsOrderBy,
   OpenAPI,
   Order,
-  PaginatedEventCategoryListDto,
-  PaginatedEventListDto,
-  UpdateEventDto,
+  PaginatedAdminEventCategoryListDto,
+  PaginatedAdminEventSummaryListDto,
 } from "@generated/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toastApiError, toastSuccess } from "@toast";
@@ -32,7 +32,7 @@ export const useGetAllEventsWithPagination = (
   const { order, orderBy, queryText, eventCategoryId, page, itemsPerPage } =
     dto;
 
-  return useQuery<PaginatedEventListDto, ApiError>({
+  return useQuery<PaginatedAdminEventSummaryListDto, ApiError>({
     queryKey: ["admin", "events", "posts", dto],
     queryFn: () =>
       AdminEventsService.getAllEventsWithPagination(
@@ -48,7 +48,7 @@ export const useGetAllEventsWithPagination = (
 };
 
 export const useGetEventById = (eventId: number) => {
-  return useQuery<EventResultDto, ApiError>({
+  return useQuery<AdminEventResultDto, ApiError>({
     queryKey: ["admin", "events", "posts", eventId],
     queryFn: () => AdminEventsService.getEventById(eventId),
     enabled: !!OpenAPI.TOKEN && !!eventId,
@@ -59,7 +59,7 @@ export const useUpdateEvent = (eventId: number) => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: UpdateEventDto) =>
+    mutationFn: (dto: AdminUpdateEventDto) =>
       AdminEventsService.updateEvent(eventId, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "events", "posts"] });
@@ -76,7 +76,8 @@ export const useCreateEvent = () => {
   const { replace } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: CreateEventDto) => AdminEventsService.createEvent(dto),
+    mutationFn: (dto: AdminCreateEventDto) =>
+      AdminEventsService.createEvent(dto),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin", "events", "posts"] });
       toastSuccess("게시글이 등록되었습니다.");
@@ -105,7 +106,7 @@ export const useDeleteEvent = () => {
 };
 
 export const useGetAllEventCategoriesWithPagination = (dto: PaginationDto) => {
-  return useQuery<PaginatedEventCategoryListDto, ApiError>({
+  return useQuery<PaginatedAdminEventCategoryListDto, ApiError>({
     queryKey: ["admin", "events", "categories", dto],
     queryFn: () =>
       AdminEventsService.getAllEventCategoriesWithPagination(
@@ -117,7 +118,7 @@ export const useGetAllEventCategoriesWithPagination = (dto: PaginationDto) => {
 };
 
 export const useGetEventCategoryById = (categoryId: number) => {
-  return useQuery<EventCategoryDto, ApiError>({
+  return useQuery<AdminEventCategoryDto, ApiError>({
     queryKey: ["admin", "events", "categories", categoryId],
     queryFn: () => AdminEventsService.getEventCategoryById(categoryId),
     enabled: !!OpenAPI.TOKEN && !!categoryId,
@@ -127,7 +128,7 @@ export const useGetEventCategoryById = (categoryId: number) => {
 export const useCreateEventCategory = (onSuccess: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: CreateEventCategoryDto) =>
+    mutationFn: (dto: AdminCreateEventCategoryDto) =>
       AdminEventsService.createEventCategory(dto),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -149,7 +150,7 @@ export const useDeleteEventCategory = (
   const { replace } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: DeleteEventCategoryDto) =>
+    mutationFn: (dto: AdminDeleteEventCategoryDto) =>
       AdminEventsService.deleteEventCategory(categoryId, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({

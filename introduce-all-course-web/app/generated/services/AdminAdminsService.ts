@@ -23,7 +23,7 @@ export class AdminAdminsService {
     role?: "SUPER" | "MANAGER",
     queryText?: string,
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedAdminListDto> {
     return __request(OpenAPI, {
       method: "GET",

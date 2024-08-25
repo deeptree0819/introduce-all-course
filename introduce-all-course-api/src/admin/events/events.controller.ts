@@ -17,14 +17,14 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
-import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
-import { CreateEventDto } from "./dtos/create-event.dto";
-import { DeleteEventCategoryDto } from "./dtos/delete-event-category.dto";
-import { EventCategoryDto } from "./dtos/event-category.dto";
-import { EventResultDto } from "./dtos/event-result.dto";
-import { EventSummaryDto } from "./dtos/event-summary.dto";
-import { GetAllEventsWithPaginationDto } from "./dtos/get-all-events.dto";
-import { UpdateEventDto } from "./dtos/update-event.dto";
+import { AdminCreateEventCategoryDto } from "./dtos/admin-create-event-category.dto";
+import { AdminCreateEventDto } from "./dtos/admin-create-event.dto";
+import { AdminDeleteEventCategoryDto } from "./dtos/admin-delete-event-category.dto";
+import { AdminEventCategoryDto } from "./dtos/admin-event-category.dto";
+import { AdminEventResultDto } from "./dtos/admin-event-result.dto";
+import { AdminEventSummaryDto } from "./dtos/admin-event-summary.dto";
+import { AdminGetAllEventsWithPaginationDto } from "./dtos/admin-get-all-events.dto";
+import { AdminUpdateEventDto } from "./dtos/admin-update-event.dto";
 import { EventsService } from "./events.service";
 
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -37,11 +37,13 @@ export class EventsController {
     summary: "공고소개 게시글 목록 조회",
     tags: ["admin-events"],
   })
-  @ApiOkResponse({ type: BasePaginatedDto(EventSummaryDto, "Event") })
+  @ApiOkResponse({
+    type: BasePaginatedDto(AdminEventSummaryDto, "AdminEventSummary"),
+  })
   @Get("/admin/events/posts")
   async getAllEventsWithPagination(
-    @Query() dto: GetAllEventsWithPaginationDto,
-  ): Promise<IPaginated<EventSummaryDto>> {
+    @Query() dto: AdminGetAllEventsWithPaginationDto,
+  ): Promise<IPaginated<AdminEventSummaryDto>> {
     return this.eventsService.getAllEventsWithPagination(dto);
   }
 
@@ -52,7 +54,7 @@ export class EventsController {
   @Get("/admin/events/posts/:eventId")
   async getEventById(
     @Param("eventId", ParseIntPipe) eventId: number,
-  ): Promise<EventResultDto> {
+  ): Promise<AdminEventResultDto> {
     return this.eventsService.getEventById(eventId);
   }
 
@@ -64,8 +66,8 @@ export class EventsController {
   async updateEvent(
     @CurrentUser() me,
     @Param("eventId", ParseIntPipe) eventId: number,
-    @Body() dto: UpdateEventDto,
-  ): Promise<EventResultDto> {
+    @Body() dto: AdminUpdateEventDto,
+  ): Promise<AdminEventResultDto> {
     return this.eventsService.updateEvent(me.userId, eventId, dto);
   }
 
@@ -76,8 +78,8 @@ export class EventsController {
   @Post("/admin/events/posts")
   async createEvent(
     @CurrentUser() me,
-    @Body() dto: CreateEventDto,
-  ): Promise<EventResultDto> {
+    @Body() dto: AdminCreateEventDto,
+  ): Promise<AdminEventResultDto> {
     return this.eventsService.createEvent(me.userId, dto);
   }
 
@@ -94,11 +96,13 @@ export class EventsController {
     summary: "공고분야 목록 조회",
     tags: ["admin-events"],
   })
-  @ApiOkResponse({ type: BasePaginatedDto(EventCategoryDto, "EventCategory") })
+  @ApiOkResponse({
+    type: BasePaginatedDto(AdminEventCategoryDto, "AdminEventCategory"),
+  })
   @Get("/admin/events/categories")
   async getAllEventCategoriesWithPagination(
     @Query() dto: PaginateDto,
-  ): Promise<IPaginated<EventCategoryDto>> {
+  ): Promise<IPaginated<AdminEventCategoryDto>> {
     return this.eventsService.getAllEventCategoriesWithPagination(dto);
   }
 
@@ -109,7 +113,7 @@ export class EventsController {
   @Get("/admin/events/categories/:eventCategoriesId")
   async getEventCategoryById(
     @Param("eventCategoriesId", ParseIntPipe) eventCategoriesId: number,
-  ): Promise<EventCategoryDto> {
+  ): Promise<AdminEventCategoryDto> {
     return this.eventsService.getEventCategoryById(eventCategoriesId);
   }
 
@@ -119,7 +123,7 @@ export class EventsController {
   })
   @Post("/admin/events/categories")
   async createEventCategory(
-    @Body() dto: CreateEventCategoryDto,
+    @Body() dto: AdminCreateEventCategoryDto,
   ): Promise<Tables<"event_categories">> {
     return this.eventsService.createEventCategory(dto);
   }
@@ -131,7 +135,7 @@ export class EventsController {
   @Delete("/admin/events/categories/:eventCategoriesId")
   async deleteEventCategory(
     @Param("eventCategoriesId", ParseIntPipe) eventCategoriesId: number,
-    @Body() dto: DeleteEventCategoryDto,
+    @Body() dto: AdminDeleteEventCategoryDto,
   ) {
     this.eventsService.deleteEventCategory(eventCategoriesId, dto);
   }
