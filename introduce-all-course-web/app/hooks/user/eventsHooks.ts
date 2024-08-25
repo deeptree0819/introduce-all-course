@@ -15,12 +15,20 @@ interface GetAllEventsWithPaginationDto extends PaginationDto {
   order?: Order;
   orderBy?: EventsOrderBy;
   eventCategoryId?: Array<number>;
+  excludeEventId?: number;
 }
 
 export const useGetAllEventsWithPagination = (
   dto: GetAllEventsWithPaginationDto
 ) => {
-  const { order, orderBy, eventCategoryId, page, itemsPerPage } = dto;
+  const {
+    order,
+    orderBy,
+    eventCategoryId,
+    excludeEventId,
+    page,
+    itemsPerPage,
+  } = dto;
 
   return useQuery<PaginatedEventListDto, ApiError>({
     queryKey: ["user", "events", "posts", dto],
@@ -29,6 +37,7 @@ export const useGetAllEventsWithPagination = (
         order,
         orderBy,
         eventCategoryId,
+        excludeEventId,
         page,
         itemsPerPage
       ),

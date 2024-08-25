@@ -24,6 +24,7 @@ const RelatedEvent = () => {
     eventCategoryId: event_category_id ? [event_category_id] : [],
     orderBy: EventsOrderBy.EVENT_VIEW_COUNT,
     order: Order.DESC,
+    excludeEventId: eventId,
   });
 
   if (!events || !events.items.length) return null;
