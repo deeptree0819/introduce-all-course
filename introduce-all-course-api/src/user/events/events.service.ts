@@ -79,9 +79,16 @@ export class EventsService {
       .from("events")
       .select(
         `
-        *, 
-        created_by:admins!events_created_by_fkey(admin_name),
-        updated_by:admins!events_updated_by_fkey(admin_name)
+        event_organization,
+        event_title,
+        event_start_at,
+        event_end_at,
+        event_poster_image_url,
+        event_info,
+        event_description,
+        event_view_count,
+        event_category_id,
+        ...event_categories(event_category_name)
         `,
       )
       .eq("events_id", eventId)
