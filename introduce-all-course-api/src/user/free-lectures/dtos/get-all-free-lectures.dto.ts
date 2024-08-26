@@ -1,25 +1,21 @@
-import { EventsOrderBy, Order } from "@common/enum";
+import { FreeLecturesOrderBy, Order } from "@common/enum";
 import { PaginateDto } from "@common/pagination";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsEnum, IsNumber, IsOptional } from "class-validator";
 
-export class GetAllEventsWithPaginationDto extends PaginateDto {
+export class GetAllFreeLecturesWithPaginationDto extends PaginateDto {
   @IsEnum(Order)
   @ApiProperty({ enum: Order, enumName: "Order" })
   @IsOptional()
   order?: Order;
 
-  @IsEnum(EventsOrderBy)
-  @ApiProperty({ enum: EventsOrderBy, enumName: "EventsOrderBy" })
+  @IsEnum(FreeLecturesOrderBy)
+  @ApiProperty({ enum: FreeLecturesOrderBy, enumName: "FreeLecturesOrderBy" })
   @IsOptional()
-  orderBy?: EventsOrderBy;
+  orderBy?: FreeLecturesOrderBy;
 
   @IsArray()
   @IsNumber({}, { each: true })
   @IsOptional()
-  eventCategoryId?: Array<number>;
-
-  @IsNumber()
-  @IsOptional()
-  excludeEventId?: number;
+  freeLectureTagIds?: Array<number>;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { FreeLectureTagDto } from "@generated/index";
+import { AdminFreeLectureTagDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import AdminPaginatedTable from "@/app/admin/components/ui/AdminPaginatedTable";
 import { useGetAllFreeLectureTagsWithPagination } from "@/app/hooks/admin/adminFreeLectureHooks";
 
-export const columns: ColumnDef<FreeLectureTagDto>[] = [
+export const columns: ColumnDef<AdminFreeLectureTagDto>[] = [
   {
     accessorKey: "free_lecture_tags_id",
     header: "ID",

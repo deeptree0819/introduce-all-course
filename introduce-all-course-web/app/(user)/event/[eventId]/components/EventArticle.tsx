@@ -100,7 +100,7 @@ const EventArticle = () => {
             </p>
           </div>
           <EditorParagraph
-            content={JSON.parse(event.event_info)}
+            content={event.event_info}
             className="order-4 mt-4 pb-2 laptop:ml-10"
           />
         </header>
@@ -110,7 +110,7 @@ const EventArticle = () => {
             <>
               <EditorParagraph
                 className="pb-6"
-                content={JSON.parse(event.event_description)}
+                content={event.event_description}
               />
               <Separator className="my-3" />
             </>

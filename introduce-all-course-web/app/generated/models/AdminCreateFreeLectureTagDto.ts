@@ -2,6 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type CreateFreeLectureTagDto = {
+export type AdminCreateFreeLectureTagDto = {
   free_lecture_tag_name: string;
 };

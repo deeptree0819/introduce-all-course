@@ -17,14 +17,14 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
-import { CreateFreeLectureTagDto } from "./dtos/create-free-lecture-tag.dto";
-import { CreateFreeLectureDto } from "./dtos/create-free-lecture.dto";
-import { FreeLectureResultDto } from "./dtos/free-lecture-result.dto";
-import { FreeLectureSummaryDto } from "./dtos/free-lecture-summary.dto";
-import { FreeLectureTagDto } from "./dtos/free-lecture-tag.dto";
-import { FreeLectureDto } from "./dtos/free-lecture.dto";
-import { GetAllFreeLecturesWithPaginationDto } from "./dtos/get-all-free-lectures.dto";
-import { UpdateFreeLectureDto } from "./dtos/update-free-lecture.dto";
+import { AdminCreateFreeLectureTagDto } from "./dtos/admin-create-free-lecture-tag.dto";
+import { AdminCreateFreeLectureDto } from "./dtos/admin-create-free-lecture.dto";
+import { AdminFreeLectureResultDto } from "./dtos/admin-free-lecture-result.dto";
+import { AdminFreeLectureSummaryDto } from "./dtos/admin-free-lecture-summary.dto";
+import { AdminFreeLectureTagDto } from "./dtos/admin-free-lecture-tag.dto";
+import { AdminFreeLectureDto } from "./dtos/admin-free-lecture.dto";
+import { AdminGetAllFreeLecturesWithPaginationDto } from "./dtos/admin-get-all-free-lectures.dto";
+import { AdminUpdateFreeLectureDto } from "./dtos/admin-update-free-lecture.dto";
 import { FreeLecturesService } from "./free-lectures.service";
 
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -38,12 +38,15 @@ export class FreeLecturesController {
     tags: ["admin-free-lectures"],
   })
   @ApiOkResponse({
-    type: BasePaginatedDto(FreeLectureSummaryDto, "FreeLecture"),
+    type: BasePaginatedDto(
+      AdminFreeLectureSummaryDto,
+      "AdminFreeLectureSummary",
+    ),
   })
   @Get("/admin/free-lecture/posts")
   async getAllFreeLecturesWithPagination(
-    @Query() dto: GetAllFreeLecturesWithPaginationDto,
-  ): Promise<IPaginated<FreeLectureSummaryDto>> {
+    @Query() dto: AdminGetAllFreeLecturesWithPaginationDto,
+  ): Promise<IPaginated<AdminFreeLectureSummaryDto>> {
     return this.freeLecturesService.getAllFreeLecturesWithPagination(dto);
   }
 
@@ -54,7 +57,7 @@ export class FreeLecturesController {
   @Get("/admin/free-lecture/posts/:postId")
   async getFreeLectureById(
     @Param("postId", ParseIntPipe) postId: number,
-  ): Promise<FreeLectureResultDto> {
+  ): Promise<AdminFreeLectureResultDto> {
     return this.freeLecturesService.getFreeLectureById(postId);
   }
 
@@ -66,8 +69,8 @@ export class FreeLecturesController {
   async updateFreeLecture(
     @CurrentUser() me,
     @Param("postId", ParseIntPipe) postId: number,
-    @Body() dto: UpdateFreeLectureDto,
-  ): Promise<FreeLectureResultDto> {
+    @Body() dto: AdminUpdateFreeLectureDto,
+  ): Promise<AdminFreeLectureResultDto> {
     return this.freeLecturesService.updateFreeLecture(me.userId, postId, dto);
   }
 
@@ -78,8 +81,8 @@ export class FreeLecturesController {
   @Post("/admin/free-lecture/posts")
   async createFreeLecture(
     @CurrentUser() me,
-    @Body() dto: CreateFreeLectureDto,
-  ): Promise<FreeLectureDto> {
+    @Body() dto: AdminCreateFreeLectureDto,
+  ): Promise<AdminFreeLectureDto> {
     return this.freeLecturesService.createFreeLecture(me.userId, dto);
   }
 
@@ -97,12 +100,12 @@ export class FreeLecturesController {
     tags: ["admin-free-lectures"],
   })
   @ApiOkResponse({
-    type: BasePaginatedDto(FreeLectureTagDto, "FreeLectureTag"),
+    type: BasePaginatedDto(AdminFreeLectureTagDto, "AdminFreeLectureTag"),
   })
   @Get("/admin/free-lecture/categories")
   async getAllFreeLectureTagsWithPagination(
     @Query() dto: PaginateDto,
-  ): Promise<IPaginated<FreeLectureTagDto>> {
+  ): Promise<IPaginated<AdminFreeLectureTagDto>> {
     return this.freeLecturesService.getAllFreeLectureTagsWithPagination(dto);
   }
 
@@ -114,7 +117,7 @@ export class FreeLecturesController {
   async getFreeLectureTagById(
     @Param("FreeLectureTagId", ParseIntPipe)
     FreeLectureTagId: number,
-  ): Promise<FreeLectureTagDto> {
+  ): Promise<AdminFreeLectureTagDto> {
     return this.freeLecturesService.getFreeLectureTagById(FreeLectureTagId);
   }
 
@@ -124,7 +127,7 @@ export class FreeLecturesController {
   })
   @Post("/admin/free-lecture/categories")
   async createFreeLectureTag(
-    @Body() dto: CreateFreeLectureTagDto,
+    @Body() dto: AdminCreateFreeLectureTagDto,
   ): Promise<Tables<"free_lecture_tags">> {
     return this.freeLecturesService.createFreeLectureTag(dto);
   }

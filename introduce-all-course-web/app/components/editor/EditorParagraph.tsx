@@ -1,15 +1,15 @@
-import { Content, EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, useEditor } from "@tiptap/react";
 
 import { editorExtensions, editorProps } from "./editorSetting";
 
 type EditorParagraphProps = {
-  content: Content;
+  content: string;
   className?: string;
 };
 
 const EditorParagraph = ({ content, className }: EditorParagraphProps) => {
   const editor = useEditor({
-    content: content,
+    content: JSON.parse(content),
     editable: false,
     extensions: editorExtensions,
     editorProps: editorProps,

@@ -3,7 +3,7 @@
 import AdminEditor from "@adminComponents/AdminEditor";
 import ImageUploader from "@adminComponents/ImageUploader";
 import { Form, FormField, FormItem, FormMessage } from "@components/ui/form";
-import { UpdateFreeLectureDto } from "@generated/index";
+import { AdminUpdateFreeLectureDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { forwardRef } from "react";
@@ -24,7 +24,7 @@ const FreeLecturePostForm = forwardRef<HTMLFormElement>((props, ref) => {
   const params = useParams<{ postId: string }>();
   const postId = +params.postId;
 
-  const form = useForm<UpdateFreeLectureDto>({
+  const form = useForm<AdminUpdateFreeLectureDto>({
     mode: "onSubmit",
     resolver: zodResolver(UpdateFreeLectureSchema),
   });
@@ -54,6 +54,24 @@ const FreeLecturePostForm = forwardRef<HTMLFormElement>((props, ref) => {
                 id="title"
                 placeholder="무료강의 제목을 입력해주세요."
                 defaultValue={post.free_lecture_title}
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="free_lecture_channel_name"
+          render={({ field }) => (
+            <FormItem className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="title">무료강의 채널명*</Label>
+              <Input
+                {...field}
+                type="text"
+                id="channel-name"
+                placeholder="무료강의 채널명을 입력해주세요."
+                defaultValue={post.free_lecture_channel_name}
               />
               <FormMessage />
             </FormItem>

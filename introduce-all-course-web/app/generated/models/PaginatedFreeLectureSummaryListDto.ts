@@ -4,7 +4,7 @@
 /* eslint-disable */
 import type { FreeLectureSummaryDto } from "./FreeLectureSummaryDto";
 import type { PaginationMetaData } from "./PaginationMetaData";
-export type PaginatedFreeLectureListDto = {
+export type PaginatedFreeLectureSummaryListDto = {
   items: Array<FreeLectureSummaryDto>;
   pagination: PaginationMetaData;
 };

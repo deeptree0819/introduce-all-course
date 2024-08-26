@@ -1,20 +1,14 @@
 import {
-  AdminFreeLecturesService,
   ApiError,
-  CreateFreeLectureDto,
-  CreateFreeLectureTagDto,
   FreeLectureResultDto,
   FreeLecturesOrderBy,
-  FreeLectureTagDto,
+  FreeLecturesService,
   OpenAPI,
   Order,
-  PaginatedFreeLectureListDto,
+  PaginatedFreeLectureSummaryListDto,
   PaginatedFreeLectureTagListDto,
-  UpdateFreeLectureDto,
 } from "@generated/index";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { toastApiError, toastSuccess } from "@toast";
-import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 
 import { PaginationDto } from "@/app/types/common";
 
@@ -22,23 +16,21 @@ interface GetAllFreeLecturesWithPaginationDto extends PaginationDto {
   queryText?: string;
   order?: Order;
   orderBy?: FreeLecturesOrderBy;
-  freeLectureTagId?: string;
+  freeLectureTagIds?: Array<number>;
 }
 
 export const useGetAllFreeLecturesWithPagination = (
   dto: GetAllFreeLecturesWithPaginationDto
 ) => {
-  const { order, orderBy, queryText, freeLectureTagId, page, itemsPerPage } =
-    dto;
+  const { order, orderBy, freeLectureTagIds, page, itemsPerPage } = dto;
 
-  return useQuery<PaginatedFreeLectureListDto, ApiError>({
-    queryKey: ["admin", "free-lecture", "posts", dto],
+  return useQuery<PaginatedFreeLectureSummaryListDto, ApiError>({
+    queryKey: ["user", "free-lecture", "posts", dto],
     queryFn: () =>
-      AdminFreeLecturesService.getAllFreeLecturesWithPagination(
+      FreeLecturesService.getAllFreeLecturesWithPagination(
         order,
         orderBy,
-        queryText,
-        freeLectureTagId,
+        freeLectureTagIds,
         page,
         itemsPerPage
       ),
@@ -48,136 +40,20 @@ export const useGetAllFreeLecturesWithPagination = (
 
 export const useGetFreeLectureById = (postId: number) => {
   return useQuery<FreeLectureResultDto, ApiError>({
-    queryKey: ["admin", "free-lecture", "posts", postId],
-    queryFn: () => AdminFreeLecturesService.getFreeLectureById(postId),
+    queryKey: ["user", "free-lecture", "posts", postId],
+    queryFn: () => FreeLecturesService.getFreeLectureById(postId),
     enabled: !!OpenAPI.TOKEN && !!postId,
-  });
-};
-
-export const useUpdateFreeLecture = (postId: number) => {
-  const { push } = useRouter();
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (dto: UpdateFreeLectureDto) =>
-      AdminFreeLecturesService.updateFreeLecture(postId, dto),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["admin", "free-lecture", "posts"],
-      });
-      toastSuccess("게시글이 수정되었습니다.");
-      push(`/admin/free-lecture/posts/${postId}`);
-    },
-    onError: (error: ApiError) => {
-      toastApiError(error, "게시글 수정에 실패했습니다.");
-    },
-  });
-};
-
-export const useCreateFreeLecture = () => {
-  const { replace } = useRouter();
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (dto: CreateFreeLectureDto) =>
-      AdminFreeLecturesService.createFreeLecture(dto),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({
-        queryKey: ["admin", "free-lecture", "posts"],
-      });
-      toastSuccess("게시글이 등록되었습니다.");
-      replace(`/admin/free-lecture/posts/${data.free_lecture_id}`);
-    },
-    onError: (error: ApiError) => {
-      toastApiError(error, "게시글 등록에 실패했습니다.");
-    },
-  });
-};
-
-export const useDeleteFreeLecture = () => {
-  const { push } = useRouter();
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (postId: number) =>
-      AdminFreeLecturesService.deleteFreeLecture(postId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["admin", "free-lecture", "posts"],
-      });
-      toastSuccess("게시글이 삭제되었습니다.");
-      push("/admin/free-lecture/posts");
-    },
-    onError: (error: ApiError) => {
-      toastApiError(error, "게시글 삭제에 실패했습니다.");
-    },
   });
 };
 
 export const useGetAllFreeLectureTagsWithPagination = (dto: PaginationDto) => {
   return useQuery<PaginatedFreeLectureTagListDto, ApiError>({
-    queryKey: ["admin", "free-lecture", "tags", dto],
+    queryKey: ["user", "free-lecture", "tags", dto],
     queryFn: () =>
-      AdminFreeLecturesService.getAllFreeLectureTagsWithPagination(
+      FreeLecturesService.getAllFreeLectureTagsWithPagination(
         dto.page,
         dto.itemsPerPage
       ),
     enabled: !!OpenAPI.TOKEN,
-  });
-};
-
-export const useGetFreeLectureTagById = (freeLectureTagId: number) => {
-  return useQuery<FreeLectureTagDto, ApiError>({
-    queryKey: ["admin", "free-lecture", "tags", freeLectureTagId],
-    queryFn: () =>
-      AdminFreeLecturesService.getFreeLectureTagById(freeLectureTagId),
-    enabled: !!OpenAPI.TOKEN && !!freeLectureTagId,
-  });
-};
-
-export const useCreateFreeLectureTag = (onSuccess: () => void) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (dto: CreateFreeLectureTagDto) =>
-      AdminFreeLecturesService.createFreeLectureTag(dto),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["admin", "free-lecture", "tags"],
-      });
-      toastSuccess("무료강의 태그가 등록되었습니다.");
-      onSuccess?.();
-    },
-    onError: (error: ApiError) => {
-      toastApiError(error, "무료강의 태그 등록에 실패했습니다.");
-    },
-  });
-};
-
-export const useDeleteFreeLectureTag = (
-  freeLectureTagId: number,
-  onSuccess?: () => void
-) => {
-  const { replace } = useRouter();
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () =>
-      AdminFreeLecturesService.deleteFreeLectureTag(freeLectureTagId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["admin", "free-lecture", "tags"],
-      });
-      toastSuccess("공고분야가 삭제되었습니다.");
-      replace("/admin/free-lecture/tags");
-      onSuccess?.();
-    },
-    onError: (error: ApiError) => {
-      toastApiError(error, "무료강의 태그 삭제에 실패했습니다.");
-    },
-  });
-};
-
-export const useGetFreeLectureTagPostCount = (freeLectureTagId: number) => {
-  return useQuery<number, ApiError>({
-    queryKey: ["admin", "free-lecture", "tags", freeLectureTagId, "postcount"],
-    queryFn: () =>
-      AdminFreeLecturesService.getFreeLectureTagPostCount(freeLectureTagId),
-    enabled: !!OpenAPI.TOKEN && !!freeLectureTagId,
   });
 };

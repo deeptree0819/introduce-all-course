@@ -6,6 +6,10 @@ export const UpdateFreeLectureSchema = z.object({
     .max(60, "60자 이내로 입력해주세요.")
     .nonempty("값을 입력해주세요.")
     .optional(),
+  free_lecture_channel_name: z
+    .string({ required_error: "값을 입력해주세요." })
+    .nonempty("값을 입력해주세요.")
+    .optional(),
   free_lecture_url: z
     .string({ required_error: "값을 입력해주세요." })
     .nonempty("값을 입력해주세요.")

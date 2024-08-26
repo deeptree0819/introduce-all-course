@@ -1,17 +1,12 @@
+import { FreeLectureSummaryDto } from "@generated/index";
 import { cn } from "@utils/common";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 
 type FreeLectureCardProps = {
-  item: {
-    id: number;
-    image: StaticImageData;
-    title: string;
-    channel: string;
-    tags: string[];
-  };
+  item: FreeLectureSummaryDto;
   hideOverflowedBadges?: boolean;
 };
 
@@ -21,21 +16,26 @@ const FreeLectureCard = ({
 }: FreeLectureCardProps) => {
   return (
     <div>
-      <Link href={`/free-lecture/${item.id}`} className="space-y-2">
-        <Image
-          src={item.image}
-          alt={item.title}
-          className="aspect-video rounded-lg"
-          width={500}
-          height={500}
-        />
+      <Link
+        href={`/free-lecture/${item.free_lecture_id}`}
+        className="space-y-2"
+      >
+        <div className="overflow-hidden rounded-lg border border-slate-200">
+          <Image
+            src={item.free_lecture_thumbnail_url}
+            alt={item.free_lecture_title}
+            className="aspect-video rounded-lg transition-transform duration-500 hover:scale-105"
+            width={500}
+            height={500}
+          />
+        </div>
         <div className="space-y-1">
           <div className="line-clamp-2 break-keep text-sm font-semibold laptop:text-base">
-            {item.title}
+            {item.free_lecture_title}
           </div>
           <div className="space-y-2">
             <div className="text-xs font-medium text-slate-600 laptop:text-sm">
-              {item.channel}
+              {item.free_lecture_channel_name}
             </div>
             <div
               className={cn(
@@ -43,12 +43,12 @@ const FreeLectureCard = ({
                 hideOverflowedBadges && "h-6 overflow-hidden"
               )}
             >
-              {item.tags.map((tag, index) => (
+              {item.free_lecture_tags.map((tag, index) => (
                 <Badge
                   key={index}
                   className="h-fit rounded-sm bg-[#D0E8FF] px-1 text-[10px] font-normal text-[#0029FF] hover:bg-[#D0E8FF] laptop:text-xs"
                 >
-                  {tag}
+                  {tag.free_lecture_tag_name}
                 </Badge>
               ))}
             </div>
