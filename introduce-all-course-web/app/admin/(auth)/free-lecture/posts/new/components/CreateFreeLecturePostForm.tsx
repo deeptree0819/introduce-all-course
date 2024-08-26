@@ -50,6 +50,23 @@ const CreateFreeLecturePostForm = forwardRef<HTMLFormElement>((props, ref) => {
 
         <FormField
           control={form.control}
+          name="free_lecture_channel_name"
+          render={({ field }) => (
+            <FormItem className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="title">무료강의 채널명*</Label>
+              <Input
+                {...field}
+                type="text"
+                id="channel-name"
+                placeholder="무료강의 채널명을 입력해주세요."
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="free_lecture_url"
           render={({ field }) => (
             <FormItem className="grid w-full max-w-sm items-center gap-1.5">
