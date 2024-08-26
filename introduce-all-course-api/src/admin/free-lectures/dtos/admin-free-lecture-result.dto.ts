@@ -11,6 +11,7 @@ export class AdminFreeLectureResultDto
   free_lecture_description: string;
   free_lecture_thumbnail_url: string;
   free_lecture_title: string;
+  free_lecture_channel_name: string;
   free_lecture_url: string;
   free_lecture_view_count: number;
   free_lecture_tags: FreeLectureTags[];

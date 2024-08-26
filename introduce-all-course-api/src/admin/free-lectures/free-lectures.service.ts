@@ -205,6 +205,8 @@ export class FreeLecturesService {
         freeLecture.free_lecture_thumbnail_url,
       free_lecture_title:
         dto.free_lecture_title || freeLecture.free_lecture_title,
+      free_lecture_channel_name:
+        dto.free_lecture_channel_name || freeLecture.free_lecture_channel_name,
       free_lecture_url: dto.free_lecture_url || freeLecture.free_lecture_url,
       updated_at: new Date().toISOString(),
       updated_by: adminId,

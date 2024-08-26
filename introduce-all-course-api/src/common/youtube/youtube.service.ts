@@ -1,7 +1,8 @@
-import { AdminYoutubeLectureDataDto } from "@admin/free-lectures/dtos/admin-youtube-lecture-data.dto";
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { firstValueFrom } from "rxjs";
+import { UpdateLectureViewCountDto } from "./dtos/update-lecture-view-count.dto";
+import { YoutubeLectureDataDto } from "./dtos/youtube-lecture-data.dto";
 
 @Injectable()
 export class YoutubeService {
@@ -12,8 +13,8 @@ export class YoutubeService {
   constructor(private readonly httpService: HttpService) {}
 
   async getVideoViewCounts(
-    lectureData: { free_lecture_id: number; free_lecture_url: string }[],
-  ): Promise<AdminYoutubeLectureDataDto[]> {
+    lectureData: UpdateLectureViewCountDto[],
+  ): Promise<YoutubeLectureDataDto[]> {
     const videoIds = lectureData
       .map((item) => this.extractVideoIdFromUrl(item.free_lecture_url))
       .filter((id) => id !== null);
