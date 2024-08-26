@@ -135,3 +135,10 @@ export const getUploadUrl = async ({
 }: getUploadURLParams) => {
   return await DefaultService.getUploadUrl(tag, contentType, fileName);
 };
+
+export const extendArrayToLength = <T>(arr: T[], limit: number): T[] => {
+  while (arr.length < limit) {
+    arr.push(...arr);
+  }
+  return arr.slice(0, limit);
+};
