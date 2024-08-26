@@ -17,7 +17,7 @@ export class MainBannersController {
     tags: ["main-banners"],
   })
   @Get("/main/banners")
-  async getAllMainBannersWithPagination(): Promise<MainBannerDto[]> {
-    return this.mainBannersService.getAllMainBannersWithPagination();
+  async getAllMainBanners(): Promise<MainBannerDto[]> {
+    return this.mainBannersService.getAllMainBanners();
   }
 }

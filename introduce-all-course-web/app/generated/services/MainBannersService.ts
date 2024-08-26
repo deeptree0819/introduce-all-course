@@ -12,9 +12,7 @@ export class MainBannersService {
    * @returns MainBannerDto
    * @throws ApiError
    */
-  public static getAllMainBannersWithPagination(): CancelablePromise<
-    Array<MainBannerDto>
-  > {
+  public static getAllMainBanners(): CancelablePromise<Array<MainBannerDto>> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/main/banners",

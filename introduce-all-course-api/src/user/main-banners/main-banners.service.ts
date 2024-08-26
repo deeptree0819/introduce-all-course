@@ -7,7 +7,7 @@ import { MainBannerDto } from "./dtos/main-banner.dto";
 export class MainBannersService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
-  async getAllMainBannersWithPagination(): Promise<MainBannerDto[]> {
+  async getAllMainBanners(): Promise<MainBannerDto[]> {
     const client = this.supabaseService.getClient();
     const query = client
       .from("main_banners")
