@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class YoutubeLectureDataDto
+export class AdminYoutubeLectureDataDto
   implements Omit<Tables<"free_lecture">, "created_by">
 {
   free_lecture_id: number;

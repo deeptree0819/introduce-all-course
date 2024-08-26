@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class UpdateFreeLectureDto
+export class AdminUpdateFreeLectureDto
   implements
     Partial<
       Pick<

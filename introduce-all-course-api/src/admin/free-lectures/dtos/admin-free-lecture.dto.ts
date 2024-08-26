@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class FreeLectureResultDto
+export class AdminFreeLectureDto
   implements Omit<Tables<"free_lecture">, "created_by" | "updated_by">
 {
   free_lecture_id: number;
@@ -13,10 +13,4 @@ export class FreeLectureResultDto
   free_lecture_title: string;
   free_lecture_url: string;
   free_lecture_view_count: number;
-  free_lecture_tags: FreeLectureTags[];
-}
-
-export class FreeLectureTags {
-  free_lecture_tags_id: number;
-  free_lecture_tag_name: string;
 }

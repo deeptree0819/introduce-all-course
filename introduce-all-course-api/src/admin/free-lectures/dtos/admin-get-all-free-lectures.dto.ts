@@ -3,7 +3,7 @@ import { PaginateDto } from "@common/pagination";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEnum, IsOptional, IsString } from "class-validator";
 
-export class GetAllFreeLecturesWithPaginationDto extends PaginateDto {
+export class AdminGetAllFreeLecturesWithPaginationDto extends PaginateDto {
   @IsEnum(Order)
   @ApiProperty({ enum: Order, enumName: "Order" })
   @IsOptional()

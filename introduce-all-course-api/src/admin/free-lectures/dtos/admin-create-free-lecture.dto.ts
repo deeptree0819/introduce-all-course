@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class CreateFreeLectureDto
+export class AdminCreateFreeLectureDto
   implements
     Pick<
       Tables<"free_lecture">,

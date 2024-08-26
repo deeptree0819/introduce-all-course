@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { FreeLectureTagDto } from "./FreeLectureTagDto";
+import type { AdminFreeLectureTagDto } from "./AdminFreeLectureTagDto";
 import type { PaginationMetaData } from "./PaginationMetaData";
-export type PaginatedFreeLectureTagListDto = {
-  items: Array<FreeLectureTagDto>;
+export type PaginatedAdminFreeLectureTagListDto = {
+  items: Array<AdminFreeLectureTagDto>;
   pagination: PaginationMetaData;
 };

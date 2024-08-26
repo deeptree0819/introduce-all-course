@@ -1,7 +1,7 @@
 "use client";
 import {
+  AdminFreeLectureSummaryDto,
   FreeLecturesOrderBy,
-  FreeLectureSummaryDto,
   Order,
 } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
@@ -17,7 +17,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import FreeLecturePostDeleteButton from "../posts/[postId]/components/FreeLecturePostDeleteButton";
 import FreeLecturePostsSearch from "../posts/components/FreeLecturePostsSearch";
 
-export const columns: ColumnDef<FreeLectureSummaryDto>[] = [
+export const columns: ColumnDef<AdminFreeLectureSummaryDto>[] = [
   {
     accessorKey: "free_lecture_id",
     header: "ID",

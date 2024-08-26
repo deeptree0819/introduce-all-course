@@ -2,16 +2,16 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateFreeLectureDto } from "../models/CreateFreeLectureDto";
-import type { CreateFreeLectureTagDto } from "../models/CreateFreeLectureTagDto";
-import type { FreeLectureDto } from "../models/FreeLectureDto";
-import type { FreeLectureResultDto } from "../models/FreeLectureResultDto";
+import type { AdminCreateFreeLectureDto } from "../models/AdminCreateFreeLectureDto";
+import type { AdminCreateFreeLectureTagDto } from "../models/AdminCreateFreeLectureTagDto";
+import type { AdminFreeLectureDto } from "../models/AdminFreeLectureDto";
+import type { AdminFreeLectureResultDto } from "../models/AdminFreeLectureResultDto";
+import type { AdminFreeLectureTagDto } from "../models/AdminFreeLectureTagDto";
+import type { AdminUpdateFreeLectureDto } from "../models/AdminUpdateFreeLectureDto";
 import type { FreeLecturesOrderBy } from "../models/FreeLecturesOrderBy";
-import type { FreeLectureTagDto } from "../models/FreeLectureTagDto";
 import type { Order } from "../models/Order";
-import type { PaginatedFreeLectureListDto } from "../models/PaginatedFreeLectureListDto";
-import type { PaginatedFreeLectureTagListDto } from "../models/PaginatedFreeLectureTagListDto";
-import type { UpdateFreeLectureDto } from "../models/UpdateFreeLectureDto";
+import type { PaginatedAdminFreeLectureSummaryListDto } from "../models/PaginatedAdminFreeLectureSummaryListDto";
+import type { PaginatedAdminFreeLectureTagListDto } from "../models/PaginatedAdminFreeLectureTagListDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
@@ -24,7 +24,7 @@ export class AdminFreeLecturesService {
    * @param freeLectureTagId
    * @param page
    * @param itemsPerPage
-   * @returns PaginatedFreeLectureListDto
+   * @returns PaginatedAdminFreeLectureSummaryListDto
    * @throws ApiError
    */
   public static getAllFreeLecturesWithPagination(
@@ -34,7 +34,7 @@ export class AdminFreeLecturesService {
     freeLectureTagId?: string,
     page: number = 1,
     itemsPerPage: number = 10
-  ): CancelablePromise<PaginatedFreeLectureListDto> {
+  ): CancelablePromise<PaginatedAdminFreeLectureSummaryListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/free-lecture/posts",
@@ -51,12 +51,12 @@ export class AdminFreeLecturesService {
   /**
    * 무료강의 게시글 작성
    * @param requestBody
-   * @returns FreeLectureDto
+   * @returns AdminFreeLectureDto
    * @throws ApiError
    */
   public static createFreeLecture(
-    requestBody: CreateFreeLectureDto
-  ): CancelablePromise<FreeLectureDto> {
+    requestBody: AdminCreateFreeLectureDto
+  ): CancelablePromise<AdminFreeLectureDto> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/admin/free-lecture/posts",
@@ -67,12 +67,12 @@ export class AdminFreeLecturesService {
   /**
    * 무료강의 게시글 상세 조회
    * @param postId
-   * @returns FreeLectureResultDto
+   * @returns AdminFreeLectureResultDto
    * @throws ApiError
    */
   public static getFreeLectureById(
     postId: number
-  ): CancelablePromise<FreeLectureResultDto> {
+  ): CancelablePromise<AdminFreeLectureResultDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/free-lecture/posts/{postId}",
@@ -85,13 +85,13 @@ export class AdminFreeLecturesService {
    * 무료강의 게시글 수정
    * @param postId
    * @param requestBody
-   * @returns FreeLectureResultDto
+   * @returns AdminFreeLectureResultDto
    * @throws ApiError
    */
   public static updateFreeLecture(
     postId: number,
-    requestBody: UpdateFreeLectureDto
-  ): CancelablePromise<FreeLectureResultDto> {
+    requestBody: AdminUpdateFreeLectureDto
+  ): CancelablePromise<AdminFreeLectureResultDto> {
     return __request(OpenAPI, {
       method: "PATCH",
       url: "/admin/free-lecture/posts/{postId}",
@@ -121,13 +121,13 @@ export class AdminFreeLecturesService {
    * 무료강의 태그 목록 조회
    * @param page
    * @param itemsPerPage
-   * @returns PaginatedFreeLectureTagListDto
+   * @returns PaginatedAdminFreeLectureTagListDto
    * @throws ApiError
    */
   public static getAllFreeLectureTagsWithPagination(
     page: number = 1,
     itemsPerPage: number = 10
-  ): CancelablePromise<PaginatedFreeLectureTagListDto> {
+  ): CancelablePromise<PaginatedAdminFreeLectureTagListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/free-lecture/categories",
@@ -144,7 +144,7 @@ export class AdminFreeLecturesService {
    * @throws ApiError
    */
   public static createFreeLectureTag(
-    requestBody: CreateFreeLectureTagDto
+    requestBody: AdminCreateFreeLectureTagDto
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "POST",
@@ -156,12 +156,12 @@ export class AdminFreeLecturesService {
   /**
    * 무료강의 태그 상세 조회
    * @param freeLectureTagId
-   * @returns FreeLectureTagDto
+   * @returns AdminFreeLectureTagDto
    * @throws ApiError
    */
   public static getFreeLectureTagById(
     freeLectureTagId: number
-  ): CancelablePromise<FreeLectureTagDto> {
+  ): CancelablePromise<AdminFreeLectureTagDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/free-lecture/categories/{FreeLectureTagId}",

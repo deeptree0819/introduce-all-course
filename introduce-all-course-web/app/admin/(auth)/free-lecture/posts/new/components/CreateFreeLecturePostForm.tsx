@@ -3,7 +3,7 @@
 import AdminEditor from "@adminComponents/AdminEditor";
 import ImageUploader from "@adminComponents/ImageUploader";
 import { Form, FormField, FormItem, FormMessage } from "@components/ui/form";
-import { CreateFreeLectureDto } from "@generated/index";
+import { AdminCreateFreeLectureDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
@@ -17,7 +17,7 @@ import FreeLectureTagSelector from "../../components/FreeLectureTagSelector";
 import { CreateFreeLectureSchema } from "../schema";
 
 const CreateFreeLecturePostForm = forwardRef<HTMLFormElement>((props, ref) => {
-  const form = useForm<CreateFreeLectureDto>({
+  const form = useForm<AdminCreateFreeLectureDto>({
     mode: "onSubmit",
     resolver: zodResolver(CreateFreeLectureSchema),
   });

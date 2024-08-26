@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UpdateFreeLectureDto = {
+export type AdminUpdateFreeLectureDto = {
   free_lecture_title: string;
   free_lecture_thumbnail_url: string;
   free_lecture_tags: Array<number>;

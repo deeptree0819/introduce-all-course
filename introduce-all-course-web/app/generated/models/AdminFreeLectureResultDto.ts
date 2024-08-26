@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type FreeLectureDto = {
+import type { FreeLectureTags } from "./FreeLectureTags";
+export type AdminFreeLectureResultDto = {
   free_lecture_id: number;
   created_at: string;
   updated_at: string;
@@ -17,4 +18,5 @@ export type FreeLectureDto = {
   free_lecture_title: string;
   free_lecture_url: string;
   free_lecture_view_count: number;
+  free_lecture_tags: Array<FreeLectureTags>;
 };

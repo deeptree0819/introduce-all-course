@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@components/ui/dialog";
 import { Form, FormField, FormItem, FormMessage } from "@components/ui/form";
-import { CreateFreeLectureTagDto } from "@generated/index";
+import { AdminCreateFreeLectureTagDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -30,7 +30,7 @@ const FreeLectureTagAddButton = ({
 }: FreeLectureTagAddButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const form = useForm<CreateFreeLectureTagDto>({
+  const form = useForm<AdminCreateFreeLectureTagDto>({
     mode: "onSubmit",
     resolver: zodResolver(CreateFreeLectureTagSchema),
   });
