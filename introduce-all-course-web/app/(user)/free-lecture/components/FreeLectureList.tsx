@@ -1,106 +1,62 @@
 "use client";
 
+import Pagination from "@components/ui/Pagination";
+import { FreeLecturesOrderBy, Order } from "@generated/index";
+import {
+  useDeleteQueryParams,
+  useGetSearchParams,
+  useUpdateQueryParams,
+} from "@utils/common";
+import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { useGetAllFreeLecturesWithPagination } from "@/app/hooks/user/freeLectureHooks";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-import Image1 from "../dummy/video1.png";
 import FreeLectureCard from "./FreeLectureCard";
 
-const DUMMY = [
-  {
-    id: 0,
-    image: Image1,
-    title:
-      "뉴모노 울트라 마이크로 스코픽 실리코 볼케이노 코니오시스 클라우드 엔지니어가 알아야 할 10가지",
-    channel: "실리콘밸리 아저씨들",
-    tags: [
-      "클라우드",
-      "인턴",
-      "경진대회",
-      "취업",
-      "실리콘밸리",
-      "아저씨들",
-      "코딩",
-      "프로그래밍",
-    ],
-  },
-  {
-    id: 1,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 2,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 3,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 4,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 5,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 6,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 7,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-  {
-    id: 8,
-    image: Image1,
-    title: "모르면 승진 안 되는 디자인",
-    channel: "삼성생명",
-    tags: ["클라우드", "인턴", "경진대회"],
-  },
-];
+const FreeLectureCardList = () => {
+  const { freeLectureTagIds, order, page } = useGetSearchParams();
 
-type FreeLectureCardListProps = {
-  temp?: string;
-};
+  const orderDirection = order === "oldest" ? Order.ASC : Order.DESC;
+  const orderBy =
+    order === "viewCount"
+      ? FreeLecturesOrderBy.FREE_LECTURE_VIEW_COUNT
+      : FreeLecturesOrderBy.CREATED_AT;
 
-const FreeLectureCardList = ({}: FreeLectureCardListProps) => {
+  const { data: freeLectures } = useGetAllFreeLecturesWithPagination({
+    freeLectureTagIds:
+      !!freeLectureTagIds && !!freeLectureTagIds.length
+        ? freeLectureTagIds.split(",").map(Number)
+        : [],
+    order: orderDirection,
+    orderBy,
+    page: page ? +page : 1,
+    itemsPerPage: 24,
+  });
+
+  const updateQueryParams = useUpdateQueryParams();
+  const deleteQueryParams = useDeleteQueryParams();
+  const { replace } = useRouter();
+
+  const handleOnValueChange = (value: string) => {
+    const newUrl = value
+      ? updateQueryParams({ order: value })
+      : deleteQueryParams(["order"]);
+
+    if (newUrl !== window.location.href) {
+      replace(newUrl);
+    }
+  };
+
   return (
-    <div className="w-full space-y-20 py-3 laptop:w-fit laptop:py-10">
+    <div className="w-full space-y-20 py-3 laptop:py-10">
       <div className="flex flex-col space-y-3 laptop:space-y-5">
-        <ToggleGroup type="single" className="block space-x-1 self-end">
+        <ToggleGroup
+          type="single"
+          className="block space-x-1 self-end"
+          onValueChange={handleOnValueChange}
+        >
           <ToggleGroupItem value="viewCount" size="sm">
             인기순
           </ToggleGroupItem>
@@ -112,37 +68,27 @@ const FreeLectureCardList = ({}: FreeLectureCardListProps) => {
           </ToggleGroupItem>
         </ToggleGroup>
 
-        <div className="grid w-fit grid-cols-2 gap-5 laptop:grid-cols-3 laptop:gap-7 desktop:grid-cols-4 desktop:gap-10">
-          {DUMMY.map((item) => (
-            <Fragment key={item.id}>
-              <FreeLectureCard item={item} />
-            </Fragment>
-          ))}
-        </div>
+        {!!freeLectures && !!freeLectures.items.length ? (
+          <div className="grid w-fit grid-cols-2 gap-5 laptop:grid-cols-3 laptop:gap-7 desktop:grid-cols-4 desktop:gap-10">
+            {freeLectures.items.map((item) => (
+              <Fragment key={item.free_lecture_id}>
+                <FreeLectureCard item={item} />
+              </Fragment>
+            ))}
+          </div>
+        ) : (
+          <div className="h-10 w-full text-center">
+            게시글이 존재하지 않습니다.
+          </div>
+        )}
       </div>
 
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      {!!freeLectures && !!freeLectures.pagination.totalItemCount && (
+        <Pagination
+          currentPage={+freeLectures.pagination.currentPage.toString()}
+          totalPage={+freeLectures.pagination.totalPage.toString()}
+        />
+      )}
     </div>
   );
 };
