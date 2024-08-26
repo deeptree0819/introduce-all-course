@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class CreateMainBannerDto
+export class AdminCreateMainBannerDto
   implements
     Omit<
       Tables<"main_banners">,

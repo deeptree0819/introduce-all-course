@@ -7,19 +7,19 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
-import { CreateMainBannerDto } from "./dtos/create-main-banner.dto";
-import { GetAllMainBannesWithPaginationDto } from "./dtos/get-all-main-banners.dto";
-import { MainBannerSummaryDto } from "./dtos/main-banner-summary.dto";
-import { MainBannerDto } from "./dtos/main-banner.dto";
-import { UpdateMainBannerDto } from "./dtos/update-main-banner.dto";
+import { AdminCreateMainBannerDto } from "./dtos/admin-create-main-banner.dto";
+import { AdminGetAllMainBannesWithPaginationDto } from "./dtos/admin-get-all-main-banners.dto";
+import { AdminMainBannerSummaryDto } from "./dtos/admin-main-banner-summary.dto";
+import { AdminMainBannerDto } from "./dtos/admin-main-banner.dto";
+import { AdminUpdateMainBannerDto } from "./dtos/admin-update-main-banner.dto";
 
 @Injectable()
 export class MainBannersService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async getAllMainBannersWithPagination(
-    dto: GetAllMainBannesWithPaginationDto,
-  ): Promise<Paginated<MainBannerSummaryDto>> {
+    dto: AdminGetAllMainBannesWithPaginationDto,
+  ): Promise<Paginated<AdminMainBannerSummaryDto>> {
     const client = this.supabaseService.getClient();
     const query = client
       .from("main_banners")
@@ -64,14 +64,14 @@ export class MainBannersService {
     }
 
     return new Paginated(
-      plainToInstance(MainBannerSummaryDto, data),
+      plainToInstance(AdminMainBannerSummaryDto, data),
       count,
       dto.page,
       dto.itemsPerPage,
     );
   }
 
-  async getMainBannerById(mainBannersId: number): Promise<MainBannerDto> {
+  async getMainBannerById(mainBannersId: number): Promise<AdminMainBannerDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("main_banners")
@@ -89,12 +89,12 @@ export class MainBannersService {
       throw new NotFoundException("해당 배너가 존재하지 않습니다.");
     }
 
-    return plainToInstance(MainBannerDto, data);
+    return plainToInstance(AdminMainBannerDto, data);
   }
 
   async updateMainBanner(
     mainBannersId: number,
-    dto: UpdateMainBannerDto,
+    dto: AdminUpdateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
     const client = this.supabaseService.getClient();
     const { data: mainBanner, error: selectError } = await client
@@ -138,7 +138,7 @@ export class MainBannersService {
   }
 
   async createMainBanner(
-    dto: CreateMainBannerDto,
+    dto: AdminCreateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client

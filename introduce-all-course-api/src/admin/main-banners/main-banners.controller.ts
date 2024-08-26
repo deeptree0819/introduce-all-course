@@ -16,11 +16,11 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
-import { CreateMainBannerDto } from "./dtos/create-main-banner.dto";
-import { GetAllMainBannesWithPaginationDto } from "./dtos/get-all-main-banners.dto";
-import { MainBannerSummaryDto } from "./dtos/main-banner-summary.dto";
-import { MainBannerDto } from "./dtos/main-banner.dto";
-import { UpdateMainBannerDto } from "./dtos/update-main-banner.dto";
+import { AdminCreateMainBannerDto } from "./dtos/admin-create-main-banner.dto";
+import { AdminGetAllMainBannesWithPaginationDto } from "./dtos/admin-get-all-main-banners.dto";
+import { AdminMainBannerSummaryDto } from "./dtos/admin-main-banner-summary.dto";
+import { AdminMainBannerDto } from "./dtos/admin-main-banner.dto";
+import { AdminUpdateMainBannerDto } from "./dtos/admin-update-main-banner.dto";
 import { MainBannersService } from "./main-banners.service";
 
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -33,11 +33,13 @@ export class MainBannersController {
     summary: "메인페이지 배너 목록 조회",
     tags: ["admin-main-banners"],
   })
-  @ApiOkResponse({ type: BasePaginatedDto(MainBannerSummaryDto, "MainBanner") })
+  @ApiOkResponse({
+    type: BasePaginatedDto(AdminMainBannerSummaryDto, "AdminMainBannerSummary"),
+  })
   @Get("/admin/main/banners")
   async getAllMainBannersWithPagination(
-    @Query() dto: GetAllMainBannesWithPaginationDto,
-  ): Promise<IPaginated<MainBannerSummaryDto>> {
+    @Query() dto: AdminGetAllMainBannesWithPaginationDto,
+  ): Promise<IPaginated<AdminMainBannerSummaryDto>> {
     return this.mainBannersService.getAllMainBannersWithPagination(dto);
   }
 
@@ -48,7 +50,7 @@ export class MainBannersController {
   @Get("/admin/main/banners/:mainBannerId")
   async getMainBannerById(
     @Param("mainBannerId", ParseIntPipe) mainBannerId: number,
-  ): Promise<MainBannerDto> {
+  ): Promise<AdminMainBannerDto> {
     return this.mainBannersService.getMainBannerById(mainBannerId);
   }
 
@@ -59,7 +61,7 @@ export class MainBannersController {
   @Patch("/admin/main/banners/:mainBannerId")
   async updateMainBanner(
     @Param("mainBannerId", ParseIntPipe) mainBannerId: number,
-    @Body() dto: UpdateMainBannerDto,
+    @Body() dto: AdminUpdateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
     return this.mainBannersService.updateMainBanner(mainBannerId, dto);
   }
@@ -70,7 +72,7 @@ export class MainBannersController {
   })
   @Post("/admin/main/banners")
   async createMainBanner(
-    @Body() dto: CreateMainBannerDto,
+    @Body() dto: AdminCreateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
     return this.mainBannersService.createMainBanner(dto);
   }

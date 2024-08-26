@@ -13,61 +13,6 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
-import MainCarouselImage from "../dummy/mainCarousel.png";
-
-const DUMMY_DATA = [
-  {
-    image: MainCarouselImage,
-    url: "/event/1",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/2",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/3",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/4",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/5",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/6",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/7",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/8",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/9",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/10",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-];
-
 const MainCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
