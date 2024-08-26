@@ -1,8 +1,8 @@
 import { Tables } from "@common/database.types";
 
-export class MainBannerSummaryDto
-  implements Omit<Tables<"main_banners">, "created_at" | "updated_at">
-{
+export class AdminMainBannerDto implements Tables<"main_banners"> {
+  created_at: string;
+  updated_at: string;
   main_banners_id: number;
   main_banner_url: string;
   main_banner_image_url: string;

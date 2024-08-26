@@ -1,9 +1,12 @@
 "use client";
 
 import { Button } from "@components/ui/button";
+import { EventsOrderBy, Order } from "@generated/index";
+import { extendArrayToLength } from "@utils/common";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
+import { useGetAllEventsWithPagination } from "@/app/hooks/user/eventsHooks";
 import {
   Carousel,
   type CarouselApi,
@@ -13,85 +16,23 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import EventCarouselImage from "../dummy/eventCarousel.png";
 import EventCard from "../event/components/EventCard";
-
-const DUMMY_DATA = [
-  {
-    id: 0,
-    image: EventCarouselImage,
-    title:
-      "11111111111111111111111111111 111111111111111 111111111111 111111111",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 1,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 2,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 3,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 4,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 5,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 6,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 7,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 8,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-  {
-    id: 9,
-    image: EventCarouselImage,
-    title: "클라우드 데이터 엔지니어 양성과정",
-    organization: "삼성생명",
-    dday: "D-3",
-  },
-];
 
 const EventCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
+
+  const { data: events } = useGetAllEventsWithPagination({
+    page: 1,
+    itemsPerPage: 10,
+    order: Order.DESC,
+    orderBy: EventsOrderBy.EVENT_END_AT,
+  });
+
+  if (!events || !events.items.length) {
+    return null;
+  }
+
+  const data = extendArrayToLength(events.items, 4);
 
   return (
     <Carousel
@@ -114,7 +55,7 @@ const EventCarousel = () => {
         <ChevronLeft size={10} />
       </Button>
       <CarouselContent className="ml-0 laptop:-ml-4">
-        {DUMMY_DATA.map((item, index) => (
+        {data.map((item, index) => (
           <CarouselItem
             key={index}
             className="max-w-xs basis-5/12 laptop:basis-3/12 "

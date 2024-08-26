@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 
-export class UpdateMainBannerDto
+export class AdminUpdateMainBannerDto
   implements
     Partial<
       Omit<

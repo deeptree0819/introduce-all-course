@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type MainBannerSummaryDto = {
+export type AdminMainBannerSummaryDto = {
   main_banners_id: number;
   main_banner_url: string;
   main_banner_image_url: string;

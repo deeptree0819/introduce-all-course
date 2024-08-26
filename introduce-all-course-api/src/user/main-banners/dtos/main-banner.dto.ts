@@ -1,15 +1,17 @@
 import { Tables } from "@common/database.types";
 
-export class CreateMainBannerDto
+export class MainBannerDto
   implements
-    Omit<
+    Pick<
       Tables<"main_banners">,
-      "main_banners_id" | "created_at" | "updated_at"
+      | "main_banners_id"
+      | "main_banner_url"
+      | "main_banner_image_url"
+      | "main_banner_image_name"
     >
 {
+  main_banners_id: number;
   main_banner_url: string;
   main_banner_image_url: string;
   main_banner_image_name: string;
-  main_banner_open_at: string;
-  main_banner_close_at: string;
 }

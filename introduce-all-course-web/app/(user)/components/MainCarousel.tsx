@@ -1,11 +1,13 @@
 "use client";
 
 import { Button } from "@components/ui/button";
+import { extendArrayToLength } from "@utils/common";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { useGetAllMainBanners } from "@/app/hooks/user/mainBannersHooks";
 import {
   Carousel,
   type CarouselApi,
@@ -13,65 +15,12 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
-import MainCarouselImage from "../dummy/mainCarousel.png";
-
-const DUMMY_DATA = [
-  {
-    image: MainCarouselImage,
-    url: "/event/1",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/2",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/3",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/4",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/5",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/6",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/7",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/8",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/9",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-  {
-    image: MainCarouselImage,
-    url: "/event/10",
-    imageName: "코드잇 스프린트 프론트엔드 엔지니어 트랙",
-  },
-];
-
 const MainCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+
+  const { data: mainBanners } = useGetAllMainBanners();
 
   useEffect(() => {
     if (!api) {
@@ -86,6 +35,12 @@ const MainCarousel = () => {
     });
   }, [api]);
 
+  if (!mainBanners) {
+    return null;
+  }
+
+  const data = extendArrayToLength(mainBanners, 5);
+
   return (
     <Carousel
       className="flex flex-col items-center space-y-5"
@@ -93,16 +48,16 @@ const MainCarousel = () => {
       opts={{ loop: true }}
     >
       <CarouselContent>
-        {DUMMY_DATA.map((item, index) => (
+        {data.map((item, index) => (
           <CarouselItem
             key={index}
             className="max-w-xl basis-10/12 laptop:basis-6/12"
           >
             <div className="overflow-hidden rounded-2xl border border-slate-200 laptop:rounded-3xl">
-              <Link href={item.url}>
+              <Link href={item.main_banner_url}>
                 <Image
-                  src={item.image}
-                  alt={item.imageName}
+                  src={item.main_banner_image_url}
+                  alt={item.main_banner_image_name}
                   className="aspect-video w-full rounded-2xl transition-transform duration-500 hover:scale-105"
                   width={500}
                   height={281.25}
