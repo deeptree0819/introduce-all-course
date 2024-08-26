@@ -154,7 +154,7 @@ export type Database = {
           event_start_at: string;
           event_thumbnail_url: string;
           event_title: string;
-          event_view_count: number;
+          event_view_count?: number;
           events_id?: number;
           updated_at?: string;
           updated_by?: number | null;
@@ -204,6 +204,7 @@ export type Database = {
         Row: {
           created_at: string;
           created_by: number | null;
+          free_lecture_channel_name: string;
           free_lecture_description: string | null;
           free_lecture_id: number;
           free_lecture_thumbnail_url: string;
@@ -216,6 +217,7 @@ export type Database = {
         Insert: {
           created_at?: string;
           created_by?: number | null;
+          free_lecture_channel_name: string;
           free_lecture_description?: string | null;
           free_lecture_id?: number;
           free_lecture_thumbnail_url: string;
@@ -228,6 +230,7 @@ export type Database = {
         Update: {
           created_at?: string;
           created_by?: number | null;
+          free_lecture_channel_name?: string;
           free_lecture_description?: string | null;
           free_lecture_id?: number;
           free_lecture_thumbnail_url?: string;
