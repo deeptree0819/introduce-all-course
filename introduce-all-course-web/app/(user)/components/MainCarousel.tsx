@@ -37,8 +37,8 @@ const MainCarousel = () => {
     });
   }, [api]);
 
-  if (!mainBanners) {
-    return null;
+  if (!mainBanners || !mainBanners.length) {
+    return <MainCarouselSkeleton />;
   }
 
   const data = extendArrayToLength(mainBanners, 5);
