@@ -92,6 +92,10 @@
   position: relative;
 }
 
+.speech-bubble-left-white {
+  position: relative;
+}
+
 .speech-bubble-left:after {
   content: "";
   position: absolute;
@@ -102,7 +106,21 @@
   border-bottom: 12px solid transparent;
 }
 
+.speech-bubble-left-white:after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: -13px;
+  border-left: 15px solid white;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
 .speech-bubble-right {
+  position: relative;
+}
+
+.speech-bubble-right-white {
   position: relative;
 }
 
@@ -112,6 +130,16 @@
   top: 16px;
   left: -13px;
   border-right: 15px solid #edf6ff;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.speech-bubble-right-white:after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: -13px;
+  border-right: 15px solid white;
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
 }
