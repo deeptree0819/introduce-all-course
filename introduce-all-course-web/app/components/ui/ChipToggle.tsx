@@ -6,14 +6,14 @@ import { useState } from "react";
 type ChipToggleProps = {
   label: string;
   onClick: () => void;
+  clicked?: boolean;
 };
 
-const ChipToggle = ({ label, onClick }: ChipToggleProps) => {
+const ChipToggle = ({ label, onClick, clicked }: ChipToggleProps) => {
   const [isActive, setIsActive] = useState(false);
 
-  const className = isActive
-    ? "bg-brand text-white"
-    : "bg-transparent text-black";
+  const className =
+    clicked ?? isActive ? "bg-brand text-white" : "bg-transparent text-black";
 
   const handleClick = () => {
     setIsActive(!isActive);

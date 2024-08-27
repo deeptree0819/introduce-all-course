@@ -4,19 +4,20 @@ import { Paginated, PaginateDto } from "@common/pagination";
 import { SupabaseService } from "@common/supabase/supabase.service";
 import { YoutubeService } from "@common/youtube/youtube.service";
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
-import { CreateFreeLectureTagDto } from "./dtos/create-free-lecture-tag.dto";
-import { CreateFreeLectureDto } from "./dtos/create-free-lecture.dto";
-import { FreeLectureResultDto } from "./dtos/free-lecture-result.dto";
-import { FreeLectureSummaryDto } from "./dtos/free-lecture-summary.dto";
-import { FreeLectureTagDto } from "./dtos/free-lecture-tag.dto";
-import { FreeLectureDto } from "./dtos/free-lecture.dto";
-import { GetAllFreeLecturesWithPaginationDto } from "./dtos/get-all-free-lectures.dto";
-import { UpdateFreeLectureDto } from "./dtos/update-free-lecture.dto";
+import { AdminCreateFreeLectureTagDto } from "./dtos/admin-create-free-lecture-tag.dto";
+import { AdminCreateFreeLectureDto } from "./dtos/admin-create-free-lecture.dto";
+import { AdminFreeLectureResultDto } from "./dtos/admin-free-lecture-result.dto";
+import { AdminFreeLectureSummaryDto } from "./dtos/admin-free-lecture-summary.dto";
+import { AdminFreeLectureTagDto } from "./dtos/admin-free-lecture-tag.dto";
+import { AdminFreeLectureDto } from "./dtos/admin-free-lecture.dto";
+import { AdminGetAllFreeLecturesWithPaginationDto } from "./dtos/admin-get-all-free-lectures.dto";
+import { AdminUpdateFreeLectureDto } from "./dtos/admin-update-free-lecture.dto";
 
 @Injectable()
 export class FreeLecturesService {
@@ -26,8 +27,8 @@ export class FreeLecturesService {
   ) {}
 
   async getAllFreeLecturesWithPagination(
-    dto: GetAllFreeLecturesWithPaginationDto,
-  ): Promise<Paginated<FreeLectureSummaryDto>> {
+    dto: AdminGetAllFreeLecturesWithPaginationDto,
+  ): Promise<Paginated<AdminFreeLectureSummaryDto>> {
     const client = this.supabaseService.getClient();
     const query = client.from("free_lecture").select(`
       *,
@@ -102,15 +103,25 @@ export class FreeLecturesService {
       }
     }
 
+    const { count, error: countError } = await client
+      .from("free_lecture")
+      .select("free_lecture_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
-      plainToInstance(FreeLectureSummaryDto, updates),
-      updates.length,
+      plainToInstance(AdminFreeLectureSummaryDto, updates),
+      count,
       dto.page,
       dto.itemsPerPage,
     );
   }
 
-  async getFreeLectureById(postId: number): Promise<FreeLectureResultDto> {
+  async getFreeLectureById(postId: number): Promise<AdminFreeLectureResultDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("free_lecture")
@@ -135,14 +146,14 @@ export class FreeLecturesService {
       throw new NotFoundException("해당 게시물이 존재하지 않습니다.");
     }
 
-    return plainToInstance(FreeLectureResultDto, data);
+    return plainToInstance(AdminFreeLectureResultDto, data);
   }
 
   async updateFreeLecture(
     adminId: number,
     postId: number,
-    dto: UpdateFreeLectureDto,
-  ): Promise<FreeLectureResultDto> {
+    dto: AdminUpdateFreeLectureDto,
+  ): Promise<AdminFreeLectureResultDto> {
     const client = this.supabaseService.getClient();
     const { data: freeLecture, error: freeLectureSelectError } = await client
       .from("free_lecture")
@@ -194,6 +205,8 @@ export class FreeLecturesService {
         freeLecture.free_lecture_thumbnail_url,
       free_lecture_title:
         dto.free_lecture_title || freeLecture.free_lecture_title,
+      free_lecture_channel_name:
+        dto.free_lecture_channel_name || freeLecture.free_lecture_channel_name,
       free_lecture_url: dto.free_lecture_url || freeLecture.free_lecture_url,
       updated_at: new Date().toISOString(),
       updated_by: adminId,
@@ -224,8 +237,8 @@ export class FreeLecturesService {
 
   async createFreeLecture(
     adminId: number,
-    dto: CreateFreeLectureDto,
-  ): Promise<FreeLectureDto> {
+    dto: AdminCreateFreeLectureDto,
+  ): Promise<AdminFreeLectureDto> {
     const { free_lecture_tags, ...rest } = dto;
 
     const newPost = {
@@ -288,7 +301,7 @@ export class FreeLecturesService {
 
   async getAllFreeLectureTagsWithPagination(
     dto: PaginateDto,
-  ): Promise<Paginated<FreeLectureTagDto>> {
+  ): Promise<Paginated<AdminFreeLectureTagDto>> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("free_lecture_tags")
@@ -305,9 +318,19 @@ export class FreeLecturesService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("free_lecture_tags")
+      .select("free_lecture_tags_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
-      plainToInstance(FreeLectureTagDto, data),
-      data.length,
+      plainToInstance(AdminFreeLectureTagDto, data),
+      count,
       dto.page,
       dto.itemsPerPage,
     );
@@ -315,7 +338,7 @@ export class FreeLecturesService {
 
   async getFreeLectureTagById(
     FreeLectureTagId: number,
-  ): Promise<FreeLectureTagDto> {
+  ): Promise<AdminFreeLectureTagDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("free_lecture_tags")
@@ -329,13 +352,21 @@ export class FreeLecturesService {
       );
     }
 
-    return plainToInstance(FreeLectureTagDto, data);
+    return plainToInstance(AdminFreeLectureTagDto, data);
   }
 
   async createFreeLectureTag(
-    dto: CreateFreeLectureTagDto,
+    dto: AdminCreateFreeLectureTagDto,
   ): Promise<Tables<"free_lecture_tags">> {
     const client = this.supabaseService.getClient();
+    const { count } = await client
+      .from("free_lecture_tags")
+      .select("*", { count: "exact", head: true });
+
+    if (count >= 100) {
+      throw new BadRequestException("공고 분야는 100개까지 등록 가능합니다.");
+    }
+
     const { data, error } = await client
       .from("free_lecture_tags")
       .insert(dto)

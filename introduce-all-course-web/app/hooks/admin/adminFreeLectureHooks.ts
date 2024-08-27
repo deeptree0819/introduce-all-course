@@ -1,16 +1,16 @@
 import {
+  AdminCreateFreeLectureDto,
+  AdminCreateFreeLectureTagDto,
+  AdminFreeLectureResultDto,
   AdminFreeLecturesService,
+  AdminFreeLectureTagDto,
+  AdminUpdateFreeLectureDto,
   ApiError,
-  CreateFreeLectureDto,
-  CreateFreeLectureTagDto,
-  FreeLectureResultDto,
   FreeLecturesOrderBy,
-  FreeLectureTagDto,
   OpenAPI,
   Order,
-  PaginatedFreeLectureListDto,
-  PaginatedFreeLectureTagListDto,
-  UpdateFreeLectureDto,
+  PaginatedAdminFreeLectureSummaryListDto,
+  PaginatedAdminFreeLectureTagListDto,
 } from "@generated/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toastApiError, toastSuccess } from "@toast";
@@ -31,7 +31,7 @@ export const useGetAllFreeLecturesWithPagination = (
   const { order, orderBy, queryText, freeLectureTagId, page, itemsPerPage } =
     dto;
 
-  return useQuery<PaginatedFreeLectureListDto, ApiError>({
+  return useQuery<PaginatedAdminFreeLectureSummaryListDto, ApiError>({
     queryKey: ["admin", "free-lecture", "posts", dto],
     queryFn: () =>
       AdminFreeLecturesService.getAllFreeLecturesWithPagination(
@@ -47,7 +47,7 @@ export const useGetAllFreeLecturesWithPagination = (
 };
 
 export const useGetFreeLectureById = (postId: number) => {
-  return useQuery<FreeLectureResultDto, ApiError>({
+  return useQuery<AdminFreeLectureResultDto, ApiError>({
     queryKey: ["admin", "free-lecture", "posts", postId],
     queryFn: () => AdminFreeLecturesService.getFreeLectureById(postId),
     enabled: !!OpenAPI.TOKEN && !!postId,
@@ -58,7 +58,7 @@ export const useUpdateFreeLecture = (postId: number) => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: UpdateFreeLectureDto) =>
+    mutationFn: (dto: AdminUpdateFreeLectureDto) =>
       AdminFreeLecturesService.updateFreeLecture(postId, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -77,7 +77,7 @@ export const useCreateFreeLecture = () => {
   const { replace } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: CreateFreeLectureDto) =>
+    mutationFn: (dto: AdminCreateFreeLectureDto) =>
       AdminFreeLecturesService.createFreeLecture(dto),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
@@ -112,7 +112,7 @@ export const useDeleteFreeLecture = () => {
 };
 
 export const useGetAllFreeLectureTagsWithPagination = (dto: PaginationDto) => {
-  return useQuery<PaginatedFreeLectureTagListDto, ApiError>({
+  return useQuery<PaginatedAdminFreeLectureTagListDto, ApiError>({
     queryKey: ["admin", "free-lecture", "tags", dto],
     queryFn: () =>
       AdminFreeLecturesService.getAllFreeLectureTagsWithPagination(
@@ -124,7 +124,7 @@ export const useGetAllFreeLectureTagsWithPagination = (dto: PaginationDto) => {
 };
 
 export const useGetFreeLectureTagById = (freeLectureTagId: number) => {
-  return useQuery<FreeLectureTagDto, ApiError>({
+  return useQuery<AdminFreeLectureTagDto, ApiError>({
     queryKey: ["admin", "free-lecture", "tags", freeLectureTagId],
     queryFn: () =>
       AdminFreeLecturesService.getFreeLectureTagById(freeLectureTagId),
@@ -135,7 +135,7 @@ export const useGetFreeLectureTagById = (freeLectureTagId: number) => {
 export const useCreateFreeLectureTag = (onSuccess: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: CreateFreeLectureTagDto) =>
+    mutationFn: (dto: AdminCreateFreeLectureTagDto) =>
       AdminFreeLecturesService.createFreeLectureTag(dto),
     onSuccess: () => {
       queryClient.invalidateQueries({

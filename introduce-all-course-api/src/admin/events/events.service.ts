@@ -9,22 +9,22 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
-import { CreateEventCategoryDto } from "./dtos/create-event-category.dto";
-import { CreateEventDto } from "./dtos/create-event.dto";
-import { DeleteEventCategoryDto } from "./dtos/delete-event-category.dto";
-import { EventCategoryDto } from "./dtos/event-category.dto";
-import { EventResultDto } from "./dtos/event-result.dto";
-import { EventSummaryDto } from "./dtos/event-summary.dto";
-import { GetAllEventsWithPaginationDto } from "./dtos/get-all-events.dto";
-import { UpdateEventDto } from "./dtos/update-event.dto";
+import { AdminCreateEventCategoryDto } from "./dtos/admin-create-event-category.dto";
+import { AdminCreateEventDto } from "./dtos/admin-create-event.dto";
+import { AdminDeleteEventCategoryDto } from "./dtos/admin-delete-event-category.dto";
+import { AdminEventCategoryDto } from "./dtos/admin-event-category.dto";
+import { AdminEventResultDto } from "./dtos/admin-event-result.dto";
+import { AdminEventSummaryDto } from "./dtos/admin-event-summary.dto";
+import { AdminGetAllEventsWithPaginationDto } from "./dtos/admin-get-all-events.dto";
+import { AdminUpdateEventDto } from "./dtos/admin-update-event.dto";
 
 @Injectable()
 export class EventsService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async getAllEventsWithPagination(
-    dto: GetAllEventsWithPaginationDto,
-  ): Promise<Paginated<EventSummaryDto>> {
+    dto: AdminGetAllEventsWithPaginationDto,
+  ): Promise<Paginated<AdminEventSummaryDto>> {
     const client = this.supabaseService.getClient();
     const query = client.from("events").select(`
         events_id, 
@@ -67,15 +67,25 @@ export class EventsService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("events")
+      .select("events_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
-      plainToInstance(EventSummaryDto, data),
-      data.length,
+      plainToInstance(AdminEventSummaryDto, data),
+      count,
       dto.page,
       dto.itemsPerPage,
     );
   }
 
-  async getEventById(eventId: number): Promise<EventResultDto> {
+  async getEventById(eventId: number): Promise<AdminEventResultDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("events")
@@ -118,14 +128,14 @@ export class EventsService {
       );
     }
 
-    return plainToInstance(EventResultDto, result);
+    return plainToInstance(AdminEventResultDto, result);
   }
 
   async updateEvent(
     adminId: number,
     eventId: number,
-    dto: UpdateEventDto,
-  ): Promise<EventResultDto> {
+    dto: AdminUpdateEventDto,
+  ): Promise<AdminEventResultDto> {
     const client = this.supabaseService.getClient();
     const { data: event, error: eventSelectError } = await client
       .from("events")
@@ -205,8 +215,8 @@ export class EventsService {
 
   async createEvent(
     adminId: number,
-    dto: CreateEventDto,
-  ): Promise<EventResultDto> {
+    dto: AdminCreateEventDto,
+  ): Promise<AdminEventResultDto> {
     const { event_attachment_urls, ...rest } = dto;
     const event = {
       ...rest,
@@ -270,7 +280,7 @@ export class EventsService {
 
   async getAllEventCategoriesWithPagination(
     dto: PaginateDto,
-  ): Promise<Paginated<EventCategoryDto>> {
+  ): Promise<Paginated<AdminEventCategoryDto>> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("event_categories")
@@ -286,9 +296,19 @@ export class EventsService {
       );
     }
 
+    const { count, error: countError } = await client
+      .from("event_categories")
+      .select("event_categories_id", { count: "exact", head: true });
+
+    if (countError) {
+      throw new InternalServerErrorException(
+        countError?.message || "전체 개수 조회에 실패하였습니다.",
+      );
+    }
+
     return new Paginated(
-      plainToInstance(EventCategoryDto, data),
-      data.length,
+      plainToInstance(AdminEventCategoryDto, data),
+      count,
       dto.page,
       dto.itemsPerPage,
     );
@@ -296,7 +316,7 @@ export class EventsService {
 
   async getEventCategoryById(
     eventCategoriesId: number,
-  ): Promise<EventCategoryDto> {
+  ): Promise<AdminEventCategoryDto> {
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("event_categories")
@@ -310,11 +330,11 @@ export class EventsService {
       );
     }
 
-    return plainToInstance(EventCategoryDto, data);
+    return plainToInstance(AdminEventCategoryDto, data);
   }
 
   async createEventCategory(
-    dto: CreateEventCategoryDto,
+    dto: AdminCreateEventCategoryDto,
   ): Promise<Tables<"event_categories">> {
     const client = this.supabaseService.getClient();
     const { count } = await client
@@ -340,7 +360,7 @@ export class EventsService {
 
   async deleteEventCategory(
     eventCategoriesId: number,
-    dto: DeleteEventCategoryDto,
+    dto: AdminDeleteEventCategoryDto,
   ): Promise<void> {
     const client = this.supabaseService.getClient();
     const { error: updateError } = await client

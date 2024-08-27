@@ -1,5 +1,7 @@
+import { JwtAuthGuard } from "@admin/auth/jwt-auth.guard";
 import { Tables } from "@common/database.types";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
+import { RolesGuard } from "@common/guards/roles.guard";
 import { BasePaginatedDto, IPaginated } from "@common/pagination";
 import {
   Body,
@@ -10,6 +12,7 @@ import {
   ParseIntPipe,
   Patch,
   Query,
+  UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 import { GetAllUsersWithPaginationDto } from "./dtos/get-all-users.dto";
@@ -18,6 +21,7 @@ import { UserSummaryDto } from "./dtos/user-summary.dto";
 import { UserDto } from "./dtos/user.dto";
 import { UsersService } from "./users.service";
 
+@UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth()
 @Controller()
 export class UsersController {

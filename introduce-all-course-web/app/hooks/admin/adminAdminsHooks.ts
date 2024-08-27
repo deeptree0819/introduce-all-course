@@ -3,6 +3,7 @@ import {
   AdminDto,
   AdminRole,
   ApiError,
+  CreateAdminDto,
   OpenAPI,
   PaginatedAdminListDto,
   UpdateAdminDto,
@@ -73,6 +74,22 @@ export const useDeleteAdmin = () => {
     },
     onError: (error: ApiError) => {
       toastApiError(error, "어드민 정보 삭제에 실패했습니다.");
+    },
+  });
+};
+
+export const useCreateAdmin = () => {
+  const { replace } = useRouter();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (dto: CreateAdminDto) => AdminAdminsService.createAdmin(dto),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "admins"] });
+      toastSuccess("어드민 정보가 추가되었습니다.");
+      replace("/admin/admins");
+    },
+    onError: (error: ApiError) => {
+      toastApiError(error, "어드민 정보 추가에 실패했습니다.");
     },
   });
 };

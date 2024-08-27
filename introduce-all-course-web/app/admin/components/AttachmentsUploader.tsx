@@ -71,10 +71,12 @@ const AttachmentsUploader = ({ fileState }: AttachmentsUploaderProps) => {
               className="flex items-end justify-between space-x-5 text-sm"
             >
               <span
-                className="line-clamp-1 w-full cursor-pointer"
+                className="w-full cursor-pointer truncate"
                 onClick={() => handleFileClick(file)}
               >
-                {file instanceof File ? file.name : file.split("__")[1]}
+                {file instanceof File
+                  ? file.name
+                  : decodeURIComponent(file.split("__")[1])}
               </span>
               <Button
                 type="button"

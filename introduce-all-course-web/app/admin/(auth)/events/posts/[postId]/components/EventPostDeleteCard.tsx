@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import UserDeleteButton from "./EventPostDeleteButton";
+import EventPostDeleteButton from "./EventPostDeleteButton";
 
 type EventPostDeleteCardProps = {
   className?: string;
@@ -27,7 +27,7 @@ const EventPostDeleteCard = ({ className }: EventPostDeleteCardProps) => {
               삭제한 이후에는 되돌릴 수 없습니다.
             </div>
           </div>
-          <UserDeleteButton postId={postId} />
+          <EventPostDeleteButton postId={postId} />
         </div>
       </CardContent>
     </Card>

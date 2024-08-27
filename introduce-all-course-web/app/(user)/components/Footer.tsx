@@ -25,9 +25,8 @@ const Footer = () => {
             <span className="font-semibold">이메일</span> deeptree00@gmail.com
           </div>
           <Link
-            href="https://tally.so"
+            href="mailto:deeptree00@gmail.com"
             className="text-xs font-medium text-slate-500"
-            target="_blank"
           >
             문의하기
           </Link>

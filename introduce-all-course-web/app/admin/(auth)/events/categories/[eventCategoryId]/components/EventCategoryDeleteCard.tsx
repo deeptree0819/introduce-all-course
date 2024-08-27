@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import UserDeleteButton from "./EventCategoryDeleteButton";
+import EventCategoryDeleteButton from "./EventCategoryDeleteButton";
 
 type EventCategoryDeleteCardProps = {
   className?: string;
@@ -29,7 +29,7 @@ const EventCategoryDeleteCard = ({
               카테고리에 해당하는 게시글이 없는 경우에만 삭제하실 수 있습니다.
             </div>
           </div>
-          <UserDeleteButton eventCategoryId={eventCategoryId} />
+          <EventCategoryDeleteButton eventCategoryId={eventCategoryId} />
         </div>
       </CardContent>
     </Card>

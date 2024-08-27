@@ -11,7 +11,7 @@ import {
   FormItem,
   FormMessage,
 } from "@components/ui/form";
-import { UpdateEventDto } from "@generated/index";
+import { AdminUpdateEventDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { forwardRef, useEffect, useState } from "react";
@@ -43,7 +43,7 @@ const EventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
   const params = useParams<{ postId: string }>();
   const postId = +params.postId;
 
-  const form = useForm<UpdateEventDto>({
+  const form = useForm<AdminUpdateEventDto>({
     mode: "onSubmit",
     resolver: zodResolver(UpdateEventSchema),
   });

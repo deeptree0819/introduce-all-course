@@ -1,11 +1,11 @@
 import {
+  AdminCreateMainBannerDto,
+  AdminMainBannerDto,
   AdminMainBannersService,
+  AdminUpdateMainBannerDto,
   ApiError,
-  CreateMainBannerDto,
-  MainBannerDto,
   OpenAPI,
-  PaginatedMainBannerListDto,
-  UpdateMainBannerDto,
+  PaginatedAdminMainBannerSummaryListDto,
 } from "@generated/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toastApiError, toastSuccess } from "@toast";
@@ -28,7 +28,7 @@ export const useGetAllMainBannersWithPagination = (
 ) => {
   const { status, page, itemsPerPage } = dto;
 
-  return useQuery<PaginatedMainBannerListDto, ApiError>({
+  return useQuery<PaginatedAdminMainBannerSummaryListDto, ApiError>({
     queryKey: ["admin", "main", "banners", dto],
     queryFn: () =>
       AdminMainBannersService.getAllMainBannersWithPagination(
@@ -41,7 +41,7 @@ export const useGetAllMainBannersWithPagination = (
 };
 
 export const useGetMainBannerById = (bannerId: number) => {
-  return useQuery<MainBannerDto, ApiError>({
+  return useQuery<AdminMainBannerDto, ApiError>({
     queryKey: ["admin", "main", "banners", bannerId],
     queryFn: () => AdminMainBannersService.getMainBannerById(bannerId),
     enabled: !!OpenAPI.TOKEN && !!bannerId,
@@ -51,7 +51,7 @@ export const useGetMainBannerById = (bannerId: number) => {
 export const useUpdateMainBanner = (bannerId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: UpdateMainBannerDto) =>
+    mutationFn: (dto: AdminUpdateMainBannerDto) =>
       AdminMainBannersService.updateMainBanner(bannerId, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "main", "banners"] });
@@ -67,7 +67,7 @@ export const useCreateMainBanner = () => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: CreateMainBannerDto) =>
+    mutationFn: (dto: AdminCreateMainBannerDto) =>
       AdminMainBannersService.createMainBanner(dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "main", "banners"] });
@@ -76,6 +76,23 @@ export const useCreateMainBanner = () => {
     },
     onError: (error: ApiError) => {
       toastApiError(error, "메인배너 등록에 실패했습니다.");
+    },
+  });
+};
+
+export const useDeleteMainBanner = () => {
+  const { replace } = useRouter();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (bannerId: number) =>
+      AdminMainBannersService.deleteMainBanner(bannerId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "main", "banners"] });
+      toastSuccess("메인배너가 삭제되었습니다.");
+      replace("/admin/main/banners");
+    },
+    onError: (error: ApiError) => {
+      toastApiError(error, "메인배너 삭제에 실패했습니다.");
     },
   });
 };

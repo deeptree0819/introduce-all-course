@@ -1,7 +1,7 @@
 import { Type } from "class-transformer";
 import { IsNumber, IsOptional, Max } from "class-validator";
 
-const DEFAULT_ITEMS_PER_PAGE = 30;
+const DEFAULT_ITEMS_PER_PAGE = 10;
 const MAX_ITEMS_PER_PAGE = 1000;
 
 export class PaginateDto {

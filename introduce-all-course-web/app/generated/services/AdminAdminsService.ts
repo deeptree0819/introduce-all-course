@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { AdminDto } from "../models/AdminDto";
+import type { CreateAdminDto } from "../models/CreateAdminDto";
 import type { PaginatedAdminListDto } from "../models/PaginatedAdminListDto";
 import type { UpdateAdminDto } from "../models/UpdateAdminDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
@@ -22,7 +23,7 @@ export class AdminAdminsService {
     role?: "SUPER" | "MANAGER",
     queryText?: string,
     page: number = 1,
-    itemsPerPage: number = 30
+    itemsPerPage: number = 10
   ): CancelablePromise<PaginatedAdminListDto> {
     return __request(OpenAPI, {
       method: "GET",
@@ -36,7 +37,23 @@ export class AdminAdminsService {
     });
   }
   /**
-   * 유저 상세 조회
+   * 어드민 등록
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public static createAdmin(
+    requestBody: CreateAdminDto
+  ): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/admin/admins",
+      body: requestBody,
+      mediaType: "application/json",
+    });
+  }
+  /**
+   * 어드민 상세 조회
    * @param adminId
    * @returns AdminDto
    * @throws ApiError
@@ -51,7 +68,7 @@ export class AdminAdminsService {
     });
   }
   /**
-   * 유저 정보 수정
+   * 어드민 정보 수정
    * @param adminId
    * @param requestBody
    * @returns any

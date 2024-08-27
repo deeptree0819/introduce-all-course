@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateMainBannerDto } from "../models/CreateMainBannerDto";
-import type { MainBannerDto } from "../models/MainBannerDto";
-import type { PaginatedMainBannerListDto } from "../models/PaginatedMainBannerListDto";
-import type { UpdateMainBannerDto } from "../models/UpdateMainBannerDto";
+import type { AdminCreateMainBannerDto } from "../models/AdminCreateMainBannerDto";
+import type { AdminMainBannerDto } from "../models/AdminMainBannerDto";
+import type { AdminUpdateMainBannerDto } from "../models/AdminUpdateMainBannerDto";
+import type { PaginatedAdminMainBannerSummaryListDto } from "../models/PaginatedAdminMainBannerSummaryListDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
@@ -15,14 +15,14 @@ export class AdminMainBannersService {
    * @param status
    * @param page
    * @param itemsPerPage
-   * @returns PaginatedMainBannerListDto
+   * @returns PaginatedAdminMainBannerSummaryListDto
    * @throws ApiError
    */
   public static getAllMainBannersWithPagination(
     status?: "BEFORE" | "PROGRESS" | "AFTER",
     page: number = 1,
-    itemsPerPage: number = 30
-  ): CancelablePromise<PaginatedMainBannerListDto> {
+    itemsPerPage: number = 10
+  ): CancelablePromise<PaginatedAdminMainBannerSummaryListDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/main/banners",
@@ -40,7 +40,7 @@ export class AdminMainBannersService {
    * @throws ApiError
    */
   public static createMainBanner(
-    requestBody: CreateMainBannerDto
+    requestBody: AdminCreateMainBannerDto
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "POST",
@@ -52,12 +52,12 @@ export class AdminMainBannersService {
   /**
    * 메인페이지 배너 상세 조회
    * @param mainBannerId
-   * @returns MainBannerDto
+   * @returns AdminMainBannerDto
    * @throws ApiError
    */
   public static getMainBannerById(
     mainBannerId: number
-  ): CancelablePromise<MainBannerDto> {
+  ): CancelablePromise<AdminMainBannerDto> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/admin/main/banners/{mainBannerId}",
@@ -75,7 +75,7 @@ export class AdminMainBannersService {
    */
   public static updateMainBanner(
     mainBannerId: number,
-    requestBody: UpdateMainBannerDto
+    requestBody: AdminUpdateMainBannerDto
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "PATCH",
@@ -85,6 +85,21 @@ export class AdminMainBannersService {
       },
       body: requestBody,
       mediaType: "application/json",
+    });
+  }
+  /**
+   * 메인페이지 배너 삭제
+   * @param mainBannerId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteMainBanner(mainBannerId: number): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/admin/main/banners/{mainBannerId}",
+      path: {
+        mainBannerId: mainBannerId,
+      },
     });
   }
 }
