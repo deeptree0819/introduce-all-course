@@ -11,6 +11,7 @@ import picture3_mobile from "@assets/inquirypicture3_mobile.png";
 import rocket from "@assets/inquiryrocket.png";
 import PointingUpImage from "@assets/pointingUp.png";
 import profile_ceo from "@assets/profile_ceo.png";
+import profile_partner from "@assets/profile_partner1.png";
 import Image from "next/image";
 
 const EventPage = () => {
@@ -95,15 +96,30 @@ const EventPage = () => {
               </div>
             </div>
           </div>
-          <div className="min-w-0 max-w-[100px] pl-2 pt-5 laptop:max-w-[120px] laptop:pt-0 desktop:max-w-[150px]">
+          <div className="min-w-0 max-w-[100px] pt-5 laptop:max-w-[120px] laptop:pl-2 laptop:pt-0 desktop:max-w-[150px]">
             <Image src={rocket} alt="로켓" />
           </div>
         </div>
       </section>
 
+      <svg
+        className="mx-auto mt-7 h-8 w-8 animate-bounce laptop:mt-8 laptop:h-12 laptop:w-12 desktop:mt-20"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="#0085FF"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1 laptop:2"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+
       <section
-        className="mx-auto flex w-full flex-col items-center space-y-3 pt-14
-      delay-150 duration-300 laptop:pt-16 desktop:pt-24"
+        className="mx-auto flex w-full flex-col items-center space-y-3 pt-10
+      delay-150 duration-300 laptop:pt-16 desktop:pt-20"
       >
         <h1 className="text-center text-base font-semibold text-[#0085FF] delay-150 duration-300 laptop:text-xl desktop:text-2xl">
           무료컨설팅
@@ -309,25 +325,31 @@ const EventPage = () => {
       </section>
 
       <section className="bg-[#EDF6FF]">
-        <div className="relative  mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between space-y-2 desktop:px-20 ">
-          <h1 className="mt-14 text-left text-base font-semibold text-[#0085FF] delay-150 duration-300 laptop:text-xl desktop:text-lg">
+        <div className="relative mx-auto flex w-full max-w-[440px] flex-col items-start px-5 pb-5 pt-10 laptop:max-w-[1200px] laptop:items-start laptop:px-44 laptop:pb-5 laptop:pt-14 desktop:pb-2">
+          <h1 className="pb-1 text-base font-semibold text-[#0085FF] delay-150 duration-300 laptop:pb-2 laptop:text-xl desktop:text-left desktop:text-lg">
             로봇AI 전문가
           </h1>
-          <h1 className="text-left text-lg font-semibold text-black delay-150 duration-300 laptop:text-xl desktop:text-3xl">
+          <h1 className="pb-5 text-left text-xl font-semibold text-black delay-150 duration-300 laptop:pb-0 laptop:text-2xl desktop:text-3xl">
             취업에 대한 커리큘럼을
             <br />
             확실히 챙길 당신의 컨설턴트예요.
           </h1>
+          <hr></hr>
+          <div className="relative w-full max-w-[400px] rounded-3xl bg-[#B9DBFF] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
+            <div className="mx-auto mt-3 w-full min-w-0 max-w-[180px] laptop:hidden ">
+              <Image src={profile_ceo} alt="사진" />
+            </div>
+          </div>
         </div>
-        <div className="relative mx-auto  mt-0 flex w-full max-w-[1200px] flex-col items-start justify-between py-5 laptop:flex-row laptop:py-8 desktop:px-20  ">
+        <div className="slaptop:flex-row slaptop:pt-0 relative mx-auto flex w-full max-w-[440px] flex-col items-start justify-between px-5 laptop:max-w-[1200px] laptop:px-44 laptop:pb-10 desktop:pt-6  ">
           <div className="mx-auto flex w-full flex-col items-start">
-            <div className="h-20 border-l-4 border-[#0085FF] pb-3 pl-4  text-xl font-semibold text-gray-800 laptop:pb-4  laptop:text-xl desktop:text-2xl ">
-              <div className="mb-2 mt-1">로봇에 풍덩</div>
-              <div className="mb-0 text-xl font-medium laptop:text-lg desktop:text-xl ">
+            <div className="h-12 border-l-2 border-[#0085FF] pb-3 pl-4 text-base font-semibold text-gray-800 laptop:h-20 laptop:border-l-4 laptop:pb-4  laptop:text-xl desktop:text-2xl ">
+              <div className="laptop:mb-2 laptop:mt-1">로봇에 풍덩</div>
+              <div className="text-sm font-medium laptop:text-lg desktop:text-xl ">
                 대표 컨설턴트 이력
               </div>
             </div>
-            <div className="mt-5 text-start text-sm font-light text-gray-700 laptop:text-base desktop:text-lg">
+            <div className="mb-10 mt-5 break-keep text-start text-sm font-light text-gray-700 laptop:mb-0 laptop:text-sm desktop:text-base">
               현) 딥트리 대표
               <br />
               현) 직업능력심사평가원 인증 NCS 확인강사
@@ -341,8 +363,55 @@ const EventPage = () => {
               특허 등록) 사용자와 상호작용하는 스피치 보조 로봇의 동작 방법
             </div>
           </div>
-          <div className="mx-auto w-full min-w-0 max-w-[150px] delay-150 duration-300 laptop:absolute laptop:bottom-0 laptop:right-48 laptop:mx-0 laptop:max-w-[200px] desktop:max-w-[280px]">
+          <div className="mx-auto mt-7 hidden w-full min-w-0 max-w-[200px] delay-150 duration-300 laptop:absolute laptop:bottom-0 laptop:right-40 laptop:mx-0 laptop:inline laptop:max-w-[240px] desktop:mt-0 desktop:max-w-[280px]">
             <Image src={profile_ceo} alt="사진" />
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-5 bg-[#F2FEFF]">
+        <div className="relative mx-auto flex w-full max-w-[440px] flex-col px-5 pb-5 pt-10 laptop:max-w-[1200px] laptop:items-end laptop:px-48 laptop:pb-5 laptop:pt-14 desktop:pb-2">
+          <h1 className="pb-1 text-base font-semibold text-[#22D1FF] delay-150 duration-300 laptop:pb-2 laptop:text-end laptop:text-xl desktop:text-lg">
+            로봇AI 전문가
+          </h1>
+          <h1 className="pb-5 text-xl font-semibold text-black delay-150 duration-300 laptop:pb-0 laptop:text-end laptop:text-2xl desktop:text-3xl">
+            딥트리의
+            <br />
+            파트너 컨설턴트.
+          </h1>
+          <div className="relative w-full max-w-[400px] rounded-3xl bg-[#9BFAFF] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
+            <div className="mx-auto w-full min-w-0 max-w-[300px] laptop:hidden ">
+              <Image src={profile_partner} alt="사진" />
+            </div>
+          </div>
+        </div>
+        <div className="slaptop:pt-0 relative mx-auto flex w-full max-w-[440px] flex-col items-start justify-between px-5 laptop:max-w-[1200px] laptop:flex-row laptop:px-48 laptop:pb-10 desktop:pt-6">
+          <div className="mx-auto mt-7 hidden w-full min-w-0 delay-150 duration-300 laptop:absolute laptop:bottom-0 laptop:left-20 laptop:mx-0 laptop:inline laptop:max-w-[380px] desktop:mt-0 desktop:max-w-[440px]">
+            <Image src={profile_partner} alt="사진" />
+          </div>
+          <div className="mx-auto flex w-full flex-col laptop:items-end">
+            <div
+              className="h-12 border-l-2 border-[#22D1FF] 
+            pb-3 pl-4 text-base font-semibold text-gray-800 laptop:h-20 laptop:border-l-0 laptop:border-r-4 laptop:pb-4 laptop:pl-0 laptop:pr-4  laptop:text-xl desktop:text-2xl "
+            >
+              <div className="laptop:mb-2 laptop:mt-1 laptop:text-end">
+                로봇에 풍덩
+              </div>
+              <div className="text-sm font-medium laptop:text-lg desktop:text-xl ">
+                파트너 컨설턴트 이력
+              </div>
+            </div>
+            <div className="mb-10 mt-5 break-keep text-sm font-light text-gray-700 laptop:mb-0 laptop:text-end laptop:text-sm desktop:text-base">
+              현) 딥트리 파트너
+              <br />
+              현) 직업능력심사평가원 인증 NCS 확인강사
+              <br />
+              전) 패스트캠퍼스 데이터사이언스 분야 전임강사
+              <br />
+              한양대학교 석사 졸업
+              <br />
+              데이터분석 관련 논문 및 강의 다수 진행
+            </div>
           </div>
         </div>
       </section>
