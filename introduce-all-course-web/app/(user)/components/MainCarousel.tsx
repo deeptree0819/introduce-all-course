@@ -15,12 +15,14 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
+import MainCarouselSkeleton from "./MainCarouselSkeleton";
+
 const MainCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  const { data: mainBanners } = useGetAllMainBanners();
+  const { data: mainBanners, isLoading } = useGetAllMainBanners();
 
   useEffect(() => {
     if (!api) {
@@ -41,7 +43,9 @@ const MainCarousel = () => {
 
   const data = extendArrayToLength(mainBanners, 5);
 
-  return (
+  return isLoading ? (
+    <MainCarouselSkeleton />
+  ) : (
     <Carousel
       className="flex flex-col items-center space-y-5"
       setApi={setApi}
@@ -58,7 +62,7 @@ const MainCarousel = () => {
                 <Image
                   src={item.main_banner_image_url}
                   alt={item.main_banner_image_name}
-                  className="aspect-video w-full rounded-2xl transition-transform duration-500 hover:scale-105"
+                  className="aspect-video w-full rounded-2xl transition-transform duration-500 hover:scale-105 laptop:rounded-3xl"
                   width={500}
                   height={281.25}
                 />
