@@ -14,6 +14,7 @@ import { useGetAllFreeLecturesWithPagination } from "@/app/hooks/user/freeLectur
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import FreeLectureCard from "./FreeLectureCard";
+import FreeLectureListSkeleton from "./FreeLectureListSkeleton";
 
 const FreeLectureCardList = () => {
   const { freeLectureTagIds, order, page } = useGetSearchParams();
@@ -24,16 +25,18 @@ const FreeLectureCardList = () => {
       ? FreeLecturesOrderBy.FREE_LECTURE_VIEW_COUNT
       : FreeLecturesOrderBy.CREATED_AT;
 
-  const { data: freeLectures } = useGetAllFreeLecturesWithPagination({
-    freeLectureTagIds:
-      !!freeLectureTagIds && !!freeLectureTagIds.length
-        ? freeLectureTagIds.split(",").map(Number)
-        : [],
-    order: orderDirection,
-    orderBy,
-    page: page ? +page : 1,
-    itemsPerPage: 24,
-  });
+  const { data: freeLectures, isLoading } = useGetAllFreeLecturesWithPagination(
+    {
+      freeLectureTagIds:
+        !!freeLectureTagIds && !!freeLectureTagIds.length
+          ? freeLectureTagIds.split(",").map(Number)
+          : [],
+      order: orderDirection,
+      orderBy,
+      page: page ? +page : 1,
+      itemsPerPage: 24,
+    }
+  );
 
   const updateQueryParams = useUpdateQueryParams();
   const deleteQueryParams = useDeleteQueryParams();
@@ -68,8 +71,10 @@ const FreeLectureCardList = () => {
           </ToggleGroupItem>
         </ToggleGroup>
 
-        {!!freeLectures && !!freeLectures.items.length ? (
-          <div className="grid w-fit grid-cols-2 gap-5 laptop:grid-cols-3 laptop:gap-7 desktop:grid-cols-4 desktop:gap-10">
+        {isLoading ? (
+          <FreeLectureListSkeleton />
+        ) : !!freeLectures && !!freeLectures.items.length ? (
+          <div className="grid w-fit grid-cols-1 gap-5 tablet:grid-cols-2 laptop:grid-cols-3 laptop:gap-7 desktop:grid-cols-4 desktop:gap-10">
             {freeLectures.items.map((item) => (
               <Fragment key={item.free_lecture_id}>
                 <FreeLectureCard item={item} />
