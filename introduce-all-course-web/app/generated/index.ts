@@ -75,4 +75,5 @@ export { AdminUsersService } from "./services/AdminUsersService";
 export { DefaultService } from "./services/DefaultService";
 export { EventsService } from "./services/EventsService";
 export { FreeLecturesService } from "./services/FreeLecturesService";
+export { InquiryFormLinkService } from "./services/InquiryFormLinkService";
 export { MainBannersService } from "./services/MainBannersService";
