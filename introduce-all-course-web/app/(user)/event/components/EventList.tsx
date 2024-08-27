@@ -14,6 +14,7 @@ import { useGetAllEventsWithPagination } from "@/app/hooks/user/eventsHooks";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import EventCard from "./EventCard";
+import EventListSkeleton from "./EventListSkeleton";
 
 const EventList = () => {
   const { eventCategoryIds, order, page } = useGetSearchParams();
@@ -26,7 +27,7 @@ const EventList = () => {
       ? EventsOrderBy.EVENT_VIEW_COUNT
       : EventsOrderBy.CREATED_AT;
 
-  const { data: events } = useGetAllEventsWithPagination({
+  const { data: events, isLoading } = useGetAllEventsWithPagination({
     eventCategoryId:
       !!eventCategoryIds && !!eventCategoryIds.length
         ? eventCategoryIds.split(",").map(Number)
@@ -70,7 +71,9 @@ const EventList = () => {
           </ToggleGroupItem>
         </ToggleGroup>
 
-        {!!events && !!events.items.length ? (
+        {isLoading ? (
+          <EventListSkeleton />
+        ) : !!events && !!events.items.length ? (
           <div className="grid w-fit grid-cols-2 gap-5 laptop:grid-cols-3 laptop:gap-7 desktop:grid-cols-4 desktop:gap-10">
             {events.items.map((event) => (
               <Fragment key={event.events_id}>

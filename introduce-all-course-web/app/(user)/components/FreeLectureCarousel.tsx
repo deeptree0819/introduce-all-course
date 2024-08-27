@@ -17,22 +17,27 @@ import {
 } from "@/components/ui/carousel";
 
 import FreeLectureCard from "../free-lecture/components/FreeLectureCard";
+import FreeLectureCarouselSkeleton from "./FreeLectureCarouselSkeleton";
 
 const FreeLectureCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
 
-  const { data: freeLectures } = useGetAllFreeLecturesWithPagination({
-    page: 1,
-    itemsPerPage: 10,
-    order: Order.DESC,
-    orderBy: FreeLecturesOrderBy.FREE_LECTURE_VIEW_COUNT,
-  });
+  const { data: freeLectures, isLoading } = useGetAllFreeLecturesWithPagination(
+    {
+      page: 1,
+      itemsPerPage: 10,
+      order: Order.DESC,
+      orderBy: FreeLecturesOrderBy.FREE_LECTURE_VIEW_COUNT,
+    }
+  );
 
   if (!freeLectures || !freeLectures.items.length) return null;
 
   const data = extendArrayToLength(freeLectures.items, 4);
 
-  return (
+  return isLoading ? (
+    <FreeLectureCarouselSkeleton />
+  ) : (
     <Carousel
       className="flex flex-row items-center space-y-2"
       setApi={setApi}
