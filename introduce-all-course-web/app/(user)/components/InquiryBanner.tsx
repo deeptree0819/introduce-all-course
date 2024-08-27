@@ -7,11 +7,14 @@ import { cn } from "@utils/common";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useGetLatestInquiryFormLink } from "@/app/hooks/user/inquiryHooks";
+
 type InquiryBannerProps = {
   className?: string;
 };
 
 const InquiryBanner = ({ className }: InquiryBannerProps) => {
+  const { data: inquiryFormLink } = useGetLatestInquiryFormLink();
   return (
     <aside
       className={cn(
@@ -62,13 +65,19 @@ const InquiryBanner = ({ className }: InquiryBannerProps) => {
         </div>
       </div>
 
-      <Link
-        href="https://tally.so"
-        className="mt-5 rounded-full bg-brand px-8 py-3 text-lg font-semibold text-white shadow-lg shadow-slate-200"
-        target="_blank"
-      >
-        무료상담 신청하기
-      </Link>
+      {inquiryFormLink ? (
+        <Link
+          href={inquiryFormLink}
+          className="mt-5 rounded-full bg-brand px-8 py-3 text-lg font-semibold text-white shadow-lg shadow-slate-200"
+          target="_blank"
+        >
+          무료상담 신청하기
+        </Link>
+      ) : (
+        <div className="mt-5 rounded-full bg-brand px-8 py-3 text-lg font-semibold text-white shadow-lg shadow-slate-200">
+          무료상담 신청하기
+        </div>
+      )}
 
       <Image
         src={PointingUpImage}
