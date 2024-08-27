@@ -31,7 +31,8 @@ const FreeLectureCarousel = () => {
     }
   );
 
-  if (!freeLectures || !freeLectures.items.length) return null;
+  if (!freeLectures || !freeLectures.items.length)
+    return <FreeLectureCarouselSkeleton />;
 
   const data = extendArrayToLength(freeLectures.items, 4);
 

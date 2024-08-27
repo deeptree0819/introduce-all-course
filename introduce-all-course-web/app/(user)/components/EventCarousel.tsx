@@ -30,7 +30,7 @@ const EventCarousel = () => {
   });
 
   if (!events || !events.items.length) {
-    return null;
+    return <EventCarouselSkeleton />;
   }
 
   const data = extendArrayToLength(events.items, 4);
