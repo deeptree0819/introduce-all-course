@@ -1,13 +1,8 @@
-import { JwtAuthGuard } from "@admin/auth/jwt-auth.guard";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
-import { RolesGuard } from "@common/guards/roles.guard";
-import { Controller, Get, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth } from "@nestjs/swagger";
+import { Controller, Get } from "@nestjs/common";
 import { MainBannerDto } from "./dtos/main-banner.dto";
 import { MainBannersService } from "./main-banners.service";
 
-@UseGuards(JwtAuthGuard, RolesGuard)
-@ApiBearerAuth()
 @Controller()
 export class MainBannersController {
   constructor(private readonly mainBannersService: MainBannersService) {}
