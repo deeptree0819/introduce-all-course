@@ -1,4 +1,5 @@
 "use client";
+
 import BoyImage from "@assets/inquiryBannerBoy.png";
 import GirlImage from "@assets/inquiryBannerGirl.png";
 import Logo from "@assets/inquirybg.svg";
@@ -14,7 +15,11 @@ import profile_ceo from "@assets/profile_ceo.png";
 import profile_partner from "@assets/profile_partner1.png";
 import Image from "next/image";
 
+import { useGetLatestInquiryFormLink } from "@/app/hooks/user/inquiryHooks";
+
 const EventPage = () => {
+  const { data: inquiryFormLink } = useGetLatestInquiryFormLink();
+
   return (
     <main>
       <section className="mx-auto flex w-full max-w-[1200px] flex-col items-center delay-150 duration-300 laptop:px-16 laptop:py-10 desktop:px-8 desktop:py-12">
@@ -37,7 +42,7 @@ const EventPage = () => {
             </div>
             <div className="pt-10">
               <a
-                href="https://tally.so"
+                href={inquiryFormLink}
                 className="rounded-full bg-brand px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-slate-300 delay-150 duration-300 hover:bg-[hsl(209,100%,54%)] laptop:px-10 laptop:py-4 laptop:text-base desktop:px-14 desktop:py-5 desktop:text-lg"
                 target="_blank"
               >
