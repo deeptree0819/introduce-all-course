@@ -15,6 +15,8 @@ export class YoutubeService {
   async getVideoViewCounts(
     lectureData: UpdateLectureViewCountDto[],
   ): Promise<YoutubeLectureDataDto[]> {
+    if (!lectureData.length) return [];
+
     const videoIds = lectureData
       .map((item) => this.extractVideoIdFromUrl(item.free_lecture_url))
       .filter((id) => id !== null);

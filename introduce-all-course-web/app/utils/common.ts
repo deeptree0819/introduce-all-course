@@ -137,6 +137,8 @@ export const getUploadUrl = async ({
 };
 
 export const extendArrayToLength = <T>(arr: T[], limit: number): T[] => {
+  if (!arr.length) return [];
+
   while (arr.length < limit) {
     arr.push(...arr);
   }
