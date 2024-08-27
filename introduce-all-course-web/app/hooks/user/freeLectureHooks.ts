@@ -3,7 +3,6 @@ import {
   FreeLectureResultDto,
   FreeLecturesOrderBy,
   FreeLecturesService,
-  OpenAPI,
   Order,
   PaginatedFreeLectureSummaryListDto,
   PaginatedFreeLectureTagListDto,
@@ -34,7 +33,6 @@ export const useGetAllFreeLecturesWithPagination = (
         page,
         itemsPerPage
       ),
-    enabled: !!OpenAPI.TOKEN,
   });
 };
 
@@ -42,7 +40,7 @@ export const useGetFreeLectureById = (postId: number) => {
   return useQuery<FreeLectureResultDto, ApiError>({
     queryKey: ["user", "free-lecture", "posts", postId],
     queryFn: () => FreeLecturesService.getFreeLectureById(postId),
-    enabled: !!OpenAPI.TOKEN && !!postId,
+    enabled: !!postId,
   });
 };
 
@@ -54,6 +52,5 @@ export const useGetAllFreeLectureTagsWithPagination = (dto: PaginationDto) => {
         dto.page,
         dto.itemsPerPage
       ),
-    enabled: !!OpenAPI.TOKEN,
   });
 };

@@ -2,7 +2,6 @@ import {
   AdminInquiryService,
   ApiError,
   CreateInquiryFormLinkDto,
-  OpenAPI,
   PaginatedInquiryFormLinkListDto,
 } from "@generated/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -21,7 +20,6 @@ export const useGetAllInquiryFormLinksWithPagination = (dto: PaginationDto) => {
         page,
         itemsPerPage
       ),
-    enabled: !!OpenAPI.TOKEN,
   });
 };
 
@@ -29,7 +27,6 @@ export const useGetLatestInquiryFormLink = () => {
   return useQuery<string, ApiError>({
     queryKey: ["admin", "inquiry", "form-links"],
     queryFn: () => AdminInquiryService.getLatestInquiryFormLink(),
-    enabled: !!OpenAPI.TOKEN,
   });
 };
 

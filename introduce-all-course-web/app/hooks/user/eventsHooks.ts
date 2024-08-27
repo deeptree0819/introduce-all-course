@@ -49,6 +49,7 @@ export const useGetEventById = (eventId: number) => {
   return useQuery<EventResultDto, ApiError>({
     queryKey: ["user", "events", "posts", eventId],
     queryFn: () => EventsService.getEventById(eventId),
+    enabled: !!eventId,
   });
 };
 
