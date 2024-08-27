@@ -17,11 +17,12 @@ import {
 } from "@/components/ui/carousel";
 
 import EventCard from "../event/components/EventCard";
+import EventCarouselSkeleton from "./EventCarouselSkeleton";
 
 const EventCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
 
-  const { data: events } = useGetAllEventsWithPagination({
+  const { data: events, isLoading } = useGetAllEventsWithPagination({
     page: 1,
     itemsPerPage: 10,
     order: Order.DESC,
@@ -34,7 +35,9 @@ const EventCarousel = () => {
 
   const data = extendArrayToLength(events.items, 4);
 
-  return (
+  return isLoading ? (
+    <EventCarouselSkeleton />
+  ) : (
     <Carousel
       className="flex flex-row items-center space-y-2"
       setApi={setApi}
@@ -58,7 +61,7 @@ const EventCarousel = () => {
         {data.map((item, index) => (
           <CarouselItem
             key={index}
-            className="max-w-xs basis-5/12 laptop:basis-3/12 "
+            className="max-w-xs basis-5/12 laptop:basis-3/12"
           >
             <EventCard item={item} />
           </CarouselItem>

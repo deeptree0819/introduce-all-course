@@ -7,13 +7,15 @@ import { Fragment, useEffect, useState } from "react";
 
 import { useGetAllEventCategoriesWithPagination } from "@/app/hooks/user/eventsHooks";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const EventFilter = () => {
   const [eventCategoryIds, setEventCategoryIds] = useState<number[]>([]);
-  const { data: eventCategories } = useGetAllEventCategoriesWithPagination({
-    page: 1,
-    itemsPerPage: 100,
-  });
+  const { data: eventCategories, isLoading } =
+    useGetAllEventCategoriesWithPagination({
+      page: 1,
+      itemsPerPage: 100,
+    });
 
   const updateQueryParams = useUpdateQueryParams();
   const deleteQueryParams = useDeleteQueryParams();
@@ -41,26 +43,35 @@ const EventFilter = () => {
     });
   };
 
-  if (!eventCategories) return null;
-
   return (
     <div className="w-full space-y-3 rounded-xl bg-brand-secondary p-5 shadow-inner laptop:p-9">
       <div className="text-base font-semibold laptop:text-xl">공고분야</div>
       <Separator />
       <div className="flex flex-wrap gap-2">
-        {eventCategories.items.map((eventCategory, index) => (
-          <Fragment key={index}>
-            <ChipToggle
-              label={eventCategory.event_category_name}
-              clicked={eventCategoryIds.includes(
-                eventCategory.event_categories_id
-              )}
-              onClick={() =>
-                handleOnValueChange(eventCategory.event_categories_id)
-              }
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, index) => (
+            <Skeleton
+              className="h-6 w-12 rounded-xl bg-slate-200"
+              key={index}
             />
-          </Fragment>
-        ))}
+          ))
+        ) : !!eventCategories && !!eventCategories.items.length ? (
+          eventCategories.items.map((eventCategory, index) => (
+            <Fragment key={index}>
+              <ChipToggle
+                label={eventCategory.event_category_name}
+                clicked={eventCategoryIds.includes(
+                  eventCategory.event_categories_id
+                )}
+                onClick={() =>
+                  handleOnValueChange(eventCategory.event_categories_id)
+                }
+              />
+            </Fragment>
+          ))
+        ) : (
+          <div>공고분야가 없습니다.</div>
+        )}
       </div>
     </div>
   );
