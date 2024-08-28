@@ -63,7 +63,7 @@ export default function AdminSidebarNav({ ...props }: AdminSidebarNavProps) {
   return (
     <div className="z-10 flex h-screen w-[255px] flex-col justify-between space-y-5 border-r bg-[#F9FAFB] p-4">
       <div className="space-y-3">
-        <div className="text-2xl font-extrabold">로봇에 풍덩</div>
+        <div className="text-2xl font-extrabold">로봇다이브</div>
         <div className="flex h-[70px] w-full flex-col justify-center rounded-md bg-white px-3">
           <div className="text-[14px] font-bold text-gray-900">
             {me?.admin_name}

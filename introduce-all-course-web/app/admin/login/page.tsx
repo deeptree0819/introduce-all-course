@@ -6,7 +6,7 @@ const AdminLoginPage = () => {
   useOnlyAdminPublicRoute();
   return (
     <div className="m-auto flex h-full min-h-screen w-full max-w-lg flex-col items-center justify-center space-y-14">
-      <h1 className="text-2xl">로봇에 풍덩 V1</h1>
+      <h1 className="text-2xl">로봇다이브 V1</h1>
       <LoginForm />
     </div>
   );

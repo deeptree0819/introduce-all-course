@@ -8,7 +8,7 @@ async function bootstrap() {
 
   if (process.env.APP_ENV !== "production") {
     const config = new DocumentBuilder()
-      .setTitle("로봇에 풍덩 API")
+      .setTitle("로봇다이브 API")
       .setVersion("1.0.0")
       .addBearerAuth()
       .build();
