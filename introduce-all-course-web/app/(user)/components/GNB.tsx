@@ -15,7 +15,7 @@ const GNB = () => {
     <header className="sticky top-0 z-20 bg-white/70 backdrop-blur-md">
       <nav className="mx-auto flex max-w-[1300px] flex-row items-center justify-between px-4 py-3 laptop:px-24 laptop:py-4">
         <Link href="/" className="cursor-pointer">
-          <Image src={Logo} alt="logo" className="h-[34px] w-[130px]" />
+          <Image src={Logo} alt="logo" className="h-[31px] w-[130px]" />
         </Link>
 
         <div className="ml-5 hidden flex-1 flex-row items-center justify-between laptop:flex">

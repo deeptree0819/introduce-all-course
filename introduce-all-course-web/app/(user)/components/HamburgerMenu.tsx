@@ -37,7 +37,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
             <div className="mb-8 flex w-full flex-row items-center justify-between pl-2">
               <Link href="/">
                 <Link href="/">
-                  <Image src={Logo} alt="logo" className="h-[34px] w-[127px]" />
+                  <Image src={Logo} alt="logo" className="h-[31px] w-[127px]" />
                 </Link>
               </Link>
               <SheetClose asChild>
