@@ -1,14 +1,9 @@
-"use client";
-import char from "@assets/char.png";
+import CharImage from "@assets/char.png";
 import kakaologinimage from "@assets/kakao_login_large_wide.png";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useGetLatestInquiryFormLink } from "@/app/hooks/user/inquiryHooks";
-
-const EventPage = () => {
-  const { data: inquiryFormLink } = useGetLatestInquiryFormLink();
-
+const LoginPage = () => {
   return (
     <div className="flex grow flex-col laptop:flex-row">
       <div className="flex w-full flex-col items-center justify-center">
@@ -39,7 +34,7 @@ const EventPage = () => {
       </div>
       <div className="flex w-full items-center justify-center laptop:bg-[#E1F7FF]">
         <Image
-          src={char}
+          src={CharImage}
           alt="로봇다이브 캐릭터"
           className="max-w-[300px] delay-150 duration-300 laptop:max-w-[400px] desktop:max-w-[500px]"
         />
@@ -48,4 +43,4 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default LoginPage;
