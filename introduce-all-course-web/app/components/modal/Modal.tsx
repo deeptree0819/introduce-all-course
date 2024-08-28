@@ -5,7 +5,7 @@ import { Button } from "@components/ui/button";
 import { DialogContent } from "@components/ui/dialog";
 import { Dialog } from "@radix-ui/react-dialog";
 
-import { useModalStore } from "@/app/store/modalStore";
+import { useModalStore } from "@/app/stores/modalStore";
 
 const Modal = () => {
   const open = useModalStore((state) => state.open);
