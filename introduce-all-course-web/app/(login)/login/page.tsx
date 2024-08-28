@@ -1,0 +1,46 @@
+"use client";
+import char from "@assets/char.png";
+import kakaologinimage from "@assets/kakao_login_large_wide.png";
+import Image from "next/image";
+import Link from "next/link";
+
+import { useGetLatestInquiryFormLink } from "@/app/hooks/user/inquiryHooks";
+
+const EventPage = () => {
+  const { data: inquiryFormLink } = useGetLatestInquiryFormLink();
+
+  return (
+    <div className="flex h-screen flex-col laptop:flex-row">
+      <div className="flex w-full flex-col items-center justify-center">
+        <div className="text-2xl font-semibold laptop:text-2xl desktop:text-4xl">
+          로그인
+        </div>
+        <div className="break-keep pb-7 pt-2 text-start text-sm font-light text-gray-700 laptop:mb-0 laptop:pb-9 laptop:pt-5 laptop:text-sm desktop:pb-12 desktop:pt-7 desktop:text-base">
+          <Link href={"inquiry"}>
+            <div className="w-full min-w-0 max-w-[300px] items-center pt-3 delay-150 duration-300 desktop:max-w-[400px]">
+              <Image src={kakaologinimage} alt="카카오로그인" />
+            </div>
+            <div
+              className="destkop:pt-10 mx-auto w-full break-keep pt-5 text-center text-xs font-medium
+              text-gray-400 laptop:max-w-[300px] laptop:pt-6 laptop:text-xs desktop:max-w-[400px] desktop:text-sm"
+            >
+              *카카오 로그인을 통해 회원가입 및 로그인을 할 수 있습니다.
+              <br />
+              로그인 버튼을 누르면, 귀하는 <u>개인정보처리방침</u> 및{" "}
+              <u>이용약관</u>에 동의하게 됩니다.
+            </div>
+          </Link>
+        </div>
+      </div>
+      <div className="flex w-full items-center justify-center bg-[#E1F7FF]">
+        <Image
+          src={char}
+          alt="로봇에풍덩 캐릭터"
+          className="max-w-[300px] delay-150 duration-300 laptop:max-w-[400px] desktop:max-w-[500px]"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default EventPage;
