@@ -13,7 +13,7 @@ const Pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "로봇에 풍덩",
+  title: "로봇다이브",
   description: "Developed by Dophin In Cali",
 };
 

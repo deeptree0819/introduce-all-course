@@ -35,7 +35,7 @@ const EventPage = () => {
       <div className="flex w-full items-center justify-center laptop:bg-[#E1F7FF]">
         <Image
           src={char}
-          alt="로봇에풍덩 캐릭터"
+          alt="로봇다이브 캐릭터"
           className="max-w-[300px] delay-150 duration-300 laptop:max-w-[400px] desktop:max-w-[500px]"
         />
       </div>

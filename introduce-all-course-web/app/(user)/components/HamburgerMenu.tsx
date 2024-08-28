@@ -1,9 +1,10 @@
 "use client";
 
-import Logo from "@assets/logo.svg";
+import Logo from "@assets/logo.png";
 import { Button } from "@components/ui/button";
 import { cn } from "@utils/common";
 import { ChevronRightIcon, MenuIcon, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
@@ -36,7 +37,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
             <div className="mb-8 flex w-full flex-row items-center justify-between pl-2">
               <Link href="/">
                 <Link href="/">
-                  <Logo width={127} height={38} className="h-9" />
+                  <Image src={Logo} alt="logo" className="h-[34px] w-[127px]" />
                 </Link>
               </Link>
               <SheetClose asChild>
@@ -50,7 +51,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
               className="mb-8 flex w-full flex-row items-center justify-between pl-3 pr-2"
             >
               <div className="font-regular text-base">로그인이 필요합니다.</div>
-              <ChevronRightIcon className="" />
+              <ChevronRightIcon />
             </Link>
             <div className="flex w-full flex-col space-y-7 px-3">
               <div className="space-y-1">
