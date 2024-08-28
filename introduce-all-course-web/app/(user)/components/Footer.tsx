@@ -35,6 +35,12 @@ const Footer = () => {
       <div className="flex flex-col gap-y-3 laptop:order-first laptop:col-span-2">
         <div className="text-xs font-medium text-slate-500">
           딥트리 | 대표 이체은
+          <br />
+          사업자등록번호 683-02-03204
+          <br />
+          소재지 서울특별시 광진구 광나루로19길23, 1층 103호(군자동,세종대학교
+          가온누리1) <br />
+          개인정보관리책임자 이체은
         </div>
         <div className="text-xs font-medium text-slate-500 laptop:mt-12">
           <Link href="/terms">이용약관</Link>
@@ -42,7 +48,7 @@ const Footer = () => {
           <Link href="/privacy">개인정보 처리방침</Link>
         </div>
         <div className="text-xs font-medium text-slate-500">
-          Copyright by (주) 딥트리. All rights reserved.
+          Copyright by 딥트리. All rights reserved.
         </div>
       </div>
     </footer>
