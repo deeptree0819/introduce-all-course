@@ -2,7 +2,7 @@
 
 import BoyImage from "@assets/inquiryBannerBoy.png";
 import GirlImage from "@assets/inquiryBannerGirl.png";
-import Logo from "@assets/inquirybg.svg";
+import InquiryBg from "@assets/inquirybg.svg";
 import picture1 from "@assets/inquirypicture1.png";
 import picture1_mobile from "@assets/inquirypicture1_mobile.png";
 import picture2 from "@assets/inquirypicture2.png";
@@ -58,7 +58,7 @@ const EventPage = () => {
 
       <section className="relative flex flex-col bg-[#2295FF] laptop:pb-0">
         <div className="absolute inset-0 z-0 h-full w-full">
-          <Logo
+          <InquiryBg
             preserveAspectRatio="xMidYMid slice"
             className="h-full w-full"
           />
@@ -66,7 +66,7 @@ const EventPage = () => {
         <div className="relative mx-auto flex w-full max-w-[1300px] flex-col items-center justify-between px-10 py-5 laptop:flex-row laptop:px-32 laptop:py-10">
           <div>
             <h1 className="pb-3 text-center text-xl  font-semibold text-white shadow-slate-800 drop-shadow-md laptop:pb-4 laptop:text-left laptop:text-2xl desktop:pb-5 desktop:text-3xl ">
-              {`모두 "로봇에풍덩"에서 해결하자!`}
+              {`모두 "로봇다이브"에서 해결하자!`}
             </h1>
 
             <div
@@ -349,7 +349,7 @@ const EventPage = () => {
         <div className="slaptop:flex-row slaptop:pt-0 relative mx-auto flex w-full max-w-[440px] flex-col items-start justify-between px-5 laptop:max-w-[1200px] laptop:px-44 laptop:pb-10 desktop:pt-6  ">
           <div className="mx-auto flex w-full flex-col items-start">
             <div className="h-12 border-l-2 border-[#0085FF] pb-3 pl-4 text-base font-semibold text-gray-800 laptop:h-20 laptop:border-l-4 laptop:pb-4  laptop:text-xl desktop:text-2xl ">
-              <div className="laptop:mb-2 laptop:mt-1">로봇에 풍덩</div>
+              <div className="laptop:mb-2 laptop:mt-1">로봇다이브</div>
               <div className="text-sm font-medium laptop:text-lg desktop:text-xl ">
                 대표 컨설턴트 이력
               </div>
@@ -400,7 +400,7 @@ const EventPage = () => {
             pb-3 pl-4 text-base font-semibold text-gray-800 laptop:h-20 laptop:border-l-0 laptop:border-r-4 laptop:pb-4 laptop:pl-0 laptop:pr-4  laptop:text-xl desktop:text-2xl "
             >
               <div className="laptop:mb-2 laptop:mt-1 laptop:text-end">
-                로봇에 풍덩
+                로봇다이브
               </div>
               <div className="text-sm font-medium laptop:text-lg desktop:text-xl ">
                 파트너 컨설턴트 이력
