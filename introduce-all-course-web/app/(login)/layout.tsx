@@ -10,7 +10,7 @@ export default function UserLayout({
     <div className="flex min-h-screen flex-col">
       <GlobalBanner />
       <GNB />
-      <div className="grow">{children}</div>
+      {children}
     </div>
   );
 }
