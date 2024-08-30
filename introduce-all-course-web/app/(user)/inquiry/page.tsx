@@ -385,13 +385,13 @@ const EventPage = () => {
             파트너 컨설턴트.
           </h1>
           <div className="relative w-full max-w-[400px] rounded-3xl bg-[#9BFAFF] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
-            <div className="mx-auto w-full min-w-0 max-w-[300px] laptop:hidden ">
+            <div className="mx-auto w-full min-w-0 max-w-[200px] laptop:hidden ">
               <Image src={profile_partner} alt="사진" />
             </div>
           </div>
         </div>
         <div className="slaptop:pt-0 relative mx-auto flex w-full max-w-[440px] flex-col items-start justify-between px-5 laptop:max-w-[1200px] laptop:flex-row laptop:px-48 laptop:pb-10 desktop:pt-6">
-          <div className="mx-auto mt-7 hidden w-full min-w-0 delay-150 duration-300 laptop:absolute laptop:bottom-0 laptop:left-20 laptop:mx-0 laptop:inline laptop:max-w-[380px] desktop:mt-0 desktop:max-w-[440px]">
+          <div className="mx-auto mt-7 hidden w-full min-w-0 delay-150 duration-300 laptop:absolute laptop:bottom-0 laptop:left-36 laptop:mx-0 laptop:inline laptop:max-w-[240px] desktop:mt-0 desktop:max-w-[280px]">
             <Image src={profile_partner} alt="사진" />
           </div>
           <div className="mx-auto flex w-full flex-col laptop:items-end">
@@ -411,7 +411,7 @@ const EventPage = () => {
               <br />
               현) 직업능력심사평가원 인증 NCS 확인강사
               <br />
-              전) 패스트캠퍼스 데이터사이언스 분야 전임강사
+              전) 데이원컴퍼니 데이터사이언스 분야 전임강사
               <br />
               한양대학교 석사 졸업
               <br />
