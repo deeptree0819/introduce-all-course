@@ -1,18 +1,21 @@
+import { Tables } from "@common/database.types";
 import { CustomApiOperation } from "@common/decorators/api-operation.decorator";
 import { CurrentUser } from "@common/decorators/current-user.decorator";
 import { Public } from "@common/decorators/public.decorator";
-import { RolesGuard } from "@common/guards/roles.guard";
 import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth } from "@nestjs/swagger";
+import { UsersService } from "@user/users/users.service";
 import { Request } from "express";
 import { AuthGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
 import { UserLoginDto } from "./dtos/user-login.dto";
-import { UserDto } from "./dtos/user.dto";
 
 @Controller()
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @CustomApiOperation({
     summary: "로그인 및 가입",
@@ -32,9 +35,9 @@ export class AuthController {
     tags: ["auth"],
   })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard, RolesGuard)
+  @UseGuards(AuthGuard)
   @Get("/me")
-  async findMe(@CurrentUser() me): Promise<UserDto> {
-    return this.authService.getUserById(me.userId);
+  async findMe(@CurrentUser() me): Promise<Tables<"users">> {
+    return this.usersService.getUserById(me.userId);
   }
 }

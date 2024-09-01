@@ -2,36 +2,30 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { UserLoginDto } from "../models/UserLoginDto";
+import type { UpdateUserDto } from "../models/UpdateUserDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
-export class AuthService {
+export class UsersService {
   /**
-   * 로그인 및 가입
+   * 유저 정보 수정
+   * @param userId
    * @param requestBody
    * @returns any
    * @throws ApiError
    */
-  public static loginByEmail(
-    requestBody: UserLoginDto
+  public static updateUser(
+    userId: number,
+    requestBody: UpdateUserDto
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
-      method: "POST",
-      url: "/login",
+      method: "PATCH",
+      url: "/user/{userId}",
+      path: {
+        userId: userId,
+      },
       body: requestBody,
       mediaType: "application/json",
-    });
-  }
-  /**
-   * 내 정보 조회
-   * @returns any
-   * @throws ApiError
-   */
-  public static findMe(): CancelablePromise<any> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/me",
     });
   }
 }

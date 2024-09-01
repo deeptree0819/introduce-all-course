@@ -7,7 +7,6 @@ import {
 import axios from "axios";
 import { Request } from "express";
 import { UserLoginDto } from "./dtos/user-login.dto";
-import { UserDto } from "./dtos/user.dto";
 
 @Injectable()
 export class AuthService {
@@ -128,20 +127,5 @@ export class AuthService {
     }
 
     return;
-  }
-
-  async getUserById(userId: number): Promise<UserDto> {
-    const client = this.supabaseService.getClient();
-    const { data, error } = await client
-      .from("users")
-      .select()
-      .eq("users_id", userId)
-      .maybeSingle();
-
-    if (error || !data) {
-      throw new Error("사용자 정보를 찾을 수 없습니다.");
-    }
-
-    return data;
   }
 }
