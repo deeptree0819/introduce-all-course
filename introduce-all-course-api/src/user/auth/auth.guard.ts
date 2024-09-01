@@ -13,9 +13,14 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext) {
     const request: Request = context.switchToHttp().getRequest();
-    const { token, provider }: { token: string; provider: string } = JSON.parse(
-      request.headers["authorization"]?.split(" ")[1],
-    );
+
+    const tokenObjectString = request.headers["authorization"]?.split(" ")[1];
+    if (!tokenObjectString) {
+      throw new UnauthorizedException("로그인이 만료되었습니다.");
+    }
+
+    const { token, provider }: { token: string; provider: string } =
+      JSON.parse(tokenObjectString);
 
     if (!token || !provider) {
       throw new UnauthorizedException("로그인이 만료되었습니다.");

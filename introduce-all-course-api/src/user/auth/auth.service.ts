@@ -72,9 +72,13 @@ export class AuthService {
   }
 
   async signIn(dto: UserLoginDto, req: Request): Promise<void> {
-    const { token, provider }: { token: string; provider: string } = JSON.parse(
-      req.headers["authorization"]?.split(" ")[1],
-    );
+    const tokenObjectString = req.headers["authorization"]?.split(" ")[1];
+    if (!tokenObjectString) {
+      throw new UnauthorizedException("로그인이 만료되었습니다.");
+    }
+
+    const { token, provider }: { token: string; provider: string } =
+      JSON.parse(tokenObjectString);
     const isAuthorized = await this.validateToken(token, provider);
     if (!isAuthorized)
       throw new UnauthorizedException("로그인을 실패하였습니다.");
