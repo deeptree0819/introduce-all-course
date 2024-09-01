@@ -13,9 +13,7 @@ export class AuthService {
    * @returns any
    * @throws ApiError
    */
-  public static loginByEmail(
-    requestBody: UserLoginDto
-  ): CancelablePromise<any> {
+  public static signIn(requestBody: UserLoginDto): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/login",

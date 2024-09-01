@@ -23,10 +23,7 @@ export class AuthController {
   })
   @Public()
   @Post("/login")
-  async loginByEmail(
-    @Body() dto: UserLoginDto,
-    @Req() req: Request,
-  ): Promise<void> {
+  async signIn(@Body() dto: UserLoginDto, @Req() req: Request): Promise<void> {
     return this.authService.signIn(dto, req);
   }
 
