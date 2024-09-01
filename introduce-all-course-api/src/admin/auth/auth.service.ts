@@ -27,14 +27,12 @@ export class AuthService {
     const ip = req.ips.length ? req.ips[0] : req.ip;
     const agent = req.headers["user-agent"];
 
-    const { error } = await this.supabaseService
-      .getClient()
-      .from("admin_login_histories")
-      .insert({
-        admin_id: admin.admin_id,
-        ip,
-        agent,
-      });
+    const client = this.supabaseService.getClient();
+    const { error } = await client.from("admin_login_histories").insert({
+      admin_id: admin.admin_id,
+      ip,
+      agent,
+    });
 
     if (error) {
       // TODO: Log error
