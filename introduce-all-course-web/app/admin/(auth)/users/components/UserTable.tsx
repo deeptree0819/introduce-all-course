@@ -1,5 +1,5 @@
 "use client";
-import { Role, UserSummaryDto } from "@generated/index";
+import { AdminUserSummaryDto, Role } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
 import { getEnumIfExists, useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -10,7 +10,7 @@ import { useGetAllUsersWithPagination } from "@/app/hooks/admin/adminUsersHooks"
 
 import UserSearch from "./UserSearch";
 
-export const columns: ColumnDef<UserSummaryDto>[] = [
+export const columns: ColumnDef<AdminUserSummaryDto>[] = [
   {
     accessorKey: "users_id",
     header: "ID",

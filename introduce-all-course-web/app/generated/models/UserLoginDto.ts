@@ -2,20 +2,20 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Gender } from "./Gender";
-import type { Role } from "./Role";
-export type UserDto = {
-  role: Role;
-  gender: Gender;
-  users_id: number;
-  created_at: string;
-  updated_at: string;
+export type UserLoginDto = {
+  kakao_id: number;
   nickname: string;
   profile_url: string;
   profile_thumbnail_url: string;
-  kakao_id: number;
+  gender: UserLoginDto.gender;
   user_name: string;
   email: string;
   birthyear: string;
   phone_number: string;
 };
+export namespace UserLoginDto {
+  export enum gender {
+    MALE = "MALE",
+    FEMALE = "FEMALE",
+  }
+}

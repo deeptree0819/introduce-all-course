@@ -2,7 +2,7 @@ import { Enums, Tables } from "@common/database.types";
 import { Role } from "@common/enum";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class UserSummaryDto
+export class AdminUserSummaryDto
   implements
     Pick<
       Tables<"users">,
