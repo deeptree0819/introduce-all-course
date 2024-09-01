@@ -90,7 +90,7 @@ export class AuthService {
 
     if (selectError) {
       throw new InternalServerErrorException(
-        selectError.message ?? "사용자 정보를 찾을 수 없습니다.",
+        selectError?.message ?? "사용자 정보를 찾을 수 없습니다.",
       );
     }
 
@@ -122,7 +122,7 @@ export class AuthService {
 
     if (upsertError) {
       throw new InternalServerErrorException(
-        selectError.message ?? "사용자 가입에 실패하였습니다.",
+        selectError?.message ?? "사용자 가입에 실패하였습니다.",
       );
     }
 

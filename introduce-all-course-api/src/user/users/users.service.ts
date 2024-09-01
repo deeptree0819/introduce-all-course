@@ -31,7 +31,7 @@ export class UsersService {
       .maybeSingle();
 
     if (error || !data) {
-      throw new Error(error.message ?? "사용자 정보를 수정할 수 없습니다.");
+      throw new Error(error?.message ?? "사용자 정보를 수정할 수 없습니다.");
     }
 
     return data;
