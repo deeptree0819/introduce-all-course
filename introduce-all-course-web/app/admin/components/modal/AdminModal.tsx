@@ -2,7 +2,7 @@
 
 import NewLineText from "@components/common/NewLineText";
 
-import { useAdminModalStore } from "@/app/store/adminModalStore";
+import { useAdminModalStore } from "@/app/stores/adminModalStore";
 
 import { AdminButton } from "../ui/admin-button";
 import { AdminDialog, AdminDialogContent } from "../ui/admin-dialog";

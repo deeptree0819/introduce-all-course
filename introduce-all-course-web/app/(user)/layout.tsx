@@ -1,5 +1,6 @@
 import { OpenAPI } from "@generated/index";
 import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
 import Footer from "./components/Footer";
 import GlobalBanner from "./components/GlobalBanner";
@@ -10,11 +11,8 @@ export default function UserLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const token = getCookie("authjs.session-token");
-  OpenAPI.TOKEN = JSON.stringify({
-    token: typeof token === "string" ? token : undefined,
-    provider: "kakao",
-  });
+  const token = getCookie("user.token", { cookies });
+  OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
 
   return (
     <div className="flex min-h-screen flex-col">

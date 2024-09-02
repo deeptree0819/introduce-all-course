@@ -35,6 +35,6 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get("/me")
   async findMe(@CurrentUser() me): Promise<Tables<"users">> {
-    return this.usersService.getUserById(me.userId);
+    return this.usersService.getUserById(me.users_id);
   }
 }
