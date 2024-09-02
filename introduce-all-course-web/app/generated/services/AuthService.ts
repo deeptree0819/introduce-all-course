@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { UpdateUserDto } from "../models/UpdateUserDto";
 import type { UserLoginDto } from "../models/UserLoginDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
@@ -30,6 +31,20 @@ export class AuthService {
     return __request(OpenAPI, {
       method: "GET",
       url: "/me",
+    });
+  }
+  /**
+   * 내 정보 수정
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public static updateMe(requestBody: UpdateUserDto): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/me",
+      body: requestBody,
+      mediaType: "application/json",
     });
   }
 }

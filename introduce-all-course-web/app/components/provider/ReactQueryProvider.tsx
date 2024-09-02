@@ -31,6 +31,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
               if ((error as ApiError).status === 401) {
                 queryClient.clear();
                 deleteCookie("token");
+                deleteCookie("user.token");
                 OpenAPI.TOKEN = "";
                 push("/");
               }
@@ -45,6 +46,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
               if ((error as ApiError).status === 401) {
                 queryClient.clear();
                 deleteCookie("token");
+                deleteCookie("user.token");
                 OpenAPI.TOKEN = "";
                 push("/");
               }

@@ -3,26 +3,16 @@ import { Gender } from "@common/enum";
 
 export class UpdateUserDto
   implements
-    Pick<
-      Tables<"users">,
-      | "kakao_id"
-      | "nickname"
-      | "profile_url"
-      | "profile_thumbnail_url"
-      | "gender"
-      | "user_name"
-      | "email"
-      | "birthyear"
-      | "phone_number"
+    Partial<
+      Pick<
+        Tables<"users">,
+        "nickname" | "profile_url" | "gender" | "email" | "birthyear"
+      >
     >
 {
-  kakao_id: number;
-  nickname: string;
-  profile_url: string;
-  profile_thumbnail_url: string;
-  gender: Gender;
-  user_name: string;
-  email: string;
-  birthyear: string;
-  phone_number: string;
+  nickname?: string;
+  profile_url?: string;
+  gender?: Gender;
+  email?: string;
+  birthyear?: string;
 }
