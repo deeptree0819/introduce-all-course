@@ -6,7 +6,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { deleteCookie, getCookie } from "cookies-next";
+import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -18,7 +18,7 @@ interface ReactQueryProviderProps {
 
 const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
   const { push } = useRouter();
-  const excludedPages = ["/admin/login"];
+  const excludedPages = ["/admin/login", "/login"];
 
   const [queryClient] = React.useState(
     () =>
@@ -31,6 +31,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
               if ((error as ApiError).status === 401) {
                 queryClient.clear();
                 deleteCookie("token");
+                deleteCookie("user.token");
                 OpenAPI.TOKEN = "";
                 push("/");
               }
@@ -45,6 +46,7 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
               if ((error as ApiError).status === 401) {
                 queryClient.clear();
                 deleteCookie("token");
+                deleteCookie("user.token");
                 OpenAPI.TOKEN = "";
                 push("/");
               }
@@ -58,10 +60,6 @@ const ReactQueryProvider = ({ children }: ReactQueryProviderProps) => {
         },
       })
   );
-
-  const token = getCookie("token");
-
-  OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

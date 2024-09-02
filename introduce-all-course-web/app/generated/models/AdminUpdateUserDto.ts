@@ -2,14 +2,19 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UpdateUserDto = {
+import type { Role } from "./Role";
+export type AdminUpdateUserDto = {
+  role?: Role;
   nickname?: string;
   profile_url?: string;
-  gender?: UpdateUserDto.gender;
+  profile_thumbnail_url?: string;
+  gender?: AdminUpdateUserDto.gender;
+  user_name?: string;
   email?: string;
   birthyear?: string;
+  phone_number?: string;
 };
-export namespace UpdateUserDto {
+export namespace AdminUpdateUserDto {
   export enum gender {
     MALE = "MALE",
     FEMALE = "FEMALE",

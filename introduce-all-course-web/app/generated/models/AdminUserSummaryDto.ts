@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Role } from "./Role";
-export type UserSummaryDto = {
+export type AdminUserSummaryDto = {
   role: Role;
   users_id: number;
   user_name: string;

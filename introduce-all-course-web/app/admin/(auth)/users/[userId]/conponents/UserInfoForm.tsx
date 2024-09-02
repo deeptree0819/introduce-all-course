@@ -7,7 +7,7 @@ import {
   FormItem,
   FormMessage,
 } from "@components/ui/form";
-import { UpdateUserDto } from "@generated/index";
+import { AdminUpdateUserDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -49,7 +49,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
 
   const { data: user } = useGetUserById(userId);
 
-  const form = useForm<UpdateUserDto>({
+  const form = useForm<AdminUpdateUserDto>({
     mode: "onSubmit",
     resolver: zodResolver(UpdateUserSchema),
   });

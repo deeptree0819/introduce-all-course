@@ -3,15 +3,26 @@ import kakaologinimage from "@assets/kakao_login_large_wide.png";
 import Image from "next/image";
 import Link from "next/link";
 
+import { signIn } from "@/app/auth/auth";
+
 const LoginPage = () => {
   return (
-    <div className="flex grow flex-col laptop:flex-row">
+    <form
+      action={async () => {
+        "use server";
+        await signIn("kakao", { redirectTo: "/" });
+      }}
+      className="flex grow flex-col laptop:flex-row"
+    >
       <div className="flex w-full flex-col items-center justify-center">
         <div className="pt-10 text-2xl font-semibold laptop:pt-0 laptop:text-2xl desktop:text-4xl">
           로그인
         </div>
         <div className="items-center break-keep pb-7 pt-2 text-start text-sm font-light text-gray-700 laptop:mb-0 laptop:pb-9 laptop:pt-5 laptop:text-sm desktop:pb-12 desktop:pt-7 desktop:text-base">
-          <button className="mx-auto w-full min-w-0 max-w-[300px] items-center pt-3 delay-150 duration-300 desktop:max-w-[400px]">
+          <button
+            type="submit"
+            className="mx-auto w-full min-w-0 max-w-[300px] items-center pt-3 delay-150 duration-300 desktop:max-w-[400px]"
+          >
             <Image src={kakaologinimage} alt="카카오로그인" />
           </button>
           <div
@@ -39,7 +50,7 @@ const LoginPage = () => {
           className="max-w-[300px] delay-150 duration-300 laptop:max-w-[400px] desktop:max-w-[500px]"
         />
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -2,7 +2,7 @@ import { Role } from "@common/enum";
 import { PaginateDto } from "@common/pagination";
 import { IsEnum, IsOptional, IsString } from "class-validator";
 
-export class GetAllUsersWithPaginationDto extends PaginateDto {
+export class AdminGetAllUsersWithPaginationDto extends PaginateDto {
   @IsEnum(Role)
   @IsOptional()
   role?: Role;

@@ -1,10 +1,10 @@
 import {
+  AdminUpdateUserDto,
   AdminUsersService,
   ApiError,
   OpenAPI,
   PaginatedUserListDto,
   Role,
-  UpdateUserDto,
   UserDto,
 } from "@generated/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -49,7 +49,7 @@ export const useGetUserById = (userId: number) => {
 export const useUpdateUser = (userId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: UpdateUserDto) =>
+    mutationFn: (dto: AdminUpdateUserDto) =>
       AdminUsersService.updateUser(userId, dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "users"] });

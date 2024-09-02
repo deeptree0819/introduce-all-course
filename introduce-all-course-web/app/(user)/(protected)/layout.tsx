@@ -1,10 +1,7 @@
 import { OpenAPI } from "@generated/index";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
-
-import Footer from "./components/Footer";
-import GlobalBanner from "./components/GlobalBanner";
-import GNB from "./components/GNB";
+import { redirect } from "next/navigation";
 
 export default function UserLayout({
   children,
@@ -14,12 +11,7 @@ export default function UserLayout({
   const token = getCookie("user.token", { cookies });
   OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
 
-  return (
-    <div className="flex min-h-screen flex-col">
-      <GlobalBanner />
-      <GNB />
-      <div className="grow">{children}</div>
-      <Footer />
-    </div>
-  );
+  if (!token) redirect("/");
+
+  return children;
 }
