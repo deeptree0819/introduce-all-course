@@ -13,8 +13,19 @@ const Pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "로봇다이브",
-  description: "Developed by Dophin In Cali",
+  title: {
+    template: "%s | 로봇다이브",
+    default: "로봇다이브",
+  },
+  description: "모두를 위한 로봇 교육, AI 교육 플랫폼",
+  openGraph: {
+    title: {
+      template: "%s | 로봇다이브",
+      default: "로봇다이브",
+    },
+    description: "모두를 위한 로봇 교육, AI 교육 플랫폼",
+    images: "/images/og-image.png",
+  },
 };
 
 export default function RootLayout({

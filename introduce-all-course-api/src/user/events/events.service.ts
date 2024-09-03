@@ -86,6 +86,7 @@ export class EventsService {
         event_start_at,
         event_end_at,
         event_poster_image_url,
+        event_thumbnail_url,
         event_info,
         event_description,
         event_view_count,
