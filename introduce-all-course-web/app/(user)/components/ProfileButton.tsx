@@ -20,7 +20,7 @@ const ProfileButton = () => {
         "flex flex-row items-center space-x-2"
       )}
     >
-      <Avatar className="h-6 w-6 border border-slate-100">
+      <Avatar className="size-6 border border-slate-100">
         <AvatarImage src={me?.profile_thumbnail_url} alt="avatar" />
         <AvatarFallback>{me?.nickname.slice(0, 1)}</AvatarFallback>
       </Avatar>

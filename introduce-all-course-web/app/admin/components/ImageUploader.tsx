@@ -56,13 +56,13 @@ const ImageUploader = ({
       <input
         type="file"
         id={fileId ? fileId : "image-upload"}
-        className="absolute inset-0 hidden h-full w-full cursor-pointer opacity-0"
+        className="absolute inset-0 hidden size-full cursor-pointer opacity-0"
         onChange={handleImageUpload}
         accept="image/*"
         ref={fileInputRef}
       />
       {preview ? (
-        <div className="h-full w-full">
+        <div className="size-full">
           <Image
             src={preview}
             alt="Image Preview"

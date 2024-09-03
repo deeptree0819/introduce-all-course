@@ -53,7 +53,7 @@ export function DatePickerForm<T extends FieldValues>({
             ) : (
               <span>날짜를 선택해주세요.</span>
             )}
-            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+            <CalendarIcon className="ml-auto size-4 opacity-50" />
           </Button>
         </FormControl>
       </PopoverTrigger>

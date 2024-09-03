@@ -19,7 +19,7 @@ const AdminFreeLectureTagDetailPage = () => {
   if (!freeLectureTag) return null;
 
   return (
-    <div className="relative flex h-full w-full flex-col">
+    <div className="relative flex size-full flex-col">
       <div className="items-start space-y-5 p-5">
         <GoBackButton />
         <div className="ml-3 flex flex-col items-start space-y-3">

@@ -109,9 +109,9 @@ const AdminEditor = ({
     const newLink = !currentInput
       ? ""
       : !currentInput.startsWith("http://") &&
-        !currentInput.startsWith("https://")
-      ? `https://${currentInput}`
-      : currentInput;
+          !currentInput.startsWith("https://")
+        ? `https://${currentInput}`
+        : currentInput;
 
     editor.chain().focus().toggleLink({ href: newLink }).run();
   };
@@ -165,10 +165,10 @@ const AdminEditor = ({
                 editor.isActive("heading", { level: 1 })
                   ? "H1"
                   : editor.isActive("heading", { level: 2 })
-                  ? "H2"
-                  : editor.isActive("heading", { level: 3 })
-                  ? "H3"
-                  : "T"
+                    ? "H2"
+                    : editor.isActive("heading", { level: 3 })
+                      ? "H3"
+                      : "T"
               }
               onValueChange={handleHeadingChange}
             >
@@ -223,7 +223,7 @@ const AdminEditor = ({
                 editor.isActive("strike") && "bg-accent text-accent-foreground"
               )}
             >
-              <StrikethroughIcon className="h-4 w-4" />
+              <StrikethroughIcon className="size-4" />
             </AdminButton>
             <AdminButton
               type="button"
@@ -263,7 +263,7 @@ const AdminEditor = ({
                   "bg-accent text-accent-foreground"
               )}
             >
-              <ListIcon className="h-4 w-4" />
+              <ListIcon className="size-4" />
             </AdminButton>
             <AdminButton
               type="button"
@@ -276,7 +276,7 @@ const AdminEditor = ({
                   "bg-accent text-accent-foreground"
               )}
             >
-              <ListOrderedIcon className="h-4 w-4" />
+              <ListOrderedIcon className="size-4" />
             </AdminButton>
             <AdminButton
               type="button"
@@ -289,7 +289,7 @@ const AdminEditor = ({
                   "bg-accent text-accent-foreground"
               )}
             >
-              <QuoteIcon className="h-4 w-4" />
+              <QuoteIcon className="size-4" />
             </AdminButton>
             <div className="h-5 w-px bg-gray-300" />
             <AdminButton
@@ -297,9 +297,9 @@ const AdminEditor = ({
               onClick={handleImageButtonClick}
               variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="size-8"
             >
-              <ImageIcon className="h-4 w-4" />
+              <ImageIcon className="size-4" />
             </AdminButton>
             <Input
               ref={imageInputRef}
@@ -315,9 +315,9 @@ const AdminEditor = ({
               disabled={!editor.can().undo()}
               variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="size-8"
             >
-              <Undo2Icon className="h-4 w-4" />
+              <Undo2Icon className="size-4" />
             </AdminButton>
             <AdminButton
               type="button"
@@ -325,9 +325,9 @@ const AdminEditor = ({
               disabled={!editor.can().redo()}
               variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="size-8"
             >
-              <Redo2Icon className="h-4 w-4" />
+              <Redo2Icon className="size-4" />
             </AdminButton>
           </div>
           <div className="px-4 text-sm text-gray-500">
@@ -377,7 +377,7 @@ const AdminEditor = ({
             editor.isActive("link") && "bg-accent text-accent-foreground"
           )}
         >
-          <LinkIcon className="h-4 w-4" />
+          <LinkIcon className="size-4" />
         </AdminButton>
         {(enterLink || editor.isActive("link")) && (
           <>
@@ -396,10 +396,10 @@ const AdminEditor = ({
               type="button"
               variant="ghost"
               size="icon"
-              className="h-8 w-8"
+              className="size-8"
               onClick={() => handleEnterLink()}
             >
-              <CheckIcon className="h-4 w-4" />
+              <CheckIcon className="size-4" />
             </AdminButton>
           </>
         )}
