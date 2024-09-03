@@ -12,9 +12,9 @@ const MainCarouselSkeleton = () => {
         ))}
       </div>
       <div className="flex flex-row items-center space-x-3 laptop:space-x-10">
-        <Skeleton className="h-4 w-4 rounded-full laptop:h-7 laptop:w-7" />
+        <Skeleton className="size-4 rounded-full laptop:size-7" />
         <Skeleton className="h-4 w-10 laptop:w-[60px]" />
-        <Skeleton className="h-4 w-4 rounded-full laptop:h-7 laptop:w-7" />
+        <Skeleton className="size-4 rounded-full laptop:size-7" />
       </div>
     </div>
   );

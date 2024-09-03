@@ -103,7 +103,7 @@ const ProfileInfo = () => {
                 </div>
                 <Label
                   htmlFor="profile"
-                  className="flex h-[250px] w-[250px] items-center justify-center rounded-md bg-slate-200 text-4xl text-slate-700"
+                  className="flex size-[250px] items-center justify-center rounded-md bg-slate-200 text-4xl text-slate-700"
                 >
                   {me.nickname.at(0)}
                 </Label>

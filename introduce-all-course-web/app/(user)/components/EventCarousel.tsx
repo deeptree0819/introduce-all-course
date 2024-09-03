@@ -52,7 +52,7 @@ const EventCarousel = () => {
     >
       <Button
         variant="outline"
-        className="hidden h-4 w-4 rounded-full p-0"
+        className="hidden size-4 rounded-full p-0"
         onClick={() => api?.scrollPrev()}
       >
         <ChevronLeft size={10} />
@@ -69,7 +69,7 @@ const EventCarousel = () => {
       </CarouselContent>
       <Button
         variant="outline"
-        className="hidden h-4 w-4 rounded-full p-0"
+        className="hidden size-4 rounded-full p-0"
         onClick={() => api?.scrollNext()}
       >
         <ChevronRight size={10} />
