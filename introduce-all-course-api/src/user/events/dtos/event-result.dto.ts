@@ -9,6 +9,7 @@ export class EventResultDto
       | "event_start_at"
       | "event_end_at"
       | "event_poster_image_url"
+      | "event_thumbnail_url"
       | "event_info"
       | "event_description"
       | "event_view_count"
@@ -19,6 +20,7 @@ export class EventResultDto
   event_start_at: string;
   event_end_at: string;
   event_poster_image_url: string;
+  event_thumbnail_url: string;
   event_info: string;
   event_description: string;
   event_view_count: number;
