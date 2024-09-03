@@ -8,6 +8,7 @@ export type EventResultDto = {
   event_start_at: string;
   event_end_at: string;
   event_poster_image_url: string;
+  event_thumbnail_url: string;
   event_info: string;
   event_description: string;
   event_view_count: number;

@@ -74,7 +74,7 @@ const MainCarousel = () => {
       <div className="flex flex-row items-center space-x-3 laptop:space-x-14">
         <Button
           variant="outline"
-          className="h-4 w-4 rounded-full p-0 laptop:h-7 laptop:w-7 laptop:border-2"
+          className="size-4 rounded-full p-0 laptop:size-7 laptop:border-2"
           onClick={() => api?.scrollPrev()}
         >
           <ChevronLeft size={30} className="w-2.5 laptop:w-4" />
@@ -84,7 +84,7 @@ const MainCarousel = () => {
         </div>
         <Button
           variant="outline"
-          className="h-4 w-4 rounded-full p-0 laptop:h-7 laptop:w-7 laptop:border-2"
+          className="size-4 rounded-full p-0 laptop:size-7 laptop:border-2"
           onClick={() => api?.scrollNext()}
         >
           <ChevronRight size={30} className="w-2.5 laptop:w-4" />

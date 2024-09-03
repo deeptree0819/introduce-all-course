@@ -7,7 +7,7 @@ import {
   FormItem,
   FormMessage,
 } from "@components/ui/form";
-import { UpdateUserDto } from "@generated/index";
+import { AdminUpdateUserDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -49,7 +49,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
 
   const { data: user } = useGetUserById(userId);
 
-  const form = useForm<UpdateUserDto>({
+  const form = useForm<AdminUpdateUserDto>({
     mode: "onSubmit",
     resolver: zodResolver(UpdateUserSchema),
   });
@@ -129,7 +129,7 @@ const UserInfoForm = ({ className }: UserInfoFormProps) => {
                   ) : (
                     <Label
                       htmlFor="profile"
-                      className="flex h-[250px] w-[250px] items-center justify-center rounded-md bg-slate-200 text-4xl text-slate-700"
+                      className="flex size-[250px] items-center justify-center rounded-md bg-slate-200 text-4xl text-slate-700"
                     >
                       {user.nickname.at(0)}
                     </Label>

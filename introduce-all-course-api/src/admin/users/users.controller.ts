@@ -15,9 +15,9 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
-import { GetAllUsersWithPaginationDto } from "./dtos/get-all-users.dto";
-import { UpdateUserDto } from "./dtos/update-user.dto";
-import { UserSummaryDto } from "./dtos/user-summary.dto";
+import { AdminGetAllUsersWithPaginationDto } from "./dtos/admin-get-all-users.dto";
+import { AdminUpdateUserDto } from "./dtos/admin-update-user.dto";
+import { AdminUserSummaryDto } from "./dtos/admin-user-summary.dto";
 import { UserDto } from "./dtos/user.dto";
 import { UsersService } from "./users.service";
 
@@ -31,11 +31,11 @@ export class UsersController {
     summary: "유저 목록 조회",
     tags: ["admin-users"],
   })
-  @ApiOkResponse({ type: BasePaginatedDto(UserSummaryDto, "User") })
+  @ApiOkResponse({ type: BasePaginatedDto(AdminUserSummaryDto, "User") })
   @Get("/admin/users")
   async getAllUsersWithPagination(
-    @Query() dto: GetAllUsersWithPaginationDto,
-  ): Promise<IPaginated<UserSummaryDto>> {
+    @Query() dto: AdminGetAllUsersWithPaginationDto,
+  ): Promise<IPaginated<AdminUserSummaryDto>> {
     return this.usersService.getAllUsersWithPagination(dto);
   }
 
@@ -57,7 +57,7 @@ export class UsersController {
   @Patch("/admin/users/:userId")
   async updateUser(
     @Param("userId", ParseIntPipe) userId: number,
-    @Body() dto: UpdateUserDto,
+    @Body() dto: AdminUpdateUserDto,
   ): Promise<Tables<"users">> {
     return this.usersService.updateUser(userId, dto);
   }

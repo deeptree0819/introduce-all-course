@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AdminUserSummaryDto } from "./AdminUserSummaryDto";
 import type { PaginationMetaData } from "./PaginationMetaData";
-import type { UserSummaryDto } from "./UserSummaryDto";
 export type PaginatedUserListDto = {
-  items: Array<UserSummaryDto>;
+  items: Array<AdminUserSummaryDto>;
   pagination: PaginationMetaData;
 };

@@ -9,13 +9,8 @@ const nextConfig = {
         port: "",
       },
       {
-        protocol: "https",
-        hostname: "picsum.photos",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "media.tenor.com",
+        protocol: "http",
+        hostname: "img1.kakaocdn.net",
         port: "",
       },
     ],

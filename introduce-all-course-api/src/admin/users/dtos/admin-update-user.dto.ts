@@ -2,7 +2,7 @@ import { Enums, Tables } from "@common/database.types";
 import { Gender, Role } from "@common/enum";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class UpdateUserDto
+export class AdminUpdateUserDto
   implements
     Partial<
       Omit<

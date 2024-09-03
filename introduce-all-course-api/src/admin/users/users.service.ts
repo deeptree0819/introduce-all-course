@@ -8,9 +8,9 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
-import { GetAllUsersWithPaginationDto } from "./dtos/get-all-users.dto";
-import { UpdateUserDto } from "./dtos/update-user.dto";
-import { UserSummaryDto } from "./dtos/user-summary.dto";
+import { AdminGetAllUsersWithPaginationDto } from "./dtos/admin-get-all-users.dto";
+import { AdminUpdateUserDto } from "./dtos/admin-update-user.dto";
+import { AdminUserSummaryDto } from "./dtos/admin-user-summary.dto";
 import { UserDto } from "./dtos/user.dto";
 
 @Injectable()
@@ -18,8 +18,8 @@ export class UsersService {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async getAllUsersWithPagination(
-    dto: GetAllUsersWithPaginationDto,
-  ): Promise<Paginated<UserSummaryDto>> {
+    dto: AdminGetAllUsersWithPaginationDto,
+  ): Promise<Paginated<AdminUserSummaryDto>> {
     const client = this.supabaseService.getClient();
     const query = client
       .from("users")
@@ -62,7 +62,7 @@ export class UsersService {
     }
 
     return new Paginated(
-      plainToInstance(UserSummaryDto, data),
+      plainToInstance(AdminUserSummaryDto, data),
       count,
       dto.page,
       dto.itemsPerPage,
@@ -92,7 +92,7 @@ export class UsersService {
 
   async updateUser(
     userId: number,
-    dto: UpdateUserDto,
+    dto: AdminUpdateUserDto,
   ): Promise<Tables<"users">> {
     const client = this.supabaseService.getClient();
     const { data: user, error: selectError } = await client

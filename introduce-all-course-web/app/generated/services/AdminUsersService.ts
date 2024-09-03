@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AdminUpdateUserDto } from "../models/AdminUpdateUserDto";
 import type { PaginatedUserListDto } from "../models/PaginatedUserListDto";
-import type { UpdateUserDto } from "../models/UpdateUserDto";
 import type { UserDto } from "../models/UserDto";
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
@@ -59,7 +59,7 @@ export class AdminUsersService {
    */
   public static updateUser(
     userId: number,
-    requestBody: UpdateUserDto
+    requestBody: AdminUpdateUserDto
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "PATCH",
