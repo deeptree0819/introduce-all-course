@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@components/ui/form";
-import { CreateMainBannerDto } from "@generated/index";
+import { AdminCreateMainBannerDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@utils/common";
 import { useForm } from "react-hook-form";
@@ -27,7 +27,7 @@ type CreateMainBannerFormProps = {
 };
 
 const CreateMainBannerForm = ({ className }: CreateMainBannerFormProps) => {
-  const form = useForm<CreateMainBannerDto>({
+  const form = useForm<AdminCreateMainBannerDto>({
     mode: "onSubmit",
     resolver: zodResolver(CreateMainBannerSchema),
     defaultValues: {
@@ -123,7 +123,7 @@ const CreateMainBannerForm = ({ className }: CreateMainBannerFormProps) => {
                           <Button
                             variant="secondary"
                             type="button"
-                            onClick={() => field.onChange("")}
+                            onClick={() => field.onChange(null)}
                           >
                             무기한
                           </Button>
