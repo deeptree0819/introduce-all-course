@@ -1,5 +1,4 @@
-import { OpenAPI } from "@generated/index";
-import { getCookie } from "cookies-next";
+import OpenApiTokenProvider from "@components/provider/OpenApiTokenProvider";
 
 import AdminModal from "./components/modal/AdminModal";
 
@@ -8,13 +7,10 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const token = getCookie("token");
-  OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
-
   return (
-    <div>
+    <OpenApiTokenProvider tokenName="token">
       <AdminModal />
       {children}
-    </div>
+    </OpenApiTokenProvider>
   );
 }

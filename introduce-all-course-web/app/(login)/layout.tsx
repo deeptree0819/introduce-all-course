@@ -1,23 +1,21 @@
-import { OpenAPI } from "@generated/index";
-import { getCookie } from "cookies-next";
-import { cookies } from "next/headers";
+import OpenApiTokenProvider from "@components/provider/OpenApiTokenProvider";
 
 import GlobalBanner from "../(user)/components/GlobalBanner";
 import GNB from "../(user)/components/GNB";
 
-export default function UserLayout({
+export default function LoginLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const token = getCookie("user.token", { cookies });
-  OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
-
   return (
-    <div className="flex min-h-screen flex-col">
+    <OpenApiTokenProvider
+      className="flex min-h-screen flex-col"
+      tokenName="user.token"
+    >
       <GlobalBanner />
       <GNB />
       {children}
-    </div>
+    </OpenApiTokenProvider>
   );
 }
