@@ -1,17 +1,19 @@
-import { OpenAPI } from "@generated/index";
+import OpenApiTokenProvider from "@components/provider/OpenApiTokenProvider";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default function UserLayout({
+export default function UserProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const token = getCookie("user.token", { cookies });
-  OpenAPI.TOKEN = typeof token === "string" ? token : undefined;
-
   if (!token) redirect("/");
 
-  return children;
+  return (
+    <OpenApiTokenProvider tokenName="user.token">
+      {children};
+    </OpenApiTokenProvider>
+  );
 }

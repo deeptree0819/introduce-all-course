@@ -140,10 +140,15 @@ export class MainBannersService {
   async createMainBanner(
     dto: AdminCreateMainBannerDto,
   ): Promise<Tables<"main_banners">> {
+    const newItem = {
+      ...dto,
+      main_banner_close_at: dto.main_banner_close_at || null,
+    };
+
     const client = this.supabaseService.getClient();
     const { data, error } = await client
       .from("main_banners")
-      .insert(dto)
+      .insert(newItem)
       .select()
       .maybeSingle();
 

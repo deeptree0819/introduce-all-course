@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@components/ui/form";
-import { UpdateMainBannerDto } from "@generated/index";
+import { AdminUpdateMainBannerDto } from "@generated/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
@@ -37,7 +37,7 @@ const MainBannerInfoForm = ({ className }: MainBannerInfoFormProps) => {
 
   const { data: mainBanner } = useGetMainBannerById(bannerId);
 
-  const form = useForm<UpdateMainBannerDto>({
+  const form = useForm<AdminUpdateMainBannerDto>({
     mode: "onSubmit",
     resolver: zodResolver(UpdateMainBannerSchema),
   });
@@ -154,7 +154,7 @@ const MainBannerInfoForm = ({ className }: MainBannerInfoFormProps) => {
                           <Button
                             variant="secondary"
                             type="button"
-                            onClick={() => field.onChange("")}
+                            onClick={() => field.onChange(null)}
                           >
                             무기한
                           </Button>

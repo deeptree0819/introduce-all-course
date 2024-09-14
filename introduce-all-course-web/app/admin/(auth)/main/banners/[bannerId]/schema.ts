@@ -9,5 +9,5 @@ export const UpdateMainBannerSchema = z.object({
     .nonempty("값을 입력해주세요.")
     .datetime()
     .optional(),
-  main_banner_close_at: z.string().optional(),
+  main_banner_close_at: z.string().nullable().optional(),
 });
