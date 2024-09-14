@@ -14,5 +14,5 @@ export const CreateMainBannerSchema = z.object({
     .string({ required_error: "값을 입력해주세요." })
     .nonempty("값을 입력해주세요.")
     .datetime(),
-  main_banner_close_at: z.string().optional(),
+  main_banner_close_at: z.string().nullable().optional(),
 });
