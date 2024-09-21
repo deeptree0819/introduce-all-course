@@ -384,13 +384,13 @@ const EventPage = () => {
             <br />
             파트너 컨설턴트.
           </h1>
-          <div className="relative w-full max-w-[400px] rounded-3xl bg-[#9BFAFF] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
-            <div className="mx-auto w-full min-w-0 max-w-[200px] laptop:hidden ">
+          <div className="relative w-full max-w-[400px] rounded-3xl bg-[#bafcff] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
+            <div className="mx-auto w-full min-w-0 max-w-[180px] pt-3 laptop:hidden ">
               <Image src={profile_partner} alt="사진" />
             </div>
           </div>
         </div>
-        <div className="slaptop:pt-0 relative mx-auto flex w-full max-w-[440px] flex-col items-start justify-between px-5 laptop:max-w-[1200px] laptop:flex-row laptop:px-48 laptop:pb-10 desktop:pt-6">
+        <div className="relative mx-auto flex w-full max-w-[440px] flex-col items-start justify-between px-5 laptop:max-w-[1200px] laptop:flex-row laptop:px-48 laptop:pb-10 laptop:pt-0 desktop:pt-6">
           <div className="mx-auto mt-7 hidden w-full min-w-0 delay-150 duration-300 laptop:absolute laptop:bottom-0 laptop:left-36 laptop:mx-0 laptop:inline laptop:max-w-[240px] desktop:mt-0 desktop:max-w-[280px]">
             <Image src={profile_partner} alt="사진" />
           </div>
