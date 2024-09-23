@@ -429,7 +429,7 @@ const PrivacyPage = () => {
         <p className="mobile:text-sm laptop:text-lg desktop:text-xl">
           공고일자: 2024년 09월 19일
           <br />
-          시행일자: 2024년 09월 ~~일
+          시행일자: 2024년 09월 26일
         </p>
       </div>
     </section>

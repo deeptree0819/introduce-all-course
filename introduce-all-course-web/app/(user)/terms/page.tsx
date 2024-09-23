@@ -985,7 +985,7 @@ const TermsPage = () => {
           본 약관은 2024년 09월 19일부터 시행/적용 됩니다.
         </p>
         <li className="mobile:text-sm mb-4 laptop:text-base desktop:text-lg">
-          공고일자: 2024년 09월 ~~일
+          공고일자: 2024년 09월 19일
         </li>
       </div>
     </section>
