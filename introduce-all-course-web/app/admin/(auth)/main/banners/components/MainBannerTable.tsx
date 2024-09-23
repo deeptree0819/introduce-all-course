@@ -1,5 +1,5 @@
 "use client";
-import { MainBannerSummaryDto } from "@generated/index";
+import { AdminMainBannerSummaryDto } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   getEnumIfExists,
@@ -41,7 +41,7 @@ const getBannerStatus = (
   }
 };
 
-export const columns: ColumnDef<MainBannerSummaryDto>[] = [
+export const columns: ColumnDef<AdminMainBannerSummaryDto>[] = [
   {
     accessorKey: "main_banners_id",
     header: "ID",
