@@ -17,7 +17,7 @@ import Image from "next/image";
 
 import { useGetLatestInquiryFormLink } from "@/app/hooks/user/inquiryHooks";
 
-const EventPage = () => {
+const InquiryPage = () => {
   const { data: inquiryFormLink } = useGetLatestInquiryFormLink();
 
   return (
@@ -57,10 +57,10 @@ const EventPage = () => {
       </section>
 
       <section className="relative flex flex-col bg-[#2295FF] laptop:pb-0">
-        <div className="absolute inset-0 z-0 size-full">
+        <div className="absolute inset-0 z-0 h-full w-full">
           <InquiryBg
             preserveAspectRatio="xMidYMid slice"
-            className="size-full"
+            className="h-full w-full"
           />
         </div>
         <div className="relative mx-auto flex w-full max-w-[1300px] flex-col items-center justify-between px-10 py-5 laptop:flex-row laptop:px-32 laptop:py-10">
@@ -108,7 +108,7 @@ const EventPage = () => {
       </section>
 
       <svg
-        className="mx-auto mt-7 size-8 animate-bounce laptop:mt-8 laptop:size-12 desktop:mt-20"
+        className="mx-auto mt-7 h-8 w-8 animate-bounce laptop:mt-8 laptop:h-12 laptop:w-12 desktop:mt-20"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -384,8 +384,8 @@ const EventPage = () => {
             <br />
             파트너 컨설턴트.
           </h1>
-          <div className="relative w-full max-w-[400px] rounded-3xl bg-[#bafcff] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
-            <div className="mx-auto w-full min-w-0 max-w-[180px] pt-3 laptop:hidden ">
+          <div className="relative w-full max-w-[400px] rounded-3xl bg-[#b2fbff] shadow-[0px_0px_20px_-15px_rgba(0,0,0,0.3)] ">
+            <div className="mx-auto w-full min-w-0 max-w-[200px] laptop:hidden ">
               <Image src={profile_partner} alt="사진" />
             </div>
           </div>
@@ -424,4 +424,4 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default InquiryPage;
