@@ -33,6 +33,12 @@ const PrivacyPage = () => {
         맞춤형 서비스 제공을 위해 이용자로부터 최소한의 개인정보를 수집하고
         있습니다.
       </p>
+      <ul className="mb-4 list-disc pl-6">
+        <li className="mb-2">
+          필수항목: 이름, 성별, 연령대, 출생연도, 전화번호
+        </li>
+        <li className="mb-2">선택항목: 프로필사진</li>
+      </ul>
       <p className="mb-4">
         ② 제1항의 개인정보 항목 외에 서비스 이용 과정이나 앱 실행 과정에서 IP
         Address, 쿠키, 방문일시, 서비스 이용기록, 불량 이용기록, 기기정보가
