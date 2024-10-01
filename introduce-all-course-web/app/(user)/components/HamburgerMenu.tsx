@@ -50,7 +50,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
               href="/login"
               className="mb-8 flex w-full flex-row items-center justify-between pl-3 pr-2"
             >
-              <div className="font-regular text-base">로그인이 필요합니다.</div>
+              <div className="text-base font-normal">로그인이 필요합니다.</div>
               <ChevronRightIcon />
             </Link>
             <div className="flex w-full flex-col space-y-7 px-3">
