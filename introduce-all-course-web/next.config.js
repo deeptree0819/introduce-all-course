@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: "img1.kakaocdn.net",
         port: "",
       },
+      {
+        protocol: "http",
+        hostname: "k.kakaocdn.net",
+        port: "",
+      },
     ],
     minimumCacheTTL: 31536000,
   },
