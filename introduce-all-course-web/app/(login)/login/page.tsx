@@ -10,7 +10,7 @@ const LoginPage = () => {
     <form
       action={async () => {
         "use server";
-        await signIn("kakao", { redirectTo: "/" });
+        await signIn("kakao", { redirectTo: "/" }, { prompt: "login" });
       }}
       className="flex grow flex-col laptop:flex-row"
     >
