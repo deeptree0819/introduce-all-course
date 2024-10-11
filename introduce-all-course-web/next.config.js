@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // TODO: Remove dummy remotePatterns
     remotePatterns: [
       {
         protocol: "https",

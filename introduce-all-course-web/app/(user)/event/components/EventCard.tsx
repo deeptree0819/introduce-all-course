@@ -30,7 +30,7 @@ const EventCard = ({ item }: EventCardProps) => {
       </div>
       <div className="space-y-2">
         <Badge className="text-[10px]">
-          {getDdayString(item.event_end_at)}
+          {getDdayString(item.event_start_at)}
         </Badge>
         <div className="space-y-1">
           <div className="line-clamp-2 break-keep text-sm font-semibold laptop:text-base">

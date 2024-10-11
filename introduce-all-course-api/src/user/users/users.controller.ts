@@ -4,6 +4,7 @@ import { RolesGuard } from "@common/guards/roles.guard";
 import {
   Body,
   Controller,
+  Delete,
   Param,
   ParseIntPipe,
   Patch,
@@ -28,5 +29,16 @@ export class UsersController {
     @Body() dto: UpdateUserDto,
   ): Promise<Tables<"users">> {
     return this.usersService.updateUser(userId, dto);
+  }
+
+  @CustomApiOperation({
+    summary: "유저 탈퇴",
+    tags: ["users"],
+  })
+  @Delete("/user/:userId")
+  async deleteUser(
+    @Param("userId", ParseIntPipe) userId: number,
+  ): Promise<void> {
+    return this.usersService.deleteUser(userId);
   }
 }

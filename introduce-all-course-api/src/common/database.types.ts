@@ -419,6 +419,7 @@ export type Database = {
         Row: {
           birthyear: string;
           created_at: string;
+          deleted: boolean;
           email: string;
           gender: Database["public"]["Enums"]["gender"];
           kakao_access_token: string | null;
@@ -435,6 +436,7 @@ export type Database = {
         Insert: {
           birthyear: string;
           created_at?: string;
+          deleted?: boolean;
           email: string;
           gender: Database["public"]["Enums"]["gender"];
           kakao_access_token?: string | null;
@@ -451,6 +453,7 @@ export type Database = {
         Update: {
           birthyear?: string;
           created_at?: string;
+          deleted?: boolean;
           email?: string;
           gender?: Database["public"]["Enums"]["gender"];
           kakao_access_token?: string | null;

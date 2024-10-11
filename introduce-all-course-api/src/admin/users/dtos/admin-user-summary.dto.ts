@@ -7,6 +7,7 @@ export class AdminUserSummaryDto
     Pick<
       Tables<"users">,
       | "users_id"
+      | "deleted"
       | "role"
       | "user_name"
       | "nickname"
@@ -16,6 +17,7 @@ export class AdminUserSummaryDto
     >
 {
   users_id: number;
+  deleted: boolean;
   @ApiProperty({ enum: Role, enumName: "Role" })
   role: Enums<"role">;
   user_name: string;
