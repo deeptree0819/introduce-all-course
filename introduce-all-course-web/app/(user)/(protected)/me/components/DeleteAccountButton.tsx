@@ -11,10 +11,13 @@ import {
   DialogTrigger,
 } from "@components/ui/dialog";
 
-import { useDeleteMe } from "@/app/hooks/user/userHooks";
+import { useDeleteMe, useFindMe } from "@/app/hooks/user/userHooks";
 
 const DeleteAccountButton = () => {
   const { mutate: deleteMe } = useDeleteMe();
+  const { data: me } = useFindMe();
+
+  if (!me) return null;
 
   return (
     <Dialog>

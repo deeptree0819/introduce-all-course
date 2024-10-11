@@ -13,7 +13,7 @@ const ProfileCard = () => {
   if (!me) return null;
 
   return (
-    <div className="flex h-fit w-80 flex-col items-center space-y-4 rounded-3xl bg-brand-secondary p-7">
+    <div className="flex h-fit flex-col items-center space-y-4 rounded-xl bg-brand-secondary p-5 laptop:w-80 laptop:rounded-3xl laptop:p-7">
       <Image
         src={me.profile_url}
         width={80}
