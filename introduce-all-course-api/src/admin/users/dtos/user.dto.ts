@@ -17,4 +17,5 @@ export class UserDto implements Omit<Tables<"users">, "kakao_access_token"> {
   email: string;
   birthyear: string;
   phone_number: string;
+  deleted: boolean;
 }
