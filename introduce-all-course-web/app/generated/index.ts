@@ -65,6 +65,7 @@ export type { UpdateAdminDto } from "./models/UpdateAdminDto";
 export { UpdateUserDto } from "./models/UpdateUserDto";
 export { UserDto } from "./models/UserDto";
 export { UserLoginDto } from "./models/UserLoginDto";
+export type { UserRecoverDto } from "./models/UserRecoverDto";
 
 export { AdminAdminsService } from "./services/AdminAdminsService";
 export { AdminAuthService } from "./services/AdminAuthService";

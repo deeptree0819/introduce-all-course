@@ -29,7 +29,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { UpdateUserSchema } from "../schema";
 
-const ProfileInfo = () => {
+const ProfileInfoForm = () => {
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const imageRef = useRef<HTMLInputElement>(null);
 
@@ -214,4 +214,4 @@ const ProfileInfo = () => {
   );
 };
 
-export default ProfileInfo;
+export default ProfileInfoForm;

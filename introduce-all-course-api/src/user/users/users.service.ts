@@ -1,6 +1,6 @@
 import { Tables } from "@common/database.types";
 import { SupabaseService } from "@common/supabase/supabase.service";
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { UpdateUserDto } from "./dtos/update-user.dto";
 
 @Injectable()
@@ -61,5 +61,19 @@ export class UsersService {
     }
 
     return updatedUser;
+  }
+
+  async deleteUser(userId: number): Promise<void> {
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("users")
+      .update({ deleted: true })
+      .eq("users_id", userId);
+
+    if (error) {
+      throw new InternalServerErrorException(
+        error?.message || "삭제를 실패했습니다.",
+      );
+    }
   }
 }

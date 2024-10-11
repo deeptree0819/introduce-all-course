@@ -35,7 +35,7 @@ export class AuthService {
     });
 
     if (error) {
-      // TODO: Log error
+      console.error(error);
     }
 
     return plainToInstance(LoginResultDto, {

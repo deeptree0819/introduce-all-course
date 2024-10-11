@@ -18,6 +18,7 @@ import { Request } from "express";
 import { AuthGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
 import { UserLoginDto } from "./dtos/user-login.dto";
+import { UserRecoverDto } from "./dtos/user-recover.dto";
 
 @Controller()
 export class AuthController {
@@ -32,7 +33,10 @@ export class AuthController {
   })
   @Public()
   @Post("/login")
-  async signIn(@Body() dto: UserLoginDto, @Req() req: Request): Promise<void> {
+  async signIn(
+    @Body() dto: UserLoginDto,
+    @Req() req: Request,
+  ): Promise<string | null> {
     return this.authService.signIn(dto, req);
   }
 
@@ -59,5 +63,15 @@ export class AuthController {
     @Body() dto: UpdateUserDto,
   ): Promise<Tables<"users">> {
     return this.usersService.updateUser(me.users_id, dto);
+  }
+
+  @CustomApiOperation({
+    summary: "탈퇴한 회원 복구",
+    tags: ["auth"],
+  })
+  @Public()
+  @Post("/recover")
+  async userRecover(@Body() dto: UserRecoverDto): Promise<void> {
+    return this.authService.userRecover(dto);
   }
 }
