@@ -6,35 +6,38 @@ import Kakao, { KakaoProfile } from "next-auth/providers/kakao";
 
 declare module "next-auth" {
   interface Profile extends KakaoProfile {}
+  interface User {
+    deleted: boolean;
+  }
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Kakao],
+  pages: {
+    error: "/login",
+  },
   callbacks: {
-    jwt: async ({ token, profile, trigger, account }) => {
-      if (
-        trigger !== "signIn" ||
-        !profile ||
-        !profile.kakao_account ||
-        !account
-      ) {
-        return null;
-      }
-
-      const { kakao_account } = profile;
-
-      OpenAPI.TOKEN = JSON.stringify({
-        token: account?.access_token ?? "",
-        provider: "kakao",
-      });
+    jwt: async ({ token }) => {
       setCookie("user.token", OpenAPI.TOKEN, {
         cookies,
         maxAge: 60 * 60 * 24 * 30,
         expires: new Date(Date.now() + 60 * 60 * 24 * 30 * 1000),
       });
 
+      return token;
+    },
+    signIn: async ({ profile, account }) => {
+      if (!profile || !profile.kakao_account) return false;
+
+      OpenAPI.TOKEN = JSON.stringify({
+        token: account?.access_token ?? "",
+        provider: "kakao",
+      });
+
+      const { kakao_account } = profile;
+
       try {
-        await AuthService.signIn({
+        const recoveryToken = await AuthService.signIn({
           kakao_id: !!profile?.id ? +profile.id : 0,
           email: kakao_account.email ?? "",
           nickname: kakao_account.profile?.nickname ?? "",
@@ -46,11 +49,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           gender: kakao_account.gender?.toUpperCase() as UserLoginDto.gender,
           phone_number: kakao_account.phone_number ?? "",
         });
-      } catch {
-        return null;
-      }
 
-      return token;
+        if (!recoveryToken) return true;
+
+        setCookie("recovery_token", recoveryToken, {
+          cookies,
+          maxAge: 60 * 60 * 1,
+          expires: new Date(Date.now() + 60 * 60 * 1 * 1000),
+        });
+
+        return "/deleted-user";
+      } catch (error) {
+        throw error;
+      }
     },
   },
 });

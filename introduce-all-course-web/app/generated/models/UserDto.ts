@@ -17,6 +17,7 @@ export type UserDto = {
   email: string;
   birthyear: string;
   phone_number: string;
+  deleted: boolean;
 };
 export namespace UserDto {
   export enum gender {

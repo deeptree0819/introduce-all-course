@@ -28,4 +28,19 @@ export class UsersService {
       mediaType: "application/json",
     });
   }
+  /**
+   * 유저 탈퇴
+   * @param userId
+   * @returns any
+   * @throws ApiError
+   */
+  public static deleteUser(userId: number): CancelablePromise<any> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/user/{userId}",
+      path: {
+        userId: userId,
+      },
+    });
+  }
 }

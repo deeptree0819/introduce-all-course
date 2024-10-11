@@ -79,7 +79,7 @@ const EventArticle = () => {
           </div>
           <div className="order-2 mt-6 w-fit space-x-1.5 laptop:order-1 laptop:col-span-2 laptop:mt-2 laptop:space-x-3">
             <Badge className="laptop:rounded-xl laptop:px-4 laptop:py-1 laptop:text-sm">
-              {getDdayString(event.event_end_at)}
+              {getDdayString(event.event_start_at)}
             </Badge>
             <Badge className="laptop:rounded-xl laptop:px-3 laptop:py-1 laptop:text-sm">
               {event.event_category_name}

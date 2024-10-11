@@ -26,7 +26,8 @@ export class EventsService {
         `
         events_id, 
         event_title, 
-        event_end_at, 
+        event_start_at, 
+        event_end_at,
         event_organization,
         event_thumbnail_url
       `,

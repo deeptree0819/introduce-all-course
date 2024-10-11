@@ -6,6 +6,7 @@ import type { Role } from "./Role";
 export type AdminUserSummaryDto = {
   role: Role;
   users_id: number;
+  deleted: boolean;
   user_name: string;
   nickname: string;
   email: string;

@@ -1,7 +1,7 @@
 "use client";
 import { AdminUserSummaryDto, Role } from "@generated/index";
 import { ColumnDef } from "@tanstack/react-table";
-import { getEnumIfExists, useGetSearchParams } from "@utils/common";
+import { cn, getEnumIfExists, useGetSearchParams } from "@utils/common";
 import { DateFnsFormat, getUtcToDateFormat } from "@utils/date";
 import Link from "next/link";
 
@@ -14,6 +14,17 @@ export const columns: ColumnDef<AdminUserSummaryDto>[] = [
   {
     accessorKey: "users_id",
     header: "ID",
+  },
+  {
+    header: "탈퇴여부",
+    cell: ({ row }) => {
+      const deleted = row.original.deleted;
+      return (
+        <p className={cn(deleted && "text-red-500")}>
+          {deleted ? "탈퇴" : "활동"}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "role",

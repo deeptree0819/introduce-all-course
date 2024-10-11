@@ -35,7 +35,7 @@ const PrivacyPage = () => {
       </p>
       <ul className="mb-4 list-disc pl-6">
         <li className="mb-2">
-          필수항목: 이름, 성별, 연령대, 출생연도, 전화번호
+          필수항목: 이름, 성별, 연령대, 출생연도, 전화번호, 이메일
         </li>
         <li className="mb-2">선택항목: 프로필사진</li>
       </ul>

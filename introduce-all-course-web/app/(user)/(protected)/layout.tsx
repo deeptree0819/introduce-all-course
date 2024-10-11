@@ -13,7 +13,7 @@ export default function UserProtectedLayout({
 
   return (
     <OpenApiTokenProvider tokenName="user.token">
-      {children};
+      {children}
     </OpenApiTokenProvider>
   );
 }

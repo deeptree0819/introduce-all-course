@@ -74,8 +74,6 @@ export const useIncreaseEventViewCount = () => {
       const currentTime = Date.now();
 
       if (!lastViewed || currentTime - lastViewed > 600000) {
-        console.log("setView", eventId.toString(), currentTime);
-
         setView(eventId.toString(), currentTime);
         return EventsService.increaseEventViewCount(eventId);
       }

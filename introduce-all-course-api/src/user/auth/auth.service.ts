@@ -7,10 +7,14 @@ import {
 import axios from "axios";
 import { Request } from "express";
 import { UserLoginDto } from "./dtos/user-login.dto";
-
+import { JwtService } from "@nestjs/jwt";
+import { UserRecoverDto } from "./dtos/user-recover.dto";
 @Injectable()
 export class AuthService {
-  constructor(private readonly supabaseService: SupabaseService) {}
+  constructor(
+    private readonly supabaseService: SupabaseService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   private async validateToken(
     token: string,
@@ -71,7 +75,7 @@ export class AuthService {
     return data;
   }
 
-  async signIn(dto: UserLoginDto, req: Request): Promise<void> {
+  async signIn(dto: UserLoginDto, req: Request): Promise<string | null> {
     const tokenObjectString = req.headers["authorization"]?.split(" ")[1];
     if (!tokenObjectString) {
       throw new UnauthorizedException("로그인이 만료되었습니다.");
@@ -88,7 +92,7 @@ export class AuthService {
     const client = this.supabaseService.getClient();
     const { data: existingUser, error: selectError } = await client
       .from("users")
-      .select("users_id")
+      .select("users_id, deleted")
       .eq("kakao_id", kakao_id)
       .maybeSingle();
 
@@ -98,7 +102,7 @@ export class AuthService {
       );
     }
 
-    if (existingUser) {
+    if (!!existingUser) {
       const ip = req.ips.length ? req.ips[0] : req.ip;
       const agent = req.headers["user-agent"];
 
@@ -109,10 +113,16 @@ export class AuthService {
       });
 
       if (error) {
-        // TODO: Log error
+        console.error(error);
       }
 
-      return;
+      if (!existingUser.deleted) return null;
+
+      const recoveryToken = this.jwtService.sign({
+        users_id: existingUser.users_id,
+      });
+
+      return recoveryToken;
     }
 
     const { error: upsertError } = await client.from("users").upsert(
@@ -130,6 +140,29 @@ export class AuthService {
       );
     }
 
-    return;
+    return null;
+  }
+
+  async userRecover(dto: UserRecoverDto): Promise<void> {
+    const { recovery_token } = dto;
+
+    const payload = this.jwtService.verify(recovery_token);
+    if (!payload) {
+      throw new UnauthorizedException("복구 토큰이 유효하지 않습니다.");
+    }
+
+    const { users_id } = payload;
+
+    const client = this.supabaseService.getClient();
+    const { error } = await client
+      .from("users")
+      .update({
+        deleted: false,
+      })
+      .eq("users_id", users_id);
+
+    if (error) {
+      throw new InternalServerErrorException(error.message);
+    }
   }
 }

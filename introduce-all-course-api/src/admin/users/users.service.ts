@@ -24,7 +24,7 @@ export class UsersService {
     const query = client
       .from("users")
       .select(
-        "users_id, role, user_name, nickname, email, phone_number, created_at",
+        "users_id, role, user_name, nickname, email, phone_number, created_at, deleted",
       );
 
     if (dto.role) query.eq("role", dto.role);
@@ -203,7 +203,7 @@ export class UsersService {
     const client = this.supabaseService.getClient();
     const { error } = await client
       .from("users")
-      .delete()
+      .update({ deleted: true })
       .eq("users_id", userId);
 
     if (error) {
