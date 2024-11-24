@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col gap-y-3">
           <div className="text-sm font-semibold">서비스</div>
           <Link href="/event" className="text-xs font-medium text-slate-500">
-            공고소개
+            커리큘럼
           </Link>
           <Link href="/inquiry" className="text-xs font-medium text-slate-500">
             취업상담

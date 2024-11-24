@@ -31,7 +31,7 @@ export const columns: ColumnDef<AdminEventSummaryDto>[] = [
   },
   {
     accessorKey: "event_category_name",
-    header: "공고분야",
+    header: "커리큘럼",
   },
   {
     header: "공고기간",
@@ -107,8 +107,8 @@ const EventsPostsTable = () => {
     order === "due"
       ? EventsOrderBy.EVENT_END_AT
       : order === "viewCount"
-      ? EventsOrderBy.EVENT_VIEW_COUNT
-      : EventsOrderBy.CREATED_AT;
+        ? EventsOrderBy.EVENT_VIEW_COUNT
+        : EventsOrderBy.CREATED_AT;
 
   const { data: events } = useGetAllEventsWithPagination({
     order: orderDirection,

@@ -81,7 +81,7 @@ const EventCategoryDeleteButton = ({
           className="text-red-600 hover:text-red-600"
           onClick={() => setIsOpen(true)}
         >
-          공고분야 삭제
+          커리큘럼 삭제
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="rounded-lg">
@@ -91,7 +91,7 @@ const EventCategoryDeleteButton = ({
             className="space-y-5"
           >
             <AlertDialogHeader className="items-start">
-              <AlertDialogTitle>공고분야를 삭제하시겠습니까?</AlertDialogTitle>
+              <AlertDialogTitle>커리큘럼를 삭제하시겠습니까?</AlertDialogTitle>
               <AlertDialogDescription>
                 {`${categoryName} 카테고리를 삭제합니다. 삭제하신 이후에는 되돌릴 수 없습니다.`}
               </AlertDialogDescription>
@@ -106,7 +106,7 @@ const EventCategoryDeleteButton = ({
                   <Select onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger className="w-56">
-                        <SelectValue placeholder="공고분야를 선택해주세요." />
+                        <SelectValue placeholder="커리큘럼를 선택해주세요." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>

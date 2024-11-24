@@ -83,7 +83,7 @@ const HamburgerMenu = ({ className }: HamburgerMenuProps) => {
               <div className="space-y-1">
                 <SheetClose asChild>
                   <Link href="/event">
-                    <div className="w-full text-lg font-semibold">공고소개</div>
+                    <div className="w-full text-lg font-semibold">커리큘럼</div>
                   </Link>
                 </SheetClose>
                 <Separator />

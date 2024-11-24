@@ -12,7 +12,7 @@ import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
 export class EventsService {
   /**
-   * 공고소개 게시글 목록 조회
+   * 커리큘럼 게시글 목록 조회
    * @param order
    * @param orderBy
    * @param eventCategoryId
@@ -44,7 +44,7 @@ export class EventsService {
     });
   }
   /**
-   * 공고소개 게시글 상세 조회
+   * 커리큘럼 게시글 상세 조회
    * @param eventId
    * @returns EventResultDto
    * @throws ApiError
@@ -61,7 +61,7 @@ export class EventsService {
     });
   }
   /**
-   * 공고분야 목록 조회
+   * 커리큘럼 목록 조회
    * @param page
    * @param itemsPerPage
    * @returns PaginatedEventCategoryListDto
@@ -81,7 +81,7 @@ export class EventsService {
     });
   }
   /**
-   * 공고소개 게시글 조회수 올리기
+   * 커리큘럼 게시글 조회수 올리기
    * @param eventId
    * @returns number
    * @throws ApiError

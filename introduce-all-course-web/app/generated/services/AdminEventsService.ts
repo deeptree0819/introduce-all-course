@@ -17,7 +17,7 @@ import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
 export class AdminEventsService {
   /**
-   * 공고소개 게시글 목록 조회
+   * 커리큘럼 게시글 목록 조회
    * @param order
    * @param orderBy
    * @param queryText
@@ -49,7 +49,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고소개 게시글 작성
+   * 커리큘럼 게시글 작성
    * @param requestBody
    * @returns AdminEventResultDto
    * @throws ApiError
@@ -65,7 +65,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고소개 게시글 상세 조회
+   * 커리큘럼 게시글 상세 조회
    * @param eventId
    * @returns AdminEventResultDto
    * @throws ApiError
@@ -82,7 +82,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고소개 게시글 수정
+   * 커리큘럼 게시글 수정
    * @param eventId
    * @param requestBody
    * @returns AdminEventResultDto
@@ -103,7 +103,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고소개 게시글 삭제
+   * 커리큘럼 게시글 삭제
    * @param eventId
    * @returns any
    * @throws ApiError
@@ -118,7 +118,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고분야 목록 조회
+   * 커리큘럼 목록 조회
    * @param page
    * @param itemsPerPage
    * @returns PaginatedAdminEventCategoryListDto
@@ -138,7 +138,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고분야 등록
+   * 커리큘럼 등록
    * @param requestBody
    * @returns any
    * @throws ApiError
@@ -154,7 +154,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고분야 상세 조회
+   * 커리큘럼 상세 조회
    * @param eventCategoriesId
    * @returns AdminEventCategoryDto
    * @throws ApiError
@@ -171,7 +171,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고분야 삭제
+   * 커리큘럼 삭제
    * @param eventCategoriesId
    * @param requestBody
    * @returns any
@@ -192,7 +192,7 @@ export class AdminEventsService {
     });
   }
   /**
-   * 공고분야 게시글수 조회
+   * 커리큘럼 게시글수 조회
    * @param eventCategoriesId
    * @returns number
    * @throws ApiError
