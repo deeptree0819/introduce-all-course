@@ -25,11 +25,11 @@ const navItems = [
     children: [{ title: "메인페이지 배너 관리", href: "/admin/main/banners" }],
   },
   {
-    title: "공고소개",
+    title: "커리큘럼",
     href: "/admin/events/posts",
     children: [
       { title: "게시글 관리", href: "/admin/events/posts" },
-      { title: "공고분야 관리", href: "/admin/events/categories" },
+      { title: "커리큘럼 관리", href: "/admin/events/categories" },
     ],
   },
   {

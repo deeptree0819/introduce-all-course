@@ -34,7 +34,7 @@ export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 목록 조회",
+    summary: "커리큘럼 게시글 목록 조회",
     tags: ["admin-events"],
   })
   @ApiOkResponse({
@@ -48,7 +48,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 상세 조회",
+    summary: "커리큘럼 게시글 상세 조회",
     tags: ["admin-events"],
   })
   @Get("/admin/events/posts/:eventId")
@@ -59,7 +59,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 수정",
+    summary: "커리큘럼 게시글 수정",
     tags: ["admin-events"],
   })
   @Patch("/admin/events/posts/:eventId")
@@ -72,7 +72,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 작성",
+    summary: "커리큘럼 게시글 작성",
     tags: ["admin-events"],
   })
   @Post("/admin/events/posts")
@@ -84,7 +84,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 삭제",
+    summary: "커리큘럼 게시글 삭제",
     tags: ["admin-events"],
   })
   @Delete("/admin/events/posts/:eventId")
@@ -93,7 +93,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고분야 목록 조회",
+    summary: "커리큘럼 목록 조회",
     tags: ["admin-events"],
   })
   @ApiOkResponse({
@@ -107,7 +107,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고분야 상세 조회",
+    summary: "커리큘럼 상세 조회",
     tags: ["admin-events"],
   })
   @Get("/admin/events/categories/:eventCategoriesId")
@@ -118,7 +118,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고분야 등록",
+    summary: "커리큘럼 등록",
     tags: ["admin-events"],
   })
   @Post("/admin/events/categories")
@@ -129,7 +129,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고분야 삭제",
+    summary: "커리큘럼 삭제",
     tags: ["admin-events"],
   })
   @Delete("/admin/events/categories/:eventCategoriesId")
@@ -141,7 +141,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고분야 게시글수 조회",
+    summary: "커리큘럼 게시글수 조회",
     tags: ["admin-events"],
   })
   @Get("/admin/events/categories/:eventCategoriesId/postcount")

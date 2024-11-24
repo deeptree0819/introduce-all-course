@@ -20,7 +20,7 @@ export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 목록 조회",
+    summary: "커리큘럼 게시글 목록 조회",
     tags: ["events"],
   })
   @ApiOkResponse({ type: BasePaginatedDto(EventSummaryDto, "Event") })
@@ -32,7 +32,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 상세 조회",
+    summary: "커리큘럼 게시글 상세 조회",
     tags: ["events"],
   })
   @Get("/events/posts/:eventId")
@@ -43,7 +43,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고분야 목록 조회",
+    summary: "커리큘럼 목록 조회",
     tags: ["events"],
   })
   @ApiOkResponse({
@@ -57,7 +57,7 @@ export class EventsController {
   }
 
   @CustomApiOperation({
-    summary: "공고소개 게시글 조회수 올리기",
+    summary: "커리큘럼 게시글 조회수 올리기",
     tags: ["events"],
   })
   @Post("/events/posts/:eventId/view-count")

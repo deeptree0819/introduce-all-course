@@ -13,8 +13,8 @@ const MainPage = () => {
       <section className="bg-[#EDF6FF] py-10 laptop:py-20">
         <div className="mx-auto max-w-[1300px] laptop:px-24">
           <h1 className="px-4 text-lg laptop:px-0 laptop:pb-2 laptop:text-2xl">
-            씹고 뜯고 배우는{" "}
-            <span className="font-semibold">로봇AI 행사 🤖</span>
+            <span className="font-semibold">로봇AI 개발자 </span> 양성 커리큘럼
+            🤖
           </h1>
           <EventCarousel />
         </div>

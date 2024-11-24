@@ -30,7 +30,7 @@ const GNB = () => {
                 "rounded-lg px-3 py-2 text-base font-normal"
               )}
             >
-              공고소개
+              커리큘럼
             </Link>
             <Link
               href="/inquiry"

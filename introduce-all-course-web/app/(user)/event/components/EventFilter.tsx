@@ -45,7 +45,7 @@ const EventFilter = () => {
 
   return (
     <div className="w-full space-y-3 rounded-xl bg-brand-secondary p-5 shadow-inner laptop:p-9">
-      <div className="text-base font-semibold laptop:text-xl">공고분야</div>
+      <div className="text-base font-semibold laptop:text-xl">커리큘럼</div>
       <Separator />
       <div className="flex flex-wrap gap-2">
         {isLoading ? (
@@ -70,7 +70,7 @@ const EventFilter = () => {
             </Fragment>
           ))
         ) : (
-          <div>공고분야가 없습니다.</div>
+          <div>커리큘럼가 없습니다.</div>
         )}
       </div>
     </div>

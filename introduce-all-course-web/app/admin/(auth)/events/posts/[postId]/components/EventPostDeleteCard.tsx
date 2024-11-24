@@ -17,12 +17,12 @@ const EventPostDeleteCard = ({ className }: EventPostDeleteCardProps) => {
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle>공고소개글 삭제</CardTitle>
+        <CardTitle>커리큘럼글 삭제</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-row items-center justify-between">
           <div>
-            <div>공고소개글을 삭제합니다.</div>
+            <div>커리큘럼글을 삭제합니다.</div>
             <div className="text-sm text-slate-700">
               삭제한 이후에는 되돌릴 수 없습니다.
             </div>
