@@ -29,7 +29,7 @@ const EventPostDeleteButton = ({
       <AlertDialogTrigger asChild>
         {variant === "text" ? (
           <Button variant="outline" className="text-red-600 hover:text-red-600">
-            공고소개글 삭제
+            커리큘럼글 삭제
           </Button>
         ) : (
           <Button

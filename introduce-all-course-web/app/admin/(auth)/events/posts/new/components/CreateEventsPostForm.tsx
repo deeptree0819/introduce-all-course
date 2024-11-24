@@ -107,7 +107,7 @@ const CreateEventsPostForm = forwardRef<HTMLFormElement>((props, ref) => {
                 <Select onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger className="w-56">
-                      <SelectValue placeholder="공고분야를 선택해주세요." />
+                      <SelectValue placeholder="커리큘럼를 선택해주세요." />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>

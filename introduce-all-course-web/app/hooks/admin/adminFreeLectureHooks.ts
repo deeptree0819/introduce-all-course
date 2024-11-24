@@ -163,7 +163,7 @@ export const useDeleteFreeLectureTag = (
       queryClient.invalidateQueries({
         queryKey: ["admin", "free-lecture", "tags"],
       });
-      toastSuccess("공고분야가 삭제되었습니다.");
+      toastSuccess("커리큘럼가 삭제되었습니다.");
       replace("/admin/free-lecture/tags");
       onSuccess?.();
     },

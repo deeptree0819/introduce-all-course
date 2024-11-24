@@ -134,11 +134,11 @@ export const useCreateEventCategory = (onSuccess: () => void) => {
       queryClient.invalidateQueries({
         queryKey: ["admin", "events", "categories"],
       });
-      toastSuccess("공고분야가 등록되었습니다.");
+      toastSuccess("커리큘럼가 등록되었습니다.");
       onSuccess?.();
     },
     onError: (error: ApiError) => {
-      toastApiError(error, "공고분야 등록에 실패했습니다.");
+      toastApiError(error, "커리큘럼 등록에 실패했습니다.");
     },
   });
 };
@@ -156,12 +156,12 @@ export const useDeleteEventCategory = (
       queryClient.invalidateQueries({
         queryKey: ["admin", "events", "categories"],
       });
-      toastSuccess("공고분야가 삭제되었습니다.");
+      toastSuccess("커리큘럼가 삭제되었습니다.");
       replace("/admin/events/categories");
       onSuccess?.();
     },
     onError: (error: ApiError) => {
-      toastApiError(error, "공고분야 삭제에 실패했습니다.");
+      toastApiError(error, "커리큘럼 삭제에 실패했습니다.");
     },
   });
 };

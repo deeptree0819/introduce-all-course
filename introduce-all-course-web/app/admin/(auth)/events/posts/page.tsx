@@ -8,7 +8,7 @@ import EventsPostsTable from "../components/EventsPostsTable";
 const AdminUsersPage = () => {
   return (
     <div className="flex flex-col space-y-10 p-5">
-      <p className="text-3xl">공고소개 게시글 관리</p>
+      <p className="text-3xl">커리큘럼 게시글 관리</p>
       <div className="flex max-w-[1300px] flex-col space-y-5">
         <EventsPostsTable />
         <Link
