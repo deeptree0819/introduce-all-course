@@ -4,7 +4,7 @@ import { toastApiError } from "@toast";
 import { getUploadUrl } from "@utils/common";
 import axios from "axios";
 
-const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10 MB limit
+const MAX_IMAGE_SIZE = 50 * 1024 * 1024; // 50 MB limit
 
 export const useUploadImage = (tag: string) => {
   return useMutation({
