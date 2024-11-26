@@ -91,6 +91,10 @@ const TermsPage = () => {
           정책에 따라 일정한 조건 하에서 유료서비스 이용 회원에게 포인트 또는
           현금으로 지급하는 것을 의미합니다.
         </li>
+        <li className="mb-2">
+          <strong>&quot;로봇AI 교육 콘텐츠&quot;</strong>는 회사가 제공하는 로봇
+          및 인공지능 관련 교육 자료, 강의, 실습 과정 등을 의미합니다.
+        </li>
       </ol>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
@@ -108,6 +112,12 @@ const TermsPage = () => {
           발생합니다.
         </li>
         <li className="mb-2">
+          3. 회사가 약관을 개정할 경우, 개정된 약관의 적용일자 및 개정사유를
+          명시하여 현행약관과 함께 그 적용일자 7일 전부터 적용일자 전일까지
+          공지합니다. 다만, 회원에게 불리한 약관의 개정의 경우에는 30일 전부터
+          공지하며, 이메일 등으로 회원에게 개별 통지합니다.
+        </li>
+        <li className="mb-2">
           회원은 변경된 약관에 동의하지 않을 경우 회원 탈퇴를 요청할 수 있으며,
           계속 서비스를 이용하는 경우 변경 약관에 동의한 것으로 간주합니다.
         </li>
@@ -117,14 +127,14 @@ const TermsPage = () => {
         제4조 (약관적용과 약관 외 준칙)
       </h2>
       <p className="mb-4">
-        딥트리의 &quot;서비스&quot; 이용에 관하여 본 약관을 적용하며, 본 약관에
-        명시되지 아니한 사항과 이 약관의 해석 및 약관에 규용되지 아니한 사항에
-        관하여는 전기통신기본법, 전기통신사업법, 정보통신망 이용촉진 등에 관한
+        회사의 &quot;서비스&quot; 이용에 관하여 본 약관을 적용하며, 본 약관에
+        명시되지 아니한 사항과 이 약 관의 해석 및 약관에 규용되지 아니한 사항에
+        관하여는 전기통신기본법, 전기통신사업법, 정보 통신망 이용촉진 등에 관한
         법률, 전자거래기본법, 신용정보의 이용 및 보호에 관한 법률, 기타 관련
         법령의 규정, 또는 상관례에 따릅니다.
       </p>
 
-      <h1 className="mb-4 mt-6 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
+      <h1 className="mb-4 mt-12 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
         제2장 서비스 이용계약
       </h1>
 
@@ -141,23 +151,22 @@ const TermsPage = () => {
       </p>
       <p className="mb-4">
         ③ 회원은 회원가입 절차에서 본 약관의 동의를 표시함으로써 본 약관의
-        내용을 인지하고 이해하였으며 적용을 받음에 동의하는 것으로 간주됩니다.
+        내용을 인지하고 이해 하였으며 적용을 받음에 동의하는 것으로 간주됩니다.
         따라서 회원은 서비스를 이용하기 전에 반드시 본 약관을 꼼꼼히 읽고
-        이해하여 서비스 이용과 관련한 분쟁이 발생하지 않도록 해야 합니다.
+        이해하여 서비스 이용과 관련한 분쟁이 발생하지 않도록 해야 합 니다.
       </p>
       <p className="mb-4">
-        ④ 회원의 약관에 대한 부지로 인하여 발생한 상황이나 손해에 대하여는
+        ➃ 회원의 약관에 대한 부지로 인하여 발생한 상황이나 손해에 대하여는
         회사에 책임을 물을 수 없으며, 이를 이유로 면책 또는 본 약관에 반하는
         주장을 할 수 없습니다.
       </p>
       <p className="mb-4">
-        ⑤ 단, &quot;비회원&quot;으로 딥트리가 제공하는 &quot;서비스&quot;를 이용
-        하고자 하는 자는 회원가입절차 없이 딥트리의 &quot;서비스&quot;를
-        이용함으로써 &quot;본 약관&quot;에 동의한 것으로 간주됩니다. 약관 변경
-        시에는, 변경된 약관이 공지된 이후 &quot;비회원&quot;으로 딥트리
-        &quot;서비스를 재이용할 시 변경된 약관에 동의한 것으로 간주됩니다. 약관
-        변경 시 공지된 변경 약관에 동의하지 않을 경우 제19조 제1항에 따라 계약
-        해지를 신청이 가능합니다.
+        ⑤ 단, “비회원ˮ으로 회사가 제공하는 “서비스ˮ를 이용 하고자 하는 자는
+        회원가입절차 없이 회사의 “서비스ˮ를 이용함으로써 “본 약관ˮ에 동의한
+        것으로 간주됩니다. 약관 변경 시에는, 변경된 약관이 공지된 이후
+        “비회원ˮ으로 회사 “서비스ˮ를 재이용할 시 변경된 약관에 동의한 것으로
+        간주됩니다. 약관 변경 시 공지된 변경 약관에 동의하지 않을 경우 제19조
+        제1항에 따라 계약 해지를 신청이 가능합니다.
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
@@ -165,8 +174,8 @@ const TermsPage = () => {
       </h2>
       <p className="mb-4">
         ① 회원이 되려고 하는 자는 회사가 정한 가입 절차와 방법에 따라 회원가입
-        신청절차를 완료해야 하고, 회사는 이 과정에서 전문기관을 통한 실명확인 및
-        본인인증 등의 본인확인절차를 요청할 수 있습니다.
+        신청절차를 완료 해야 하고, 회사는 이 과정에서 전문기관을 통한 실명확인
+        및 본인인증 등의 본인확인절차를 요 청할 수 있습니다.
       </p>
       <p className="mb-4">
         ② 회사는 회원이 되려고 하는 자의 회원가입 신청에 대하여 승낙함을
@@ -176,7 +185,7 @@ const TermsPage = () => {
       <ol className=" mb-4 list-inside list-decimal text-sm laptop:text-base">
         <li className="mb-2">“서비스” 관련 설비에 여유가 없는 경우.</li>
         <li className="mb-2">기술상 지장이 있는 경우.</li>
-        <li className="mb-2">기타 딥트리의 사정상 필요하다고 인정되는 경우.</li>
+        <li className="mb-4">기타 딥트리의 사정상 필요하다고 인정되는 경우.</li>
         <p className="mb-4">
           ③ 딥트리는 다음 각 호에 해당하는 이용계약 신청에 대하여는 이를
           승낙하지 않을 수 있습니다.
@@ -196,12 +205,16 @@ const TermsPage = () => {
           이용자의 귀책사유로 인하여 승인이 불가능하거나 기타 규정한 제반 사항을
           위반하며 신청하는 경우
         </li>
-        <li className="mb-2">
+        <li className="mb-4">
           기타 딥트리가 정한 이용 신청 요건이 미흡한 경우
         </li>
         <p className="mb-4">
           ④ 딥트리는 관계법령에서 규정하는 미성년자일 경우에 이용계약 신청의
           승낙을 보류할 수 있습니다.
+        </p>
+        <p className="mb-4">
+          ⑤ 미성년자가 서비스를 이용하기 위해서는 법정대리인의 동의를 받아야
+          하며, 회사는 필요한 경우 법정대리인의 동의 여부를 확인할 수 있습니다.
         </p>
       </ol>
 
@@ -280,9 +293,9 @@ const TermsPage = () => {
       </h2>
       <p className="mb-4">
         ① 회사는 『개인정보 보호법』 및 『정보통신망 이용촉진 및 정보보호 등에
-        관한 법률』 등 관계법령이 정하는 바에 따라 회원의 개인정보를 보호하기
-        위해 노력합니다. 회원 개인정보의 보호 및 사용에 대해서는 관계법령 및
-        회사의 개인정보처리방침이 적용됩니다.
+        관한 법률』 등 관련 법령을 준수하며, 회원의 개인정보를 보호하기 위해
+        &apos;개인정보처리방침&apos;을 수립하고 운영합니다. 개인정보처리방침의
+        자세한 내용은 플랫폼 내에서 확인할 수 있습니다.
       </p>
       <p className="mb-4">
         ② 플랫폼에 링크된 제3자의 사이트 및 제3자가 제공하는 서비스 이용 시에는
@@ -293,12 +306,18 @@ const TermsPage = () => {
         정보에 대해서 일체의 책임을 지지 않습니다.
       </p>
       <p className="mb-4">
-        ④ 회사는 회사의 서비스를 확장 내지 추가하는 경우, 회원의 개인정보 및
+        ➃ 회사는 회사의 서비스를 확장 내지 추가하는 경우, 회원의 개인정보 및
         데이터를 이전할 수 있고, 이전한 개인정보 및 데이터를 확장 내지 추가한
         서비스 제공에 이용할 수 있습니다.
       </p>
+      <p className="mb-4">
+        ⑤ 만 14세 미만의 미성년자가 서비스를 이용하기 위해서는 법정대리인의
+        동의가 필요합니다. 회사는 만 14세 미만 미성년자의 개인정보를 수집할 때
+        반드시 법정대리인의 동의를 받으며, 법정대리인의 동의 없이 수집한
+        미성년자의 개인정보는 즉시 파기합니다.
+      </p>
 
-      <h1 className="mb-4 mt-6 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
+      <h1 className="mb-4 mt-12 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
         제3장 회사의 서비스 제공
       </h1>
 
@@ -336,7 +355,7 @@ const TermsPage = () => {
       <p className="mb-4">
         ② 회사는 서비스의 내용, 서비스의 제공 범위 등을 사이트 운영의 필요에
         따라 변경할 수 있으며, 이에 대해 특별한 규정이 없는 한 회원에게 별도의
-        보상을 하지 않습니다. 단, 이 경우 해당 내용을 사이트에 공지합니다.
+        보상을 하지 않습니다.
       </p>
       <p className="mb-4">
         ③ 회사는 무료로 제공되는 서비스의 일부 또는 전부를 회사의 운영정책 및
@@ -368,11 +387,10 @@ const TermsPage = () => {
         제공이 제한될 수 있습니다.
       </p>
       <p className="mb-4">
-        ④ 제3항에도 불구하고, 다음 각 호의 어느 하나에 해당하는 경우에는 일정한
-        시간 동안 서비스가 제공되지 아니하거나 폐지될 수 있으며, 이 경우 회사는
-        서비스를 제공할 의무가 없습니다. 여기서 제공되지 아니하거나 폐지될 수
-        있는 서비스에는 평생 소장이 가능한 유료서비스를 포함하여 회사가 플랫폼을
-        통하여 제공하는 모든 서비스를 의미합니다.
+        ④ 제3항에도 불구하고, 다음 각 호의 어느 하나에 해당하는 경우에는
+        서비스의 전부 또는 일부가 일시 중단될 수 있습니다. 이 경우 회사는 사전에
+        그 사실을 회원에게 고지하며, 부득이한 경우에는 사후에 고지할 수
+        있습니다.
       </p>
       <ol className=" mb-4 list-inside list-decimal text-sm laptop:text-base">
         <li className="mb-2">
@@ -392,17 +410,47 @@ const TermsPage = () => {
           폭주 등으로 정상적인 서비스 제공이 불가능할 경우
         </li>
         <li className="mb-2">
-          분할, 합병, 영업양도, 영업의 폐지, 당해 서비스의 수익 악화 등 회사의
-          경영상 중대한 필요에 의한 경우
+          기타 회사의 제반 사정으로 서비스를 제공할 수 없는 경우
         </li>
       </ol>
       <p className="mb-4">
-        ⑤ 회사는 제4항 각호의 경우, 회사는 사전에 회원에게 공지 내지 통지할 수
-        없는 부득이한 사정(긴급한 시스템 점검 · 증설 · 교체, 시스템 관리자의
-        고의, 과실 없는 디스크 장애 · 시스템 다운, 제3자인 PC통신 회사,
-        기간통신사업자 등의 사정으로 인한 서비스 제공의 불가 등 회사가 통제할 수
-        없는 사정 등 포함)이 있는 경우에는 그 사정이 종료된 후에 공지 내지
-        통지할 수 있습니다.
+        ⑤ 제4항에 따른 서비스 중단이 24시간 이상 지속되는 경우, 회사는 그 사유와
+        예상 복구 시간을 회원에게 지체 없이 안내하며, 유료 서비스 이용 회원에
+        대해서는 중단된 기간만큼 이용 기간을 연장하거나 이에 상응하는 보상을
+        합니다.
+      </p>
+      <p className="mb-4">
+        ⑥ 회사가 제공하는 무료 서비스의 중단 또는 종료와 관련해서는 회사는 관련
+        법령에 특별한 규정이 없는 한 회원에게 별도의 보상을 하지 않습니다. 단,
+        유료로 구매한 콘텐츠나 서비스에 대해서는 다음과 같이 처리합니다:
+      </p>
+      <ol className=" mb-4 list-inside list-decimal text-sm laptop:text-base">
+        <li className="mb-2">
+          일시적 중단의 경우: 중단 기간만큼 이용 기간을 연장하거나 이에 상응하는
+          보상을 제공합니다.
+        </li>
+        <li className="mb-2">
+          영구적 종료의 경우: 잔여 기간에 대한 이용료를 환불하거나, 유사한 대체
+          서비스를 제공합니다.
+        </li>
+      </ol>
+      <p className="mb-4">
+        ⑦ 회사의 고의 또는 중대한 과실로 인한 서비스 중단 또는 장애의 경우,
+        회사는 그로 인해 회원에게 발생한 손해에 대해 배상할 책임이 있습니다.
+      </p>
+      <p className="mb-4">
+        ⑧ 서비스의 영구적 종료가 필요한 경우, 회사는 최소 30일 전에 회원에게
+        통지하고, 유료 서비스 이용자에 대해서는 잔여 기간에 대한 환불 또는 대체
+        서비스 제공 등의 적절한 보상 방안을 안내합니다.
+      </p>
+      <p className="mb-4">
+        ⑨ 회사는 제4항 각호의 경우, 회사는 사전에 회원에게 공지 내지 통지할 수
+        없는 부득이한 사 정(긴급한 시스템 점검 · 증설 · 교체, 시스템 관리자의
+        고의, 과실 없는 디스크 장애 · 시스템 다 운, 악성코드의 감지, 제3자인
+        PC통신 회사, 기간통신사업자 등의 사정으로 인한 서비스 제공의 불가 등
+        회사가 통제할 수 없는 사정 등 포함)이 있는 경우에는 회원에게 사전 통지
+        없이 서비스의 전부 또는 일부를 제한하거나 중지할 수 있고, 그 사정이
+        종료된 후에 공지 내지 통지할 수 있습니다.
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
@@ -431,12 +479,21 @@ const TermsPage = () => {
         그로 인한 회원의 손해에 대하여도 회사는 책임을 지지 않습니다.
       </p>
 
-      <h1 className="mb-4 mt-6 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
+      <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
+        제15조 (교육 콘텐츠의 업데이트 및 변경)
+      </h2>
+      <p className="mb-4">
+        회사는 로봇AI 기술의 발전과 교육 트렌드의 변화에 따라 교육 콘텐츠를
+        주기적으로 업데이트하거나 변경할 수 있습니다. 주요한 변경사항이 있을
+        경우, 회사는 이를 회원에게 사전에 고지합니다.
+      </p>
+
+      <h1 className="mb-4 mt-12 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
         제4장 유료서비스의 이용
       </h1>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제15조 (유료서비스 결제)
+        제16조 (유료서비스 결제)
       </h2>
       <p className="mb-4">
         ① 회원은 플랫폼을 통하여 회사가 제공하는 유료서비스를 이용할 수
@@ -476,9 +533,50 @@ const TermsPage = () => {
         ④ 회사에서 제공하는 포인트, 쿠폰 등은 회사가 정한 절차와 방식, 사용기간
         등의 조건에 따라 사용이 가능하며, 이에 대한 환급은 불가합니다.
       </p>
+      <p className="mb-4">
+        ⑤ 회사는 로봇AI 교육 플랫폼의 특성을 고려하여 다음과 같은 결제 방식을
+        제공할 수 있습니다:
+      </p>
+      <ol className=" mb-4 list-inside list-decimal text-sm laptop:text-base">
+        <li className="mb-2">
+          단일 강좌 구매: 회원이 원하는 특정 강좌를 개별적으로 구매하여 이용할
+          수 있습니다.
+        </li>
+        <li className="mb-2">
+          수강권: 일정 기간 동안 지정된 범위의 강좌를 무제한으로 수강할 수 있는
+          이용권을 구매할 수 있습니다.
+        </li>
+        <li className="mb-2">
+          정기구독: 월간, 분기, 반기 또는 연간 단위로 전체 또는 일부 서비스에
+          대한 이용 권한을 구매할 수 있습니다.
+        </li>
+        <li className="mb-4">
+          패키지 상품: 특정 주제나 난이도로 구성된 여러 강좌를 묶어서 할인된
+          가격으로 제공하는 상품을 구매할 수 있습니다.
+        </li>
+      </ol>
+      <p className="mb-4">
+        ⑥ 각 결제 방식에 따른 구체적인 이용 기간, 제공 서비스의 범위, 갱신 방법
+        등은 서비스 구매 시 회사가 미리 고지하거나 결제 페이지에 명시한 내용에
+        따릅니다.
+      </p>
+      <p className="mb-4">
+        ⑦ 정기구독의 경우, 해당 구독의 종료일 7일 전까지 회원이 별도의 해지
+        의사를 표시하지 않으면 동일한 조건으로 자동 갱신됩니다. 회사는 갱신
+        예정일로부터 7일 전까지 갱신 내용에 대해 회원에게 안내합니다.
+      </p>
+      <p className="mb-4">
+        ⑧ 회원은 언제든지 정기구독을 해지할 수 있으며, 해지 시 남은 기간에 대한
+        환불은 제18조의 환불 정책에 따릅니다.
+      </p>
+      <p className="mb-4">
+        ⑨ 회사는 결제 방식이나 조건을 변경할 경우, 그 내용을 회원에게 사전에
+        고지하고 동의를 구해야 합니다. 회원이 변경된 내용에 동의하지 않는 경우,
+        해당 서비스의 이용을 중단하고 환불을 요청할 수 있습니다.
+      </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제16조 (구독서비스)
+        제17조 (구독서비스)
       </h2>
       <p className="mb-4">
         ① 유료서비스 중 일부 서비스는 정기 구독의 방식으로 제공됩니다. 이 경우
@@ -490,9 +588,15 @@ const TermsPage = () => {
         해당 이용료는 구독 주기에 따른 할인율이 적용된 것으로 중도 해지 시에는
         플랫폼에 표시된 정상가를 기준으로 환불 금액이 산정됩니다.
       </p>
+      <p className="mb-4">
+        ③ 구독 기간 중 서비스 내용이 변경되는 경우, 회사는 이를 회원에게 사전에
+        고지하고 동의를 받아야 합니다. 회원이 변경된 서비스 내용에 동의하지 않을
+        경우, 회원은 구독을 해지할 수 있으며 잔여 기간에 대한 이용료를 환불받을
+        수 있습니다.
+      </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제17조 (환급, 환불)
+        제18조 (환급, 환불)
       </h2>
       <p className="mb-4">
         ① 회사는 이용자가 구매신청한 재화 등이 품절 등의 사유로 인도 또는 제공을
@@ -515,12 +619,12 @@ const TermsPage = () => {
         수단으로 환불할 수 있습니다.
       </p>
 
-      <h1 className="mb-4 mt-6 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
+      <h1 className="mb-4 mt-12 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
         제5장 계약 당사자의 의무
       </h1>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제18조 (회사의 의무)
+        제19조 (회사의 의무)
       </h2>
       <p className="mb-4">
         ① 회사는 서비스를 제공함에 있어 관계법령과 본 약관이 금지하거나
@@ -534,22 +638,26 @@ const TermsPage = () => {
       </p>
       <p className="mb-4">
         ③ 회사는 계속적이고 안정적인 서비스의 제공을 위하여 서비스 개선을
-        시행하던 중 설비에 장애가 발생하거나 데이터 등이 멸실된 때에는 천재지변,
-        비상사태 등 이에 준하는 사유 또는 현재의 기술로는 해결이 불가능한 결함
-        및 장애 등 부득이한 사유가 없는 한 지체 없이 이를 수리 또는 복구하도록
-        최선의 노력을 다합니다. 다만, 협력사의 설비에 장애가 발생하거나 협력사의
-        고의 또는 과실로 인하여 데이터 등이 멸실된 때에는 회사에 고의 또는
-        중과실이 없는 한 회사는 면책됩니다.
+        시행하던 중 설비에 장 애가 발생하거나 데이터 등이 멸실된 때에는
+        천재지변, 비상사태 등 이에 준하는 사유 또는 현재 의 기술로는 해결이
+        불가능한 결함 및 장애 등 부득이한 사유가 없는 한 지체 없이 이를 수리 또
+        는 복구하도록 최선의 노력을 다합니다. 다만, 협력사의 설비에 장애가
+        발생하거나 협력사의 고 의 또는 과실로 인하여 데이터 등이 멸실된 때에는
+        회사에 고의 또는 중과실이 없는 한 회사는 면책됩니다.
       </p>
       <p className="mb-4">
         ④ 회사가 제공하는 서비스로 인하여 회원에게 손해가 발생한 경우에는 그러한
         손해가 회사의 고의 또는 중과실에 의하여 발생한 경우에 한하여 책임을
-        부담하며, 그 책임의 범위는 통상손해로 합니다. 단, 이 경우 회원이 회사에
+        부담하며, 그 책임의 범위는 통상손해 로 합니다. 단, 이 경우 회원이 회사에
         지불한 금액을 초과할 수 없습니다.
+      </p>
+      <p className="mb-4">
+        ⑤ 회사는 로봇AI 교육 콘텐츠의 품질 유지 및 향상을 위해 노력하며,
+        콘텐츠의 오류나 버그 발견 시 신속히 수정하도록 합니다.
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제19조 (이용자의 의무)
+        제20조 (이용자의 의무)
       </h2>
       <p className="mb-4">
         ① 이용자는 본 약관의 규정, 서비스 이용안내 및 이와 관련하여 이루어진
@@ -559,15 +667,15 @@ const TermsPage = () => {
         ② 이용자는 다음 행위(또는 이에 준하는 행위를 포함합니다)를 하여서는 안
         됩니다. 아래 각 호에 명시된 구체적인 행위태양은 예시입니다.
       </p>
-      <ul className="list-decimal pl-6">
-        <li className=" mb-2 text-sm laptop:text-base">
+      <ol className="list-decimal pl-6">
+        <li className="mb-2 text-sm laptop:text-base">
           회사의 플랫폼을 통하지 않고 직접 거래를 유도하거나 권유, 제안하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           비정상적인 시스템 접근 · 악성코드, 바이러스 등의 프로그램을 고의 또는
           과실로 설치, 유포하는 행위
           <ul className="list-disc pl-6">
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               플랫폼의 정보 및 협력사의 정보를 수집하기 위한 불법적인
               크롤링(crawling), 리버스 엔지니어링(reverse engineering),
               디컴파일(decompile), 디스어셈블(disassemble) 및 기타 일체의
@@ -575,102 +683,105 @@ const TermsPage = () => {
             </li>
           </ul>
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           비정상적인 서비스 이용 · 허위 또는 타인의 정보로 가입을 하는 행위
           <ul className="list-disc pl-6">
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               정당한 사유 없이 다수의 계정으로 활동하거나 상습 또는 반복적인
               환불, 취소 행위
             </li>
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               계정 내 불리한 정보를 삭제하기 위해 의도적으로 계정을
               탈퇴/재가입하는 행위
             </li>
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               동일 또는 유사한 취지의 게시물을 3회 이상 반복하여 게시하는 행위
             </li>
           </ul>
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           허위 또는 과장된 정보 입력 행위
           <ul className="list-disc pl-6">
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               회사의 서비스 이용 시 회원이 입력하는 정보 일체에 대하여 허위 또는
               과장된 정보를 입력하는 행위
             </li>
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               자기 또는 타인에게 재산상의 이익을 주거나 타인에게 손해를 가할
               목적으로 허위의 정보를 유통시키는 행위
             </li>
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               프로필 정보나 이력서와 같이 서비스 이용에 중요한 영향을 미치는
               정보를 허위 또는 과장하여 입력하는 행위
             </li>
           </ul>
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사가 운영하는 플랫폼 내에 상호(성명), 로고 등 상표, 주소, 전화번호,
           이메일 주소 등 신원 식별을 용이하게 하는 정보를 회사의 사전 동의 내지
           허락을 얻지 아니하고 입력 내지 사용하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           공공질서 위반, 성별 · 정치 · 종교 · 장애 · 연령 · 사회적 신분 · 인종 ·
           지역 · 직업 등을 차별하거나 이에 대한 편견을 조장하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사 또는 다른 회원, 제3자를 차별 또는 비방하거나 욕설, 폭언, 협박,
           명예를 훼손하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           과도한 신체 노출이나 음란한 행위를 묘사하거나, 성매매 관련 정보를
           공유하거나, 타인에게 성적 수치심이나 불쾌감을 유발할 수 있는 내용을
           게시하는 등 미풍양속에 반하는 정보를 등록하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           혐오스러운 사진 또는 내용을 게시하거나, 욕설, 비속어, 은어를 사용하는
           등 사회 통념에 반하는 비정상적인 활동을 하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           타인의 권리 침해 · 회사 및 다른 회원, 제3자의 특허권, 상표권, 저작권
           등 지적재산권을 침해하는 행위 또는 침해할 우려가 있는 행위
           <ul className="list-disc pl-6">
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               타인의 개인정보를 침해하는 행위
             </li>
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               기타 웹 해킹 프로그램, 매크로 프로그램, 보이스 피싱을 위한 미러링
               사이트 등 타인의 권리를 침해하거나 침해할 우려가 있는 모든 행위
             </li>
           </ul>
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
+          제공된 로봇AI 교육 콘텐츠를 무단으로 복제, 배포, 판매하는 행위
+        </li>
+        <li className="mb-2 text-sm laptop:text-base">
           계정 및 계정 내 정보를 타인에게 판매, 양도, 대여하거나, 타인에게 그
           이용을 허락 또는 이를 시도하는 행위 및 이를 알선하는 행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           명의 사칭, 도용 등으로 다른 회원, 제3자 또는 회사의 직원을 사칭하는
           행위
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사의 이익(영업)을 저해하는 행위
           <ul className="list-disc pl-6">
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               회사의 동의 없이 영리, 영업, 광고, 정치활동 등을 목적으로 서비스를
               사용하는 행위
             </li>
-            <li className=" mb-2 text-sm laptop:text-base">
+            <li className="mb-2 text-sm laptop:text-base">
               관련 법령에서 금지하거나 선량한 풍속 기타 사회통념상 허용되지
               아니하거나 원활한 서비스 제공에 악영향을 끼치는 행위
             </li>
           </ul>
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           기타 위 각 호에 준하는 행위
         </li>
-      </ul>
+      </ol>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제20조 (양도금지)
+        제21조 (양도금지)
       </h2>
       <p className="mb-4">
         회원은 본 약관에 의한 서비스의 이용권한, 서비스 이용계약 상의 권리, 지위
@@ -678,7 +789,7 @@ const TermsPage = () => {
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제21조 (회원 탈퇴 및 자격 상실 등)
+        제22조 (회원 탈퇴 및 자격 상실 등)
       </h2>
       <p className="mb-4">
         ① 회원은 언제든지 플랫폼을 통하여 서비스 이용계약의 해지
@@ -699,14 +810,14 @@ const TermsPage = () => {
         임의로 삭제할 수 있습니다.
       </p>
       <p className="mb-4">
-        ⑤ 회원이 다음 각 호의 사유에 해당하는 경우,회사는 회원자격을 제한 및
+        ⑤ 회원이 다음 각 호의 사유에 해당하는 경우, 회사는 회원자격을 제한 및
         정지시킬 수 있습니다.
       </p>
-      <ol className=" mb-4 list-inside list-decimal text-sm laptop:text-base">
+      <ol className="mb-4 list-inside list-decimal text-sm laptop:text-base">
         <li className="mb-2">가입 신청 시에 허위 내용을 등록한 경우</li>
         <li className="mb-2">
-          회사를 이용하여 구입한 재화 등의 대금, 기타회사 이용에 관련하여 회원이
-          부담하는 채무를 기일에 지급하지 않는 경우
+          회사를 이용하여 구입한 재화 등의 대금, 기타 회사 이용에 관련하여
+          회원이 부담하는 채무를 기일에 지급하지 않는 경우
         </li>
         <li className="mb-2">
           다른 사람의 회사 이용을 방해하거나 그 정보를 도용하는 등 전자상거래
@@ -716,31 +827,36 @@ const TermsPage = () => {
           회사를 이용하여 법령 또는 이 약관이 금지하거나 공서양속에 반하는
           행위를 하는 경우
         </li>
-        <li className="mb-2">회사가 부정적인 영향을 끼친 경우</li>
+        <li className="mb-2">회사에 부정적인 영향을 끼친 경우</li>
         <li className="mb-2">영리목적으로 회원가입을 신청한 경우</li>
         <li className="mb-2">
           회사의 운영에 방해가 되는 행위와 요구를 하는 경우
         </li>
       </ol>
 
-      <h1 className="mb-4 mt-6 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
+      <h1 className="mb-4 mt-12 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
         제6장 저작권 등에 관한 내용
       </h1>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제22조 (회원의 저작권)
+        제23조 (회원의 저작권)
       </h2>
       <p className="mb-4">
-        본 약관에 따라 회원이 직접 제작하여 플랫폼에 게시 내지 업로드한
-        콘텐츠(부호, 문자, 도형, 색채, 음성, 음향, 음원, 이미지 및 영상
+        ① 본 약관에 따라 회원이 직접 제작하여 플랫폼에 게시 내지 업로드한
+        콘텐츠(부호, 문자, 도형, 색 채, 음성, 음향, 음원, 이미지 및 영상
         등(이들의 복합체를 포함한다), 본 약관에서 동일)에 대한 저작권은 해당
         회원이 소유하며, 회사는 플랫폼 내에서 서비스의 원활한 제공을 위한 범위
-        내에서 해당 콘텐츠를 게시(변형, 가공, 요약, 발췌, 취합 행위를 포함)할 수
-        있는 권리를 갖습니다.
+        내에 서 해당 콘텐츠를 게시(변형, 가공, 요약, 발췌, 취합 행위를 포함)할
+        수 있는 권리를 갖습니다.
+      </p>
+      <p className="mb-4">
+        ② 회원이 플랫폼 내에서 생성한 프로젝트, 코드, 결과물 등에 대한 저작권은
+        해당 회원에게 귀속됩니다. 단, 회사는 서비스 개선 및 교육 목적으로 이를
+        활용할 수 있는 권리를 가집니다.
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제23조 (회원이 제작한 콘텐츠 등에 대한 관리방안)
+        제24조 (회원이 제작한 콘텐츠 등에 대한 관리방안)
       </h2>
       <p className="mb-4">
         ① 회사는 회원이 플랫폼에 게시하는 콘텐츠가 다음 각 호에 해당하는 경우
@@ -756,7 +872,9 @@ const TermsPage = () => {
         </li>
         <li className="mb-2">
           회사 또는 서비스와 관련하여 객관적인 사실과 부합하지 않거나 관련이
-          없는 경우
+          없는 경우(ex. 회원 의 개인적인 인격이나 명예 등을 훼손하는 내용이 담긴
+          콘텐츠, 정당한 근거 없이 회사의 서 비스를 폄하하거나 신용을 저하시키는
+          내용이 담긴 콘텐츠)
         </li>
         <li className="mb-2">
           본 약관에 위배되거나 불법, 음란, 저속하다고 판단되는 내용인 경우
@@ -778,13 +896,18 @@ const TermsPage = () => {
       <p className="mb-4">
         ③ 회사는 회원이 다른 회원 또는 제3자의 저작권을 침해하는 경우, 저작권법
         등 관계법령에 정해진 절차에 의하여 저작권자 또는 회원의 요청에 의해 해당
-        콘텐츠를 삭제하거나 다시 게시할 수 있으며, 이 경우 회사는 면책됩니다.
+        콘텐츠를 삭제하거나 다시 게시 할 수 있으며, 이 경우 회사는 면책됩니다.
         회원이 다른 회원 또는 제3자의 저작권 등의 권리를 침해함으로써 발생하는
         민, 형사상의 책임은 침해한 회원이 전적으로 부담합니다.
       </p>
+      <p className="mb-4">
+        ④ 회원이 플랫폼 내에서 제작한 로봇AI 프로젝트나 결과물이 타인의
+        지식재산권을 침해하거나 불법적인 내용을 포함하고 있다고 판단되는 경우,
+        회사는 해당 콘텐츠를 삭제하거나 접근을 제한할 수 있습니다.
+      </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제24조 (회사의 저작권 등의 권리 및 이에 따른 이용자의 의무)
+        제25조 (회사의 저작권 등의 권리 및 이에 따른 이용자의 의무)
       </h2>
       <p className="mb-4">
         ① 회사가 제작한 콘텐츠에 대한 저작권 및 기타 지식재산권은 회사의
@@ -796,34 +919,43 @@ const TermsPage = () => {
       </p>
       <p className="mb-4">
         ② 회원은 회사가 제공하는 서비스를 이용함으로써 얻은 정보 중 회사 또는
-        제3자에게 지적재산권 등이 귀속된 정보를 회사 또는 제3자의 사전 승낙 없이
-        복제, 전송, 출판, 배포, 방송 기타 방법에 의하여 이용하거나 제3자에게
-        이용하게 하여서는 안 됩니다.
+        제3자에게 지적재 산권 등이 귀속된 정보를 회사 또는 제3자의 사전 승낙
+        없이 복제, 전송, 출판, 배포, 방송 기타방법에 의하여 이용하거나 제3자에게
+        이용하게 하여서는 안 됩니다. 이 경우, 영리, 비영리 이용 을 모두
+        포함합니다.
       </p>
       <p className="mb-4">
         ③ 회사가 제공하는 서비스, 그에 필요한 소프트웨어, 이미지, 마크, 로고,
         디자인, 서비스 명칭, 정보 및 상표 등과 관련된 지식재산권 및 기타 권리는
-        회사에게 있습니다.
+        회사에게 있습니다. 회원은 회사가 명시적 으로 승인한 경우를 제외하고는
+        상기에 명시한 소정의 각 재산에 대한 전부 또는 일부의 수정, 대여, 대출,
+        판매, 배포, 제작, 양도, 재라이센스, 담보권 설정행위 등 일체의 상업적
+        이용행위를 할 수 없으며, 제3자로 하여금 이와 같은 행위를 하도록 허락할
+        수 없습니다.
+      </p>
+      <p className="mb-4">
+        ➃ 회원은 교육 목적 외의 용도로 회사가 제공하는 로봇AI 교육 콘텐츠를
+        사용할 수 없으며, 특히 상업적 목적으로의 사용을 금지합니다.
       </p>
 
-      <h1 className="mb-4 mt-6 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
+      <h1 className="mb-4 mt-12 text-xl font-semibold laptop:text-2xl desktop:text-2xl">
         제7장 회사의 책임제한 등
       </h1>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제25조 (회사의 책임제한)
+        제26조 (회사의 책임제한)
       </h2>
       <ol className="list-decimal pl-6">
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 전시, 사변, 천재지변, 비상사태, 현재의 기술로는 해결이 불가능한
           기술적 결함 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수
           없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원의 귀책사유로 인한 서비스 이용의 중지, 이용장애 및 계약
           해지에 대하여는 책임을 지지 않습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원 또는 회사의 서비스 이용계약 해지 등으로 인하여 서비스
           이용계약이 종료되는 경우, 관계법령 및 개인정보처리방침에 따라 회사가
           회원의 정보를 보유하는 경우를 제외하고는 보다 나은 서비스 환경 등을
@@ -833,56 +965,60 @@ const TermsPage = () => {
           기간 보유할 필요가 있는 경우에는 합리적인 기간 동안 보유할 수
           있습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 기간통신사업자가 전기통신서비스를 중지하거나 정상적으로
           제공하지 아니하여 회원에게 손해가 발생한 경우에 대해서 회사의 고의
           또는 중대한 과실이 없는 한 책임이 면제됩니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 사전에 공지된 서비스 시스템 설비의 보수, 교체, 정기점검, 공사
           등 부득이한 사유로 서비스가 중지되거나 장애가 발생한 경우에 대해서
           회사의 고의 또는 중대한 과실이 없는 한 책임이 면제됩니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원이 사용하는 모바일 기기, 컴퓨터 등의 상태로 인하여 발생하는
           제반 문제 또는 회사의 고의 또는 중대한 과실이 없는 네트워크 환경으로
           인하여 발생하는 문제에 대해서 책임이 면제됩니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원 또는 제3자가 서비스와 관련하여 게재한 정보, 자료, 사실의
           신뢰도, 정확성 등의 내용에 관하여는 회사의 고의 또는 중대한 과실이
           없는 한 책임을 지지 않습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 서비스 상에 게재되어 있거나 서비스를 통한 제3자와의 판촉활동에
           회원이 참여하거나 교신 또는 거래의 결과로서 발생하는 모든 손실 또는
           손해에 대해 관련 법에 특별한 규정이 있거나 회사의 고의 또는 중과실로
           인한 경우가 아닌 한 책임을 지지 않습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원이 다른 회원 또는 제3자와 서비스를 매개로 하여 거래 등을 한
           경우에는 개입할 의무가 없으며, 이로 인한 손해를 배상할 책임도
           없습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원이 서비스를 이용하는 과정에서 기대하는 수익이나 기대의
           상실에 대하여 책임을 지지 않습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 무료로 제공하는 서비스의 이용과 관련하여 회원이 입은 손해에
           대하여, 회사의 고의 또는 중과실로 발생한 것이 아닌 이상 책임을 지지
           않습니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 회원이 자신의 신상정보 및 전자우편주소 등의 정보를 부정확하게
           기재하거나 기재하지 않음으로써 손해가 발생한 경우, 회사의 고의 또는
           중대한 과실이 없는 한 책임이 면제됩니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
+          회사는 회원이 로봇AI 교육 콘텐츠를 이용하여 제작한 프로그램, 로봇, AI
+          모델 등의 결과물로 인해 발생하는 문제에 대해 책임을 지지 않습니다.
+        </li>
+        <li className="mb-2 text-sm laptop:text-base">
           회사는 관계법령, 정부 정책 등에 따라 서비스 제공을 할 수 없는 경우
           책임이 면제됩니다.
         </li>
-        <li className=" mb-2 text-sm laptop:text-base">
+        <li className="mb-2 text-sm laptop:text-base">
           회원의 불법적인 행위 또는 본 약관에 위배되는 행위로 인하여 회사에
           손해가 발생하거나 수사기관, 행정청으로부터 형사처벌 또는 제재를 받은
           경우 회원은 회원의 비용과 부담으로 손해(손해배상금, 소송비용, 변호사
@@ -892,7 +1028,7 @@ const TermsPage = () => {
       </ol>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제26조 (회사의 고충처리 및 분쟁해결)
+        제27조 (회사의 고충처리 및 분쟁해결)
       </h2>
       <p className="mb-4">
         ① 회사는 회원의 편의를 고려하여 회원의 의견이나 불만을 제시하는 방법을
@@ -901,7 +1037,9 @@ const TermsPage = () => {
       </p>
       <p className="mb-4">
         ② 회사는 회원으로부터 제기되는 의견이나 불만이 객관적으로 정당하다고
-        인정될 경우에는 합리적인 기간 내에 이를 신속하게 처리합니다.
+        인정될 경우에는 합리적인 기간 내에 이를 신속하게 처리합니다. 다만,
+        처리에 장기간이 소요되는 경우에는 장기 간이 소요되는 사유와 처리일정을
+        회원에게 전자우편, 전화 또는 서면 등으로 개별적으로 통보 할 수 있습니다.
       </p>
       <p className="mb-4">
         ③ 회사와 회원 간에 분쟁이 발생하여 제3의 분쟁조정기관이 조정할 경우,
@@ -910,7 +1048,7 @@ const TermsPage = () => {
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제27조 (회원에 대한 통지)
+        제28조 (회원에 대한 통지)
       </h2>
       <p className="mb-4">
         ① 회사는 회원에 대한 통지를 하는 경우, 본 약관에 별도 규정이 없는 한
@@ -923,7 +1061,7 @@ const TermsPage = () => {
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제28조 (약관조항의 무효)
+        제29조 (약관조항의 무효)
       </h2>
       <p className="mb-4">
         본 약관의 일부 내용이 무효인 경우에도 나머지 조항의 효력은 여전히
@@ -931,7 +1069,7 @@ const TermsPage = () => {
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제29조 (분쟁의 해결)
+        제30조 (분쟁의 해결)
       </h2>
       <p className="mb-4">
         ① 본 약관과 관련하여 분쟁이 발생한 경우, 분쟁의 당사자인 회사와 회원은
@@ -948,7 +1086,7 @@ const TermsPage = () => {
       </p>
 
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
-        제30조 (준거법 및 재판관할)
+        제31조 (준거법 및 재판관할)
       </h2>
       <p className="mb-4">
         ① 회사와 회원 간의 제기된 소송은 대한민국 법령을 준거법으로 합니다.
@@ -956,6 +1094,8 @@ const TermsPage = () => {
       <p className="mb-4">
         ② 회사와 회원 간 발생한 분쟁에 관한 소송은, 제소 당시 회원의 주소에
         의하고, 주소가 없는 경우 거소를 관할하는 지방법원의 전속관할로 합니다.
+        단, 제소 당시 회원의 주소 또는 거소가 명확하지 아니한 경우의 관할법원은
+        민사소송법에 따라 정합니다.
       </p>
       <p className="mb-4">
         ③ 해외에 주소나 거소가 있는 회원의 경우에는 제1항이 적용됩니다. 단,
@@ -966,9 +1106,9 @@ const TermsPage = () => {
       <h2 className="mb-4 mt-10 text-lg font-semibold laptop:text-xl">
         &lt;부칙&gt;
       </h2>
-      <p className="mb-4">본 약관은 2024년 09월 19일부터 시행/적용 됩니다.</p>
+      <p className="mb-4">본 약관은 2024년 11월 25일부터 시행/적용 됩니다.</p>
       <li className=" mb-4 text-sm laptop:text-base">
-        공고일자: 2024년 09월 19일
+        공고일자: 2024년 11월 25일
       </li>
     </section>
   );
