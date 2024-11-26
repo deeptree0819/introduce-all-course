@@ -31,7 +31,7 @@ const RelatedEvent = () => {
 
   return (
     <section className="space-y-4">
-      <h3 className="text-base font-semibold">비슷한 공고를 찾아보세요 ☎️</h3>
+      <h3 className="text-base font-semibold">비슷한 교육을 찾아보세요 ☎️</h3>
       <div className="grid w-fit grid-cols-2 gap-5 laptop:grid-cols-3 laptop:gap-7 desktop:grid-cols-4 desktop:gap-10">
         {events.items.map((item) => (
           <Fragment key={item.events_id}>
