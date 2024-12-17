@@ -41,7 +41,8 @@ const MainCarousel = () => {
     return <MainCarouselSkeleton />;
   }
 
-  const data = extendArrayToLength(mainBanners, 5);
+  const data =
+    mainBanners.length < 5 ? extendArrayToLength(mainBanners, 5) : mainBanners;
 
   return isLoading ? (
     <MainCarouselSkeleton />

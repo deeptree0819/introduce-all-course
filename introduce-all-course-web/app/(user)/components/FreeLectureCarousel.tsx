@@ -34,7 +34,10 @@ const FreeLectureCarousel = () => {
   if (!freeLectures || !freeLectures.items.length)
     return <FreeLectureCarouselSkeleton />;
 
-  const data = extendArrayToLength(freeLectures.items, 4);
+  const data =
+    freeLectures.items.length < 4
+      ? extendArrayToLength(freeLectures.items, 4)
+      : freeLectures.items;
 
   return isLoading ? (
     <FreeLectureCarouselSkeleton />
