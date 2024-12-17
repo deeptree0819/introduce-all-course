@@ -33,7 +33,10 @@ const EventCarousel = () => {
     return <EventCarouselSkeleton />;
   }
 
-  const data = extendArrayToLength(events.items, 4);
+  const data =
+    events.items.length < 4
+      ? extendArrayToLength(events.items, 4)
+      : events.items;
 
   return isLoading ? (
     <EventCarouselSkeleton />
@@ -58,14 +61,18 @@ const EventCarousel = () => {
         <ChevronLeft size={10} />
       </Button>
       <CarouselContent className="ml-0 laptop:-ml-4">
-        {data.map((item, index) => (
-          <CarouselItem
-            key={index}
-            className="max-w-xs basis-5/12 laptop:basis-3/12"
-          >
-            <EventCard item={item} />
-          </CarouselItem>
-        ))}
+        {data.map((item, index) => {
+          console.log("item", index);
+
+          return (
+            <CarouselItem
+              key={index}
+              className="max-w-xs basis-5/12 laptop:basis-3/12"
+            >
+              <EventCard item={item} />
+            </CarouselItem>
+          );
+        })}
       </CarouselContent>
       <Button
         variant="outline"
